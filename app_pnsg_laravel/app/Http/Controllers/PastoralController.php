@@ -66,7 +66,7 @@ class PastoralController extends Controller
 
             $pastoral->save();
 
-            return redirect()->route('pastorais.index')->with('success', 'Pastoral criada com sucesso.');
+            return redirect()->route('pastorais.index')->with('Sucesso', 'Pastoral criada com sucesso.');
         }
     }
 
@@ -104,13 +104,26 @@ class PastoralController extends Controller
         return redirect()->back()->with('success', 'Pastoral atualizada com sucesso!');
     }
 
-    public function destroy(Pastoral $pastoral)
+    public function deleteImage(Request $request, Pastoral $pastoral)
     {
-        $pastoral->ativo = false; // definindo como inativo
-        $pastoral->save();
+        // Verifique se a imagem existe antes de excluir
+        if ($pastoral->imagem) {
+            // Exclua a imagem do armazenamento
+            Storage::delete('public/' . $pastoral->imagem);
 
-        return redirect()->back()->with('success', 'Pastoral inativada com sucesso!');
+            // Atualize o campo de imagem para null
+            $pastoral->imagem = null;
+            $pastoral->save();
+
+            return redirect()->back()->with('success', 'Imagem excluída com sucesso.');
+        } else {
+            return redirect()->back()->with('error', 'Nenhuma imagem para excluir.');
+        }
     }
+
+
+
+
 
     public function inativar(Request $request)
     {
@@ -125,17 +138,7 @@ class PastoralController extends Controller
         return redirect()->route('pastorais.index')->with('success', 'Pastoral inativada com sucesso.');
     }
 
-    public function deleteImage(Request $request, Pastoral $pastoral)
-    {
-        // Verifique se a imagem existe antes de excluir
-        if ($pastoral->imagem) {
-            // Atualize o campo de imagem para null
-            $pastoral->imagem = null;
-            $pastoral->save();
-        }
 
-        return redirect()->back()->with('success', 'Imagem excluída com sucesso.');
-    }
 
     public function ativar($id)
     {

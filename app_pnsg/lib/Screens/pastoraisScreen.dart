@@ -79,7 +79,7 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
             if (index == 0) {
               return const Column(
                 children: [
-                  SizedBox(height: 40),
+                  SizedBox(height: 20),
                   Text(
                     'Pastorais',
                     style: TextStyle(
@@ -91,14 +91,14 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
                   Padding(
                     padding: EdgeInsets.all(25),
                     child: Text(
-                      'Descrição do que é uma pastoral ',
+                      'Pastoral é a ação da Igreja Católica no mundo ou o conjunto de atividades pelas quais a Igreja realiza a sua missão de continuar a ação de Jesus Cristo junto a diferentes grupos e realidades.',
                       style: TextStyle(
                         fontSize: 16,
                       ),
                       textAlign: TextAlign.justify,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 1),
                 ],
               );
             } else {
@@ -175,3 +175,10 @@ class PastoralService {
     }
   }
 }
+
+
+
+
+//10.20.1.95
+
+//192.168.1.5:8000
