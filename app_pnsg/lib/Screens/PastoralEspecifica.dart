@@ -54,7 +54,8 @@ class PastoralEspecifica extends StatelessWidget {
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.lightBlue,
       ),
-      body: Center(
+      body: SingleChildScrollView(
+      child:Center(
         child: Column(
           children: <Widget>[
             SizedBox(height: 50),
@@ -74,6 +75,7 @@ class PastoralEspecifica extends StatelessWidget {
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             if (descricao != null)
@@ -91,18 +93,17 @@ class PastoralEspecifica extends StatelessWidget {
             if (imagem != null && imagem!.isNotEmpty)
               Image.network(
                 _buildImageUrl(imagem!),
-                height: 200,
+                width: 200,
               ),
-
-
           ],
         ),
+      ),
       ),
     );
   }
 
   String _buildImageUrl(String imagem) {
-    return 'http://192.168.1.5:8000/storage/$imagem';
+    return 'http://10.20.1.95:8000/storage/$imagem';
   }
 }
 
