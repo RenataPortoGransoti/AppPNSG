@@ -16,7 +16,7 @@ class HorarioController extends Controller
             'missa' => Horario::where('tipo', 'missa')->get(),
             'confissão' => Horario::where('tipo', 'confissão')->get(),
         ];
-        return view('informacoes', compact('horarios'));
+        return $horarios; // Retorna o array diretamente
     }
 
     public function store(Request $request)

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\ContatoController;
+use Illuminate\Http\Request;
 
 class InformacoesController extends Controller
-
 {
-    public function index()
+    public function index(HorarioController $horarioController, ContatoController $contatoController)
     {
-        // Carregar os horários (substitua isso pela lógica real para carregar os horários)
-        //  $horarios = Horario::all();
+        $horarios = $horarioController->index();
+        $contatosMap = $contatoController->index();
 
-        // Retornar a visão 'informacoes' com os horários
-        // return view('informacoes.index', ['horarios' => $horarios]);
+        return view('informacoes', compact('horarios', 'contatosMap'));
     }
 }

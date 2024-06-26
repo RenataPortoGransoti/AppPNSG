@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PastoralController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\InformacoesController;
 use App\Http\Controllers\ContatoController;
 
 
@@ -57,11 +58,11 @@ Route::delete('/eventos/{id}/soft-delete', [EventoController::class, 'deletarEve
 
 Route::put('/eventos/{id}/ativar', [EventoController::class, 'ativarEvento'])->name('eventos.ativar');
 
-// web.php
-Route::get('/informacoes', [HorarioController::class, 'index'])->name('informacoes.index');
+Route::get('/informacoes', [InformacoesController::class, 'index'])->name('informacoes.index');
 Route::post('/horarios/store', [HorarioController::class, 'store'])->name('horarios.store');
 Route::delete('/horarios/{id}', [HorarioController::class, 'destroy'])->name('horarios.destroy');
-Route::resource('contatos', ContatoController::class)->only(['index', 'store', 'destroy']);
+Route::post('/contatos/store', [ContatoController::class, 'store'])->name('contatos.store');
+Route::delete('/contatos/{tipo}', [ContatoController::class, 'destroy'])->name('contatos.destroy');
 
 
 

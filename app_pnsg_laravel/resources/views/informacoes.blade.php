@@ -23,7 +23,7 @@
                                             <label for="contato" class="block text-gray-700">Contato</label>
                                             <div class="flex">
                                                 <input type="text" id="contato" name="contato"
-                                                    value="{{ $contatosMap['contato']->valor ?? '' }}"
+                                                    value="{{ old('contato', $contatosMap['contato'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                 <button type="button" class="ml-2 text-red-500 remove-contato"
                                                     data-tipo="contato"><i class="bi bi-x"></i></button>
@@ -33,7 +33,7 @@
                                             <label for="instagram" class="block text-gray-700">Instagram</label>
                                             <div class="flex">
                                                 <input type="text" id="instagram" name="instagram"
-                                                    value="{{ $contatosMap['instagram']->valor ?? '' }}"
+                                                    value="{{ old('instagram', $contatosMap['instagram'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                 <button type="button" class="ml-2 text-red-500 remove-contato"
                                                     data-tipo="instagram"><i class="bi bi-x"></i></button>
@@ -45,7 +45,7 @@
                                             <label for="email" class="block text-gray-700">E-mail</label>
                                             <div class="flex">
                                                 <input type="email" id="email" name="email"
-                                                    value="{{ $contatosMap['email']->valor ?? '' }}"
+                                                    value="{{ old('email', $contatosMap['email'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                 <button type="button" class="ml-2 text-red-500 remove-contato"
                                                     data-tipo="email"><i class="bi bi-x"></i></button>
@@ -55,7 +55,7 @@
                                             <label for="facebook" class="block text-gray-700">Facebook</label>
                                             <div class="flex">
                                                 <input type="text" id="facebook" name="facebook"
-                                                    value="{{ $contatosMap['facebook']->valor ?? '' }}"
+                                                    value="{{ old('facebook', $contatosMap['facebook'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                 <button type="button" class="ml-2 text-red-500 remove-contato"
                                                     data-tipo="facebook"><i class="bi bi-x"></i></button>
@@ -71,6 +71,7 @@
                                         class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
                                 </div>
                             </form>
+
                             <form action="{{ route('horarios.store') }}" method="POST">
                                 @csrf
                                 @foreach (['secretaria', 'missa', 'confissão'] as $tipo)

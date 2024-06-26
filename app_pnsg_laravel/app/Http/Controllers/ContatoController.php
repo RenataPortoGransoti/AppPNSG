@@ -11,15 +11,8 @@ class ContatoController extends Controller
 {
     public function index()
     {
-        $contatos = Contato::all();
-        $contatosMap = $contatos->keyBy('tipo');
-        $horarios = [
-            'secretaria' => Horario::where('tipo', 'secretaria')->get(),
-            'missa' => Horario::where('tipo', 'missa')->get(),
-            'confissão' => Horario::where('tipo', 'confissão')->get(),
-        ];
-
-        return view('informacoes', compact('contatosMap', 'horarios'));
+        $contatos = Contato::all()->groupBy('tipo');
+        return $contatos;
     }
 
     public function store(Request $request)
@@ -32,7 +25,7 @@ class ContatoController extends Controller
             $contato->save();
         }
 
-        return redirect()->route('contatos.index')->with('success', 'Contatos atualizados com sucesso!');
+        return redirect()->route('informacoes.index')->with('success', 'Contatos atualizados com sucesso!');
     }
 
     public function destroy($tipo)
