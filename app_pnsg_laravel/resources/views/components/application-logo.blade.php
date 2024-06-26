@@ -1,1 +1,1 @@
-<img src="{{ asset('build/assets/brasaoparoquia_logo.jpg') }}" class="rounded-full">
+<img src="{{ asset('build/assets/brasao_pnsg.png') }}" class="rounded-full w-5/6">

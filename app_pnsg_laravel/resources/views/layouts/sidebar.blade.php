@@ -4,12 +4,12 @@
       <a href="{{ url('/') }}" class="flex items-center">
         <!--begin::Brand Image-->
         <div>
-            <x-application-logo />
+            <x-application-logo class="" />
 
         </div>
         <!--end::Brand Image-->
         <!--begin::Brand Text-->
-        <span class="ml-3 text-lg font-light">Painel Admin PNSG</span>
+        <span class=" text-lg font-light">Painel Admin PNSG</span>
         <!--end::Brand Text-->
       </a>
       <!--end::Brand Link-->

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PastoralController extends Controller
 {
-    public function index()
+    public function consultarPastoral()
     {
         $pastorais = Pastoral::all();
         return view('pastorais', ['pastorais' => $pastorais]);
@@ -20,12 +20,12 @@ class PastoralController extends Controller
         return response()->json($pastorais);
     }
 
-    public function store(Request $request)
+    public function cadastrarPastoral(Request $request)
     {
         $maxFileSize = 20; // 20 MB
 
         $request->validate([
-            'nomePastoral' => 'required|string|max:255',
+            'nomePastoral' => 'required|string|max:60',
             'descricao' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -70,7 +70,7 @@ class PastoralController extends Controller
         }
     }
 
-    public function update(Request $request, Pastoral $pastoral)
+    public function editarPastoral(Request $request, Pastoral $pastoral)
     {
         // Validação dos dados do formulário
         $request->validate([
@@ -121,11 +121,7 @@ class PastoralController extends Controller
         }
     }
 
-
-
-
-
-    public function inativar(Request $request)
+    public function inativarPastoral(Request $request)
     {
         $id = $request->input('pastoral_id');
         $pastoral = Pastoral::find($id);
@@ -138,9 +134,7 @@ class PastoralController extends Controller
         return redirect()->route('pastorais.index')->with('success', 'Pastoral inativada com sucesso.');
     }
 
-
-
-    public function ativar($id)
+    public function ativarPastoral($id)
     {
         $pastoral = Pastoral::find($id);
 

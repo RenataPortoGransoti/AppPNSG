@@ -904,9 +904,9 @@
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 
-    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
+    <header class="grid grid-cols-2 items-center gap-2 py-8 lg:grid-cols-3">
         <div class="flex lg:justify-center lg:col-start-2">
-            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+            <x-application-logo class="" />
         </div>
 
         @if (Route::has('login'))
