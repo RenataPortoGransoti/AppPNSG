@@ -7,7 +7,8 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\InformacoesController;
 use App\Http\Controllers\ContatoController;
-
+use App\Http\Controllers\AvisoController;
+use App\Http\Controllers\EmailController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -65,10 +66,16 @@ Route::post('/contatos/store', [ContatoController::class, 'store'])->name('conta
 Route::delete('/contatos/{tipo}', [ContatoController::class, 'destroy'])->name('contatos.destroy');
 
 
+Route::get('/inicio', [AvisoController::class, 'index'])->name('inicio.index');
+Route::post('/avisos/store', [AvisoController::class, 'store'])->name('avisos.store');
+Route::delete('/avisos/{id}', [AvisoController::class, 'destroy'])->name('avisos.destroy');
 
 
-
-require __DIR__ . '/auth.php';
 
 //Rota para informações das pastorais em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
+Route::post('/send-email', [EmailController::class, 'sendEmail']);
+Route::get('/csrf-token', function () {
+    return response()->json(['csrfToken' => csrf_token()]);
+});
+require __DIR__ . '/auth.php';
