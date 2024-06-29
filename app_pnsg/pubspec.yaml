@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   google_maps_flutter: ^2.6.1
-  mailer: ^4.0.0
   http: ^1.2.1
   shared_preferences: ^2.2.3
   webview_flutter: ^2.0.13
@@ -66,6 +65,7 @@ flutter:
       - assets/images/pnsg-img.jpg
       - assets/images/background.png
       - assets/images/mapa_paroquia.png
+      - assets/images/terco_inter.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
+import 'package:http/http.dart' as http;
 
 class ContactForm extends StatelessWidget {
   final Function(String, String, String, String) onSubmit;
@@ -8,25 +9,28 @@ class ContactForm extends StatelessWidget {
   ContactForm({required this.onSubmit});
 
   final _formKey = GlobalKey<FormState>();
-  late final String _fullName;
-  late final String _email;
-  late final String _phone;
-  late final String _userMessage;
+  late String _nomeCompleto;
+  late String _email;
+  late String _celular;
+  late String _mensagem;
 
-  Future<void> sendEmail(String fullName, String email, String phone, String userMessage) async {
-    final smtpServer = gmail('', ''); // Usando credenciais vazias para enviar sem autenticação
+  Future<void> sendEmail(String nomeCompleto, String email, String celular, String mensagem) async {
+    final Uri uri = Uri.parse('http://192.168.1.5:8000/send-email');
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'nomeCompleto': nomeCompleto,
+        'email': email,
+        'celular': celular,
+        'mensagem': mensagem,
+      }),
+    );
 
-    final message = Message()
-      ..from = Address(email)
-      ..recipients.add('renata.gransoti@edu.unifil.br')
-      ..subject = 'Nova mensagem de contato'
-      ..text = 'Nome: $fullName\nEmail: $email\nCelular: $phone\nMensagem: $userMessage';
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Mensagem enviada: ${sendReport.toString()}');
-    } catch (e) {
-      print('Erro ao enviar email: $e');
+    if (response.statusCode == 200) {
+      print('Email enviado com sucesso');
+    } else {
+      print('Falha ao enviar email: ${response.body}');
     }
   }
 
@@ -76,7 +80,7 @@ class ContactForm extends StatelessWidget {
                         }
                         return null;
                       },
-                      onSaved: (value) => _fullName = value!,
+                      onSaved: (value) => _nomeCompleto = value!,
                     ),
                     SizedBox(height: 10),
                     TextFormField(
@@ -116,7 +120,7 @@ class ContactForm extends StatelessWidget {
                         }
                         return null;
                       },
-                      onSaved: (value) => _phone = value!,
+                      onSaved: (value) => _celular = value!,
                     ),
                     SizedBox(height: 10),
                     TextFormField(
@@ -136,14 +140,15 @@ class ContactForm extends StatelessWidget {
                         }
                         return null;
                       },
-                      onSaved: (value) => _userMessage = value!,
+                      onSaved: (value) => _mensagem = value!,
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          sendEmail(_fullName, _email, _phone, _userMessage);
+                          onSubmit(_nomeCompleto, _email, _celular, _mensagem); // Chama a função onSubmit passada como parâmetro
+                          sendEmail(_nomeCompleto, _email, _celular, _mensagem); // Chama a função para enviar email
                           Navigator.pop(context);
                         }
                       },
@@ -171,20 +176,4 @@ class ContactForm extends StatelessWidget {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: Scaffold(
-      body: ContactForm(
-        onSubmit: (fullName, email, phone, message) {
-          print('Formulário enviado:');
-          print('Nome: $fullName');
-          print('E-mail: $email');
-          print('Celular: $phone');
-          print('Mensagem: $message');
-        },
-      ),
-    ),
-  ));
 }

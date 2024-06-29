@@ -72,8 +72,10 @@ Route::delete('/avisos/{id}', [AvisoController::class, 'destroy'])->name('avisos
 
 
 
-//Rota para informações das pastorais em JSON
+//Rota para informações das pastorais e eventos em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
+Route::get('/eventosapi', [EventoController::class, 'indexApi']);
+
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
 Route::get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);

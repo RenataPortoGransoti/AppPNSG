@@ -2,6 +2,7 @@ import 'package:app_pnsg/Screens/pastoraisScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../contatoFormulario.dart';
+import '../email_service.dart';
 import 'contribua.dart';
 import 'eventos.dart';
 import 'inicio.dart';
@@ -70,16 +71,33 @@ class InformacoesState extends State<Informacoes> {
       ),
       body: SingleChildScrollView(
         child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 50),
-            Text('Entre em contato:', ),
-            GestureDetector(
-              onTap: () {
-                _launchPhone('43-3342-1276');
-              },
-              child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 50),
+              Text('Entre em contato:'),
+              GestureDetector(
+                onTap: () {
+                  _launchPhone('43-3342-1276');
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.all(18),
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue.shade100,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text(
+                    "(43) 3342-1276 - Ligar agora",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
                 margin: EdgeInsets.symmetric(vertical: 5),
                 padding: const EdgeInsets.all(18),
                 width: MediaQuery.of(context).size.width - 40,
@@ -88,129 +106,115 @@ class InformacoesState extends State<Informacoes> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Text(
-                  "(43) 3342-1276 - Ligar agora",
+                  "Iniciar conversa no WhatsApp",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              padding: const EdgeInsets.all(18),
-              width: MediaQuery.of(context).size.width - 40,
-              decoration: BoxDecoration(
-                color: Colors.lightBlue.shade100,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                "Iniciar conversa no WhatsApp",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
+              GestureDetector(
+                onTap: () {
+                  _showContactFormDialog(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.all(18),
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue.shade100,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text(
+                    "Enviar Mensagem",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ),
-
-            ),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => ContactForm(
-                    onSubmit: (fullName, email, phone, message) {
-                      // Aqui você pode fazer algo com os dados do formulário, se necessário
-                      print('Nome: $fullName, E-mail: $email, Celular: $phone, Mensagem: $message');
-                    },
-                  ),
-                );
-              },
-              child: Container(
+              SizedBox(height: 30),
+              Text('Nos acompanhe nas redes sociais:'),
+              SizedBox(height: 20),
+              Text('Instagram - @pnsgracalondrina'),
+              SizedBox(height: 15),
+              Text('Facebook - pnsgracalondrina'),
+              SizedBox(height: 30),
+              Container(
                 margin: EdgeInsets.symmetric(vertical: 5),
                 padding: const EdgeInsets.all(18),
                 width: MediaQuery.of(context).size.width - 40,
                 decoration: BoxDecoration(
-                  color: Colors.lightBlue.shade100,
+                  color: Color(0xFF036896),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Text(
-                  "Enviar Mensagem",
+                  "Horário Secretaria Paroquial",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 30),
-            Text('Nos acompanhe nas redes sociais:'),
-            SizedBox(height: 20),
-            Text('Instagram - @pnsgracalondrina'),
-            SizedBox(height: 15),
-            Text('Facebook - pnsgracalondrina'),
-            SizedBox(height: 30),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              padding: const EdgeInsets.all(18),
-              width: MediaQuery.of(context).size.width - 40,
-              decoration: BoxDecoration(
-                color: Color(0xFF036896),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                "Horário Secretaria Paroquial",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.all(18),
+                width: MediaQuery.of(context).size.width - 40,
+                decoration: BoxDecoration(
+                  color: Color(0xFF036896),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(
+                  "Horário Missa",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              padding: const EdgeInsets.all(18),
-              width: MediaQuery.of(context).size.width - 40,
-              decoration: BoxDecoration(
-                color: Color(0xFF036896),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                "Horário Missa",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.all(18),
+                width: MediaQuery.of(context).size.width - 40,
+                decoration: BoxDecoration(
+                  color: Color(0xFF036896),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(
+                  "Horário Confissões",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              padding: const EdgeInsets.all(18),
-              width: MediaQuery.of(context).size.width - 40,
-              decoration: BoxDecoration(
-                color: Color(0xFF036896),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                "Horário Confissões",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Image
-              (image: AssetImage('assets/images/mapa_paroquia.png')
-            ),
-
-          ],
+              SizedBox(height: 20),
+              Image(image: AssetImage('assets/images/mapa_paroquia.png')),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+
+
+  void _showContactFormDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => ContactForm(
+        onSubmit: (nomeCompleto, email, celular, mensagem) {
+          // Chama a função para enviar email
+          sendEmail(nomeCompleto, email, celular, mensagem);
+          Navigator.pop(context); // Fecha o diálogo do formulário após envio
+        },
       ),
     );
   }
