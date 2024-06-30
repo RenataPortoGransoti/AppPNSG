@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:http/http.dart' as http;
 import '../Inicio/galeria.dart';
 import '../Inicio/historiaParoquia.dart';
 import '../Inicio/oracoes.dart';
@@ -9,6 +10,7 @@ import 'navigation_bar.dart';
 import 'pastoraisScreen.dart';
 import 'contribua.dart';
 import 'informacoes.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Inicio extends StatefulWidget {
   @override
@@ -17,6 +19,29 @@ class Inicio extends StatefulWidget {
 
 class InicioState extends State<Inicio> {
   int currentPageIndex = 0;
+  List<dynamic> avisos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAvisos();
+  }
+
+  void fetchAvisos() async {
+    try {
+      final response = await http.get(Uri.parse('http://192.168.1.5:8000/avisosapi'));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          avisos = json.decode(response.body);
+        });
+      } else {
+        throw Exception('Falha ao carregar os avisos');
+      }
+    } catch (e) {
+      print('Erro ao carregar os avisos: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +67,9 @@ class InicioState extends State<Inicio> {
               );
             } else if (currentPageIndex == 4) {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Informacoes()));
+                context,
+                MaterialPageRoute(builder: (context) => Informacoes()),
+              );
             }
           });
         },
@@ -54,22 +79,53 @@ class InicioState extends State<Inicio> {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(
-                left: 20, right: 20, top: 60, bottom: 10),
-            padding: const EdgeInsets.all(58),
-            width: MediaQuery.of(context).size.width - 70,
+            margin: EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 10),
+            padding: const EdgeInsets.all(18),
+            width: MediaQuery.of(context).size.width - 40,
             decoration: BoxDecoration(
               color: Color(0xFF036896),
               borderRadius: BorderRadius.circular(15),
             ),
-            child: const Text(
-              "Avisos Paroquiais",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            child: Column(
+              children: [
+                Text(
+                  "AVISOS PAROQUIAIS",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 10),
+                if (avisos.isEmpty)
+                  Text(
+                    'Não há avisos disponíveis no momento.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                for (var aviso in avisos)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center, // Ajuste aqui
+                      children: [
+                        Icon(Icons.fiber_manual_record, size: 10, color: Colors.white),
+                        SizedBox(width: 5),
+                        Expanded(
+                          child: Text(
+                            aviso['aviso'],
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
             ),
           ),
           Expanded(
@@ -178,13 +234,6 @@ class InicioState extends State<Inicio> {
                       ),
                     ],
                   ),
-/*Container(
-                    height: MediaQuery.of(context).size.height - 200,
-                    child: WebView(
-                      initialUrl: 'https://liturgia.cancaonova.com/pb/',
-                      javascriptMode: JavascriptMode.unrestricted,
-                    ),
-                  ),*/
                 ],
               ),
             ),
@@ -194,3 +243,11 @@ class InicioState extends State<Inicio> {
     );
   }
 }
+//aparecer janela web com a liturgia diária
+/*Container(
+ height: MediaQuery.of(context).size.height - 200,
+ child: WebView(
+ initialUrl: 'https://liturgia.cancaonova.com/pb/',
+ javascriptMode: JavascriptMode.unrestricted,
+
+ */

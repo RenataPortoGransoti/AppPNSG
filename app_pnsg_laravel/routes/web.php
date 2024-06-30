@@ -78,7 +78,7 @@ Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
 Route::get('/eventosapi', [EventoController::class, 'indexApi']);
 Route::get('/horariosapi', [HorarioController::class, 'indexApi']);
 Route::get('/contatosapi', [ContatoController::class, 'indexApi']);
-
+Route::get('/avisosapi', [AvisoController::class, 'indexApi']);
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
 Route::get('/csrf-token', function () {

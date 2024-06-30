@@ -183,12 +183,6 @@ class InformacoesState extends State<Informacoes> {
                 context,
                 MaterialPageRoute(builder: (context) => Contribua()),
               );
-            } else if (currentPageIndex == 4) {
-              // Não é necessário redirecionar para a própria página Informacoes
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Informacoes()),
-              // );
             }
           });
         },
@@ -201,7 +195,7 @@ class InformacoesState extends State<Informacoes> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 50),
-              Text('Entre em contato:'),
+              Text('Entre em contato:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,)),
               GestureDetector(
                 onTap: () {
                   _launchPhone();
@@ -225,7 +219,7 @@ class InformacoesState extends State<Informacoes> {
               ),
               GestureDetector(
                 onTap: () {
-                  abrirWhatsapp('$phoneNumber', 'Olá!'); // Chama o método para abrir o WhatsApp
+                  abrirWhatsapp('$phoneNumber', 'Olá!');
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 5),
@@ -266,7 +260,7 @@ class InformacoesState extends State<Informacoes> {
                 ),
               ),
               SizedBox(height: 30),
-              Text('Nos acompanhe nas redes sociais:'),
+              Text('Nos acompanhe nas redes sociais:', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16, )),
               SizedBox(height: 20),
               //abrirInstagram();
           GestureDetector(
@@ -304,8 +298,7 @@ class InformacoesState extends State<Informacoes> {
       ),
     );
   }
-
-  // Método para construir um ExpansionTile para os horários
+  
   Widget _buildHorarioTile(String titulo, String tipo) {
     var horariosList = horarios[tipo];
 

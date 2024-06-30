@@ -14,6 +14,12 @@ class AvisoController extends Controller
         return view('inicio', compact('avisos'));
     }
 
+    public function indexapi()
+    {
+        $avisos = Aviso::all();
+        return response()->json($avisos);
+    }
+
     public function store(Request $request)
     {
         Log::info('Request data:', $request->all());
