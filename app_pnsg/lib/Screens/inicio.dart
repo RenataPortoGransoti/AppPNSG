@@ -178,13 +178,13 @@ class InicioState extends State<Inicio> {
                       ),
                     ],
                   ),
-                  Container(
+/*Container(
                     height: MediaQuery.of(context).size.height - 200,
                     child: WebView(
                       initialUrl: 'https://liturgia.cancaonova.com/pb/',
                       javascriptMode: JavascriptMode.unrestricted,
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),

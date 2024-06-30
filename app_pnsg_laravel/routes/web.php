@@ -9,6 +9,7 @@ use App\Http\Controllers\InformacoesController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\AvisoController;
 use App\Http\Controllers\EmailController;
+use App\Models\Horario;
 
 Route::get('/', function () {
     return view('welcome');
@@ -75,6 +76,7 @@ Route::delete('/avisos/{id}', [AvisoController::class, 'destroy'])->name('avisos
 //Rota para informações das pastorais e eventos em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
 Route::get('/eventosapi', [EventoController::class, 'indexApi']);
+Route::get('/horariosapi', [HorarioController::class, 'indexApi']);
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
 Route::get('/csrf-token', function () {
