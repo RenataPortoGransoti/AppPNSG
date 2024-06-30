@@ -68,18 +68,43 @@ class InformacoesState extends State<Informacoes> {
   }
 
 
+  _abrirInstagram() async {
+    var nativeUrl = "instagram://user?username=pnsgracalondrina";
+    var webUrl = "https://www.instagram.com/pnsgracalondrina";
 
-
-
-//abrir instagram
-  void abrirInstagram() async {
-    var messengerUrl = 'https://instagram.com/pnsgracalondrina';
-    if (await canLaunchUrl(Uri.parse(messengerUrl))) {
-      await launchUrl(Uri.parse(messengerUrl));
-    } else {
-      throw 'Could not launch $messengerUrl';
+    try {
+      await launchUrlString(nativeUrl, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      print(e);
+      await launchUrlString(webUrl, mode: LaunchMode.platformDefault);
     }
   }
+
+  void _abrirFacebook() async {
+    var nativeUrl = "fb://pnsgracalondrina";
+    var webUrl = "https://www.facebook.com/pnsgracalondrina";
+
+    try {
+      if (await canLaunchUrl(Uri.parse(nativeUrl))) {
+        await launchUrl(
+          Uri.parse(nativeUrl),
+          mode: LaunchMode.externalApplication,
+        );
+      } else {
+        await launchUrl(
+          Uri.parse(webUrl),
+          mode: LaunchMode.platformDefault,
+        );
+      }
+    } catch (e) {
+      print(e);
+      await launchUrl(
+        Uri.parse(webUrl),
+        mode: LaunchMode.platformDefault,
+      );
+    }
+  }
+
 
 // Função para lançar o WhatsApp com o número específico
   void abrirWhatsapp(
@@ -220,9 +245,19 @@ class InformacoesState extends State<Informacoes> {
               Text('Nos acompanhe nas redes sociais:'),
               SizedBox(height: 20),
               //abrirInstagram();
+          GestureDetector(
+            onTap: () {
+              _abrirInstagram();
+            },child:
               Text('Instagram - @pnsgracalondrina'),
+          ),
               SizedBox(height: 15),
+          GestureDetector(
+            onTap: () {
+              _abrirFacebook();
+            },child:
               Text('Facebook - pnsgracalondrina'),
+          ),
               SizedBox(height: 30),
 
               // Containers de horários expandíveis
