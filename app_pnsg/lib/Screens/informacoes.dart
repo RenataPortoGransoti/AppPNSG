@@ -9,7 +9,7 @@ import 'contribua.dart';
 import 'eventos.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
-import 'pastoraisScreen.dart'; // Suponho que você tenha importado corretamente a tela PastoraisScreen
+import 'pastoraisScreen.dart';
 class Informacoes extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -23,13 +23,17 @@ class InformacoesState extends State<Informacoes> {
     'secretaria': [],
     'missa': [],
     'confissao': [],
-  }; // Mapa para armazenar os horários por tipo
+  };
+  String phoneNumber = "";
+  String instagramUrl = "";
+  String facebookUrl = "";
+  String instagramUsername = "";
 
   @override
   void initState() {
     super.initState();
     fetchHorarios(); // Chama a função para buscar os horários ao iniciar a tela
-  }
+    fetchContactDetails();  }
 
   // Função para buscar os horários da API Laravel
   void fetchHorarios() async {
@@ -54,8 +58,32 @@ class InformacoesState extends State<Informacoes> {
     }
   }
 
-  // Função para lançar o telefone
-  void _launchPhone(String phoneNumber) async {
+// Função para buscar os detalhes de contato da API Laravel
+  void fetchContactDetails() async {
+    try {
+      final response = await http.get(Uri.parse('http://192.168.1.5:8000/contatosapi'));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          var parsedJson = json.decode(response.body) as Map<String, dynamic>;
+          phoneNumber = parsedJson['contato'][0]['valor']; // Atualiza o número de telefone
+          instagramUrl = parsedJson['instagram'][0]['valor']; // Atualiza o URL do Instagram
+          facebookUrl = parsedJson['facebook'][0]['valor']; // Atualiza o URL do Facebook
+          // Extrair o nome de usuário do URL do Instagram
+          if (instagramUrl.isNotEmpty) {
+            final uri = Uri.parse(instagramUrl);
+            instagramUsername = uri.pathSegments.isNotEmpty ? uri.pathSegments[0] : '';
+          }
+        });
+      } else {
+        throw Exception('Falha ao carregar os detalhes de contato');
+      }
+    } catch (e) {
+      print('Erro ao carregar os detalhes de contato: $e');
+    }
+  }
+
+  void _launchPhone() async {
     final Uri launchUri = Uri(
       scheme: 'tel',
       path: phoneNumber,
@@ -67,41 +95,37 @@ class InformacoesState extends State<Informacoes> {
     }
   }
 
-
-  _abrirInstagram() async {
-    var nativeUrl = "instagram://user?username=pnsgracalondrina";
-    var webUrl = "https://www.instagram.com/pnsgracalondrina";
-
-    try {
-      await launchUrlString(nativeUrl, mode: LaunchMode.externalApplication);
-    } catch (e) {
-      print(e);
-      await launchUrlString(webUrl, mode: LaunchMode.platformDefault);
-    }
-  }
-
-  void _abrirFacebook() async {
-    var nativeUrl = "fb://pnsgracalondrina";
-    var webUrl = "https://www.facebook.com/pnsgracalondrina";
+  // Função para abrir o Instagram
+  void _abrirInstagram() async {
+    var nativeUrl = instagramUrl.replaceFirst('https://www.instagram.com/', 'instagram://user?username=');
+    var webUrl = instagramUrl;
 
     try {
-      if (await canLaunchUrl(Uri.parse(nativeUrl))) {
-        await launchUrl(
-          Uri.parse(nativeUrl),
-          mode: LaunchMode.externalApplication,
-        );
+      if (await canLaunch(nativeUrl)) {
+        await launch(nativeUrl);
       } else {
-        await launchUrl(
-          Uri.parse(webUrl),
-          mode: LaunchMode.platformDefault,
-        );
+        await launch(webUrl);
       }
     } catch (e) {
       print(e);
-      await launchUrl(
-        Uri.parse(webUrl),
-        mode: LaunchMode.platformDefault,
-      );
+      await launch(webUrl);
+    }
+  }
+
+  // Função para abrir o Facebook
+  void _abrirFacebook() async {
+    var nativeUrl = facebookUrl.replaceFirst('https://www.facebook.com/', 'fb://page/');
+    var webUrl = facebookUrl;
+
+    try {
+      if (await canLaunch(nativeUrl)) {
+        await launch(nativeUrl);
+      } else {
+        await launch(webUrl);
+      }
+    } catch (e) {
+      print(e);
+      await launch(webUrl);
     }
   }
 
@@ -180,7 +204,7 @@ class InformacoesState extends State<Informacoes> {
               Text('Entre em contato:'),
               GestureDetector(
                 onTap: () {
-                  _launchPhone('43-3342-1276');
+                  _launchPhone();
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 5),
@@ -191,7 +215,7 @@ class InformacoesState extends State<Informacoes> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                    "(43) 3342-1276 - Ligar agora",
+                    "$phoneNumber - Ligar agora",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -201,7 +225,7 @@ class InformacoesState extends State<Informacoes> {
               ),
               GestureDetector(
                 onTap: () {
-                  abrirWhatsapp('4333421276', 'Olá!'); // Chama o método para abrir o WhatsApp
+                  abrirWhatsapp('$phoneNumber', 'Olá!'); // Chama o método para abrir o WhatsApp
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 5),
@@ -249,7 +273,7 @@ class InformacoesState extends State<Informacoes> {
             onTap: () {
               _abrirInstagram();
             },child:
-              Text('Instagram - @pnsgracalondrina'),
+              Text('Instagram - @$instagramUsername'),
           ),
               SizedBox(height: 15),
           GestureDetector(

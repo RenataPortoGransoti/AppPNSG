@@ -77,6 +77,8 @@ Route::delete('/avisos/{id}', [AvisoController::class, 'destroy'])->name('avisos
 Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
 Route::get('/eventosapi', [EventoController::class, 'indexApi']);
 Route::get('/horariosapi', [HorarioController::class, 'indexApi']);
+Route::get('/contatosapi', [ContatoController::class, 'indexApi']);
+
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
 Route::get('/csrf-token', function () {

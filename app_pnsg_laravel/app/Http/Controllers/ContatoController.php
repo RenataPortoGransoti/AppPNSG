@@ -15,6 +15,12 @@ class ContatoController extends Controller
         return $contatos;
     }
 
+    public function indexapi()
+    {
+        $contatos = Contato::all()->groupBy('tipo');
+        return response()->json($contatos);
+    }
+
     public function store(Request $request)
     {
         $data = $request->only(['contato', 'email', 'instagram', 'facebook']);
