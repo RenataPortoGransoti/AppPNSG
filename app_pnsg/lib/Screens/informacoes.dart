@@ -267,14 +267,23 @@ class InformacoesState extends State<Informacoes> {
             onTap: () {
               _abrirInstagram();
             },child:
-              Text('Instagram - @$instagramUsername'),
+              Text('Instagram - @$instagramUsername',style: TextStyle(
+                decoration: TextDecoration.underline, // Adicionando sublinhado
+                decorationColor: Color(0xFF036896), // Cor do sublinhado
+                decorationThickness: 1, // Espessura do sublinhado
+              ),),
+
           ),
               SizedBox(height: 15),
           GestureDetector(
             onTap: () {
               _abrirFacebook();
             },child:
-              Text('Facebook - pnsgracalondrina'),
+              Text('Facebook - pnsgracalondrina',style: TextStyle(
+                decoration: TextDecoration.underline, // Adicionando sublinhado
+                decorationColor: Color(0xFF036896), // Cor do sublinhado
+                decorationThickness: 1, // Espessura do sublinhado
+              ),),
           ),
               SizedBox(height: 30),
 
@@ -298,7 +307,7 @@ class InformacoesState extends State<Informacoes> {
       ),
     );
   }
-  
+
   Widget _buildHorarioTile(String titulo, String tipo) {
     var horariosList = horarios[tipo];
 
