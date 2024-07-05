@@ -122,7 +122,7 @@
                             class="p-4" id="formEvento">
                             @csrf
                             <div class="mb-4">
-                                <label for="nomeEvento" class="block mb-1">Nome do Evento</label>
+                                <label for="nomeEvento" class="block mb-1">Nome do Evento*</label>
                                 <input type="text" class="form-input w-full border rounded-md h-12" id="nomeEvento"
                                     name="nome_evento" required>
                                 <div id="error-message-nomeEvento" class="text-red-500 text-sm" style="display: none">Por
@@ -130,7 +130,7 @@
                             </div>
                             <div class="mb-4 flex space-x-4">
                                 <div class="w-1/2">
-                                    <label for="dataInicio" class="block mb-1">Data e Hora de Início</label>
+                                    <label for="dataInicio" class="block mb-1">Data e Hora de Início*</label>
                                     <input type="datetime-local" id="dataInicio"
                                         class="form-input border rounded-md h-10 w-full" name="data_inicio" required>
                                     <div id="error-message-dataInicio" class="text-red-500 text-sm"
@@ -144,7 +144,7 @@
                             </div>
 
                             <div class="mb-4">
-                                <label for="local" class="block mb-1">Local</label>
+                                <label for="local" class="block mb-1">Local*</label>
                                 <input type="text" class="form-input w-full border rounded-md h-10" id="local"
                                     name="local" required>
                                 <div id="error-message-local" class="text-red-500 text-sm" style="display: none">Por
@@ -152,7 +152,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="descricao" class="block mb-1">Descrição</label>
-                                <textarea class="form-textarea w-full border rounded-md" id="descricao" name="descricao"></textarea>
+                                <textarea class="form-textarea w-full border rounded-md h-32" id="descricao" name="descricao"></textarea>
                             </div>
                             <div class="text-white px-4 py-3 text-center">
                                 <button type="button"
