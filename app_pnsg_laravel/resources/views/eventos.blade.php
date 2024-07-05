@@ -167,19 +167,20 @@
                     <h2 class="text-center text-2xl font-semibold mb-3">Eventos Inativos</h2>
                     @foreach ($eventos as $evento)
                         @if (!$evento->ativo)
-                            <div class="bg-white shadow-lg rounded-2xl mb-4 mx-5">
+                            <div class="bg-white shadow-lg rounded-2xl mb-4  mx-5">
                                 <div
                                     class="bg-gray-200 rounded-md py-3 px-4 flex justify-between items-center cursor-pointer border border-gray-400">
                                     <h4 class="font-semibold text-xl py-3 px-1">{{ $evento->nome_evento }}</h4>
-                                    <div class="">
-                                        <form action="{{ route('eventos.ativar', $evento->id) }}" method="POST">
+                                    <div class="flex items-center space-x-2">
+                                        <form action="{{ route('eventos.ativar', $evento->id) }}" method="POST"
+                                            class="mb-0">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="relative group btn btn-outline-success pr-5 ">
                                                 <i
                                                     class="bi bi-check-circle text-gray-800 group-hover:text-green-500 transform group-hover:scale-110 transition-transform duration-300"></i>
                                                 <span
-                                                    class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                    class="absolute bottom-full left-1/2 transform -translate-x-1/2  w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                                                     Ativar
                                                 </span>
                                             </button>
