@@ -128,18 +128,21 @@
                                 <div id="error-message-nomeEvento" class="text-red-500 text-sm" style="display: none">Por
                                     favor, preencha o nome do evento.</div>
                             </div>
-                            <div class="mb-4">
-                                <label for="dataInicio" class="block mb-1">Data e Hora de Início</label>
-                                <input type="datetime-local" id="dataInicio" class="form-input border rounded-md h-10"
-                                    name="data_inicio" required>
-                                <div id="error-message-dataInicio" class="text-red-500 text-sm" style="display: none">Por
-                                    favor, preencha a data e hora de início.</div>
+                            <div class="mb-4 flex space-x-4">
+                                <div class="w-1/2">
+                                    <label for="dataInicio" class="block mb-1">Data e Hora de Início</label>
+                                    <input type="datetime-local" id="dataInicio"
+                                        class="form-input border rounded-md h-10 w-full" name="data_inicio" required>
+                                    <div id="error-message-dataInicio" class="text-red-500 text-sm"
+                                        style="display: none">Por favor, preencha a data e hora de início.</div>
+                                </div>
+                                <div class="w-1/2">
+                                    <label for="dataFim" class="block mb-1">Data e Hora de Fim</label>
+                                    <input type="datetime-local" id="dataFim"
+                                        class="form-input border rounded-md h-10 w-full" name="data_fim">
+                                </div>
                             </div>
-                            <div class="mb-4">
-                                <label for="dataFim" class="block mb-1">Data e Hora de Fim</label>
-                                <input type="datetime-local" id="dataFim" class="form-input border rounded-md h-10"
-                                    name="data_fim">
-                            </div>
+
                             <div class="mb-4">
                                 <label for="local" class="block mb-1">Local</label>
                                 <input type="text" class="form-input w-full border rounded-md h-10" id="local"
