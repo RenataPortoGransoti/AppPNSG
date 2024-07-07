@@ -44,7 +44,7 @@
                                                 </span>
                                             </button>
                                             <button type="button" class="relative group btn btn-outline-danger pr-5"
-                                                onclick="showExcluirModal({{ $evento->id }})">
+                                                onclick="showInativarModal({{ $evento->id }})">
                                                 <i
                                                     class="bi bi-trash text-gray-800 group-hover:text-red-500 transform group-hover:scale-110 transition-transform duration-300"></i>
                                                 <span
@@ -188,7 +188,7 @@
                                                 </span>
                                             </button>
                                             <button type="button" class="relative group btn btn-outline-danger pr-5"
-                                                onclick="confirmSoftDelete({{ $evento->id }})">
+                                                onclick="showExcluirModal({{ $evento->id }})">
                                                 <i
                                                     class="bi bi-x text-gray-800 group-hover:text-red-500 transform group-hover:scale-110 transition-transform duration-300"></i>
                                                 <span
@@ -221,18 +221,40 @@
                 </div>
 
                 <!--  Modal Inativar Evento -->
-                <div id="excluirModal"
+                <div id="inativarModal"
                     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
                     <div class="bg-white w-1/3 p-8 rounded-md">
                         <h3 class="text-[#960316] text-lg font-bold text-center mb-4">Inativar Evento?</h3>
                         <p class="mt-2 mb-4">Tem certeza de que deseja inativar? O evento não aparecerá mais na lista
                             de eventos ativos.</p>
                         <div class="flex justify-center items-center align-center">
+                            <button id="btnInativarFecharModal"
+                                class="px-4 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white border border-[#036896] rounded-xl mr-2">Voltar</button>
+                            <form id="forminativarEvento" method="POST"
+                                action="{{ route('eventos.inativar', ['id' => 0]) }}">
+                                @csrf
+                                <input type="hidden" id="inativarEventoId" name="evento_id">
+                                <button type="submit"
+                                    class="mt-4 px-4 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black text-white border border-[#960316] rounded-xl">Confirmar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  Modal Excluir Evento -->
+                <div id="excluirModal"
+                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                    <div class="bg-white w-1/3 p-8 rounded-md">
+                        <h3 class="text-[#960316] text-lg font-bold text-center mb-4">Excluir Evento?</h3>
+                        <p class="mt-2 mb-4">Tem certeza de que deseja excluir? O evento não aparecerá mais na lista
+                            de eventos.</p>
+                        <div class="flex justify-center items-center align-center">
                             <button id="btnExcluirFecharModal"
                                 class="px-4 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white border border-[#036896] rounded-xl mr-2">Voltar</button>
                             <form id="formExcluirEvento" method="POST"
-                                action="{{ route('eventos.inativar', ['id' => 0]) }}">
+                                action="{{ route('eventos.softDelete', $evento->id) }}">
                                 @csrf
+                                @method('DELETE')
                                 <input type="hidden" id="excluirEventoId" name="evento_id">
                                 <button type="submit"
                                     class="mt-4 px-4 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black text-white border border-[#960316] rounded-xl">Confirmar</button>
@@ -282,6 +304,20 @@
             document.getElementById('cardEvento').classList.add('hidden');
         });
 
+        function showInativarModal(id) {
+            const inativarModal = document.getElementById('inativarModal');
+            const inativarEventoId = document.getElementById('inativarEventoId');
+            inativarEventoId.value = id;
+            inativarModal.classList.remove('hidden');
+        }
+
+        function hideInativarModal() {
+            const inativarModal = document.getElementById('inativarModal');
+            inativarModal.classList.add('hidden');
+        }
+
+        document.getElementById('btnInativarFecharModal').addEventListener('click', hideInativarModal);
+
         function showExcluirModal(id) {
             const excluirModal = document.getElementById('excluirModal');
             const excluirEventoId = document.getElementById('excluirEventoId');
@@ -308,31 +344,5 @@
                 document.getElementById('formEvento').submit();
             }
         });
-
-        function confirmSoftDelete(eventoId) {
-            if (confirm('Tem certeza de que deseja excluir o evento? O evento não irá mais aparecer no sistema!')) {
-                fetch(`/eventos/${eventoId}/soft-delete`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Ocorreu um erro ao excluir o evento.');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        alert(data.message);
-                        window.location.reload();
-                    })
-                    .catch(error => {
-                        alert(error.message);
-                    });
-
-            }
-        }
     </script>
 @endsection

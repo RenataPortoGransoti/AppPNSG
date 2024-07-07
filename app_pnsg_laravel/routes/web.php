@@ -55,7 +55,7 @@ Route::post('/eventos', [EventoController::class, 'cadastrarEvento'])->name('eve
 Route::put('/eventos/{evento}', [EventoController::class, 'editarEvento'])->name('eventos.editarEvento');
 Route::post('/eventos/inativar', [EventoController::class, 'inativarEvento'])->name('eventos.inativar');
 // Route::delete('/eventos/{id}', [EventoController::class, 'deletarEvento'])->name('eventos.delete');
-Route::delete('/eventos/{id}/soft-delete', [EventoController::class, 'deletarEvento'])->name('eventos.softDelete');
+Route::delete('/eventos/{id}/excluir', [EventoController::class, 'deletarEvento'])->name('eventos.softDelete');
 
 
 Route::put('/eventos/{id}/ativar', [EventoController::class, 'ativarEvento'])->name('eventos.ativar');
