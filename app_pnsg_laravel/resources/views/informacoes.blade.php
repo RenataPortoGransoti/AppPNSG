@@ -9,6 +9,23 @@
 <body>
     @section('content')
         <div class="container mx-auto max-w-4xl">
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+                    role="alert">
+                    <strong class="font-bold">Sucesso!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                    <button type="button"
+                        class="absolute top-0 right-0 mt-1 mr-2 text-green-700 hover:text-green-500 focus:outline-none"
+                        onclick="this.parentElement.style.display='none'">
+                        <span class="sr-only">Fechar</span>
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M12.707 7.293a1 1 0 0 1 1.414 1.414L11.414 11l2.707 2.293a1 1 0 1 1-1.414 1.414L10 12.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 11 5.879 8.707a1 1 0 0 1 1.414-1.414L10 9.586l2.293-2.293z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            @endif
             <h1 class="text-center font-semibold text-4xl">INFORMAÇÕES GERAIS</h1>
             <div class="container mx-auto mt-4 mb-8">
                 <div class="flex justify-center">
@@ -110,7 +127,8 @@
                                                 @foreach ($horarios[$tipo] as $horario)
                                                     <div class="my-2 flex items-center">
                                                         <input type="text" name="horarios_{{ $tipo }}[]"
-                                                            value="{{ $horario->descricao }}" data-id="{{ $horario->id }}"
+                                                            value="{{ $horario->descricao }}"
+                                                            data-id="{{ $horario->id }}"
                                                             class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                         <input type="hidden" name="ids_{{ $tipo }}[]"
                                                             value="{{ $horario->id }}">
