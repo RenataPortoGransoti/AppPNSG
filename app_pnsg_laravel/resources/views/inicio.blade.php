@@ -33,16 +33,27 @@
                                                     <input type="text" name="avisos[]" value="{{ $aviso->aviso }}"
                                                         class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                     <input type="hidden" name="ids[]" value="{{ $aviso->id }}">
-                                                    <button type="button" class="remove-aviso-btn ml-2 text-red-500"><i
-                                                            class="bi bi-x"></i></button>
+                                                    <button type="button" class="relative remove-aviso-btn ml-2 group">
+                                                        <i
+                                                            class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                        <span
+                                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                            Excluir
+                                                        </span>
+                                                    </button>
                                                 </div>
                                             @endforeach
                                             <div class="my-2 flex items-center">
                                                 <input type="text" name="avisos[]"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                 <input type="hidden" name="ids[]" value="">
-                                                <button type="button" class="add-aviso-btn ml-2 text-green-500"><i
-                                                        class="bi bi-plus"></i></button>
+                                                <button type="button"
+                                                    class="relative add-aviso-btn ml-2 text-green-500 group"><i
+                                                        class="bi bi-plus text-green-500 group-hover:text-gray-800 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class=" absolute bottom-full  left-0.5 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Adicionar
+                                                    </span></button>
                                             </div>
                                         </div>
                                     </div>

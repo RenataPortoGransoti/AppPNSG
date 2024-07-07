@@ -25,8 +25,14 @@
                                                 <input type="text" id="contato" name="contato"
                                                     value="{{ old('contato', $contatosMap['contato'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button" class="ml-2 text-red-500 remove-contato"
-                                                    data-tipo="contato"><i class="bi bi-x"></i></button>
+                                                <button type="button"
+                                                    class="relative ml-2 text-red-500 remove-contato group "
+                                                    data-tipo="contato"><i
+                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Excluir
+                                                    </span></button>
                                             </div>
                                         </div>
                                         <div>
@@ -35,8 +41,14 @@
                                                 <input type="text" id="instagram" name="instagram"
                                                     value="{{ old('instagram', $contatosMap['instagram'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button" class="ml-2 text-red-500 remove-contato"
-                                                    data-tipo="instagram"><i class="bi bi-x"></i></button>
+                                                <button type="button"
+                                                    class="relative ml-2 text-red-500 remove-contato group"
+                                                    data-tipo="instagram"><i
+                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Excluir
+                                                    </span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -47,8 +59,14 @@
                                                 <input type="email" id="email" name="email"
                                                     value="{{ old('email', $contatosMap['email'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button" class="ml-2 text-red-500 remove-contato"
-                                                    data-tipo="email"><i class="bi bi-x"></i></button>
+                                                <button type="button"
+                                                    class="relative ml-2 text-red-500 remove-contato group"
+                                                    data-tipo="email"><i
+                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Excluir
+                                                    </span></button>
                                             </div>
                                         </div>
                                         <div>
@@ -57,8 +75,14 @@
                                                 <input type="text" id="facebook" name="facebook"
                                                     value="{{ old('facebook', $contatosMap['facebook'][0]->valor ?? '') }}"
                                                     class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button" class="ml-2 text-red-500 remove-contato"
-                                                    data-tipo="facebook"><i class="bi bi-x"></i></button>
+                                                <button type="button"
+                                                    class="relative ml-2 text-red-500 remove-contato group"
+                                                    data-tipo="facebook"><i
+                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Excluir
+                                                    </span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -91,17 +115,30 @@
                                                         <input type="hidden" name="ids_{{ $tipo }}[]"
                                                             value="{{ $horario->id }}">
                                                         <button type="button"
-                                                            class="remove-horario-btn ml-2 text-red-500"><i
-                                                                class="bi bi-x"></i></button>
+                                                            class="relative remove-horario-btn ml-2  group">
+
+                                                            <i
+                                                                class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                            <span
+                                                                class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                                Excluir
+                                                            </span>
+                                                        </button>
                                                     </div>
                                                 @endforeach
                                                 <div class="my-2 flex items-center">
                                                     <input type="text" name="horarios_{{ $tipo }}[]"
                                                         data-id=""
                                                         class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                    <input type="hidden" name="ids_{{ $tipo }}[]" value="">
-                                                    <button type="button" class="add-horario-btn ml-2 text-green-500"><i
-                                                            class="bi bi-plus"></i></button>
+                                                    <input type="hidden" name="ids_{{ $tipo }}[]"
+                                                        value="">
+                                                    <button type="button"
+                                                        class="relative add-horario-btn ml-2 text-green-500 group"><i
+                                                            class="bi bi-plus text-green-500 group-hover:text-gray-800 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                        <span
+                                                            class=" absolute bottom-full  left-0.5 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                            Adicionar
+                                                        </span></button>
                                                 </div>
                                             </div>
                                         </div>

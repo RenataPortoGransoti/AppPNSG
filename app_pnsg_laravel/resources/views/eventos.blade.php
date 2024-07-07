@@ -190,7 +190,7 @@
                                             <button type="button" class="relative group btn btn-outline-danger pr-5"
                                                 onclick="confirmSoftDelete({{ $evento->id }})">
                                                 <i
-                                                    class="bi bi-trash text-gray-800 group-hover:text-red-500 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    class="bi bi-x text-gray-800 group-hover:text-red-500 transform group-hover:scale-110 transition-transform duration-300"></i>
                                                 <span
                                                     class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                                                     Excluir
