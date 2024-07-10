@@ -6,8 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 
 class EnviarEmail extends Mailable
 {
@@ -30,23 +28,21 @@ class EnviarEmail extends Mailable
         $this->celular = $celular;
         $this->mensagem = $mensagem;
     }
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Nova mensagem!',
-        );
-    }
+
     /**
      * Build the message.
      *
      * @return $this
      */
-
-
-    public function content(): Content
+    public function build()
     {
-        return new Content(
-            view: 'emails.enviar_email',
-        );
+        return $this->subject('Nova mensagem recebida!')
+            ->view('emails.enviar_email')
+            ->with([
+                'nomeCompleto' => $this->nomeCompleto,
+                'email' => $this->email,
+                'celular' => $this->celular,
+                'mensagem' => $this->mensagem,
+            ]);
     }
 }

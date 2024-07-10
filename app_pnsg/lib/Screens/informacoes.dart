@@ -10,6 +10,7 @@ import 'eventos.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
 import 'pastoraisScreen.dart';
+import '../email.dart';
 class Informacoes extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -18,6 +19,7 @@ class Informacoes extends StatefulWidget {
 }
 
 class InformacoesState extends State<Informacoes> {
+
   int currentPageIndex = 4;
   Map<String, List<dynamic>> horarios = {
     'secretaria': [],
@@ -129,7 +131,6 @@ class InformacoesState extends State<Informacoes> {
     }
   }
 
-
 // Função para lançar o WhatsApp com o número específico
   void abrirWhatsapp(
       String phone,
@@ -148,14 +149,31 @@ class InformacoesState extends State<Informacoes> {
       context: context,
       builder: (context) => ContactForm(
         onSubmit: (nomeCompleto, email, celular, mensagem) {
-          // Chama a função para enviar email
+          // Chama a função para enviar email da classe InformacoesState
           sendEmail(nomeCompleto, email, celular, mensagem);
           Navigator.pop(context); // Fecha o diálogo do formulário após envio
-        },
+        }, baseUrl: '',
       ),
     );
   }
 
+  String _text = '';
+  var email = Email('renata.porto.gransoti@gmail.com', 'ahpgpdyusnznyoif');
+
+  void sendEmail(String nomeCompleto, String email, String celular, String mensagem) async {
+    var emailService = Email('renata.porto.gransoti@gmail.com', 'ahpgpdyusnznyoif');
+    bool result = await emailService.sendMessage(
+      mensagem,
+      email,
+      nomeCompleto,
+      'Novo mensagem enviada pelo aplicativo!',
+      nomeCompleto: nomeCompleto,
+      celular: celular,
+    );
+    setState(() {
+      _text = result ? 'Enviado.' : 'Não enviado.';
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

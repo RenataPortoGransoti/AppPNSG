@@ -1,21 +1,27 @@
-import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' as parser;
+import 'package:html/dom.dart' as dom;
 
-Future<String> fetchCsrfToken() async {
-  try {
-    final Uri uri = Uri.parse('http://192.168.1.5:8000/csrf-token'); // Substitua pela rota correta do seu backend para obter o token CSRF
-    final response = await http.get(uri);
+Future<String?> fetchCSRFToken(String baseUrl) async {
+  final response = await http.get(Uri.parse(baseUrl));
 
-    if (response.statusCode == 200) {
-      // Recupera o token CSRF do corpo da resposta
-      Map<String, dynamic> responseData = jsonDecode(response.body);
-      String csrfToken = responseData['csrfToken'];
-      return csrfToken;
-    } else {
-      throw Exception('Falha ao obter o token CSRF');
+  if (response.statusCode == 200) {
+    // Parse o HTML da resposta para obter o token CSRF
+    dom.Document document = parser.parse(response.body);
+    var metaTags = document.getElementsByTagName('meta');
+
+    String? csrfToken = '';
+
+    // Encontrar a meta tag com o nome csrf-token
+    for (var tag in metaTags) {
+      if (tag.attributes['name'] == 'csrf-token') {
+        csrfToken = tag.attributes['content'];
+        break;
+      }
     }
-  } catch (e) {
-    print('Erro ao obter token CSRF: $e');
-    throw e; // Lança o erro para ser tratado onde a função for chamada
+
+    return csrfToken;
+  } else {
+    throw Exception('Falha ao carregar o token CSRF');
   }
 }

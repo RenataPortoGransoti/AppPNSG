@@ -3,37 +3,20 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'email.dart';
+import 'Screens/informacoes.dart';
+
 class ContactForm extends StatelessWidget {
   final Function(String, String, String, String) onSubmit;
+  final String baseUrl;
 
-  ContactForm({required this.onSubmit});
+  ContactForm({required this.onSubmit, required this.baseUrl});
 
   final _formKey = GlobalKey<FormState>();
   late String _nomeCompleto;
   late String _email;
   late String _celular;
   late String _mensagem;
-
-  Future<void> sendEmail(String nomeCompleto, String email, String celular, String mensagem) async {
-    final Uri uri = Uri.parse('http://192.168.1.5:8000/send-email');
-    final response = await http.post(
-      uri,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'nomeCompleto': nomeCompleto,
-        'email': email,
-        'celular': celular,
-        'mensagem': mensagem,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      print('Email enviado com sucesso');
-    } else {
-      print('Falha ao enviar email: ${response.body}');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +49,7 @@ class ContactForm extends StatelessWidget {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: 'Nome Completo',
+                        labelText: 'Nome Completo*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                         ),
@@ -85,7 +68,7 @@ class ContactForm extends StatelessWidget {
                     SizedBox(height: 10),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: 'E-mail',
+                        labelText: 'E-mail para contato*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                         ),
@@ -105,7 +88,7 @@ class ContactForm extends StatelessWidget {
                     SizedBox(height: 10),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: 'Celular',
+                        labelText: 'Celular para contato*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                         ),
@@ -125,7 +108,7 @@ class ContactForm extends StatelessWidget {
                     SizedBox(height: 10),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: 'Mensagem',
+                        labelText: 'Mensagem*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                         ),
@@ -147,8 +130,7 @@ class ContactForm extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          onSubmit(_nomeCompleto, _email, _celular, _mensagem); // Chama a função onSubmit passada como parâmetro
-                          sendEmail(_nomeCompleto, _email, _celular, _mensagem); // Chama a função para enviar email
+                          onSubmit(_nomeCompleto, _email, _celular, _mensagem);
                           Navigator.pop(context);
                         }
                       },
@@ -176,4 +158,65 @@ class ContactForm extends StatelessWidget {
       ),
     );
   }
+
+  Future<String?> fetchCSRFToken(String baseUrl) async {
+    try {
+      final Uri uri = Uri.parse(
+          '$baseUrl/csrf-token'); // Exemplo de URL para obter o token CSRF
+      final response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        final String csrfToken = responseData['csrfToken']; // Supondo que o token CSRF seja retornado como 'csrfToken'
+        return csrfToken;
+      } else {
+        print('Erro ao obter token CSRF: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      print('Erro ao obter token CSRF: $e');
+      return null;
+    }
+  }
+
+  // Função para enviar e-mail
+  Future<void> enviarRequisicaoComToken(String baseUrl, String nomeCompleto,
+      String email, String celular, String mensagem) async {
+    try {
+      // Obter o token CSRF
+      String? csrfToken = await fetchCSRFToken(baseUrl);
+
+      if (csrfToken != null) {
+        // Configurar a URL para enviar o email
+        final Uri uri = Uri.parse('$baseUrl/send-email');
+
+        // Enviar o email com o token CSRF nos headers
+        final response = await http.post(
+          uri,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+          },
+          body: jsonEncode({
+            'nomeCompleto': nomeCompleto,
+            'email': email,
+            'celular': celular,
+            'mensagem': mensagem,
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          print('Email enviado com sucesso');
+        } else {
+          print('Falha ao enviar email: ${response.body}');
+        }
+      } else {
+        print('Não foi possível obter o token CSRF');
+      }
+    } catch (e) {
+      print('Erro ao enviar email: $e');
+    }
+  }
+
 }
+

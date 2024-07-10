@@ -13,7 +13,7 @@ class EmailController extends Controller
 
     public function __construct()
     {
-        $this->toEmail = env('MAIL_SEND_TO');
+        $this->toEmail = 'renata.gransoti@edu.unifil.br';
     }
 
     public function sendEmail(Request $request)

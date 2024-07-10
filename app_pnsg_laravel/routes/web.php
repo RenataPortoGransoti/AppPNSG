@@ -80,7 +80,8 @@ Route::get('/horariosapi', [HorarioController::class, 'indexApi']);
 Route::get('/contatosapi', [ContatoController::class, 'indexApi']);
 Route::get('/avisosapi', [AvisoController::class, 'indexApi']);
 
-Route::post('/send-email', [EmailController::class, 'sendEmail']);
+Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send-email');
+
 Route::get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);
 });
