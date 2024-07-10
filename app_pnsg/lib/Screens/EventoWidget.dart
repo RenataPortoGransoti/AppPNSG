@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Importe o pacote intl para usar o DateFormat
 
 class EventoWidget extends StatelessWidget {
   final String nome_evento;
-  final String data_inicio;
+  final String data_inicio; // A data de início do evento como uma string
   final String local;
   final String descricao;
 
@@ -15,33 +16,39 @@ class EventoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime startDate = DateTime.parse(data_inicio);
+    String formattedDate = DateFormat('dd/MM/yy - HH:mm').format(startDate);
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
-      padding:const EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.lightBlue),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
-
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RichText(
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-                TextSpan(text: 'Evento: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize:18,)),
-                TextSpan(text: '$nome_evento\n', style:TextStyle(fontSize:18,)),
-                TextSpan(text: 'Data de Início: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize:16,)),
-                TextSpan(text: '$data_inicio\n', style:TextStyle(fontSize:16,)),
-                TextSpan(text: 'Local: ', style: TextStyle(fontWeight: FontWeight.bold,fontSize:16,)),
-                TextSpan(text: ' $local\n', style:TextStyle(fontSize:16,)),
-                TextSpan(text: 'Descrição: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize:16,)),
-                TextSpan(text: '$descricao\n', style:TextStyle(fontSize:16,)),
-              ],
-            ),
+          Text(
+            'Evento: $nome_evento',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-
+          SizedBox(height: 5),
+          Text(
+            'Data de Início: $formattedDate',
+            style: TextStyle(fontSize: 16),
+          ),
+          SizedBox(height: 5),
+          Text(
+            'Local: $local',
+            style: TextStyle(fontSize: 16),
+          ),
+          SizedBox(height: 5),
+          Text(
+            'Descrição: $descricao',
+            style: TextStyle(fontSize: 16),
+          ),
         ],
       ),
     );

@@ -8,6 +8,7 @@ import 'informacoes.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
 
+
 class Eventos extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
