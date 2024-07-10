@@ -33,8 +33,7 @@ class EventoWidget extends StatelessWidget {
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.all(5),
-      alignment: Alignment.center,
+      padding: EdgeInsets.all(20), // Espaçamento interno fixo
       decoration: BoxDecoration(
         border: Border.all(color: Colors.lightBlue),
         borderRadius: BorderRadius.circular(8.0),

@@ -8,7 +8,6 @@ import 'informacoes.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
 
-
 class Eventos extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +25,6 @@ class EventosState extends State<Eventos> {
     super.initState();
     fetchEventos();
   }
-
   Future<void> fetchEventos() async {
     try {
       final response = await http.get(Uri.parse('http://192.168.1.5:8000/eventosapi'));
@@ -91,24 +89,25 @@ class EventosState extends State<Eventos> {
           children: [
             Image(image: AssetImage('assets/images/terco_inter.jpg'),),//imagem ser cadastrada no painel admin
             SizedBox(height: 10.0),
-            ElevatedButton(
-              onPressed: () {
-                // Ação ao clicar em "Ver eventos salvos"
-              },
-              child: Text('Ver eventos salvos', style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightBlue,
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // Ação ao clicar em "Ver eventos salvos"
+            //   },
+            //   child: Text('Ver eventos salvos', style: TextStyle(
+            //     fontSize: 18,
+            //     color: Colors.white,
+            //     fontWeight: FontWeight.bold,
+            //   ),),
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.lightBlue,
+            //   ),
+            // ),
             ListView.separated(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: eventos.length,
-              separatorBuilder: (context, index) => SizedBox(height: 15.0), // Espaço entre os itens
+              padding: EdgeInsets.all(5),
+              separatorBuilder: (context, index) => SizedBox(height: 15.0),
               itemBuilder: (context, index) {
                 final evento = eventos[index];
                 return EventoWidget(
