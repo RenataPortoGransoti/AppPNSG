@@ -114,6 +114,7 @@ class EventosState extends State<Eventos> {
                 return EventoWidget(
                   nome_evento: evento['nome_evento'],
                   data_inicio: evento['data_inicio'],
+                  data_fim: evento['data_fim'],
                   local: evento['local'],
                   descricao: evento['descricao'],
                 );
