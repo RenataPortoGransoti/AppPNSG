@@ -26,151 +26,167 @@
                     </button>
                 </div>
             @endif
-            <h1 class="text-center font-semibold text-4xl">INFORMAÇÕES GERAIS</h1>
+            <h1 class="text-center font-semibold text-4xl my-6">INFORMAÇÕES GERAIS</h1>
             <div class="container mx-auto mt-4 mb-8">
                 <div class="flex justify-center">
                     <div class="w-full md:w-2/3">
-                        <div class="px-8 py-4 bg-white shadow rounded-lg">
-                            <h1 class="mb-4 text-center text-xl">Editar Informações</h1>
-                            <form action="{{ route('contatos.store') }}" method="POST">
-                                @csrf
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="space-y-3">
-                                        <div>
-                                            <label for="contato" class="block text-gray-700">Contato</label>
-                                            <div class="flex">
-                                                <input type="text" id="contato" name="contato"
-                                                    value="{{ old('contato', $contatosMap['contato'][0]->valor ?? '') }}"
-                                                    class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button"
-                                                    class="relative ml-2 text-red-500 remove-contato group "
-                                                    data-tipo="contato"><i
-                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
-                                                    <span
-                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                        Excluir
-                                                    </span></button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label for="instagram" class="block text-gray-700">Instagram</label>
-                                            <div class="flex">
-                                                <input type="text" id="instagram" name="instagram"
-                                                    value="{{ old('instagram', $contatosMap['instagram'][0]->valor ?? '') }}"
-                                                    class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button"
-                                                    class="relative ml-2 text-red-500 remove-contato group"
-                                                    data-tipo="instagram"><i
-                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
-                                                    <span
-                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                        Excluir
-                                                    </span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-3">
-                                        <div>
-                                            <label for="email" class="block text-gray-700">E-mail</label>
-                                            <div class="flex">
-                                                <input type="email" id="email" name="email"
-                                                    value="{{ old('email', $contatosMap['email'][0]->valor ?? '') }}"
-                                                    class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button"
-                                                    class="relative ml-2 text-red-500 remove-contato group"
-                                                    data-tipo="email"><i
-                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
-                                                    <span
-                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                        Excluir
-                                                    </span></button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label for="facebook" class="block text-gray-700">Facebook</label>
-                                            <div class="flex">
-                                                <input type="text" id="facebook" name="facebook"
-                                                    value="{{ old('facebook', $contatosMap['facebook'][0]->valor ?? '') }}"
-                                                    class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                <button type="button"
-                                                    class="relative ml-2 text-red-500 remove-contato group"
-                                                    data-tipo="facebook"><i
-                                                        class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
-                                                    <span
-                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                        Excluir
-                                                    </span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-white px-4 py-3 text-center">
-                                    <button type="button"
-                                        class="btn w-3/12 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl"
-                                        onclick="showConfirmationModal()">Cancelar</button>
-                                    <button type="submit" id="submitBtn"
-                                        class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
-                                </div>
-                            </form>
-
-                            <form action="{{ route('horarios.store') }}" method="POST">
-                                @csrf
-                                @foreach (['secretaria', 'missa', 'confissão'] as $tipo)
-                                    <div class="my-5">
-                                        <div class="card bg-white shadow rounded-lg overflow-hidden">
-                                            <div
-                                                class="card-header flex items-center justify-between bg-[#036896] text-white p-4">
-                                                <h3 class="text-center w-full">Horários {{ ucfirst($tipo) }}</h3>
-                                                <i class="bi bi-dash toggle-icon cursor-pointer text-white text-2xl"></i>
-                                            </div>
-                                            <div class="card-body p-4" id="horarios-container-{{ $tipo }}">
-                                                @foreach ($horarios[$tipo] as $horario)
-                                                    <div class="my-2 flex items-center">
-                                                        <input type="text" name="horarios_{{ $tipo }}[]"
-                                                            value="{{ $horario->descricao }}"
-                                                            data-id="{{ $horario->id }}"
-                                                            class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                        <input type="hidden" name="ids_{{ $tipo }}[]"
-                                                            value="{{ $horario->id }}">
-                                                        <button type="button"
-                                                            class="relative remove-horario-btn ml-2  group">
-
-                                                            <i
-                                                                class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
-                                                            <span
-                                                                class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                                Excluir
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                @endforeach
-                                                <div class="my-2 flex items-center">
-                                                    <input type="text" name="horarios_{{ $tipo }}[]"
-                                                        data-id=""
+                        {{-- div contato --}}
+                        <div class="px-8 py-4 bg-white shadow rounded-lg mb-10">
+                            <h1 class="mb-4 text-center text-xl">Editar Informações de Contato</h1>
+                            <div class="flex justify-end">
+                                <i class="bi bi-dash toggle-icon cursor-pointer text-2xl"></i>
+                            </div>
+                            <div class="toggle-content">
+                                <form action="{{ route('contatos.store') }}" method="POST">
+                                    @csrf
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="space-y-3">
+                                            <div>
+                                                <label for="contato" class="block text-gray-700">Contato</label>
+                                                <div class="flex">
+                                                    <input type="text" id="contato" name="contato"
+                                                        value="{{ old('contato', $contatosMap['contato'][0]->valor ?? '') }}"
                                                         class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                    <input type="hidden" name="ids_{{ $tipo }}[]"
-                                                        value="">
                                                     <button type="button"
-                                                        class="relative add-horario-btn ml-2 text-green-500 group"><i
-                                                            class="bi bi-plus text-green-500 group-hover:text-gray-800 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                        class="relative ml-2 text-red-500 remove-contato group "
+                                                        data-tipo="contato"><i
+                                                            class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
                                                         <span
-                                                            class=" absolute bottom-full  left-0.5 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                            Adicionar
+                                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                            Excluir
+                                                        </span></button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="instagram" class="block text-gray-700">Instagram</label>
+                                                <div class="flex">
+                                                    <input type="text" id="instagram" name="instagram"
+                                                        value="{{ old('instagram', $contatosMap['instagram'][0]->valor ?? '') }}"
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                    <button type="button"
+                                                        class="relative ml-2 text-red-500 remove-contato group"
+                                                        data-tipo="instagram"><i
+                                                            class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                        <span
+                                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                            Excluir
+                                                        </span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div>
+                                                <label for="email" class="block text-gray-700">E-mail</label>
+                                                <div class="flex">
+                                                    <input type="email" id="email" name="email"
+                                                        value="{{ old('email', $contatosMap['email'][0]->valor ?? '') }}"
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                    <button type="button"
+                                                        class="relative ml-2 text-red-500 remove-contato group"
+                                                        data-tipo="email"><i
+                                                            class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                        <span
+                                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                            Excluir
+                                                        </span></button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="facebook" class="block text-gray-700">Facebook</label>
+                                                <div class="flex">
+                                                    <input type="text" id="facebook" name="facebook"
+                                                        value="{{ old('facebook', $contatosMap['facebook'][0]->valor ?? '') }}"
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                    <button type="button"
+                                                        class="relative ml-2 text-red-500 remove-contato group"
+                                                        data-tipo="facebook"><i
+                                                            class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                        <span
+                                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                            Excluir
                                                         </span></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                    <div class="text-white px-4 py-3 text-center">
+                                        <button type="button"
+                                            class="btn w-3/12 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl"
+                                            onclick="showConfirmationModal()">Cancelar</button>
+                                        <button type="submit" id="submitBtn"
+                                            class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        {{-- div horarios --}}
+                        <div class="px-8 py-4 bg-white shadow rounded-lg mb-10">
 
-                                <div class="text-white px-4 py-3 text-center">
-                                    <button type="button"
-                                        class="btn w-3/12 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl"
-                                        onclick="showConfirmationModal()">Cancelar</button>
-                                    <button type="submit" id="submitBtn"
-                                        class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
-                                </div>
-                            </form>
+                            <h1 class="mb-4 text-center text-xl">Editar Informações de Horários</h1>
+                            <div class="flex justify-end">
+                                <i class="bi bi-dash toggle-icon cursor-pointer text-2xl"></i>
+                            </div>
+                            <div class="toggle-content">
+                                <form action="{{ route('horarios.store') }}" method="POST">
+                                    @csrf
+                                    @foreach (['secretaria', 'missa', 'confissão'] as $tipo)
+                                        <div class="my-5">
+                                            <div class="card bg-white shadow rounded-lg overflow-hidden">
+                                                <div
+                                                    class="card-header flex items-center justify-between bg-[#036896] text-white p-4">
+                                                    <h3 class="text-center w-full">Horários {{ ucfirst($tipo) }}</h3>
+                                                    <i
+                                                        class="bi bi-dash toggle-icon cursor-pointer text-white text-2xl"></i>
+                                                </div>
+                                                <div class="card-body p-4" id="horarios-container-{{ $tipo }}">
+                                                    @foreach ($horarios[$tipo] as $horario)
+                                                        <div class="my-2 flex items-center">
+                                                            <input type="text" name="horarios_{{ $tipo }}[]"
+                                                                value="{{ $horario->descricao }}"
+                                                                data-id="{{ $horario->id }}"
+                                                                class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                            <input type="hidden" name="ids_{{ $tipo }}[]"
+                                                                value="{{ $horario->id }}">
+                                                            <button type="button"
+                                                                class="relative remove-horario-btn ml-2  group">
+
+                                                                <i
+                                                                    class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                                <span
+                                                                    class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                                    Excluir
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    @endforeach
+                                                    <div class="my-2 flex items-center">
+                                                        <input type="text" name="horarios_{{ $tipo }}[]"
+                                                            data-id=""
+                                                            class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                        <input type="hidden" name="ids_{{ $tipo }}[]"
+                                                            value="">
+                                                        <button type="button"
+                                                            class="relative add-horario-btn ml-2 text-green-500 group"><i
+                                                                class="bi bi-plus text-green-500 group-hover:text-gray-800 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                            <span
+                                                                class=" absolute bottom-full  left-0.5 transform -translate-x-1/2 mb-2 w-20 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                                Adicionar
+                                                            </span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                    <div class="text-white px-4 py-3 text-center">
+                                        <button type="button"
+                                            class="btn w-3/12 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl"
+                                            onclick="showConfirmationModal()">Cancelar</button>
+                                        <button type="submit" id="submitBtn"
+                                            class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -192,6 +208,8 @@
                         }
                     });
                 });
+
+
 
                 document.addEventListener('click', (event) => {
                     if (event.target.closest('.add-horario-btn')) {
@@ -225,6 +243,20 @@
                             }
                         });
                     }
+                });
+            });
+
+            document.querySelectorAll('.remove-contato').forEach(button => {
+                button.addEventListener('click', function() {
+                    const tipo = this.getAttribute('data-tipo');
+                    // Logica para remover o contato
+                });
+            });
+
+            document.querySelectorAll('.remove-horario').forEach(button => {
+                button.addEventListener('click', function() {
+                    const tipo = this.getAttribute('data-tipo');
+                    // Logica para remover o horario
                 });
             });
         </script>
