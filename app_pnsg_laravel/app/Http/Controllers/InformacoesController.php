@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class InformacoesController extends Controller
 {
-    public function index(HorarioController $horarioController, ContatoController $contatoController)
+    public function consultarInformacoes(HorarioController $horarioController, ContatoController $contatoController)
     {
         $horarios = $horarioController->index();
         $contatosMap = $contatoController->index();
