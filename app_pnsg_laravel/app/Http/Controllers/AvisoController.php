@@ -11,7 +11,7 @@ class AvisoController extends Controller
     public function index()
     {
         $avisos = Aviso::all();
-        return view('inicio', compact('avisos'));
+        return view('inicio', ['avisos' => $avisos]);
     }
 
     public function indexapi()
@@ -52,13 +52,13 @@ class AvisoController extends Controller
 
     public function destroy($id)
     {
-        try {
-            $aviso = Aviso::findOrFail($id);
+        $aviso = Aviso::find($id);
+        if ($aviso) {
             $aviso->delete();
-
-            return response()->json(['success' => true], 200);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return redirect()->route('inicio.index')
+                ->with('success', 'Aviso excluído com sucesso.');
+        } else {
+            return response()->json(['error' => 'Aviso não encontrado'], 404);
         }
     }
 }

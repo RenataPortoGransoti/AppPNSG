@@ -69,7 +69,7 @@ Route::delete('/contatos/{tipo}', [ContatoController::class, 'destroy'])->name('
 
 Route::get('/inicio', [AvisoController::class, 'index'])->name('inicio.index');
 Route::post('/avisos/store', [AvisoController::class, 'store'])->name('avisos.store');
-Route::delete('/avisos/{id}', [AvisoController::class, 'destroy'])->name('avisos.destroy');
+Route::delete('/avisos/{aviso}', [AvisoController::class, 'destroy'])->name('avisos.destroy');
 
 
 
