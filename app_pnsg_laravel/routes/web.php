@@ -42,36 +42,45 @@ Route::get('/informacoes', function () {
     return view('informacoes');
 });
 
-Route::get('/inicio', [AvisoController::class, 'consultarAvisos'])->name('inicio.index');
-Route::post('/avisos/store', [AvisoController::class, 'cadastrarAviso'])->name('avisos.store');
-Route::delete('/avisos/{aviso}', [AvisoController::class, 'excluirAviso'])->name('avisos.destroy');
-
 Route::get('/pastorais', [PastoralController::class, 'consultarPastoral'])->name('pastorais.index');
 Route::post('/pastorais', [PastoralController::class, 'cadastrarPastoral'])->name('pastorais.store');
 Route::put('/pastorais/{pastoral}', [PastoralController::class, 'editarPastoral'])->name('pastorais.update');
 Route::post('/pastorais/inativar', [PastoralController::class, 'inativarPastoral'])->name('pastorais.inativar');
-Route::post('/pastorais/{pastoral}/delete-image', [PastoralController::class, 'excluirImagem'])->name('pastorais.deleteImage');
+Route::post('/pastorais/{pastoral}/delete-image', [PastoralController::class, 'deleteImage'])->name('pastorais.deleteImage');
 Route::put('/pastorais/ativar/{id}', [PastoralController::class, 'ativarPastoral'])->name('pastorais.ativar');
 
+// Route::get('/eventos', [EventoController::class, 'indexEvento'])->name('eventos.index');
 Route::get('/eventos', [EventoController::class, 'consultarEvento'])->name('eventos.index');;
 Route::post('/eventos', [EventoController::class, 'cadastrarEvento'])->name('eventos.store');
 Route::put('/eventos/{evento}', [EventoController::class, 'editarEvento'])->name('eventos.editarEvento');
 Route::post('/eventos/inativar', [EventoController::class, 'inativarEvento'])->name('eventos.inativar');
+// Route::delete('/eventos/{id}', [EventoController::class, 'deletarEvento'])->name('eventos.delete');
+Route::delete('/eventos/{id}/excluir', [EventoController::class, 'deletarEvento'])->name('eventos.softDelete');
+
+
 Route::put('/eventos/{id}/ativar', [EventoController::class, 'ativarEvento'])->name('eventos.ativar');
-Route::delete('/eventos/{id}/excluir', [EventoController::class, 'excluirEvento'])->name('eventos.softDelete');
 
-Route::get('/informacoes', [InformacoesController::class, 'consultarInformacoes'])->name('informacoes.index');
-Route::post('/horarios/store', [HorarioController::class, 'cadastrarHorario'])->name('horarios.store');
-Route::delete('/horarios/{id}', [HorarioController::class, 'excluirHorario'])->name('horarios.destroy');
-Route::post('/contatos/store', [ContatoController::class, 'cadastrarContato'])->name('contatos.store');
-Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])->name('contatos.destroy');
+Route::get('/informacoes', [InformacoesController::class, 'index'])->name('informacoes.index');
+Route::post('/horarios/store', [HorarioController::class, 'store'])->name('horarios.store');
+Route::delete('/horarios/{id}', [HorarioController::class, 'destroy'])->name('horarios.destroy');
+Route::post('/contatos/store', [ContatoController::class, 'store'])->name('contatos.store');
+Route::delete('/contatos/{tipo}', [ContatoController::class, 'destroy'])->name('contatos.destroy');
 
-//Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
+
+Route::get('/inicio', [AvisoController::class, 'index'])->name('inicio.index');
+Route::post('/avisos/store', [AvisoController::class, 'store'])->name('avisos.store');
+Route::delete('/avisos/{aviso}', [AvisoController::class, 'destroy'])->name('avisos.destroy');
+
+
+
+//Rota para informações das pastorais e eventos em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
 Route::get('/eventosapi', [EventoController::class, 'indexApi']);
 Route::get('/horariosapi', [HorarioController::class, 'indexApi']);
 Route::get('/contatosapi', [ContatoController::class, 'indexApi']);
 Route::get('/avisosapi', [AvisoController::class, 'indexApi']);
+
+Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send-email');
 
 Route::get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);

@@ -27,7 +27,7 @@ class HorarioController extends Controller
     }
 
 
-    public function cadastrarHorario(Request $request)
+    public function store(Request $request)
     {
         Log::info('Request data:', $request->all());
 
@@ -64,7 +64,7 @@ class HorarioController extends Controller
         }
     }
 
-    public function excluirHorario($id)
+    public function destroy($id)
     {
         try {
             $horario = Horario::findOrFail($id);

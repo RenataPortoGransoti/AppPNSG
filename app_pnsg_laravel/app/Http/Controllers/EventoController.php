@@ -91,7 +91,7 @@ class EventoController extends Controller
 
 
     // Deleta um evento utilizando soft delete
-    public function excluirEvento($id)
+    public function deletarEvento($id)
     {
         $evento = Evento::find($id);
         if ($evento) {

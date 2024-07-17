@@ -104,7 +104,7 @@ class PastoralController extends Controller
         return redirect()->back()->with('success', 'Pastoral atualizada com sucesso!');
     }
 
-    public function excluirImagem(Request $request, Pastoral $pastoral)
+    public function deleteImage(Request $request, Pastoral $pastoral)
     {
         // Verifique se a imagem existe antes de excluir
         if ($pastoral->imagem) {

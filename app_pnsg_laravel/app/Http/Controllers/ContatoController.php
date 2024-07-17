@@ -21,7 +21,7 @@ class ContatoController extends Controller
         return response()->json($contatos);
     }
 
-    public function cadastrarContato(Request $request)
+    public function store(Request $request)
     {
         $data = $request->only(['contato', 'email', 'instagram', 'facebook']);
 
@@ -34,7 +34,7 @@ class ContatoController extends Controller
         return redirect()->route('informacoes.index')->with('success', 'Contatos atualizados com sucesso!');
     }
 
-    public function excluirContato($tipo)
+    public function destroy($tipo)
     {
         $contato = Contato::where('tipo', $tipo)->first();
         if ($contato) {
