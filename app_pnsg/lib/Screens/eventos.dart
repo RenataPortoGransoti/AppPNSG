@@ -27,7 +27,7 @@ class EventosState extends State<Eventos> {
   }
   Future<void> fetchEventos() async {
     try {
-      final response = await http.get(Uri.parse('http://192.168.1.5:8000/eventosapi'));
+      final response = await http.get(Uri.parse('http://10.21.1.26:8000/eventosapi'));
       if (response.statusCode == 200) {
         setState(() {
           eventos = json.decode(response.body);

@@ -1,10 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import 'email.dart';
-import 'Screens/informacoes.dart';
 
 class ContactForm extends StatelessWidget {
   final Function(String, String, String, String) onSubmit;
@@ -17,7 +13,9 @@ class ContactForm extends StatelessWidget {
   late String _email;
   late String _celular;
   late String _mensagem;
-  @override
+
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -130,7 +128,13 @@ class ContactForm extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          onSubmit(_nomeCompleto, _email, _celular, _mensagem);
+                          enviarRequisicaoComToken(
+                            baseUrl,
+                            _nomeCompleto,
+                            _email,
+                            _celular,
+                            _mensagem,
+                          );
                           Navigator.pop(context);
                         }
                       },
@@ -161,8 +165,7 @@ class ContactForm extends StatelessWidget {
 
   Future<String?> fetchCSRFToken(String baseUrl) async {
     try {
-      final Uri uri = Uri.parse(
-          '$baseUrl/csrf-token'); // Exemplo de URL para obter o token CSRF
+      final Uri uri = Uri.parse('$baseUrl/csrf-token'); // URL para obter o token CSRF
       final response = await http.get(uri);
 
       if (response.statusCode == 200) {
@@ -179,18 +182,22 @@ class ContactForm extends StatelessWidget {
     }
   }
 
-  // Função para enviar e-mail
-  Future<void> enviarRequisicaoComToken(String baseUrl, String nomeCompleto,
-      String email, String celular, String mensagem) async {
+  Future<void> enviarRequisicaoComToken(
+      String baseUrl,
+      String nomeCompleto,
+      String email,
+      String celular,
+      String mensagem,
+      ) async {
     try {
       // Obter o token CSRF
       String? csrfToken = await fetchCSRFToken(baseUrl);
 
       if (csrfToken != null) {
-        // Configurar a URL para enviar o email
+        // Configurar a URL para enviar o e-mail
         final Uri uri = Uri.parse('$baseUrl/send-email');
 
-        // Enviar o email com o token CSRF nos headers
+        // Enviar o e-mail com o token CSRF nos headers
         final response = await http.post(
           uri,
           headers: {
@@ -217,6 +224,4 @@ class ContactForm extends StatelessWidget {
       print('Erro ao enviar email: $e');
     }
   }
-
 }
-

@@ -103,7 +103,7 @@ class PastoralEspecifica extends StatelessWidget {
   }
 
   String _buildImageUrl(String imagem) {
-    return 'http://10.20.1.95:8000/storage/$imagem';
+    return 'http://10.21.1.26:8000/storage/$imagem';
   }
 }
 

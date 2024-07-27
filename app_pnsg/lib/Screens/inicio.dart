@@ -29,7 +29,7 @@ class InicioState extends State<Inicio> {
 
   void fetchAvisos() async {
     try {
-      final response = await http.get(Uri.parse('http://192.168.1.5:8000/avisosapi'));
+      final response = await http.get(Uri.parse('http://10.21.1.26:8000/avisosapi'));
 
       if (response.statusCode == 200) {
         setState(() {
