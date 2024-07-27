@@ -59,19 +59,27 @@ class FormularioDizimista extends StatelessWidget {
                       }
                       return null;
                     }),
+                    SizedBox(height: 10),
+
                     buildTextFormField('Celular*', (value) => _celular = value!, keyboardType: TextInputType.phone, validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha o celular.';
                       }
                       return null;
                     }),
+                    SizedBox(height: 10),
+
                     buildTextFormField('Nome do cônjuge', (value) => _nomeConjuge = value!),
+                    SizedBox(height: 10),
+
                     buildTextFormField('Endereço*', (value) => _endereco = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha o endereço.';
                       }
                       return null;
                     }),
+                    SizedBox(height: 10),
+
                     Row(
                       children: [
                         Expanded(
@@ -88,18 +96,23 @@ class FormularioDizimista extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 10),
+
                     buildTextFormField('Bairro*', (value) => _bairro = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha o bairro.';
                       }
                       return null;
                     }),
+                    SizedBox(height: 10),
                     buildTextFormField('CEP*', (value) => _cep = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha o CEP.';
                       }
                       return null;
                     }),
+                    SizedBox(height: 10),
+
                     DropdownButtonFormField<String>(
                       decoration: InputDecoration(
                         labelText: 'Estado Civil*',
@@ -126,13 +139,19 @@ class FormularioDizimista extends StatelessWidget {
                         return null;
                       },
                     ),
+                    SizedBox(height: 10),
+
                     buildTextFormField('Data de Nascimento*', (value) => _dataNascimento = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha a data de nascimento.';
                       }
                       return null;
                     }),
+                    SizedBox(height: 10),
+
                     buildTextFormField('Data de Nascimento do Cônjuge', (value) => _dataNascimentoConjuge = value!),
+                    SizedBox(height: 10),
+
                     buildTextFormField('E-mail*', (value) => _email = value!, keyboardType: TextInputType.emailAddress, validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha o e-mail.';
