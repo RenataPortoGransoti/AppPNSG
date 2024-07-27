@@ -115,28 +115,116 @@ class ContribuaState extends State<Contribua> {
         backgroundColor: Colors.lightBlue,
       ),
       body: Center(
-        child:
-        GestureDetector(
-          onTap: () {
-            _mostrarFormularioDizimista(context);
-          },
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.all(18),
-          width: MediaQuery.of(context).size.width - 40,
-          decoration: BoxDecoration(
-            color: Colors.lightBlue.shade100,
-            borderRadius: BorderRadius.circular(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+        Padding(
+          padding: EdgeInsets.all(25),
+          child:
+            Text(
+                  "Dê cada um conforme o impulso do seu coração, sem tristeza nem constrangimento. Deus ama o que dá com alegria - II Coríntios 9, 7",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
           ),
-          child: Text(
-            "Ser Dizimista",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
+            SizedBox(height: 10),
+            Text(
+              "Formas de Contribuir",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // Lógica para Dízimo
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: const EdgeInsets.all(18),
+                    width: 160,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue.shade100,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Dízimo",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Lógica para Doação
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: const EdgeInsets.all(18),
+                    width: 160,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue.shade100,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Doação",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: () {
+                _mostrarFormularioDizimista(context);
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 15),
+                padding: const EdgeInsets.all(18),
+                width: MediaQuery.of(context).size.width - 40,
+                decoration: BoxDecoration(
+                  color: Color(0xFF036896),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(
+                  "Ser Dizimista",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                double imageSize = constraints.maxWidth * 0.9; // 50% da largura da tela
+                return Image.asset(
+                  'assets/images/donation.png',
+                  width: imageSize,
+                );
+              },
+            ),
+          ],
         ),
-      ),
       ),
     );
   }
