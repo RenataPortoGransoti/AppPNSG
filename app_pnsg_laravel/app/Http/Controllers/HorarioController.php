@@ -69,8 +69,8 @@ class HorarioController extends Controller
         try {
             $horario = Horario::findOrFail($id);
             $horario->delete();
-
-            return response()->json(['success' => true], 200);
+            return redirect()->route('informacoes.index')
+                ->with('success', 'Horário excluído com sucesso.');
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }

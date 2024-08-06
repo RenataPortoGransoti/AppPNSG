@@ -147,8 +147,8 @@
                                                                 class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
                                                             <input type="hidden" name="ids_{{ $tipo }}[]"
                                                                 value="{{ $horario->id }}">
-                                                            <button type="button"
-                                                                class="relative remove-horario-btn ml-2  group">
+                                                            <button type="button" class="relative ml-2 group"
+                                                                onclick="showExcluirModal({{ $horario->id }})">
 
                                                                 <i
                                                                     class="bi bi-x text-red-500 group-hover:text-[#FA9DAA] transform group-hover:scale-110 transition-transform duration-300"></i>
@@ -189,6 +189,25 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Excluir Horário-->
+        <div id="excluirModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white w-1/3 p-8 rounded-md">
+                <h3 class="text-[#960316] text-lg font-bold text-center mb-4">Excluir Horário?</h3>
+                <p class="mt-2 mb-4">Tem certeza de que deseja excluir? O horário não aparecerá mais na lista de horários.
+                </p>
+                <div class="flex justify-center items-center align-center">
+                    <button id="btnExcluirFecharModal"
+                        class="px-4 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white border border-[#036896] rounded-xl mr-2">Voltar</button>
+                    <form id="formExcluirHorario" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" id="excluirHorarioId" name="horario_id">
+                        <button type="submit"
+                            class="mt-4 px-4 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black text-white border border-[#960316] rounded-xl">Confirmar</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -259,6 +278,21 @@
                     // Logica para remover o horario
                 });
             });
+
+            function showExcluirModal(id) {
+                const excluirModal = document.getElementById('excluirModal');
+                const excluirHorarioId = document.getElementById('excluirHorarioId');
+                excluirHorarioId.value = id;
+                const formExcluirHorario = document.getElementById('formExcluirHorario');
+                formExcluirHorario.action = `/horarios/${id}`;
+                excluirModal.classList.remove('hidden');
+            }
+
+            function hideExcluirModal() {
+                const excluirModal = document.getElementById('excluirModal');
+                excluirModal.classList.add('hidden');
+            }
+            document.getElementById('btnExcluirFecharModal').addEventListener('click', hideExcluirModal);
         </script>
     @endsection
 </body>
