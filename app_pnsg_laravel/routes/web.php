@@ -25,22 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/inicio', function () {
-    return view('inicio');
-});
-
-Route::get('/pastorais', function () {
-    return view('pastorais');
-});
-Route::get('/eventos', function () {
-    return view('eventos');
-});
 Route::get('/contribua', function () {
     return view('contribua');
 });
-Route::get('/informacoes', function () {
-    return view('informacoes');
-});
+
 
 Route::get('/inicio', [AvisoController::class, 'consultarAvisos'])->name('inicio.index');
 Route::post('/avisos/store', [AvisoController::class, 'cadastrarAviso'])->name('avisos.store');
