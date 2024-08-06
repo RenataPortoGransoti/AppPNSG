@@ -265,19 +265,6 @@
                 });
             });
 
-            document.querySelectorAll('.remove-contato').forEach(button => {
-                button.addEventListener('click', function() {
-                    const tipo = this.getAttribute('data-tipo');
-                    // Logica para remover o contato
-                });
-            });
-
-            document.querySelectorAll('.remove-horario').forEach(button => {
-                button.addEventListener('click', function() {
-                    const tipo = this.getAttribute('data-tipo');
-                    // Logica para remover o horario
-                });
-            });
 
             function showExcluirModal(id) {
                 const excluirModal = document.getElementById('excluirModal');
