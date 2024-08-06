@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class AvisoController extends Controller
 {
-    public function index()
+    public function consultarAvisos()
     {
         $avisos = Aviso::all();
         return view('inicio', ['avisos' => $avisos]);
@@ -20,7 +20,7 @@ class AvisoController extends Controller
         return response()->json($avisos);
     }
 
-    public function store(Request $request)
+    public function cadastrarAviso(Request $request)
     {
         Log::info('Request data:', $request->all());
 
@@ -50,7 +50,7 @@ class AvisoController extends Controller
         return redirect()->route('inicio.index')->with('success', 'Avisos salvos com sucesso!');
     }
 
-    public function destroy($id)
+    public function excluirAviso($id)
     {
         $aviso = Aviso::find($id);
         if ($aviso) {
