@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:PNSG/Screens/pastoraisScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import '../config.dart';
 import 'EventoWidget.dart';
 import 'contribua.dart';
 import 'informacoes.dart';
@@ -27,7 +28,7 @@ class EventosState extends State<Eventos> {
   }
   Future<void> fetchEventos() async {
     try {
-      final response = await http.get(Uri.parse('http://10.21.2.39:8000/eventosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}eventosapi'));
       if (response.statusCode == 200) {
         setState(() {
           eventos = json.decode(response.body);

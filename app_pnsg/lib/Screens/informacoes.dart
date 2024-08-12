@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import '../config.dart';
 import '../contatoFormulario.dart';
 import 'contribua.dart';
 import 'eventos.dart';
@@ -39,7 +40,7 @@ class InformacoesState extends State<Informacoes> {
   // Função para buscar os horários da API Laravel
   void fetchHorarios() async {
     try {
-      final response = await http.get(Uri.parse('http://10.21.2.39:8000/horariosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}horariosapi'));
 
       if (response.statusCode == 200) {
         setState(() {
@@ -62,7 +63,7 @@ class InformacoesState extends State<Informacoes> {
 // Função para buscar os detalhes de contato da API Laravel
   void fetchContactDetails() async {
     try {
-      final response = await http.get(Uri.parse('http://10.21.2.39:8000/contatosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}contatosapi'));
 
       if (response.statusCode == 200) {
         setState(() {

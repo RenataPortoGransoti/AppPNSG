@@ -5,6 +5,7 @@ import '../Inicio/galeria.dart';
 import '../Inicio/historiaParoquia.dart';
 import '../Inicio/oracoes.dart';
 import '../Inicio/viaSacra.dart';
+import '../config.dart';
 import 'eventos.dart';
 import 'navigation_bar.dart';
 import 'pastoraisScreen.dart';
@@ -29,7 +30,7 @@ class InicioState extends State<Inicio> {
 
   void fetchAvisos() async {
     try {
-      final response = await http.get(Uri.parse('http://10.21.2.39:8000/avisosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}avisosapi'));
 
       if (response.statusCode == 200) {
         setState(() {
