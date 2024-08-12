@@ -1,4 +1,4 @@
-import 'package:app_pnsg/Screens/pastoraisScreen.dart';
+import 'package:PNSG/Screens/pastoraisScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Screens/PastoralEspecifica.dart';
 import 'Screens/inicio.dart';
-
+import 'splash.dart';
 class appPNSG extends StatelessWidget {
   final bool isLoggedIn;
 
@@ -12,7 +12,7 @@ class appPNSG extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'App PNSG',
-      home: isLoggedIn ? Inicio() : Inicio(),
+      home: Splash(), // Altere para Splash para exibir a página de splash
       onGenerateRoute: (settings) {
         if (settings.name == '/PastoralEspecifica') {
           final args = settings.arguments as Map<String, dynamic>;

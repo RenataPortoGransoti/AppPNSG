@@ -39,7 +39,7 @@ class InformacoesState extends State<Informacoes> {
   // Função para buscar os horários da API Laravel
   void fetchHorarios() async {
     try {
-      final response = await http.get(Uri.parse('http://10.21.1.26:8000/horariosapi'));
+      final response = await http.get(Uri.parse('http://10.21.2.39:8000/horariosapi'));
 
       if (response.statusCode == 200) {
         setState(() {
@@ -62,7 +62,7 @@ class InformacoesState extends State<Informacoes> {
 // Função para buscar os detalhes de contato da API Laravel
   void fetchContactDetails() async {
     try {
-      final response = await http.get(Uri.parse('http://10.21.1.26:8000/contatosapi'));
+      final response = await http.get(Uri.parse('http://10.21.2.39:8000/contatosapi'));
 
       if (response.statusCode == 200) {
         setState(() {

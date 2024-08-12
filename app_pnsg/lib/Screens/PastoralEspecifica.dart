@@ -1,5 +1,5 @@
+import 'package:PNSG/Screens/pastoraisScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:app_pnsg/Screens/pastoraisScreen.dart';
 import 'contribua.dart';
 import 'eventos.dart';
 import 'informacoes.dart';
@@ -103,7 +103,7 @@ class PastoralEspecifica extends StatelessWidget {
   }
 
   String _buildImageUrl(String imagem) {
-    return 'http://10.21.1.26:8000/storage/$imagem';
+    return 'http://10.21.2.39:8000/storage/$imagem';
   }
 }
 

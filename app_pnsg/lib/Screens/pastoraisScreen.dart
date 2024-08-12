@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../config.dart';
 import 'contribua.dart';
 import 'eventos.dart';
 import 'informacoes.dart';
@@ -167,7 +168,7 @@ class _SampleCard extends StatelessWidget {
 
 class PastoralService {
   Future<List<dynamic>> fetchPastorais() async {
-    final response = await http.get(Uri.parse('http://10.21.1.26:8000/pastoraisapi'));
+    final response = await http.get(Uri.parse('${Config.baseUrl}pastoraisapi'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
