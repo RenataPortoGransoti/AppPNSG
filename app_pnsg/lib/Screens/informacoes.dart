@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../config.dart';
 import '../contatoFormulario.dart';
 import 'contribua.dart';
@@ -24,7 +25,7 @@ class InformacoesState extends State<Informacoes> {
   Map<String, List<dynamic>> horarios = {
     'secretaria': [],
     'missa': [],
-    'confissao': [],
+    'confissão': [],
   };
   String phoneNumber = "";
   String instagramUrl = "";
@@ -47,7 +48,7 @@ class InformacoesState extends State<Informacoes> {
           var parsedJson = json.decode(response.body) as Map<String, dynamic>;
           // Iterar sobre as chaves do JSON para preencher horarios corretamente
           parsedJson.forEach((key, value) {
-            if (key == 'secretaria' || key == 'missa' || key == 'confissao') {
+            if (key == 'secretaria' || key == 'missa' || key == 'confissão') {
               horarios[key] = value as List<dynamic>;
             }
           });
@@ -284,24 +285,48 @@ class InformacoesState extends State<Informacoes> {
           GestureDetector(
             onTap: () {
               _abrirInstagram();
-            },child:
-              Text('Instagram - @$instagramUsername',style: TextStyle(
-                decoration: TextDecoration.underline, // Adicionando sublinhado
-                decorationColor: Color(0xFF036896), // Cor do sublinhado
-                decorationThickness: 1, // Espessura do sublinhado
-              ),),
-
+            },
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(FontAwesomeIcons.instagram, color: Color(0xFFF50057), size: 24),
+                  SizedBox(width: 10),
+                  Text(
+                    instagramUsername.isNotEmpty ? '@$instagramUsername' : 'Instagram',
+                    style: TextStyle(fontSize: 16,
+                      decoration: TextDecoration.underline, // Adicionando sublinhado
+                      decorationColor: Color(0xFF036896), // Cor do sublinhado
+                      decorationThickness: 1, // Espessura do sublinhado
+                      ),
+                  ),
+                ],
+              ),
+            ),
           ),
               SizedBox(height: 15),
           GestureDetector(
             onTap: () {
               _abrirFacebook();
-            },child:
-              Text('Facebook - pnsgracalondrina',style: TextStyle(
-                decoration: TextDecoration.underline, // Adicionando sublinhado
-                decorationColor: Color(0xFF036896), // Cor do sublinhado
-                decorationThickness: 1, // Espessura do sublinhado
-              ),),
+            },child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FaIcon(FontAwesomeIcons.facebook, color: Color(0xFF3F51B5), size: 24), // Ícone do Facebook
+                SizedBox(width: 10),
+                Text(
+                   'pnsgracalondrina' ,
+                  style: TextStyle(
+                    fontSize: 16,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Color(0xFF036896), // Cor do sublinhado
+                    decorationThickness: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
           ),
               SizedBox(height: 30),
 
@@ -315,7 +340,7 @@ class InformacoesState extends State<Informacoes> {
               ),
               _buildHorarioTile("Secretaria Paroquial", 'secretaria'), // Tipo 'secretaria'
               _buildHorarioTile("Missas", 'missa'), // Tipo 'missa'
-              _buildHorarioTile("Confissões", 'confissao'), // Tipo 'confissao'
+              _buildHorarioTile("Confissões", 'confissão'), // Tipo 'confissao'
 
               SizedBox(height: 20),
               Image(image: AssetImage('assets/images/mapa_paroquia.png')),
