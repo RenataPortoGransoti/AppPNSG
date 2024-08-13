@@ -1,12 +1,16 @@
+import 'dart:convert';
+
 import 'package:PNSG/Screens/pastoraisScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import '../config.dart';
 import 'eventos.dart';
 import 'formulario_dizimista.dart';
 import 'informacoes.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
+import 'package:http/http.dart' as http;
 
 class Contribua extends StatefulWidget {
   @override
@@ -17,7 +21,12 @@ class Contribua extends StatefulWidget {
 
 class ContribuaState extends State<Contribua> {
   int currentPageIndex = 3;
-
+  String email = "";
+  @override
+  void initState() {
+    super.initState();
+    fetchContactDetails(); // Chama o método para buscar detalhes de contato
+  }
   void _mostrarFormularioDizimista(BuildContext context) {
     showDialog(
       context: context,
@@ -29,6 +38,29 @@ class ContribuaState extends State<Contribua> {
       ),
     );
   }
+  void fetchContactDetails() async {
+    try {
+      final response = await http.get(Uri.parse('${Config.baseUrl}contatosapi'));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          var parsedJson = json.decode(response.body) as Map<String, dynamic>;
+          // Verifica se a lista de e-mails não está vazia
+          if (parsedJson['email'] != null && parsedJson['email'].isNotEmpty) {
+            email = parsedJson['email'][0]['valor'];
+          } else {
+            print('Nenhum e-mail encontrado');
+          }
+        });
+      } else {
+        throw Exception('Falha ao carregar os detalhes de contato');
+      }
+    } catch (e) {
+      print('Erro ao carregar os detalhes de contato: $e');
+    }
+  }
+
+
 
   Future<void> sendEmail(
       String nomeCompleto,
@@ -47,8 +79,8 @@ class ContribuaState extends State<Contribua> {
     final smtpServer = gmail('renata.porto.gransoti@gmail.com', 'ahpgpdyusnznyoif');
     final message = Message()
       ..from = Address('renata.gransoti@edu.unifil.br', 'Aplicativo')
-      ..recipients.add('renatagransoti@gmail.com')
-      ..subject = 'Novo mensagem enviada pelo aplicativo!'
+      ..recipients.add(email)
+      ..subject = 'Novo formulário de dizimista preenchdio - App PNSG!'
       ..text = '''
       Nome Completo: $nomeCompleto
       Email: $email

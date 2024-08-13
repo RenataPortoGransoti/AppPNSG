@@ -34,7 +34,9 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
       print('Erro ao carregar dados das pastorais: $e');
     }
   }
-
+  Future<void> _handleRefresh() async {
+    await _fetchPastorais();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +75,9 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.lightBlue,
       ),
-      body: Center(
+      body: RefreshIndicator(
+        onRefresh: _handleRefresh,
+        color: Colors.blue[200],
         child: ListView.builder(
           itemCount: _pastorais.length + 1,
           itemBuilder: (context, index) {

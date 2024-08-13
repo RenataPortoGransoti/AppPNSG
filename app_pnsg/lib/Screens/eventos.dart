@@ -88,7 +88,28 @@ class EventosState extends State<Eventos> {
           : SingleChildScrollView(
         child: Column(
           children: [
-            Image(image: AssetImage('assets/images/terco_inter.jpg'),),//imagem ser cadastrada no painel admin
+        Container(
+        margin: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+        padding: const EdgeInsets.all(18),
+        width: MediaQuery.of(context).size.width - 40,
+        decoration: BoxDecoration(
+          color: Color(0xFF036896),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          children: [
+            Text(
+              "EVENTOS PAROQUIAIS",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+        ],
+        ),
+    ),
             SizedBox(height: 10.0),
             // ElevatedButton(
             //   onPressed: () {
