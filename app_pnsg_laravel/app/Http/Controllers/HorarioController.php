@@ -19,7 +19,7 @@ class HorarioController extends Controller
         return $horarios; // Retorna o array diretamente
     }
 
-    public function indexApi()
+    public function carregarHorariosApp()
     {
         $horarios = Horario::all()->groupBy('tipo');
 

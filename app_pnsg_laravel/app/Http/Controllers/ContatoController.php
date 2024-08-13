@@ -15,7 +15,7 @@ class ContatoController extends Controller
         return $contatos;
     }
 
-    public function indexapi()
+    public function carregarContatoApp()
     {
         $contatos = Contato::all()->groupBy('tipo');
         return response()->json($contatos);

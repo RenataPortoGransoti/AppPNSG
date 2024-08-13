@@ -14,7 +14,7 @@ class PastoralController extends Controller
         return view('pastorais', ['pastorais' => $pastorais]);
     }
 
-    public function indexApi()
+    public function carregarPastoraisApp()
     {
         $pastorais = Pastoral::where('ativo', 1)->get();
         return response()->json($pastorais);

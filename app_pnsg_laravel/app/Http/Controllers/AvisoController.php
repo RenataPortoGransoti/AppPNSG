@@ -14,7 +14,7 @@ class AvisoController extends Controller
         return view('inicio', ['avisos' => $avisos]);
     }
 
-    public function indexapi()
+    public function carregarAvisosApp()
     {
         $avisos = Aviso::all();
         return response()->json($avisos);

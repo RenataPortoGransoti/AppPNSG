@@ -15,7 +15,7 @@ class EventoController extends Controller
         return view('eventos', ['eventos' => $eventos]);
     }
 
-    public function indexApi()
+    public function carregarEventosAtivosApp()
     {
         $eventos = Evento::where('ativo', 1)->get();
         return response()->json($eventos);

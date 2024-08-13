@@ -8,8 +8,6 @@ use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\InformacoesController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\AvisoController;
-use App\Http\Controllers\EmailController;
-use App\Models\Horario;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,11 +53,11 @@ Route::post('/contatos/store', [ContatoController::class, 'cadastrarContato'])->
 Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])->name('contatos.destroy');
 
 //Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
-Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
-Route::get('/eventosapi', [EventoController::class, 'indexApi']);
-Route::get('/horariosapi', [HorarioController::class, 'indexApi']);
-Route::get('/contatosapi', [ContatoController::class, 'indexApi']);
-Route::get('/avisosapi', [AvisoController::class, 'indexApi']);
+Route::get('/pastoraisapi', [PastoralController::class, 'carregarPastoraisApp']);
+Route::get('/eventosapi', [EventoController::class, 'carregarEventosAtivosApp']);
+Route::get('/horariosapi', [HorarioController::class, 'carregarHorariosApp']);
+Route::get('/contatosapi', [ContatoController::class, 'carregarContatoApp']);
+Route::get('/avisosapi', [AvisoController::class, 'carregarAvisosApp']);
 
 Route::get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);
