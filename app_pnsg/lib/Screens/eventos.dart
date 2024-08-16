@@ -110,7 +110,7 @@ class EventosState extends State<Eventos> {
           children: [
             Container(
               padding: const EdgeInsets.all(18),
-              margin: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+              margin: EdgeInsets.only(left: 14, right: 14, top: 20, bottom: 10),
               decoration: BoxDecoration(
                 color: Color(0xFF036896),
                 borderRadius: BorderRadius.circular(15),
@@ -133,7 +133,7 @@ class EventosState extends State<Eventos> {
                 : Column(
               children: eventos.map<Widget>((evento) {
                 return SizedBox(
-                  width: 350, // Define a largura fixa para o card
+                  width: 380, // Define a largura fixa para o card
                   child: Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     elevation: 4,
@@ -168,13 +168,15 @@ class EventosState extends State<Eventos> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Text(
-                            'Fim: ${formatDate(evento['data_fim'])} ${formatTime(evento['data_fim'])}',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[700],
+                          if (evento['data_fim'] != null)
+                            Text(
+                              'Fim: ${formatDate(evento['data_fim'])} ${formatTime(evento['data_fim'])}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey[700],
+                              ),
                             ),
-                          ),
+
                           SizedBox(height: 8),
                           Text(
                             'Local: ${evento['local']}',
@@ -185,7 +187,8 @@ class EventosState extends State<Eventos> {
                             ),
                           ),
                           SizedBox(height: 8),
-                          Text(
+                          evento['descricao'] != null && evento['descricao'].isNotEmpty
+                              ? Text(
                             evento['descricao'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
@@ -193,7 +196,9 @@ class EventosState extends State<Eventos> {
                               fontSize: 16,
                               color: Colors.black,
                             ),
-                          ),
+                          )
+                              : SizedBox.shrink(), // Ou outra widget de fallback, se desejado
+
                         ],
                       ),
                     ),

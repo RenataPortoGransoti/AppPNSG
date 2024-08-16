@@ -175,6 +175,9 @@ class InformacoesState extends State<Informacoes> {
       _text = result ? 'Enviado.' : 'Não enviado.';
     });
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
