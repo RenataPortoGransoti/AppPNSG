@@ -136,9 +136,10 @@
                                                     class="card-header flex items-center justify-between bg-[#036896] text-white p-4">
                                                     <h3 class="text-center w-full">Horários {{ ucfirst($tipo) }}</h3>
                                                     <i
-                                                        class="bi bi-dash toggle-icon cursor-pointer text-white text-2xl"></i>
+                                                        class="bi bi-plus toggle-icon cursor-pointer text-white text-2xl"></i>
                                                 </div>
-                                                <div class="card-body p-4" id="horarios-container-{{ $tipo }}">
+                                                <div class="card-body p-4" id="horarios-container-{{ $tipo }}"
+                                                    hidden>
                                                     @foreach ($horarios[$tipo] as $horario)
                                                         <div class="my-2 flex items-center">
                                                             <input type="text" name="horarios_{{ $tipo }}[]"
