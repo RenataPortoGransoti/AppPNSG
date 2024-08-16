@@ -7,6 +7,7 @@ use App\Models\Pastoral;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,5 +28,16 @@ class DatabaseSeeder extends Seeder
             'descricao' => 'Descrição Leitores',
             'imagem' => 'images/1716139135.jpg'
         ]);
+
+
+        // DB::table('users')->insert([
+        //     'nome' => 'Secretário',
+        //     'email' => 'admin@email.com',
+        //     'cpf' => '06230749904',
+        //     'celular' => '4333421276',
+        //     'dataNascimento' => '1999-12-12',
+        //     'tipo' => 'secretario',
+        //     'senha' => bcrypt('admin123'),
+        // ]);
     }
 }
