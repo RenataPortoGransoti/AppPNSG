@@ -91,17 +91,31 @@ class EventoController extends Controller
 
 
     // Deleta um evento utilizando soft delete
+    // public function excluirEvento($id)
+    // {
+    //     $evento = Evento::find($id);
+    //     if ($evento) {
+    //         $evento->delete();
+    //         return redirect()->route('eventos.index')
+    //             ->with('success', 'Evento inativado com sucesso.');
+    //     } else {
+    //         return response()->json(['error' => 'Evento não encontrado'], 404);
+    //     }
+    // }
+
     public function excluirEvento($id)
     {
         $evento = Evento::find($id);
         if ($evento) {
             $evento->delete();
             return redirect()->route('eventos.index')
-                ->with('success', 'Evento inativado com sucesso.');
+                ->with('success', 'Evento excluído com sucesso.');
         } else {
-            return response()->json(['error' => 'Evento não encontrado'], 404);
+            return redirect()->route('eventos.index')
+                ->with('error', 'Evento não encontrado.');
         }
     }
+
 
 
     // Inativa um evento
