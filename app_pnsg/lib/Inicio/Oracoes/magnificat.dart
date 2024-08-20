@@ -7,7 +7,7 @@ class Magnificat extends StatelessWidget {
       appBar: AppBar(
         title: Text('Magnificat'),
       ),
-      body: Padding(
+      body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

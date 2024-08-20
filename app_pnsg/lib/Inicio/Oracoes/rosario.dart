@@ -28,17 +28,17 @@ class RosarioList extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(10),
       children: <Widget>[
-        SizedBox(height: 10),
-        Text('Creio em Deus Pai...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
-        Text('Pai Nosso...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
-        Text('3 Ave Marias', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
-        Text('Glória', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
-        Text('Rezar os mistérios, a cada mistério rezar 1 Pai Nosso, 10 Ave Marias, Glória e Ó meu Jesus...', style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
-        Text('Ao final, rezar:', style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
-        Text('Salve Rainha...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
-        SizedBox(height: 15),
-        Text('*Após cada Glória, rezar: ', style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
-        Text(' Ó meu Jesus, perdoais-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem. Abençoai o Santo Padre o Papa Francisco, nosso arcebispo Dom Geremias, o Pe. (nome do Pároco) e todo clero e dai-nos a paz.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
+        const SizedBox(height: 10),
+        const Text('Creio em Deus Pai...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
+        const Text('Pai Nosso...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
+        const Text('3 Ave Marias', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
+        const Text('Glória', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
+        const Text('Rezar os mistérios, a cada mistério rezar 1 Pai Nosso, 10 Ave Marias, Glória e Ó meu Jesus...', style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
+        const Text('Ao final, rezar:', style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
+        const Text('Salve Rainha...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
+        const SizedBox(height: 15),
+        const Text('*Após cada Glória, rezar: ', style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
+        const Text(' Ó meu Jesus, perdoais-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem. Abençoai o Santo Padre o Papa Francisco, nosso arcebispo Dom Geremias, o Pe. (nome do Pároco) e todo clero e dai-nos a paz.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
 
         RosarioTile(
           title: 'Mistérios Gozosos',

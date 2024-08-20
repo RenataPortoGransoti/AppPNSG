@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class FormularioDizimista extends StatelessWidget {
   final Function(String, String, String, String, String, String, String, String, String, String, String, String) onSubmit;
@@ -211,5 +212,16 @@ class FormularioDizimista extends StatelessWidget {
       onSaved: onSaved,
       validator: validator,
     );
+  }
+}
+
+Future<String> fetchEmailFromApi(String baseUrl) async {
+  final response = await http.get(Uri.parse('$baseUrl/contatosapi'));
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    return data['email'];
+  } else {
+    throw Exception('Failed to load email');
   }
 }

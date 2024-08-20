@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'Screens/PastoralEspecifica.dart';
-import 'Screens/inicio.dart';
 import 'splash.dart';
 class appPNSG extends StatelessWidget {
   final bool isLoggedIn;

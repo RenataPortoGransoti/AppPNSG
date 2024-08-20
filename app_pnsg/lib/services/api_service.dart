@@ -6,7 +6,6 @@ Future<String?> fetchCSRFToken(String baseUrl) async {
   final response = await http.get(Uri.parse(baseUrl));
 
   if (response.statusCode == 200) {
-    // Parse o HTML da resposta para obter o token CSRF
     dom.Document document = parser.parse(response.body);
     var metaTags = document.getElementsByTagName('meta');
 

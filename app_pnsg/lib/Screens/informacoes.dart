@@ -144,39 +144,43 @@ class InformacoesState extends State<Informacoes> {
       mode: LaunchMode.externalApplication,
     );
   }
-  // Método para mostrar o diálogo de formulário de contato
+// Método para mostrar o diálogo de formulário de contato
   void _showContactFormDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => ContactForm(
         onSubmit: (nomeCompleto, email, celular, mensagem) {
-          // Chama a função para enviar email da classe InformacoesState
+          // Chama a função para enviar email usando o EmailService
           sendEmail(nomeCompleto, email, celular, mensagem);
           Navigator.pop(context); // Fecha o diálogo do formulário após envio
-        }, baseUrl: '',
+        },
+        baseUrl: '',
       ),
     );
   }
 
-  String _text = '';
-  var email = Email('renata.porto.gransoti@gmail.com', 'ahpgpdyusnznyoif');
+  Future<void> sendEmail(
+      String nomeCompleto,
+      String email,
+      String celular,
+      String mensagem
+      ) async {
+  final emailService = EmailService();
 
-  void sendEmail(String nomeCompleto, String email, String celular, String mensagem) async {
-    var emailService = Email('renata.porto.gransoti@gmail.com', 'ahpgpdyusnznyoif');
-    bool result = await emailService.sendMessage(
-      mensagem,
-      email,
-      nomeCompleto,
-      'Novo mensagem enviada pelo aplicativo!',
-      nomeCompleto: nomeCompleto,
-      celular: celular,
+  String emailBody = '''
+        Nome Completo: $nomeCompleto
+        Email: $email
+        Celular: $celular
+        Mensagem: $mensagem
+  ''';
+
+    await emailService.sendEmail(
+      fromEmail: 'renata.porto.gransoti@gmail.com',
+      fromName: nomeCompleto,
+      subject: 'Nova mensagem enviada pelo aplicativo!',
+      body: emailBody,
     );
-    setState(() {
-      _text = result ? 'Enviado.' : 'Não enviado.';
-    });
   }
-
-
 
   @override
   Widget build(BuildContext context) {

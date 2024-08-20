@@ -128,8 +128,7 @@ class ContactForm extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          enviarRequisicaoComToken(
-                            baseUrl,
+                          onSubmit(
                             _nomeCompleto,
                             _email,
                             _celular,

@@ -1,37 +1,60 @@
+import 'dart:convert';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:http/http.dart' as http;
+import '../config.dart';
 
-class Email {
-  late final String _username;
-  late final String _password;
-  late final SmtpServer smtpServer;
+class EmailService {
+  final String username = 'renata.porto.gransoti@gmail.com';
+  final String password = 'ahpgpdyusnznyoif';
+  late final smtpServer;
 
-  Email(String username, String password) {
-    _username = username;
-    _password = password;
-    smtpServer = gmail(_username, _password);
+  EmailService() {
+    smtpServer = gmail(username, password);
   }
 
-  Future<bool> sendMessage(String mensagem, String remetenteEmail, String remetenteNome, String assunto, {String nomeCompleto = '', String celular = ''}) async {
+  Future<String> _fetchContactEmail() async {
+    try {
+      final response = await http.get(Uri.parse('${Config.baseUrl}contatosapi'));
+
+      if (response.statusCode == 200) {
+        var parsedJson = json.decode(response.body) as Map<String, dynamic>;
+        if (parsedJson['email'] != null && parsedJson['email'].isNotEmpty) {
+          return parsedJson['email'][0]['valor'];
+        } else {
+          throw Exception('Nenhum e-mail encontrado');
+        }
+      } else {
+        throw Exception('Falha ao carregar os detalhes de contato');
+      }
+    } catch (e) {
+      print('Erro ao carregar os detalhes de contato: $e');
+      throw e; // Re-lança a exceção para que o chamador possa lidar com ela
+    }
+  }
+
+  Future<void> sendEmail({
+    required String fromEmail,
+    required String fromName,
+    required String subject,
+    required String body,
+  }) async {
+    final contactEmail = await _fetchContactEmail();
+
     final message = Message()
-      ..from = Address(remetenteEmail, remetenteNome)
-      ..recipients.add('renatagransoti@gmail.com') // Alterado para o endereço desejado
-      ..subject = assunto
-      ..text = 'Nome completo: $nomeCompleto\n'
-          'Email para contato: $remetenteEmail\n'
-          'Celular: $celular\n'
-          'Mensagem: $mensagem';
+      ..from = Address(fromEmail, fromName)
+      ..recipients.add(contactEmail)
+      ..subject = subject
+      ..text = body;
 
     try {
       final sendReport = await send(message, smtpServer);
-      print('Mensagem enviada: ' + sendReport.toString());
-      return true;
+      print('Message sent: ' + sendReport.toString());
     } on MailerException catch (e) {
-      print('Mensagem não enviada.');
+      print('Message not sent. \n' + e.toString());
       for (var p in e.problems) {
-        print('Problema: ${p.code}: ${p.msg}');
+        print('Problem: ${p.code}: ${p.msg}');
       }
-      return false;
     }
   }
 }
