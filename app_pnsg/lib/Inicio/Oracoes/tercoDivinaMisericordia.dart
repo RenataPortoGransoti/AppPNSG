@@ -7,7 +7,7 @@ class TercoDivinaMisericordia extends StatelessWidget {
       appBar: AppBar(
         title: Text('Terço da Divina Misericórdia'),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, // Alinhado à esquerda
@@ -19,7 +19,7 @@ class TercoDivinaMisericordia extends StatelessWidget {
               ),
               textAlign: TextAlign.justify, // Justificado
             ),
-            SizedBox(height: 10), // Espaçamento entre os textos
+            SizedBox(height: 10),
             Text('1. Sinal da Cruz', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),
             SizedBox(height: 10),
             Text('2. Pai Nosso', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,), textAlign: TextAlign.justify),

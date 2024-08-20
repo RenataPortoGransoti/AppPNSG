@@ -72,14 +72,14 @@ class GaleriaPagina extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          margin: EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 20),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 20),
+          padding: const EdgeInsets.all(10),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: const Color(0xFF036896).withOpacity(0.8),
             borderRadius: BorderRadius.circular(50),
           ),
-          child: Text(
+          child: const Text(
             nome,
             style: TextStyle(
               fontSize: 24,

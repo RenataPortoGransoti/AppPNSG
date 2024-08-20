@@ -220,8 +220,8 @@ class InformacoesState extends State<Informacoes> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 50),
-              Text('Entre em contato:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,)),
+              const SizedBox(height: 50),
+              const Text('Entre em contato:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,)),
               GestureDetector(
                 onTap: () {
                   _launchPhone();
@@ -237,7 +237,7 @@ class InformacoesState extends State<Informacoes> {
                   child: Text(
                     "$phoneNumber - Ligar agora",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
@@ -255,7 +255,7 @@ class InformacoesState extends State<Informacoes> {
                     color: Colors.lightBlue.shade100,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Iniciar conversa no WhatsApp",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -276,7 +276,7 @@ class InformacoesState extends State<Informacoes> {
                     color: Colors.lightBlue.shade100,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Enviar Mensagem",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -285,9 +285,9 @@ class InformacoesState extends State<Informacoes> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
-              Text('Nos acompanhe nas redes sociais:', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16, )),
-              SizedBox(height: 20),
+              const SizedBox(height: 30),
+              const Text('Nos acompanhe nas redes sociais:', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16, )),
+              const SizedBox(height: 20),
               //abrirInstagram();
           GestureDetector(
             onTap: () {
@@ -298,11 +298,11 @@ class InformacoesState extends State<Informacoes> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FaIcon(FontAwesomeIcons.instagram, color: Color(0xFFF50057), size: 24),
-                  SizedBox(width: 10),
+                  const FaIcon(FontAwesomeIcons.instagram, color: Color(0xFFF50057), size: 24),
+                  const SizedBox(width: 10),
                   Text(
                     instagramUsername.isNotEmpty ? '@$instagramUsername' : 'Instagram',
-                    style: TextStyle(fontSize: 16,
+                    style: const TextStyle(fontSize: 16,
                       decoration: TextDecoration.underline, // Adicionando sublinhado
                       decorationColor: Color(0xFF036896), // Cor do sublinhado
                       decorationThickness: 1, // Espessura do sublinhado
@@ -317,7 +317,7 @@ class InformacoesState extends State<Informacoes> {
             onTap: () {
               _abrirFacebook();
             },child: Container(
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FaIcon(FontAwesomeIcons.facebook, color: Color(0xFF3F51B5), size: 24), // Ícone do Facebook
@@ -335,10 +335,10 @@ class InformacoesState extends State<Informacoes> {
             ),
           ),
           ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
               // Containers de horários expandíveis
-              Text(
+              const Text(
                 'HORÁRIOS:',
                 style: TextStyle(
                   fontSize: 20,
@@ -349,8 +349,8 @@ class InformacoesState extends State<Informacoes> {
               _buildHorarioTile("Missas", 'missa'), // Tipo 'missa'
               _buildHorarioTile("Confissões", 'confissão'), // Tipo 'confissao'
 
-              SizedBox(height: 20),
-              Image(image: AssetImage('assets/images/mapa_paroquia.png')),
+              const SizedBox(height: 20),
+              const Image(image: AssetImage('assets/images/mapa_paroquia.png')),
             ],
           ),
         ),
@@ -362,10 +362,10 @@ class InformacoesState extends State<Informacoes> {
     var horariosList = horarios[tipo];
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       width: MediaQuery.of(context).size.width - 40,
       decoration: BoxDecoration(
-        color: Color(0xFF036896),
+        color: const Color(0xFF036896),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Theme(
@@ -373,12 +373,12 @@ class InformacoesState extends State<Informacoes> {
           iconTheme: IconThemeData(color: Colors.white),
         ),
         child: ExpansionTile(
-          shape: Border(),
+          shape: const Border(),
           title: Align(
             alignment: Alignment.center,
             child: Text(
               titulo,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -394,7 +394,7 @@ class InformacoesState extends State<Informacoes> {
                     padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                     child: Text(
                       horario['descricao'],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                       ),
@@ -403,8 +403,8 @@ class InformacoesState extends State<Informacoes> {
                 }).toList(),
               ),
             if (horariosList == null || horariosList.isEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                 child: Text(
                   'Não há horário cadastrado',
                   style: TextStyle(

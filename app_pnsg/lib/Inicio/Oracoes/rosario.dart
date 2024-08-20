@@ -15,7 +15,7 @@ class _RosarioState extends State<Rosario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rosário'),
+        title: const Text('Rosário'),
       ),
       body: RosarioList(),
     );

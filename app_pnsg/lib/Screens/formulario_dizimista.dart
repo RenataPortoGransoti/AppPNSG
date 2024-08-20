@@ -60,7 +60,7 @@ class FormularioDizimista extends StatelessWidget {
                       }
                       return null;
                     }),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     buildTextFormField('Celular*', (value) => _celular = value!, keyboardType: TextInputType.phone, validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -68,10 +68,10 @@ class FormularioDizimista extends StatelessWidget {
                       }
                       return null;
                     }),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     buildTextFormField('Nome do cônjuge', (value) => _nomeConjuge = value!),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     buildTextFormField('Endereço*', (value) => _endereco = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -79,7 +79,7 @@ class FormularioDizimista extends StatelessWidget {
                       }
                       return null;
                     }),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     Row(
                       children: [
@@ -91,13 +91,13 @@ class FormularioDizimista extends StatelessWidget {
                             return null;
                           }),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: buildTextFormField('Apto', (value) => _apto = value!),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     buildTextFormField('Bairro*', (value) => _bairro = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -105,17 +105,17 @@ class FormularioDizimista extends StatelessWidget {
                       }
                       return null;
                     }),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     buildTextFormField('CEP*', (value) => _cep = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha o CEP.';
                       }
                       return null;
                     }),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Estado Civil*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
@@ -131,7 +131,7 @@ class FormularioDizimista extends StatelessWidget {
                       onChanged: (String? newValue) {
                         _estadoCivil = newValue!;
                       },
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       dropdownColor: Colors.white,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -140,7 +140,7 @@ class FormularioDizimista extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     buildTextFormField('Data de Nascimento*', (value) => _dataNascimento = value!, validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -148,10 +148,10 @@ class FormularioDizimista extends StatelessWidget {
                       }
                       return null;
                     }),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     buildTextFormField('Data de Nascimento do Cônjuge', (value) => _dataNascimentoConjuge = value!),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     buildTextFormField('E-mail*', (value) => _email = value!, keyboardType: TextInputType.emailAddress, validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -161,7 +161,7 @@ class FormularioDizimista extends StatelessWidget {
                       }
                       return null;
                     }),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -179,8 +179,8 @@ class FormularioDizimista extends StatelessWidget {
                         backgroundColor: Colors.blue[200],
                         foregroundColor: Colors.black,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(12.0),
                         child: Text(
                           'Enviar',
                           style: TextStyle(fontSize: 18),
@@ -201,12 +201,12 @@ class FormularioDizimista extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         labelText: labelText,
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.blue),
         ),
-        labelStyle: TextStyle(color: Colors.black),
+        labelStyle: const TextStyle(color: Colors.black),
       ),
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
       cursorColor: Colors.black,
       keyboardType: keyboardType,
       onSaved: onSaved,

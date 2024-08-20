@@ -123,7 +123,7 @@ class _ViaSacraState extends State<ViaSacra> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Via Sacra'),
+        title: const Text('Via Sacra'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -141,17 +141,17 @@ class _ViaSacraState extends State<ViaSacra> {
                       Text(
                         titulos[index],
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF036896),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         textos[index],
                         textAlign: TextAlign.justify,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),
@@ -173,10 +173,10 @@ class _ViaSacraState extends State<ViaSacra> {
               children: <Widget>[
                 if (_currentPage > 0)
                   IconButton(
-                    icon: Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back),
                     onPressed: () {
                       _pageController.previousPage(
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.ease,
                       );
                     },
@@ -184,10 +184,10 @@ class _ViaSacraState extends State<ViaSacra> {
                 _buildPageIndicator(),
                 if (_currentPage < titulos.length - 1)
                   IconButton(
-                    icon: Icon(Icons.arrow_forward),
+                    icon: const Icon(Icons.arrow_forward),
                     onPressed: () {
                       _pageController.nextPage(
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.ease,
                       );
                     },
@@ -207,10 +207,10 @@ class _ViaSacraState extends State<ViaSacra> {
         return Container(
           width: 8.0,
           height: 8.0,
-          margin: EdgeInsets.symmetric(horizontal: 4.0),
+          margin: const EdgeInsets.symmetric(horizontal: 4.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: _currentPage == index ? Color(0xFF036896) : Colors.grey,
+            color: _currentPage == index ? const Color(0xFF036896) : Colors.grey,
           ),
         );
       }),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:http/http.dart' as http;
@@ -28,8 +29,10 @@ class EmailService {
         throw Exception('Falha ao carregar os detalhes de contato');
       }
     } catch (e) {
-      print('Erro ao carregar os detalhes de contato: $e');
-      throw e; // Re-lança a exceção para que o chamador possa lidar com ela
+      if (kDebugMode) {
+        print('Erro ao carregar os detalhes de contato: $e');
+      }
+      rethrow; // Re-lança a exceção para que o chamador possa lidar com ela
     }
   }
 
@@ -49,11 +52,17 @@ class EmailService {
 
     try {
       final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
+      if (kDebugMode) {
+        print('Message sent: $sendReport');
+      }
     } on MailerException catch (e) {
-      print('Message not sent. \n' + e.toString());
+      if (kDebugMode) {
+        print('Message not sent. \n$e');
+      }
       for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
+        if (kDebugMode) {
+          print('Problem: ${p.code}: ${p.msg}');
+        }
       }
     }
   }

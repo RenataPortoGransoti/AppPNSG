@@ -5,7 +5,7 @@ class PaiNosso extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pai Nosso'),
+        title: const Text('Pai Nosso'),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),

@@ -90,12 +90,12 @@ class InicioState extends State<Inicio> {
                 padding: const EdgeInsets.all(18),
                 width: MediaQuery.of(context).size.width - 40,
                 decoration: BoxDecoration(
-                  color: Color(0xFF036896),
+                  color: const Color(0xFF036896),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       "AVISOS PAROQUIAIS",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -117,8 +117,8 @@ class InicioState extends State<Inicio> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(Icons.fiber_manual_record, size: 10, color: Colors.white),
-                            SizedBox(width: 5),
+                            const Icon(Icons.fiber_manual_record, size: 10, color: Colors.white),
+                            const SizedBox(width: 5),
                             Expanded(
                               child: Text(
                                 aviso['aviso'],
@@ -152,7 +152,7 @@ class InicioState extends State<Inicio> {
                       );
                     },
                     child: Container(
-                      constraints: BoxConstraints(maxHeight: 70),
+                      constraints: const BoxConstraints(maxHeight: 70),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue.shade100,
@@ -175,7 +175,7 @@ class InicioState extends State<Inicio> {
                       );
                     },
                     child: Container(
-                      constraints: BoxConstraints(maxHeight: 70),
+                      constraints: const BoxConstraints(maxHeight: 70),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue.shade100,
@@ -198,7 +198,7 @@ class InicioState extends State<Inicio> {
                       );
                     },
                     child: Container(
-                      constraints: BoxConstraints(maxHeight: 70),
+                      constraints: const BoxConstraints(maxHeight: 70),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue.shade100,
@@ -221,7 +221,7 @@ class InicioState extends State<Inicio> {
                       );
                     },
                     child: Container(
-                      constraints: BoxConstraints(maxHeight: 70),
+                      constraints: const BoxConstraints(maxHeight: 70),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue.shade100,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,7 +47,7 @@ class ContactForm extends StatelessWidget {
                       ],
                     ),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Nome Completo*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
@@ -63,9 +64,9 @@ class ContactForm extends StatelessWidget {
                       },
                       onSaved: (value) => _nomeCompleto = value!,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'E-mail para contato*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
@@ -83,16 +84,16 @@ class ContactForm extends StatelessWidget {
                       },
                       onSaved: (value) => _email = value!,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Celular para contato*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                         ),
                         labelStyle: TextStyle(color: Colors.black),
                       ),
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       cursorColor: Colors.black,
                       keyboardType: TextInputType.phone,
                       validator: (value) {
@@ -103,16 +104,16 @@ class ContactForm extends StatelessWidget {
                       },
                       onSaved: (value) => _celular = value!,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Mensagem*',
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                         ),
                         labelStyle: TextStyle(color: Colors.black),
                       ),
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       cursorColor: Colors.black,
                       maxLines: 5,
                       validator: (value) {
@@ -123,7 +124,7 @@ class ContactForm extends StatelessWidget {
                       },
                       onSaved: (value) => _mensagem = value!,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -144,8 +145,8 @@ class ContactForm extends StatelessWidget {
                         backgroundColor: Colors.blue[200],
                         foregroundColor: Colors.black,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(12.0),
                         child: Text(
                           'Enviar',
                           style: TextStyle(fontSize: 18),
@@ -172,11 +173,15 @@ class ContactForm extends StatelessWidget {
         final String csrfToken = responseData['csrfToken']; // Supondo que o token CSRF seja retornado como 'csrfToken'
         return csrfToken;
       } else {
-        print('Erro ao obter token CSRF: ${response.statusCode}');
+        if (kDebugMode) {
+          print('Erro ao obter token CSRF: ${response.statusCode}');
+        }
         return null;
       }
     } catch (e) {
-      print('Erro ao obter token CSRF: $e');
+      if (kDebugMode) {
+        print('Erro ao obter token CSRF: $e');
+      }
       return null;
     }
   }
@@ -214,13 +219,19 @@ class ContactForm extends StatelessWidget {
         if (response.statusCode == 200) {
           print('Email enviado com sucesso');
         } else {
-          print('Falha ao enviar email: ${response.body}');
+          if (kDebugMode) {
+            print('Falha ao enviar email: ${response.body}');
+          }
         }
       } else {
-        print('Não foi possível obter o token CSRF');
+        if (kDebugMode) {
+          print('Não foi possível obter o token CSRF');
+        }
       }
     } catch (e) {
-      print('Erro ao enviar email: $e');
+      if (kDebugMode) {
+        print('Erro ao enviar email: $e');
+      }
     }
   }
 }

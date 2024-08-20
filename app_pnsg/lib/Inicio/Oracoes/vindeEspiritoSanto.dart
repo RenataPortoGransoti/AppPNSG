@@ -5,9 +5,9 @@ class VindeEspiritoSanto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vinde Espirito Santo'),
+        title: const Text('Vinde Espirito Santo'),
       ),
-      body: Padding(
+      body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

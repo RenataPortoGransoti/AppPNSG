@@ -8,7 +8,7 @@ class EventoWidget extends StatelessWidget {
   final String local;
   final String descricao;
 
-  EventoWidget({
+  const EventoWidget({
     required this.nome_evento,
     required this.data_inicio,
     this.data_fim,
@@ -32,8 +32,8 @@ class EventoWidget extends StatelessWidget {
     String? formattedDataFim = parsedDataFim != null ? outputFormat.format(parsedDataFim) : null;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.all(20), // Espaçamento interno fixo
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.all(20), // Espaçamento interno fixo
       decoration: BoxDecoration(
         border: Border.all(color: Colors.lightBlue),
         borderRadius: BorderRadius.circular(8.0),
@@ -43,27 +43,27 @@ class EventoWidget extends StatelessWidget {
         children: [
           Text(
             'Evento: $nome_evento',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             'Data de Início: $formattedDataInicio',
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
           if (formattedDataFim != null) // Mostra apenas se formattedDataFim não for nulo
             Text(
               'Data de Fim: $formattedDataFim',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           SizedBox(height: 5),
           Text(
             'Local: $local',
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             'Descrição: $descricao',
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),
