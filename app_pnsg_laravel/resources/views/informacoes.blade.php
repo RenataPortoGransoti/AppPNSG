@@ -46,7 +46,7 @@
                                                 <div class="flex">
                                                     <input type="text" id="contato" name="contato"
                                                         value="{{ old('contato', $contatosMap['contato'][0]->valor ?? '') }}"
-                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm px-1">
                                                     <button type="button"
                                                         class="relative ml-2 text-red-500 remove-contato group "
                                                         data-tipo="contato"><i
@@ -62,7 +62,7 @@
                                                 <div class="flex">
                                                     <input type="text" id="instagram" name="instagram"
                                                         value="{{ old('instagram', $contatosMap['instagram'][0]->valor ?? '') }}"
-                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm px-1">
                                                     <button type="button"
                                                         class="relative ml-2 text-red-500 remove-contato group"
                                                         data-tipo="instagram"><i
@@ -80,7 +80,7 @@
                                                 <div class="flex">
                                                     <input type="email" id="email" name="email"
                                                         value="{{ old('email', $contatosMap['email'][0]->valor ?? '') }}"
-                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm px-1">
                                                     <button type="button"
                                                         class="relative ml-2 text-red-500 remove-contato group"
                                                         data-tipo="email"><i
@@ -96,7 +96,7 @@
                                                 <div class="flex">
                                                     <input type="text" id="facebook" name="facebook"
                                                         value="{{ old('facebook', $contatosMap['facebook'][0]->valor ?? '') }}"
-                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm px-1">
                                                     <button type="button"
                                                         class="relative ml-2 text-red-500 remove-contato group"
                                                         data-tipo="facebook"><i
@@ -145,7 +145,7 @@
                                                             <input type="text" name="horarios_{{ $tipo }}[]"
                                                                 value="{{ $horario->descricao }}"
                                                                 data-id="{{ $horario->id }}"
-                                                                class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                                class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm px-1">
                                                             <input type="hidden" name="ids_{{ $tipo }}[]"
                                                                 value="{{ $horario->id }}">
                                                             <button type="button" class="relative ml-2 group"
@@ -163,7 +163,7 @@
                                                     <div class="my-2 flex items-center">
                                                         <input type="text" name="horarios_{{ $tipo }}[]"
                                                             data-id=""
-                                                            class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                            class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm px-1">
                                                         <input type="hidden" name="ids_{{ $tipo }}[]"
                                                             value="">
                                                         <button type="button"

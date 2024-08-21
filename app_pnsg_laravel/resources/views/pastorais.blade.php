@@ -4,7 +4,7 @@
     <main class="app-main flex-1 p-5 overflow-y-auto">
 
         <div class="container mx-auto">
-            <h1 class="text-center font-semibold text-4xl">PASTORAIS</h1>
+            <h1 class="text-center font-semibold text-4xl my-6">PASTORAIS</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
                 <!--Pastorais Ativas-->
                 <div class="my-4">

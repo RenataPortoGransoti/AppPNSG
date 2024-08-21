@@ -3,7 +3,7 @@
 @section('content')
     <main class="app-main flex-1 p-5 overflow-y-auto">
         <div class="container mx-auto">
-            <h1 class="text-center font-semibold text-4xl">EVENTOS</h1>
+            <h1 class="text-center font-semibold text-4xl my-6">EVENTOS</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
                 <!--EVENTOS ATIVOS-->
                 <div class="my-4">
@@ -62,14 +62,14 @@
                                             @method('PUT')
                                             <div class="mb-4">
                                                 <label for="editNomeEvento" class="block mb-1">Nome do Evento</label>
-                                                <input type="text" class="form-input w-full border rounded-md h-12"
+                                                <input type="text" class="form-input w-full border rounded-md h-12 px-1"
                                                     id="editNomeEvento" name="edit_nome_evento"
                                                     value="{{ $evento->nome_evento }}" required>
                                             </div>
                                             <div class="mb-4">
                                                 <label for="editDataInicio" class="block mb-1">Data Início</label>
                                                 <input type="datetime-local" id="editDataInicio"
-                                                    class="form-input border rounded-md h-10" name="edit_data_inicio"
+                                                    class="form-input border rounded-md h-10 px-1" name="edit_data_inicio"
                                                     value="{{ \Carbon\Carbon::parse($evento->data_inicio)->format('Y-m-d\TH:i') }}"
                                                     required>
                                             </div>
@@ -77,18 +77,18 @@
                                             <div class="mb-4">
                                                 <label for="editDataFim" class="block mb-1">Data Fim</label>
                                                 <input type="datetime-local" id="editDataFim"
-                                                    class="form-input border rounded-md h-10" name="edit_data_fim"
+                                                    class="form-input border rounded-md h-10 px-1" name="edit_data_fim"
                                                     value="{{ \Carbon\Carbon::parse($evento->data_fim)->format('Y-m-d\TH:i') }}">
                                             </div>
 
                                             <div class="mb-4">
                                                 <label for="editLocal" class="block mb-1">Local</label>
-                                                <input type="text" class="form-input w-full border rounded-md h-10"
+                                                <input type="text" class="form-input w-full border rounded-md h-10 px-1"
                                                     id="editLocal" name="edit_local" value="{{ $evento->local }}" required>
                                             </div>
                                             <div class="mb-4">
                                                 <label for="editDescricao" class="block mb-1">Descrição</label>
-                                                <textarea class="form-textarea w-full border rounded-md px-2" id="editDescricao" name="edit_descricao">{{ $evento->descricao }}</textarea>
+                                                <textarea class="form-textarea w-full border rounded-md px-1" id="editDescricao" name="edit_descricao">{{ $evento->descricao }}</textarea>
                                             </div>
                                             <div class="text-white px-4 py-3 text-center">
                                                 <button type="button"
@@ -123,8 +123,8 @@
                             @csrf
                             <div class="mb-4">
                                 <label for="nomeEvento" class="block mb-1">Nome do Evento*</label>
-                                <input type="text" class="form-input w-full border rounded-md h-12" id="nomeEvento"
-                                    name="nome_evento" required>
+                                <input type="text" class="form-input w-full border rounded-md h-12 px-1"
+                                    id="nomeEvento" name="nome_evento" required>
                                 <div id="error-message-nomeEvento" class="text-red-500 text-sm" style="display: none">Por
                                     favor, preencha o nome do evento.</div>
                             </div>
@@ -132,27 +132,27 @@
                                 <div class="w-1/2">
                                     <label for="dataInicio" class="block mb-1">Data e Hora de Início*</label>
                                     <input type="datetime-local" id="dataInicio"
-                                        class="form-input border rounded-md h-10 w-full" name="data_inicio" required>
+                                        class="form-input border rounded-md h-10 w-full px-1" name="data_inicio" required>
                                     <div id="error-message-dataInicio" class="text-red-500 text-sm"
                                         style="display: none">Por favor, preencha a data e hora de início.</div>
                                 </div>
                                 <div class="w-1/2">
                                     <label for="dataFim" class="block mb-1">Data e Hora de Fim</label>
                                     <input type="datetime-local" id="dataFim"
-                                        class="form-input border rounded-md h-10 w-full" name="data_fim">
+                                        class="form-input border rounded-md h-10 w-full px-1" name="data_fim">
                                 </div>
                             </div>
 
                             <div class="mb-4">
                                 <label for="local" class="block mb-1">Local*</label>
-                                <input type="text" class="form-input w-full border rounded-md h-10" id="local"
-                                    name="local" required>
+                                <input type="text" class="form-input w-full border rounded-md h-10 px-1"
+                                    id="local" name="local" required>
                                 <div id="error-message-local" class="text-red-500 text-sm" style="display: none">Por
                                     favor, preencha o local do evento.</div>
                             </div>
                             <div class="mb-4">
                                 <label for="descricao" class="block mb-1">Descrição</label>
-                                <textarea class="form-textarea w-full border rounded-md h-32" id="descricao" name="descricao"></textarea>
+                                <textarea class="form-textarea w-full border rounded-md h-32 px-1" id="descricao" name="descricao"></textarea>
                             </div>
                             <div class="text-white px-4 py-3 text-center">
                                 <button type="button"

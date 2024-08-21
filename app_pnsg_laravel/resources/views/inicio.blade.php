@@ -10,7 +10,7 @@
 <body>
     @section('content')
         <div class="container mx-auto max-w-4xl">
-            <h1 class="text-center font-semibold text-4xl">AVISOS PAROQUIAIS</h1>
+            <h1 class="text-center font-semibold text-4xl my-6">AVISOS PAROQUIAIS</h1>
             <div class="container mx-auto mt-4 mb-8">
                 <div class="flex justify-center">
                     <div class="w-full md:w-2/3">
@@ -31,7 +31,7 @@
                                             @foreach ($avisos as $aviso)
                                                 <div class="my-2 flex items-center">
                                                     <input type="text" name="avisos[]" value="{{ $aviso->aviso }}"
-                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                                        class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm px-1">
                                                     <input type="hidden" name="ids[]" value="{{ $aviso->id }}">
                                                     <button type="button" class="relative ml-2 group"
                                                         onclick="showExcluirModal({{ $aviso->id }})">
