@@ -152,7 +152,14 @@ class InformacoesState extends State<Informacoes> {
         onSubmit: (nomeCompleto, email, celular, mensagem) {
           // Chama a função para enviar email usando o EmailService
           sendEmail(nomeCompleto, email, celular, mensagem);
-          Navigator.pop(context); // Fecha o diálogo do formulário após envio
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Formulário enviado com sucesso. Aguarde nosso contato!'),
+              backgroundColor: Colors.lightGreen[800],
+              duration: Duration(seconds: 4),
+            ),
+          );
         },
         baseUrl: '',
       ),
