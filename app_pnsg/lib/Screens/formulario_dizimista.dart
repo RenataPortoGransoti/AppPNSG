@@ -1,6 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class FormularioDizimista extends StatelessWidget {
   final Function(String, String, String, String, String, String, String, String, String, String, String, String) onSubmit;
@@ -27,7 +29,6 @@ class FormularioDizimista extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -54,64 +55,108 @@ class FormularioDizimista extends StatelessWidget {
                         ),
                       ],
                     ),
-                    buildTextFormField('Nome completo*', (value) => _nomeCompleto = value!, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha o nome completo.';
-                      }
-                      return null;
-                    }),
+                    buildTextFormField(
+                      'Nome completo*',
+                          (value) => _nomeCompleto = value!,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha o nome completo.';
+                        }
+                        return null;
+                      },
+                    ),
                     const SizedBox(height: 10),
 
-                    buildTextFormField('Celular*', (value) => _celular = value!, keyboardType: TextInputType.phone, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha o celular.';
-                      }
-                      return null;
-                    }),
+                    buildTextFormField(
+                      'Celular*',
+                          (value) => _celular = value!,
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha o celular.';
+                        }
+                        return null;
+                      },
+                      inputFormatters: [
+                        MaskedInputFormatter('(##) #########'), // Máscara de telefone
+                      ],
+                    ),
                     const SizedBox(height: 10),
 
-                    buildTextFormField('Nome do cônjuge', (value) => _nomeConjuge = value!),
+                    buildTextFormField(
+                      'Nome do cônjuge',
+                          (value) => _nomeConjuge = value!,
+                    ),
                     const SizedBox(height: 10),
 
-                    buildTextFormField('Endereço*', (value) => _endereco = value!, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha o endereço.';
-                      }
-                      return null;
-                    }),
+                    buildTextFormField(
+                      'Endereço*',
+                          (value) => _endereco = value!,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha o endereço.';
+                        }
+                        return null;
+                      },
+                    ),
                     const SizedBox(height: 10),
 
                     Row(
                       children: [
                         Expanded(
-                          child: buildTextFormField('Nº*', (value) => _numero = value!, validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor, preencha o número.';
-                            }
-                            return null;
-                          }),
+                          child: buildTextFormField(
+                            'Nº*',
+                                (value) => _numero = value!,
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Por favor, preencha o número.';
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(6),
+                            ],
+                          ),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
-                          child: buildTextFormField('Apto', (value) => _apto = value!),
+                          child: buildTextFormField(
+                            'Apto',
+                                (value) => _apto = value!,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
 
-                    buildTextFormField('Bairro*', (value) => _bairro = value!, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha o bairro.';
-                      }
-                      return null;
-                    }),
+                    buildTextFormField(
+                      'Bairro*',
+                          (value) => _bairro = value!,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha o bairro.';
+                        }
+                        return null;
+                      },
+                    ),
                     const SizedBox(height: 10),
-                    buildTextFormField('CEP*', (value) => _cep = value!, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha o CEP.';
-                      }
-                      return null;
-                    }),
+
+                    buildTextFormField(
+                      'CEP*',
+                          (value) => _cep = value!,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha o CEP.';
+                        }
+                        return null;
+                      },
+                      inputFormatters: [
+                        MaskedInputFormatter('#####-###'),
+                      ],
+                    ),
                     const SizedBox(height: 10),
 
                     DropdownButtonFormField<String>(
@@ -142,32 +187,61 @@ class FormularioDizimista extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
 
-                    buildTextFormField('Data de Nascimento*', (value) => _dataNascimento = value!, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha a data de nascimento.';
-                      }
-                      return null;
-                    }),
+                    buildTextFormField(
+                      'Data de Nascimento*',
+                          (value) => _dataNascimento = value!,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha a data de nascimento.';
+                        }
+                        return null;
+                      },
+                      inputFormatters: [
+                        MaskedInputFormatter('##/##/####'),
+                      ],
+                    ),
                     const SizedBox(height: 10),
 
-                    buildTextFormField('Data de Nascimento do Cônjuge', (value) => _dataNascimentoConjuge = value!),
+                    buildTextFormField(
+                      'Data de Nascimento do Cônjuge',
+                          (value) => _dataNascimentoConjuge = value!,
+                      inputFormatters: [
+                        MaskedInputFormatter('##/##/####'),
+                      ],
+                    ),
                     const SizedBox(height: 10),
 
-                    buildTextFormField('E-mail*', (value) => _email = value!, keyboardType: TextInputType.emailAddress, validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha o e-mail.';
-                      } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return 'Por favor, insira um e-mail válido.';
-                      }
-                      return null;
-                    }),
+                    buildTextFormField(
+                      'E-mail*',
+                          (value) => _email = value!,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha o e-mail.';
+                        } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                          return 'Por favor, insira um e-mail válido.';
+                        }
+                        return null;
+                      },
+                    ),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           onSubmit(
-                              _nomeCompleto, _email, _celular, _nomeConjuge, _endereco, _numero, _apto, _bairro, _cep, _estadoCivil, _dataNascimento, _dataNascimentoConjuge
+                              _nomeCompleto,
+                              _email,
+                              _celular,
+                              _nomeConjuge,
+                              _endereco,
+                              _numero,
+                              _apto,
+                              _bairro,
+                              _cep,
+                              _estadoCivil,
+                              _dataNascimento,
+                              _dataNascimentoConjuge
                           );
                           Navigator.pop(context);
                         }
@@ -197,7 +271,7 @@ class FormularioDizimista extends StatelessWidget {
     );
   }
 
-  TextFormField buildTextFormField(String labelText, void Function(String?) onSaved, {TextInputType keyboardType = TextInputType.text, String? Function(String?)? validator}) {
+  TextFormField buildTextFormField(String labelText, void Function(String?) onSaved, {TextInputType keyboardType = TextInputType.text, String? Function(String?)? validator, List<TextInputFormatter>? inputFormatters}) {
     return TextFormField(
       decoration: InputDecoration(
         labelText: labelText,
@@ -211,6 +285,7 @@ class FormularioDizimista extends StatelessWidget {
       keyboardType: keyboardType,
       onSaved: onSaved,
       validator: validator,
+      inputFormatters: inputFormatters,
     );
   }
 }
