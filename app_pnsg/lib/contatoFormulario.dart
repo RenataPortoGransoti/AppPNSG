@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 import 'package:http/http.dart' as http;
 
 class ContactForm extends StatelessWidget {
@@ -96,6 +97,9 @@ class ContactForm extends StatelessWidget {
                       style: const TextStyle(color: Colors.black),
                       cursorColor: Colors.black,
                       keyboardType: TextInputType.phone,
+                      inputFormatters: [
+                        MaskedInputFormatter('(##) #########'),
+                      ],
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, insira um número de celular';
