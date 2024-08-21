@@ -37,7 +37,14 @@ class ContribuaState extends State<Contribua> {
             dataNascimento,
             dataNascimentoConjuge,
           );
-        },
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Formulário enviado com sucesso. Deus abençoe. Aguarde nosso contato!'),
+              backgroundColor: Colors.lightGreen[800],
+              duration: Duration(seconds: 4),
+            ),
+          );        },
         baseUrl: '',
       ),
     );
