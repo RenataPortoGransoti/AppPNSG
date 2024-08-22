@@ -130,6 +130,41 @@
                     closeAllModals();
                 }
             });
+
+            function handleImageUpload(inputId, previewId, containerId, fileNameId, removeBtnId) {
+                const fileInput = document.getElementById(inputId);
+                const previewImage = document.getElementById(previewId);
+                const previewContainer = document.getElementById(containerId);
+                const fileName = document.getElementById(fileNameId);
+                const removeBtn = document.getElementById(removeBtnId);
+
+                fileInput.addEventListener('change', function() {
+                    const file = fileInput.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result;
+                            previewContainer.classList.remove('hidden');
+                            fileName.textContent = file.name;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        previewContainer.classList.add('hidden');
+                        fileName.textContent = 'Nenhum arquivo selecionado';
+                    }
+                });
+
+                removeBtn.addEventListener('click', function() {
+                    fileInput.value = '';
+                    previewContainer.classList.add('hidden');
+                    fileName.textContent = 'Nenhum arquivo selecionado';
+                });
+            }
+
+            handleImageUpload('imagemDizimo', 'previewImageDizimo', 'imagePreviewContainerDizimo', 'fileNameDizimo',
+                'removeImageBtnDizimo');
+            handleImageUpload('imagemDoacao', 'previewImageDoacao', 'imagePreviewContainerDoacao', 'fileNameDoacao',
+                'removeImageBtnDoacao');
         });
     </script>
 @endsection
