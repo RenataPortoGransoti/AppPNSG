@@ -1,30 +1,19 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-300">
-
-    <!-- Primary Navigation Menu -->
     <div class="px-4 sm:px-6 lg:px-8">
-
         <div class="flex justify-between h-16 items-center">
-            <!-- Adicione a classe items-center para centralizar verticalmente -->
-            <!-- Menu hamburguer -->
             <button id="toggleSidebar"
                 class="flex items-center w-10 h-10 p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                    <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16" />
-                    <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <i class="bi bi-list" x-show="!open"></i> <!-- Ícone de menu hambúrguer -->
             </button>
 
             <div class="flex">
-
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                    <div class="flex justify-between h-16">
+                    <div class="flex justify-between items-center h-16">
                         <!-- Settings Dropdown -->
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Seu dropdown de configurações vai aqui -->
                         </div>
+                        <h2>Painel Admin - Aplicativo da Paróquia Nossa Senhora das Graças</h2>
                     </div>
                 </div>
 
@@ -69,10 +58,8 @@
                             {{ __('Perfil') }}
                         </x-dropdown-link>
 
-                        <!-- Autenticação -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -140,7 +127,7 @@
     const toggleButton = document.getElementById('toggleSidebar');
     const sidebar = document.querySelector('aside');
 
-    let open = true; // Defina o estado inicial
+    let open = true; 
 
     toggleButton.addEventListener('click', () => {
         open = !open;
