@@ -143,92 +143,104 @@
 
                 <!-- Pastorais Inativas-->
                 <div class="my-3">
-                    {{-- colocar if para não aparecer o h2 caso não tenha pastorais inativas --}}
                     <h2 class="text-center text-2xl font-semibold mt-3 mb-9">Pastorais Inativas</h2>
-                    @foreach ($pastorais as $pastoral)
-                        @if (!$pastoral->ativo)
-                            <div class="bg-white shadow-lg rounded-2xl mb-4 mx-5">
-                                <div
-                                    class="bg-gray-200 rounded-md py-3 px-4 flex justify-between items-center cursor-pointer border border-gray-400">
-                                    <h4 class="font-semibold text-xl py-3 px-1">{{ $pastoral->nome }}</h4>
-                                    <div class=" ">
-                                        <button type="button" class="relative group btn btn-outline-primary me-2 px-5"
-                                            onclick="toggleEditForm({{ $pastoral->id }})">
-                                            <i
-                                                class="bi bi-pencil text-gray-800 group-hover:text-blue-500 transform group-hover:scale-110 transition-transform duration-300"></i>
-                                            <span
-                                                class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                Editar
-                                            </span>
-                                        </button>
-                                        <form action="{{ route('pastorais.ativar', $pastoral->id) }}" method="POST"
-                                            class="inline">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="relative group btn btn-outline-success pr-5 ">
+                    @php
+                        $pastoraisInativas = $pastorais->where('ativo', 0);
+                    @endphp
+
+                    @if ($pastoraisInativas->isEmpty())
+                        <p class="text-center text-gray-600">Não há pastorais inativas no momento.</p>
+                    @else
+                        @foreach ($pastorais as $pastoral)
+                            @if (!$pastoral->ativo)
+                                <div class="bg-white shadow-lg rounded-2xl mb-4 mx-5">
+                                    <div
+                                        class="bg-gray-200 rounded-md py-3 px-4 flex justify-between items-center cursor-pointer border border-gray-400">
+                                        <h4 class="font-semibold text-xl py-3 px-1">{{ $pastoral->nome }}</h4>
+                                        <div class=" ">
+                                            <button type="button"
+                                                class="relative group btn btn-outline-primary me-2 px-5"
+                                                onclick="toggleEditForm({{ $pastoral->id }})">
                                                 <i
-                                                    class="bi bi-check-circle text-gray-800 group-hover:text-green-500 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    class="bi bi-pencil text-gray-800 group-hover:text-blue-500 transform group-hover:scale-110 transition-transform duration-300"></i>
                                                 <span
                                                     class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                    Ativar
+                                                    Editar
                                                 </span>
                                             </button>
+                                            <form action="{{ route('pastorais.ativar', $pastoral->id) }}" method="POST"
+                                                class="inline">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                    class="relative group btn btn-outline-success pr-5 ">
+                                                    <i
+                                                        class="bi bi-check-circle text-gray-800 group-hover:text-green-500 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Ativar
+                                                    </span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div id="editForm{{ $pastoral->id }}"
+                                        class="hidden bg-white shadow-lg rounded-2xl p-4 mt-2">
+                                        <form action="{{ route('pastorais.update', $pastoral->id) }}" method="POST"
+                                            enctype="multipart/form-data" id="formPastoral">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="mb-3">
+                                                <label for="editNomePastoral" class="form-label mb-1 block">Nome da
+                                                    Pastoral*</label>
+                                                <input type="text"
+                                                    class="px-2 form-input w-full border rounded-md h-12"
+                                                    id="editNomePastoral" name="nomePastoral" maxlength="60"
+                                                    value="{{ $pastoral->nome }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="editDescricao" class="form-label mb-1 block">Descrição</label>
+                                                <textarea class="px-2 form-input w-full border rounded-md h-24 resize-y" id="editDescricao" name="descricao">{{ $pastoral->descricao }}</textarea>
+                                            </div>
+                                            <div class="mb-4">
+                                                @if ($pastoral->imagem)
+                                                    <label for="photo" class="form-label mb-1 block">Imagem
+                                                        Atual</label>
+                                                    <img src="{{ asset('storage/' . $pastoral->imagem) }}"
+                                                        class="block mb-2" style="max-width: 200px;" alt="Imagem Atual">
+                                                    <form action="{{ route('pastorais.update', $pastoral->id) }}"
+                                                        method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="delete_image" value="1">
+                                                        <button type="submit"
+                                                            class="text-red-500 hover:text-red-700">Excluir
+                                                            Imagem</button>
+                                                    </form>
+                                                @else
+                                                    <p>Nenhuma imagem disponível.</p>
+                                                    <label for="photo" class="form-label mb-1 block">Selecione uma
+                                                        Imagem</label>
+                                                    <input type="file" name="photo" id="photo"
+                                                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black">
+                                                    <p class="text-sm mx-2">Formatos aceitos (JPG | JPEG| PNG). Tamanho
+                                                        máximo:
+                                                        2MB.</p>
+                                                @endif
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="button"
+                                                    class="btn bg-[#960316] text-white hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl px-4 py-2"
+                                                    onclick="hideEditForm({{ $pastoral->id }})">Cancelar</button>
+                                                <button type="submit"
+                                                    class="btn bg-[#036896] text-white hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl px-4 py-2">Salvar</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div id="editForm{{ $pastoral->id }}"
-                                    class="hidden bg-white shadow-lg rounded-2xl p-4 mt-2">
-                                    <form action="{{ route('pastorais.update', $pastoral->id) }}" method="POST"
-                                        enctype="multipart/form-data" id="formPastoral">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="mb-3">
-                                            <label for="editNomePastoral" class="form-label mb-1 block">Nome da
-                                                Pastoral*</label>
-                                            <input type="text" class="px-2 form-input w-full border rounded-md h-12"
-                                                id="editNomePastoral" name="nomePastoral" maxlength="60"
-                                                value="{{ $pastoral->nome }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editDescricao" class="form-label mb-1 block">Descrição</label>
-                                            <textarea class="px-2 form-input w-full border rounded-md h-24 resize-y" id="editDescricao" name="descricao">{{ $pastoral->descricao }}</textarea>
-                                        </div>
-                                        <div class="mb-4">
-                                            @if ($pastoral->imagem)
-                                                <label for="photo" class="form-label mb-1 block">Imagem
-                                                    Atual</label>
-                                                <img src="{{ asset('storage/' . $pastoral->imagem) }}" class="block mb-2"
-                                                    style="max-width: 200px;" alt="Imagem Atual">
-                                                <form action="{{ route('pastorais.update', $pastoral->id) }}"
-                                                    method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="delete_image" value="1">
-                                                    <button type="submit" class="text-red-500 hover:text-red-700">Excluir
-                                                        Imagem</button>
-                                                </form>
-                                            @else
-                                                <p>Nenhuma imagem disponível.</p>
-                                                <label for="photo" class="form-label mb-1 block">Selecione uma
-                                                    Imagem</label>
-                                                <input type="file" name="photo" id="photo"
-                                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black">
-                                                <p class="text-sm mx-2">Formatos aceitos (JPG | JPEG| PNG). Tamanho máximo:
-                                                    2MB.</p>
-                                            @endif
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="button"
-                                                class="btn bg-[#960316] text-white hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl px-4 py-2"
-                                                onclick="hideEditForm({{ $pastoral->id }})">Cancelar</button>
-                                            <button type="submit"
-                                                class="btn bg-[#036896] text-white hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl px-4 py-2">Salvar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
 
                 <!--  Modal Cancelar Alterações -->
