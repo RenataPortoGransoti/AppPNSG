@@ -123,7 +123,7 @@ class FormularioDizimista extends StatelessWidget {
                         const SizedBox(width: 10),
                         Expanded(
                           child: buildTextFormField(
-                            'Apto',
+                            'Complemento',
                                 (value) => _apto = value!,
                           ),
                         ),
