@@ -109,17 +109,38 @@
                 });
             });
 
-            document.querySelectorAll('.remove-aviso-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const avisoToDelete = event.target.closest('.my-2');
-                    const avisoId = avisoToDelete.querySelector('input[name="ids[]"]').value;
+            document.addEventListener('click', (event) => {
+                if (event.target.closest('.add-aviso-btn')) {
+                    const container = event.target.closest('.card-body');
+                    const newAviso = document.createElement('div');
+                    newAviso.classList.add('my-2', 'flex', 'items-center');
+                    newAviso.innerHTML = `
+                            <input type="text" name="${container.id.replace('container', '')}[]" data-id="" class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                            <input type="hidden" name="ids_${container.id.replace('container', '')}[]" value="">
+                            <button type="button" class="remove-aviso-btn ml-2 text-red-500"><i class="bi bi-x"></i></button>
+                        `;
+                    container.appendChild(newAviso);
+                }
 
-                    if (avisoId) {
-                        showExcluirModal(avisoId);
-                    } else {
-                        avisoToDelete.remove();
-                    }
-                });
+                if (event.target.closest('.remove-aviso-btn')) {
+                    const aviso = event.target.closest('.my-2');
+                    aviso.remove();
+                }
+
+                if (event.target.closest('.remove-aviso')) {
+                    const tipo = event.target.closest('.remove-aviso').dataset.tipo;
+                    fetch(`{{ route('avisos.destroy', '') }}/${tipo}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            const input = document.querySelector(`input[name="${tipo}"]`);
+                            input.value = '';
+                        }
+                    });
+                }
             });
         });
 
