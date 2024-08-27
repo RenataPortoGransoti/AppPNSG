@@ -31,7 +31,6 @@ class InformacoesState extends State<Informacoes> {
   String instagramUrl = "";
   String facebookUrl = "";
   String instagramUsername = "";
-
   @override
   void initState() {
     super.initState();
@@ -39,7 +38,7 @@ class InformacoesState extends State<Informacoes> {
     fetchContactDetails();  }
 
   // Função para buscar os horários da API Laravel
-  void fetchHorarios() async {
+  Future<void>  fetchHorarios() async {
     try {
       final response = await http.get(Uri.parse('${Config.baseUrl}horariosapi'));
 
@@ -62,7 +61,7 @@ class InformacoesState extends State<Informacoes> {
   }
 
 // Função para buscar os detalhes de contato da API Laravel
-  void fetchContactDetails() async {
+  Future<void>  fetchContactDetails() async {
     try {
       final response = await http.get(Uri.parse('${Config.baseUrl}contatosapi'));
 
@@ -85,6 +84,8 @@ class InformacoesState extends State<Informacoes> {
       print('Erro ao carregar os detalhes de contato: $e');
     }
   }
+
+
 
   void _launchPhone() async {
     final Uri launchUri = Uri(
@@ -188,6 +189,12 @@ class InformacoesState extends State<Informacoes> {
       body: emailBody,
     );
   }
+  Future<void> _handleRefresh() async {
+    await fetchHorarios();
+    await fetchContactDetails();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +229,10 @@ class InformacoesState extends State<Informacoes> {
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.lightBlue,
       ),
-      body: SingleChildScrollView(
+      body: RefreshIndicator(
+        onRefresh: _handleRefresh,
+        color: Colors.blue[200],
+    child:SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -362,7 +372,7 @@ class InformacoesState extends State<Informacoes> {
           ),
         ),
       ),
-    );
+    ),);
   }
 
   Widget _buildHorarioTile(String titulo, String tipo) {
