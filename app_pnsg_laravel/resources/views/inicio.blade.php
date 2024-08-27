@@ -79,7 +79,7 @@
                 <h3 class="text-[#960316] text-lg font-bold text-center mb-4">Excluir Aviso?</h3>
                 <p class="mt-2 mb-4">Tem certeza de que deseja excluir? O Aviso não aparecerá mais na lista de avisos.</p>
                 <div class="flex justify-center items-center align-center">
-                    <button id="btnExcluirFecharModal"
+                    <button id="btnExcluirFecharModal" onclick="hideExcluirModal()"
                         class="px-4 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white border border-[#036896] rounded-xl mr-2">Voltar</button>
                     <form id="formExcluirAviso" method="POST">
                         @csrf
@@ -142,6 +142,7 @@
                     });
                 }
             });
+
         });
 
         function showExcluirModal(id) {
@@ -154,10 +155,10 @@
         }
 
         function hideExcluirModal() {
+            console.log('Hide modal function called'); // Verificação de chamada
             const excluirModal = document.getElementById('excluirModal');
             excluirModal.classList.add('hidden');
         }
-        document.getElementById('btnExcluirFecharModal').addEventListener('click', hideExcluirModal);
     </script>
 
 </body>
