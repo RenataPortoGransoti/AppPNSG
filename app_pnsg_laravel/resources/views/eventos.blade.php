@@ -64,7 +64,7 @@
                                                 <label for="editNomeEvento" class="block mb-1">Nome do Evento</label>
                                                 <input type="text" class="form-input w-full border rounded-md h-12 px-1"
                                                     id="editNomeEvento" name="edit_nome_evento"
-                                                    value="{{ $evento->nome_evento }}" required>
+                                                    value="{{ $evento->nome_evento }}" maxlength="50" required>
                                             </div>
                                             <div class="mb-4">
                                                 <label for="editDataInicio" class="block mb-1">Data Início</label>
@@ -84,11 +84,12 @@
                                             <div class="mb-4">
                                                 <label for="editLocal" class="block mb-1">Local</label>
                                                 <input type="text" class="form-input w-full border rounded-md h-10 px-1"
-                                                    id="editLocal" name="edit_local" value="{{ $evento->local }}" required>
+                                                    id="editLocal" name="edit_local" maxlength="100"
+                                                    value="{{ $evento->local }}" required>
                                             </div>
                                             <div class="mb-4">
                                                 <label for="editDescricao" class="block mb-1">Descrição</label>
-                                                <textarea class="form-textarea w-full border rounded-md px-1" id="editDescricao" name="edit_descricao">{{ $evento->descricao }}</textarea>
+                                                <textarea class="form-textarea w-full border rounded-md px-1" id="editDescricao" name="edit_descricao" maxlength="255">{{ $evento->descricao }} </textarea>
                                             </div>
                                             <div class="text-white px-4 py-3 text-center">
                                                 <button type="button"
@@ -124,7 +125,7 @@
                             <div class="mb-4">
                                 <label for="nomeEvento" class="block mb-1">Nome do Evento*</label>
                                 <input type="text" class="form-input w-full border rounded-md h-12 px-1"
-                                    id="nomeEvento" name="nome_evento" required>
+                                    id="nomeEvento" name="nome_evento" maxlength="50" required>
                                 <div id="error-message-nomeEvento" class="text-red-500 text-sm" style="display: none">Por
                                     favor, preencha o nome do evento.</div>
                             </div>
@@ -146,13 +147,13 @@
                             <div class="mb-4">
                                 <label for="local" class="block mb-1">Local*</label>
                                 <input type="text" class="form-input w-full border rounded-md h-10 px-1"
-                                    id="local" name="local" required>
+                                    id="local" name="local" maxlength="100" required>
                                 <div id="error-message-local" class="text-red-500 text-sm" style="display: none">Por
                                     favor, preencha o local do evento.</div>
                             </div>
                             <div class="mb-4">
                                 <label for="descricao" class="block mb-1">Descrição</label>
-                                <textarea class="form-textarea w-full border rounded-md h-32 px-1" id="descricao" name="descricao"></textarea>
+                                <textarea class="form-textarea w-full border rounded-md h-32 px-1" id="descricao" name="descricao" maxlength="255"></textarea>
                             </div>
                             <div class="text-white px-4 py-3 text-center">
                                 <button type="button"
