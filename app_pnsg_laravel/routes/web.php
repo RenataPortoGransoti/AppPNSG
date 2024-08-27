@@ -44,7 +44,7 @@ Route::post('/eventos', [EventoController::class, 'cadastrarEvento'])->name('eve
 Route::put('/eventos/{evento}', [EventoController::class, 'editarEvento'])->name('eventos.editarEvento');
 Route::post('/eventos/inativar', [EventoController::class, 'inativarEvento'])->name('eventos.inativar');
 Route::put('/eventos/{id}/ativar', [EventoController::class, 'ativarEvento'])->name('eventos.ativar');
-Route::delete('/eventos/{id}/excluir', [EventoController::class, 'excluirEvento'])->name('eventos.softDelete');
+Route::delete('/eventos/{evento}', [EventoController::class, 'excluirEvento'])->name('eventos.softDelete');
 
 Route::get('/informacoes', [InformacoesController::class, 'consultarInformacoes'])->name('informacoes.index');
 Route::post('/horarios/store', [HorarioController::class, 'cadastrarHorario'])->name('horarios.store');

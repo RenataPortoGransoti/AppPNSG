@@ -155,7 +155,6 @@
         }
 
         function hideExcluirModal() {
-            console.log('Hide modal function called'); // Verificação de chamada
             const excluirModal = document.getElementById('excluirModal');
             excluirModal.classList.add('hidden');
         }
