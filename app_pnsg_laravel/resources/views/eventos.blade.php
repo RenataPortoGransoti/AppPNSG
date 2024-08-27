@@ -262,7 +262,7 @@
                             <button id="btnExcluirFecharModal"
                                 class="px-4 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white border border-[#036896] rounded-xl mr-2">Voltar</button>
                             <form id="formExcluirEvento" method="POST"
-                                action="{{ route('eventos.softDelete', ['id' => 0]) }}">
+                                action="{{ route('eventos.softDelete', $evento->id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" id="excluirEventoId" name="evento_id">
