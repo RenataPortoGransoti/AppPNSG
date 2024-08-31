@@ -22,16 +22,26 @@
             <button id="closeDizimoModal"
                 class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl font-semibold">&times;</button>
             <h2 class="text-3xl font-semibold mb-4 text-center py-6">Gerenciar Dízimo</h2>
-            <form id="formDizimo">
+            <form id="formDizimo" action="{{ route('dizimo.salvar') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="mb-4">
                     <div class="mb-6">
                         <label for="chavePix" class="form-label mb-2 text-gray-700 font-bold block">Chave PIX</label>
                         <input type="text"
                             class="px-2 shadow appearance-none w-full border rounded-md h-12 leading-tight focus:outline-none focus:shadow-outline"
-                            id="chavePix" name="chavePix" maxlength="60" required>
+                            id="chavePix" name="chavePix" value="{{ $dizimo->chavePix ?? '' }}" maxlength="255" required>
                     </div>
+
                     <div class="mb-6">
-                        <label for="imagemDizimo" class="form-label mb-2 text-gray-700 font-bold block">QR Code:</label>
+                        <label for="QRCode" class="form-label mb-2 text-gray-700 font-bold block">QR Code</label>
+                        <input type="text"
+                            class="px-2 shadow appearance-none w-full border rounded-md h-12 leading-tight focus:outline-none focus:shadow-outline"
+                            id="QRCode" name="QRCode" value="{{ $dizimo->QRCode ?? '' }}" maxlength="255">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="imagemDizimo" class="form-label mb-2 text-gray-700 font-bold block">Imagem QR
+                            Code:</label>
                         <div class="flex items-center">
                             <label for="imagemDizimo"
                                 class="cursor-pointer bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white font-semibold py-2 px-4 rounded-md border border-[#036896]">
@@ -49,12 +59,14 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="flex justify-center mt-12">
-                        <button type="button" id="submitBtnDizimo"
+                        <button type="submit" id="submitBtnDizimo"
                             class="btn w-3/12 py-2 text-white bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\InformacoesController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\AvisoController;
+use App\Http\Controllers\DizimoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +33,10 @@ Route::get('/inicio', [AvisoController::class, 'consultarAvisos'])->name('inicio
 Route::post('/avisos/store', [AvisoController::class, 'cadastrarAviso'])->name('avisos.store');
 Route::delete('/avisos/{aviso}', [AvisoController::class, 'excluirAviso'])->name('avisos.destroy');
 
+Route::get('/dizimo', [DizimoController::class, 'consultarDadosDizimo'])->name('dizimo.consultar');
+Route::post('/dizimo/salvar', [DizimoController::class, 'salvarDadosDizimo'])->name('dizimo.salvar');
+Route::delete('/dizimo/excluir', [DizimoController::class, 'excluirDadosDizimo'])->name('dizimo.excluir');
+
 Route::get('/pastorais', [PastoralController::class, 'consultarPastoral'])->name('pastorais.index');
 Route::post('/pastorais', [PastoralController::class, 'cadastrarPastoral'])->name('pastorais.store');
 Route::put('/pastorais/{pastoral}', [PastoralController::class, 'editarPastoral'])->name('pastorais.update');
@@ -51,6 +56,8 @@ Route::post('/horarios/store', [HorarioController::class, 'cadastrarHorario'])->
 Route::delete('/horarios/{id}', [HorarioController::class, 'excluirHorario'])->name('horarios.destroy');
 Route::post('/contatos/store', [ContatoController::class, 'cadastrarContato'])->name('contatos.store');
 Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])->name('contatos.destroy');
+
+
 
 //Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'carregarPastoraisApp']);
