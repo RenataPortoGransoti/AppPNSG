@@ -71,13 +71,15 @@
             <button id="closeDoacaoModal"
                 class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl font-semibold">&times;</button>
             <h2 class="text-3xl font-semibold mb-4 text-center py-6">Gerenciar Doação</h2>
-            <form id="formDoacao">
+            <form id="formDoacao" action="{{ route('doacao.salvar') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="mb-4">
                     <div class="mb-6">
                         <label for="chavePixDoacao" class="form-label mb-2 text-gray-700 font-bold block">Chave PIX</label>
                         <input type="text"
                             class="px-2 shadow appearance-none w-full border rounded-md h-12 leading-tight focus:outline-none focus:shadow-outline"
-                            id="chavePixDoacao" name="chavePixDoacao" maxlength="60" required>
+                            id="chavePixDoacao" name="chavePix" value="{{ $doacao->chavePix ?? '' }}" maxlength="255"
+                            required>
                     </div>
                     <div class="mb-6">
                         <label for="imagemDoacao" class="form-label mb-2 text-gray-700 font-bold block">QR Code:</label>
@@ -86,20 +88,24 @@
                                 class="cursor-pointer bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white font-semibold py-2 px-4 rounded-md border border-[#036896]">
                                 Selecione uma imagem
                             </label>
-                            <input type="file" id="imagemDoacao" name="imagemDoacao" accept="image/*" class="hidden">
+                            <input type="file" id="imagemDoacao" name="QRCode" accept="image/*" class="hidden">
                             <span id="fileNameDoacao" class="ml-4 text-gray-700">Nenhum arquivo selecionado</span>
                         </div>
-                        <div id="imagePreviewContainerDoacao" class="mt-4 hidden relative">
-                            <img id="previewImageDoacao" class="w-auto max-h-72 object-cover rounded-md mx-auto"
-                                src="" alt="Pré-visualização da imagem">
-                            <button type="button" id="removeImageBtnDoacao"
-                                class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1">
-                                Remover
-                            </button>
-                        </div>
+                        @if (isset($doacao) && $doacao->QRCode)
+                            <div class="mt-4 relative" id="imagePreviewContainerDoacao">
+                                <img src="{{ asset('storage/' . $doacao->QRCode) }}" alt="QR Code"
+                                    class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageDoacao">
+
+                                <button type="button" id="removeImageBtnDoacao"
+                                    class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1">
+                                    Remover
+                                </button>
+                                <input type="hidden" name="removeQRCode" id="removeQRCodeFieldDoacao" value="0">
+                            </div>
+                        @endif
                     </div>
                     <div class="flex justify-center mt-12">
-                        <button type="button" id="submitBtnDoacao"
+                        <button type="submit" id="submitBtnDoacao"
                             class="btn w-3/12 py-2 text-white bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
                     </div>
                 </div>
