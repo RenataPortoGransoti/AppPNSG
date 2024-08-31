@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dizimo', function (Blueprint $table) {
             $table->id();
             $table->string('chavePix', 255);
-            $table->string('QRCode', 255);
+            $table->string('QRCode', 255)->nullable(); // Adiciona o nullable() para permitir valores nulos
             $table->timestamps();
         });
     }

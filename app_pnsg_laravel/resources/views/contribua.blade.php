@@ -33,31 +33,27 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="QRCode" class="form-label mb-2 text-gray-700 font-bold block">QR Code</label>
-                        <input type="text"
-                            class="px-2 shadow appearance-none w-full border rounded-md h-12 leading-tight focus:outline-none focus:shadow-outline"
-                            id="QRCode" name="QRCode" value="{{ $dizimo->QRCode ?? '' }}" maxlength="255">
-                    </div>
-
-                    <div class="mb-6">
-                        <label for="imagemDizimo" class="form-label mb-2 text-gray-700 font-bold block">Imagem QR
-                            Code:</label>
+                        <label for="QRCode" class="form-label mb-2 text-gray-700 font-bold block">QR Code:</label>
                         <div class="flex items-center">
-                            <label for="imagemDizimo"
+                            <label for="QRCode"
                                 class="cursor-pointer bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white font-semibold py-2 px-4 rounded-md border border-[#036896]">
                                 Selecione uma imagem
                             </label>
-                            <input type="file" id="imagemDizimo" name="imagemDizimo" accept="image/*" class="hidden">
-                            <span id="fileNameDizimo" class="ml-4 text-gray-700">Nenhum arquivo selecionado</span>
+                            <input type="file" id="QRCode" name="QRCode" accept="image/*" class="hidden">
+                            <span id="fileNameQRCode" class="ml-4 text-gray-700">Nenhum arquivo selecionado</span>
                         </div>
-                        <div id="imagePreviewContainerDizimo" class="mt-4 hidden relative">
-                            <img id="previewImageDizimo" class="w-auto max-h-72 object-cover rounded-md mx-auto"
-                                src="" alt="Pré-visualização da imagem">
-                            <button type="button" id="removeImageBtnDizimo"
-                                class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1">
-                                Remover
-                            </button>
-                        </div>
+                        @if (isset($dizimo) && $dizimo->QRCode)
+                            <div class="mt-4 relative" id="imagePreviewContainerQRCode">
+                                <img src="{{ asset('storage/' . $dizimo->QRCode) }}" alt="QR Code"
+                                    class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageQRCode">
+
+                                <button type="button" id="removeImageBtnQRCode"
+                                    class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1">
+                                    Remover
+                                </button>
+                                <input type="hidden" name="removeQRCode" id="removeQRCodeField" value="0">
+                            </div>
+                        @endif
                     </div>
 
                     <div class="flex justify-center mt-12">
@@ -66,7 +62,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 
@@ -143,21 +138,25 @@
                 }
             });
 
-            function handleImageUpload(inputId, previewId, containerId, fileNameId, removeBtnId) {
+            function handleImageUpload(inputId, previewId, containerId, fileNameId, removeBtnId, removeFieldId) {
                 const fileInput = document.getElementById(inputId);
                 const previewImage = document.getElementById(previewId);
                 const previewContainer = document.getElementById(containerId);
                 const fileName = document.getElementById(fileNameId);
                 const removeBtn = document.getElementById(removeBtnId);
+                const removeField = removeFieldId ? document.getElementById(removeFieldId) : null;
 
                 fileInput.addEventListener('change', function() {
                     const file = fileInput.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = function(e) {
-                            previewImage.src = e.target.result;
+                        reader.onload = function(event) {
+                            previewImage.src = event.target.result;
                             previewContainer.classList.remove('hidden');
                             fileName.textContent = file.name;
+                            if (removeField) {
+                                removeField.value = '0'; // Reset remove field when new file is uploaded
+                            }
                         };
                         reader.readAsDataURL(file);
                     } else {
@@ -167,16 +166,35 @@
                 });
 
                 removeBtn.addEventListener('click', function() {
-                    fileInput.value = '';
+                    previewImage.src = '';
                     previewContainer.classList.add('hidden');
+                    fileInput.value = ''; // Clear the file input
                     fileName.textContent = 'Nenhum arquivo selecionado';
+
+                    if (removeField) {
+                        removeField.value = '1'; // Mark the image for removal
+                    }
                 });
             }
 
-            handleImageUpload('imagemDizimo', 'previewImageDizimo', 'imagePreviewContainerDizimo', 'fileNameDizimo',
-                'removeImageBtnDizimo');
-            handleImageUpload('imagemDoacao', 'previewImageDoacao', 'imagePreviewContainerDoacao', 'fileNameDoacao',
-                'removeImageBtnDoacao');
+            // Chamada da função para o QR Code do Dízimo
+            handleImageUpload(
+                'QRCode',
+                'previewImageQRCode',
+                'imagePreviewContainerQRCode',
+                'fileNameQRCode',
+                'removeImageBtnQRCode',
+                'removeQRCodeField'
+            );
+
+
+            document.getElementById('submitBtnDizimo').addEventListener('click', function() {
+                document.getElementById('formDizimo').submit();
+            });
+
+            document.getElementById('submitBtnDoacao').addEventListener('click', function() {
+                document.getElementById('formDoacao').submit();
+            });
         });
     </script>
 @endsection
