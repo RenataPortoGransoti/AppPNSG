@@ -29,7 +29,8 @@
                         <label for="chavePix" class="form-label mb-2 text-gray-700 font-bold block">Chave PIX</label>
                         <input type="text"
                             class="px-2 shadow appearance-none w-full border rounded-md h-12 leading-tight focus:outline-none focus:shadow-outline"
-                            id="chavePix" name="chavePix" value="{{ $dizimo->chavePix ?? '' }}" maxlength="255" required>
+                            id="chavePix" name="chavePix" value="{{ old('chavePix', $dizimo->chavePix ?? '') }}"
+                            maxlength="255" required>
                     </div>
 
                     <div class="mb-6">
@@ -46,9 +47,18 @@
                             <div class="mt-4 relative" id="imagePreviewContainerQRCode">
                                 <img src="{{ asset('storage/' . $dizimo->QRCode) }}" alt="QR Code"
                                     class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageQRCode">
-
                                 <button type="button" id="removeImageBtnQRCode"
                                     class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1">
+                                    Remover
+                                </button>
+                                <input type="hidden" name="removeQRCode" id="removeQRCodeField" value="0">
+                            </div>
+                        @else
+                            <div class="mt-4 relative hidden" id="imagePreviewContainerQRCode">
+                                <img src="#" alt="QR Code" class="w-auto max-h-72 object-cover rounded-md mx-auto"
+                                    id="previewImageQRCode">
+                                <button type="button" id="removeImageBtnQRCode"
+                                    class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1 hidden">
                                     Remover
                                 </button>
                                 <input type="hidden" name="removeQRCode" id="removeQRCodeField" value="0">
@@ -78,8 +88,8 @@
                         <label for="chavePixDoacao" class="form-label mb-2 text-gray-700 font-bold block">Chave PIX</label>
                         <input type="text"
                             class="px-2 shadow appearance-none w-full border rounded-md h-12 leading-tight focus:outline-none focus:shadow-outline"
-                            id="chavePixDoacao" name="chavePix" value="{{ $doacao->chavePix ?? '' }}" maxlength="255"
-                            required>
+                            id="chavePixDoacao" name="chavePix" value="{{ old('chavePix', $doacao->chavePix ?? '') }}"
+                            maxlength="255" required>
                     </div>
                     <div class="mb-6">
                         <label for="imagemDoacao" class="form-label mb-2 text-gray-700 font-bold block">QR Code:</label>
@@ -95,9 +105,18 @@
                             <div class="mt-4 relative" id="imagePreviewContainerDoacao">
                                 <img src="{{ asset('storage/' . $doacao->QRCode) }}" alt="QR Code"
                                     class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageDoacao">
-
                                 <button type="button" id="removeImageBtnDoacao"
                                     class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1">
+                                    Remover
+                                </button>
+                                <input type="hidden" name="removeQRCode" id="removeQRCodeFieldDoacao" value="0">
+                            </div>
+                        @else
+                            <div class="mt-4 relative hidden" id="imagePreviewContainerDoacao">
+                                <img src="#" alt="QR Code"
+                                    class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageDoacao">
+                                <button type="button" id="removeImageBtnDoacao"
+                                    class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1 hidden">
                                     Remover
                                 </button>
                                 <input type="hidden" name="removeQRCode" id="removeQRCodeFieldDoacao" value="0">
