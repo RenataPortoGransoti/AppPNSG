@@ -61,8 +61,6 @@
                                 </div>
 
                                 <div class="text-white px-4 py-3 text-center">
-                                    <button type="button"
-                                        class="btn w-3/12 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl">Cancelar</button>
                                     <button type="submit" id="submitBtn"
                                         class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
                                 </div>
