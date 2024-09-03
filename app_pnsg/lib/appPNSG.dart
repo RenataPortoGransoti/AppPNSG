@@ -11,7 +11,7 @@ class appPNSG extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'App PNSG',
-      home: Splash(), // Altere para Splash para exibir a página de splash
+        home: Splash(), // Altere para Splash para exibir a página de splash
       onGenerateRoute: (settings) {
         if (settings.name == '/PastoralEspecifica') {
           final args = settings.arguments as Map<String, dynamic>;
