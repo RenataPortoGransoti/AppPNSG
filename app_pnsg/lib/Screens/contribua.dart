@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../email.dart';
+import 'dizimo.dart';
 import 'formulario_dizimista.dart';
 import 'navigation_bar.dart';
 import 'inicio.dart';
@@ -157,7 +158,10 @@ class ContribuaState extends State<Contribua> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Lógica para Dízimo
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Dizimo()),
+                    );
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
