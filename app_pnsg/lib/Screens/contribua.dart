@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../email.dart';
 import 'dizimo.dart';
+import 'doacao.dart';
 import 'formulario_dizimista.dart';
 import 'navigation_bar.dart';
 import 'inicio.dart';
@@ -185,7 +186,10 @@ class ContribuaState extends State<Contribua> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Lógica para Doação
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Doacao()),
+                    );
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
