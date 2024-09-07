@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class DizimoController extends Controller
 {
+    public function carregarDizimoApp()
+    {
+        $dizimo = Dizimo::all();
+        return response()->json($dizimo);
+    }
+
     public function consultarDadosDizimo()
     {
         $dizimo = Dizimo::first();
