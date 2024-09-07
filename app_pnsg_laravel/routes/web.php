@@ -8,6 +8,7 @@ use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\InformacoesController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\AvisoController;
+use App\Http\Controllers\ContribuicaoController;
 use App\Http\Controllers\DizimoController;
 use App\Http\Controllers\DoacaoController;
 
@@ -25,24 +26,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/contribua', function () {
-    return view('contribua');
-});
-
-
 Route::get('/inicio', [AvisoController::class, 'consultarAvisos'])->name('inicio.index');
 Route::post('/avisos/store', [AvisoController::class, 'cadastrarAviso'])->name('avisos.store');
 Route::delete('/avisos/{aviso}', [AvisoController::class, 'excluirAviso'])->name('avisos.destroy');
 
+Route::get('/contribua', [ContribuicaoController::class, 'consultarContribuicao'])->name('contribuicao.index');
 Route::get('/dizimo', [DizimoController::class, 'consultarDadosDizimo'])->name('dizimo.consultar');
 Route::post('/dizimo/salvar', [DizimoController::class, 'salvarDadosDizimo'])->name('dizimo.salvar');
 Route::delete('/dizimo/excluir', [DizimoController::class, 'excluirDadosDizimo'])->name('dizimo.excluir');
-
-
 Route::get('/doacao', [DoacaoController::class, 'consultarDadosDoacao'])->name('doacao.consultar');
 Route::post('/doacao/salvar', [DoacaoController::class, 'salvarDadosDoacao'])->name('doacao.salvar');
 Route::delete('/doacao/excluir', [DoacaoController::class, 'excluirDadosDoacao'])->name('doacao.excluir');
-
 
 Route::get('/pastorais', [PastoralController::class, 'consultarPastoral'])->name('pastorais.index');
 Route::post('/pastorais', [PastoralController::class, 'cadastrarPastoral'])->name('pastorais.store');
