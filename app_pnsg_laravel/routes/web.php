@@ -68,6 +68,7 @@ Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])-
 //Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'carregarPastoraisApp']);
 Route::get('/dizimoapi', [DizimoController::class, 'carregarDizimoApp']);
+Route::get('/doacaoapi', [DoacaoController::class, 'carregarDoacaoApp']);
 Route::get('/eventosapi', [EventoController::class, 'carregarEventosAtivosApp']);
 Route::get('/horariosapi', [HorarioController::class, 'carregarHorariosApp']);
 Route::get('/contatosapi', [ContatoController::class, 'carregarContatoApp']);

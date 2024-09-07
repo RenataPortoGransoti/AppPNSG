@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Storage;
 
 class DoacaoController extends Controller
 {
+
+    public function carregarDoacaoApp()
+    {
+        $doacao = Doacao::all();
+        return response()->json($doacao);
+    }
+
     public function consultarDadosDoacao()
     {
         $doacao = Doacao::first();
