@@ -92,30 +92,30 @@
                             maxlength="255" required>
                     </div>
                     <div class="mb-6">
-                        <label for="imagemDoacao" class="form-label mb-2 text-gray-700 font-bold block">QR Code:</label>
+                        <label for="QRCodeDoacao" class="form-label mb-2 text-gray-700 font-bold block">QR Code:</label>
                         <div class="flex items-center">
-                            <label for="imagemDoacao"
+                            <label for="QRCodeDoacao"
                                 class="cursor-pointer bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white font-semibold py-2 px-4 rounded-md border border-[#036896]">
                                 Selecione uma imagem
                             </label>
-                            <input type="file" id="imagemDoacao" name="QRCode" accept="image/*" class="hidden">
-                            <span id="fileNameDoacao" class="ml-4 text-gray-700">Nenhum arquivo selecionado</span>
+                            <input type="file" id="QRCodeDoacao" name="QRCode" accept="image/*" class="hidden">
+                            <span id="fileNameQRCodeDoacao" class="ml-4 text-gray-700">Nenhum arquivo selecionado</span>
                         </div>
                         @if (isset($doacao) && $doacao->QRCode)
-                            <div class="mt-4 relative" id="imagePreviewContainerDoacao">
+                            <div class="mt-4 relative" id="imagePreviewContainerQRCodeDoacao">
                                 <img src="{{ asset('storage/' . $doacao->QRCode) }}" alt="QR Code"
-                                    class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageDoacao">
-                                <button type="button" id="removeImageBtnDoacao"
+                                    class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageQRCodeDoacao">
+                                <button type="button" id="removeImageBtnQRCodeDoacao"
                                     class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1">
                                     Remover
                                 </button>
                                 <input type="hidden" name="removeQRCode" id="removeQRCodeFieldDoacao" value="0">
                             </div>
                         @else
-                            <div class="mt-4 relative hidden" id="imagePreviewContainerDoacao">
+                            <div class="mt-4 relative hidden" id="imagePreviewContainerQRCodeDoacao">
                                 <img src="#" alt="QR Code"
-                                    class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageDoacao">
-                                <button type="button" id="removeImageBtnDoacao"
+                                    class="w-auto max-h-72 object-cover rounded-md mx-auto" id="previewImageQRCodeDoacao">
+                                <button type="button" id="removeImageBtnQRCodeDoacao"
                                     class="absolute top-0 right-0 mt-2 mr-2 px-3 py-2 bg-red-500 text-white rounded-lg p-1 hidden">
                                     Remover
                                 </button>
@@ -123,6 +123,7 @@
                             </div>
                         @endif
                     </div>
+
                     <div class="flex justify-center mt-12">
                         <button type="submit" id="submitBtnDoacao"
                             class="btn w-3/12 py-2 text-white bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
@@ -133,93 +134,43 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function closeAllModals() {
-                document.getElementById('dizimoModal').classList.add('hidden');
-                document.getElementById('doacaoModal').classList.add('hidden');
-            }
+        // Script para abrir e fechar os modais
+        document.getElementById('gerenciarDizimo').addEventListener('click', function() {
+            document.getElementById('dizimoModal').classList.remove('hidden');
+        });
+        document.getElementById('closeDizimoModal').addEventListener('click', function() {
+            document.getElementById('dizimoModal').classList.add('hidden');
+        });
 
-            document.getElementById('gerenciarDizimo').addEventListener('click', function() {
-                closeAllModals(); // Close other modals
-                document.getElementById('dizimoModal').classList.remove('hidden');
-            });
+        document.getElementById('gerenciarDoacao').addEventListener('click', function() {
+            document.getElementById('doacaoModal').classList.remove('hidden');
+        });
+        document.getElementById('closeDoacaoModal').addEventListener('click', function() {
+            document.getElementById('doacaoModal').classList.add('hidden');
+        });
 
-            document.getElementById('closeDizimoModal').addEventListener('click', function() {
-                document.getElementById('dizimoModal').classList.add('hidden');
-            });
+        // Script para exibir o nome do arquivo selecionado no modal de dízimo
+        document.getElementById('QRCode').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || 'Nenhum arquivo selecionado';
+            document.getElementById('fileNameQRCode').textContent = fileName;
+        });
 
-            document.getElementById('gerenciarDoacao').addEventListener('click', function() {
-                closeAllModals(); // Close other modals
-                document.getElementById('doacaoModal').classList.remove('hidden');
-            });
+        // Script para exibir o nome do arquivo selecionado no modal de doação
+        document.getElementById('QRCodeDoacao').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || 'Nenhum arquivo selecionado';
+            document.getElementById('fileNameQRCodeDoacao').textContent = fileName;
+        });
 
-            document.getElementById('closeDoacaoModal').addEventListener('click', function() {
-                document.getElementById('doacaoModal').classList.add('hidden');
-            });
+        // Script para remover imagem no modal de dízimo
+        document.getElementById('removeImageBtnQRCode').addEventListener('click', function() {
+            document.getElementById('imagePreviewContainerQRCode').classList.add('hidden');
+            document.getElementById('removeQRCodeField').value = '1';
+        });
 
-            document.addEventListener('click', function(event) {
-                if (event.target.id === 'dizimoModal' || event.target.id === 'doacaoModal') {
-                    closeAllModals();
-                }
-            });
-
-            function handleImageUpload(inputId, previewId, containerId, fileNameId, removeBtnId, removeFieldId) {
-                const fileInput = document.getElementById(inputId);
-                const previewImage = document.getElementById(previewId);
-                const previewContainer = document.getElementById(containerId);
-                const fileName = document.getElementById(fileNameId);
-                const removeBtn = document.getElementById(removeBtnId);
-                const removeField = removeFieldId ? document.getElementById(removeFieldId) : null;
-
-                fileInput.addEventListener('change', function() {
-                    const file = fileInput.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            previewImage.src = event.target.result;
-                            previewContainer.classList.remove('hidden');
-                            fileName.textContent = file.name;
-                            if (removeField) {
-                                removeField.value = '0'; // Reset remove field when new file is uploaded
-                            }
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        previewContainer.classList.add('hidden');
-                        fileName.textContent = 'Nenhum arquivo selecionado';
-                    }
-                });
-
-                removeBtn.addEventListener('click', function() {
-                    previewImage.src = '';
-                    previewContainer.classList.add('hidden');
-                    fileInput.value = ''; // Clear the file input
-                    fileName.textContent = 'Nenhum arquivo selecionado';
-
-                    if (removeField) {
-                        removeField.value = '1'; // Mark the image for removal
-                    }
-                });
-            }
-
-            // Chamada da função para o QR Code do Dízimo
-            handleImageUpload(
-                'QRCode',
-                'previewImageQRCode',
-                'imagePreviewContainerQRCode',
-                'fileNameQRCode',
-                'removeImageBtnQRCode',
-                'removeQRCodeField'
-            );
-
-
-            document.getElementById('submitBtnDizimo').addEventListener('click', function() {
-                document.getElementById('formDizimo').submit();
-            });
-
-            document.getElementById('submitBtnDoacao').addEventListener('click', function() {
-                document.getElementById('formDoacao').submit();
-            });
+        // Script para remover imagem no modal de doação
+        document.getElementById('removeImageBtnQRCodeDoacao').addEventListener('click', function() {
+            document.getElementById('imagePreviewContainerQRCodeDoacao').classList.add('hidden');
+            document.getElementById('removeQRCodeFieldDoacao').value = '1';
         });
     </script>
 @endsection

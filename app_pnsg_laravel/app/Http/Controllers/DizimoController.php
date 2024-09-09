@@ -17,10 +17,8 @@ class DizimoController extends Controller
     public function consultarDadosDizimo()
     {
         $dizimo = Dizimo::first();
-
-        return view('contribua', compact('dizimo'));
+        return response()->json(['dizimo' => $dizimo]);
     }
-
 
     public function salvarDadosDizimo(Request $request)
     {
@@ -47,7 +45,7 @@ class DizimoController extends Controller
         $dizimo->chavePix = $request->input('chavePix');
         $dizimo->save();
 
-        return redirect()->route('dizimo.consultar')->with('success', 'Dízimo salvo com sucesso.');
+        return redirect()->route('contribuicao.index')->with('success', 'Dízimo salvo com sucesso.');
     }
 
     public function excluirDadosDizimo()

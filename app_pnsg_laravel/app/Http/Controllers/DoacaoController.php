@@ -18,8 +18,7 @@ class DoacaoController extends Controller
     public function consultarDadosDoacao()
     {
         $doacao = Doacao::first();
-
-        return view('contribua', compact('doacao'));
+        return response()->json(['doacao' => $doacao]);
     }
 
 
@@ -48,7 +47,7 @@ class DoacaoController extends Controller
         $doacao->chavePix = $request->input('chavePix');
         $doacao->save();
 
-        return redirect()->route('doacao.consultar')->with('success', 'Dízimo salvo com sucesso.');
+        return redirect()->route('contribuicao.index')->with('success', 'Dízimo salvo com sucesso.');
     }
 
     public function excluirDadosDoacao()

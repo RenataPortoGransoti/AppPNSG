@@ -31,12 +31,15 @@ Route::post('/avisos/store', [AvisoController::class, 'cadastrarAviso'])->name('
 Route::delete('/avisos/{aviso}', [AvisoController::class, 'excluirAviso'])->name('avisos.destroy');
 
 Route::get('/contribua', [ContribuicaoController::class, 'consultarContribuicao'])->name('contribuicao.index');
+Route::delete('/dizimo/excluir', [DizimoController::class, 'excluirDadosDizimo'])->name('dizimo.excluir');
+Route::delete('/doacao/excluir', [DoacaoController::class, 'excluirDadosDoacao'])->name('doacao.excluir');
+
 Route::get('/dizimo', [DizimoController::class, 'consultarDadosDizimo'])->name('dizimo.consultar');
 Route::post('/dizimo/salvar', [DizimoController::class, 'salvarDadosDizimo'])->name('dizimo.salvar');
-Route::delete('/dizimo/excluir', [DizimoController::class, 'excluirDadosDizimo'])->name('dizimo.excluir');
+
 Route::get('/doacao', [DoacaoController::class, 'consultarDadosDoacao'])->name('doacao.consultar');
 Route::post('/doacao/salvar', [DoacaoController::class, 'salvarDadosDoacao'])->name('doacao.salvar');
-Route::delete('/doacao/excluir', [DoacaoController::class, 'excluirDadosDoacao'])->name('doacao.excluir');
+
 
 Route::get('/pastorais', [PastoralController::class, 'consultarPastoral'])->name('pastorais.index');
 Route::post('/pastorais', [PastoralController::class, 'cadastrarPastoral'])->name('pastorais.store');
