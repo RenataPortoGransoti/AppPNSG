@@ -35,14 +35,13 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('users')->insert([
-            'nome' => 'Secretário',
-            'cpf' => '06230749904',
+            'nome' => 'Admin',
+            'cpf' => '89993884090',
             'celular' => '4333421276',
             'email' => 'admin@email.com',
-            'dataNascimento' => '1999-12-12',
-            'tipo' => 'secretario',
+            'dataNascimento' => '1955-11-01',
+            'tipo' => 'secretário(a)',
             'password' => bcrypt('admin123'),
         ]);
-
     }
 }
