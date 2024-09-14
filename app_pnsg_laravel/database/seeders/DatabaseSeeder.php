@@ -18,26 +18,31 @@ class DatabaseSeeder extends Seeder
     {
 
         DB::table('pastorais')->insert([
-            'nome' => 'Pastoral da Acolhida',
+            'nome' => 'Acolhida',
             'descricao' => 'Descrição da Pastoral da Acolhida',
             'imagem' => null
         ]);
-
         DB::table('pastorais')->insert([
-            'nome' => 'Ministério de Leitores',
-            'descricao' => 'Descrição Leitores',
-            'imagem' => 'images/1716139135.jpg'
+            'nome' => 'Acólitos',
+            'descricao' => null,
+            'imagem' => null
+        ]);
+        DB::table('pastorais')->insert([
+            'nome' => 'Apostolado da oração',
+            'descricao' => null,
+            'imagem' => null
         ]);
 
 
-        // DB::table('users')->insert([
-        //     'nome' => 'Secretário',
-        //     'email' => 'admin@email.com',
-        //     'cpf' => '06230749904',
-        //     'celular' => '4333421276',
-        //     'dataNascimento' => '1999-12-12',
-        //     'tipo' => 'secretario',
-        //     'senha' => bcrypt('admin123'),
-        // ]);
+        DB::table('users')->insert([
+            'nome' => 'Secretário',
+            'cpf' => '06230749904',
+            'celular' => '4333421276',
+            'email' => 'admin@email.com',
+            'dataNascimento' => '1999-12-12',
+            'tipo' => 'secretario',
+            'password' => bcrypt('admin123'),
+        ]);
+
     }
 }
