@@ -11,6 +11,8 @@ use App\Http\Controllers\AvisoController;
 use App\Http\Controllers\ContribuicaoController;
 use App\Http\Controllers\DizimoController;
 use App\Http\Controllers\DoacaoController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,6 +63,8 @@ Route::delete('/horarios/{id}', [HorarioController::class, 'excluirHorario'])->n
 Route::post('/contatos/store', [ContatoController::class, 'cadastrarContato'])->name('contatos.store');
 Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])->name('contatos.destroy');
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('edit-user');
 
 //Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'carregarPastoraisApp']);
