@@ -8,13 +8,11 @@
                 Registrar novo(a) usuário(a)
             </a>
 
-            <!-- Formulário de Filtro -->
             <form method="GET" action="{{ route('dashboard') }}" class="flex items-center">
                 <select name="tipo" class="border border-gray-300 rounded-md p-2 mr-2">
                     <option value="">Todos</option>
-                    <option value="secretario">Secretário</option>
-                    <option value="admin">Admin</option>
-                    <!-- Adicione outras opções conforme necessário -->
+                    <option value="secretário(a)">Secretário</option>
+                    <option value="paroquiano">Paroquiano</option>
                 </select>
                 <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-700">
                     Filtrar
