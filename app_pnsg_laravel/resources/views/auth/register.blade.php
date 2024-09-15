@@ -40,7 +40,7 @@
         <div class="mt-4 relative">
             <x-input-label for="password" :value="__('Senha*')" />
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
-            <i class="bx bx-lock-alt absolute right-3 top-10 cursor-pointer" id="togglePasswordIcon"
+            <i class="bx bx-lock-alt absolute right-3 top-7 cursor-pointer" id="togglePasswordIcon"
                 onclick="togglePasswordVisibility('password', 'togglePasswordIcon')"></i>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -49,7 +49,7 @@
             <x-input-label for="password_confirmation" :value="__('Confirmar Senha*')" />
             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
                 name="password_confirmation" required />
-            <i class="bx bx-lock-alt absolute right-3 top-10 cursor-pointer" id="togglePasswordConfirmIcon"
+            <i class="bx bx-lock-alt absolute right-3 top-7 cursor-pointer" id="togglePasswordConfirmIcon"
                 onclick="togglePasswordVisibility('password_confirmation', 'togglePasswordConfirmIcon')"></i>
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
@@ -70,23 +70,18 @@
         </div>
     @endif
 
-    <!-- Script de jQuery Mask Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Máscara para CPF
             $('#cpf').mask('000.000.000-00', {
                 reverse: true
             });
 
-            // Máscara para telefone celular
             $('#celular').mask('(00) 00000-0000');
 
-            // Máscara para data de nascimento
             $('#dataNascimento').mask('00/00/0000');
 
-            // Alternar visibilidade da senha
             window.togglePasswordVisibility = function(inputId, iconId) {
                 const passwordInput = document.getElementById(inputId);
                 const passwordIcon = document.getElementById(iconId);
