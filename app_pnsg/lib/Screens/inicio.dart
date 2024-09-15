@@ -1,17 +1,19 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../Inicio/galeria.dart';
 import '../Inicio/historiaParoquia.dart';
 import '../Inicio/oracoes.dart';
 import '../Inicio/viaSacra.dart';
-import '../config.dart';
 import '../loginButton.dart';
+import 'login.dart';
 import 'eventos.dart';
 import 'navigation_bar.dart';
 import 'pastoraisScreen.dart';
 import 'contribua.dart';
 import 'informacoes.dart';
+import '../config.dart';
 
 class Inicio extends StatefulWidget {
   @override
@@ -21,11 +23,20 @@ class Inicio extends StatefulWidget {
 class InicioState extends State<Inicio> {
   int currentPageIndex = 0;
   List<dynamic> avisos = [];
+  User? _user;
 
   @override
   void initState() {
     super.initState();
+    _checkUser();
     fetchAvisos();
+  }
+
+  Future<void> _checkUser() async {
+    final user = FirebaseAuth.instance.currentUser;
+    setState(() {
+      _user = user;
+    });
   }
 
   Future<void> fetchAvisos() async {
@@ -46,6 +57,19 @@ class InicioState extends State<Inicio> {
 
   Future<void> _handleRefresh() async {
     await fetchAvisos();
+  }
+
+  void _navigateToLogin() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
+
+  void _logout() async {
+    await FirebaseAuth.instance.signOut();
+    setState(() {
+      _user = null;
+    });
   }
 
   @override
@@ -138,14 +162,14 @@ class InicioState extends State<Inicio> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20), // Espaço extra entre o Container e o GridView
+                SizedBox(height: 20),
                 GridView.count(
                   padding: const EdgeInsets.all(30),
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 5,
                   crossAxisCount: 2,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(), // Impede rolagem do GridView
+                  physics: NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
@@ -244,7 +268,15 @@ class InicioState extends State<Inicio> {
               ],
             ),
           ),
-          LoginButton()
+          _user == null
+              ? LoginButton(
+            onPressed: _navigateToLogin,
+            buttonText: "Login",
+          )
+              : LoginButton(
+            onPressed: _logout,
+            buttonText: "Sair",
+          ),
         ],
       ),
     );
