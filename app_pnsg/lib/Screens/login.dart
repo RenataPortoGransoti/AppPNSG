@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 backgroundColor: Colors.blue[200],
                 foregroundColor: Colors.black,
-                padding: EdgeInsets.symmetric(horizontal: 66, vertical: 12), // Padding maior nas laterais
+                padding: EdgeInsets.symmetric(horizontal: 66, vertical: 12), /
               ),
               child: Text(
                 'Login',
