@@ -6,6 +6,7 @@ import '../Inicio/historiaParoquia.dart';
 import '../Inicio/oracoes.dart';
 import '../Inicio/viaSacra.dart';
 import '../config.dart';
+import '../loginButton.dart';
 import 'eventos.dart';
 import 'navigation_bar.dart';
 import 'pastoraisScreen.dart';
@@ -80,168 +81,173 @@ class InicioState extends State<Inicio> {
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.lightBlue,
       ),
-      body: RefreshIndicator(
-        onRefresh: _handleRefresh,
-        color: Colors.blue[200],
-        child: ListView(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 10),
-                padding: const EdgeInsets.all(18),
-                width: MediaQuery.of(context).size.width - 40,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF036896),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  children: [
-                    const Text(
-                      "AVISOS PAROQUIAIS",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    if (avisos.isEmpty)
-                      Text(
-                        'Não há avisos disponíveis no momento.',
+      body: Stack(
+        children: [
+          RefreshIndicator(
+            onRefresh: _handleRefresh,
+            color: Colors.blue[200],
+            child: ListView(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 10),
+                  padding: const EdgeInsets.all(18),
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF036896),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "AVISOS PAROQUIAIS",
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    for (var aviso in avisos)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.fiber_manual_record, size: 10, color: Colors.white),
-                            const SizedBox(width: 5),
-                            Expanded(
-                              child: Text(
-                                aviso['aviso'],
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
+                      SizedBox(height: 10),
+                      if (avisos.isEmpty)
+                        Text(
+                          'Não há avisos disponíveis no momento.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      for (var aviso in avisos)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.fiber_manual_record, size: 10, color: Colors.white),
+                              const SizedBox(width: 5),
+                              Expanded(
+                                child: Text(
+                                  aviso['aviso'],
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20), // Espaço extra entre o Container e o GridView
+                GridView.count(
+                  padding: const EdgeInsets.all(30),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 5,
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(), // Impede rolagem do GridView
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Oracoes()),
+                        );
+                      },
+                      child: Container(
+                        constraints: const BoxConstraints(maxHeight: 70),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.lightBlue.shade100,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            "Orações",
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Galeria()),
+                        );
+                      },
+                      child: Container(
+                        constraints: const BoxConstraints(maxHeight: 70),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.lightBlue.shade100,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Galeria',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ViaSacra()),
+                        );
+                      },
+                      child: Container(
+                        constraints: const BoxConstraints(maxHeight: 70),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.lightBlue.shade100,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            "Via Sacra",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HistoriaParoquia()),
+                        );
+                      },
+                      child: Container(
+                        constraints: const BoxConstraints(maxHeight: 70),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.lightBlue.shade100,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'História da Paróquia',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              SizedBox(height: 20), // Espaço extra entre o Container e o GridView
-              GridView.count(
-                padding: const EdgeInsets.all(30),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 5,
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(), // Impede rolagem do GridView
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Oracoes()),
-                      );
-                    },
-                    child: Container(
-                      constraints: const BoxConstraints(maxHeight: 70),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlue.shade100,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "Orações",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Galeria()),
-                      );
-                    },
-                    child: Container(
-                      constraints: const BoxConstraints(maxHeight: 70),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlue.shade100,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Galeria',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ViaSacra()),
-                      );
-                    },
-                    child: Container(
-                      constraints: const BoxConstraints(maxHeight: 70),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlue.shade100,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "Via Sacra",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HistoriaParoquia()),
-                      );
-                    },
-                    child: Container(
-                      constraints: const BoxConstraints(maxHeight: 70),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlue.shade100,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'História da Paróquia',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
+          LoginButton()
+        ],
+      ),
+    );
   }
 }
 
