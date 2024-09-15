@@ -64,8 +64,8 @@ Route::post('/contatos/store', [ContatoController::class, 'cadastrarContato'])->
 Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])->name('contatos.destroy');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('edit-user');
-Route::put('/users/{user}', [UserController::class, 'editarSecretario'])->name('editar.secretario');
+Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])->name('edit-user');
+Route::put('/usuarios/{user}', [UserController::class, 'editarSecretario'])->name('editar.secretario');
 
 
 //Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
