@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "865358064867",
+    "project_id": "pnsg-71d91",
+    "storage_bucket": "pnsg-71d91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865358064867:android:b3a904ae80c832783829d6",
+        "android_client_info": {
+          "package_name": "com.example.app_pnsg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOaaYPyrGvzypCCXVzt_gr-zJBMY4LHW0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
