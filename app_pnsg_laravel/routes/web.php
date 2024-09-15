@@ -65,6 +65,8 @@ Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])-
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('edit-user');
+Route::put('/users/{user}', [UserController::class, 'editarSecretario'])->name('editar.secretario');
+
 
 //Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
 Route::get('/pastoraisapi', [PastoralController::class, 'carregarPastoraisApp']);

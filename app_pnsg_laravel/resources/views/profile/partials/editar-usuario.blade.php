@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('profile.update', $user->id) }}">
+    <form method="POST" action="{{ route('editar.secretario', $user->id) }}">
         @csrf
         @method('PUT')
 
