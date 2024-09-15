@@ -46,7 +46,7 @@
                             <td class="py-2 px-4 border-b">{{ $user->tipo }}</td>
                             <td class="py-2 px-4 border-b">
                                 <a href="{{ route('edit-user', $user->id) }}"
-                                    class="text-blue-500 hover:underline">Editar</a>
+                                    class="text-[#036896] font-bold hover:underline">Editar</a>
                             </td>
                         </tr>
                     @empty
