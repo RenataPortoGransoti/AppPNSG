@@ -3,9 +3,13 @@ import 'Screens/login.dart';
 
 class LoginButton extends StatelessWidget {
   final double topPadding;
+  final VoidCallback onPressed;
+  final String buttonText;
 
   LoginButton({
-    this.topPadding = 6.0,
+    this.topPadding = 26.0,
+    required this.onPressed,
+    this.buttonText = "Login",
   });
 
   @override
@@ -21,14 +25,9 @@ class LoginButton extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
         ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
-          );
-        },
+        onPressed: onPressed,
         child: Text(
-          "Login",
+          buttonText,
           style: TextStyle(color: Colors.black),
         ),
       ),
