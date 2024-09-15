@@ -14,7 +14,8 @@
                     <option value="secretário(a)">Secretário</option>
                     <option value="paroquiano">Paroquiano</option>
                 </select>
-                <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-700">
+                <button type="submit"
+                    class="rounded-md px-6 py-2 bg-[#9DDEFB] text-black font-semibold hover:bg-[#9DDEFB] hover:text-white transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#036896] focus:ring-offset-2">
                     Filtrar
                 </button>
             </form>
