@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+<head>
+    <title>Dashboard | Painel Admin</title>
+</head>
+
 @section('content')
     <div class="container mx-auto p-4">
         <div class="flex justify-between items-center mb-4">
