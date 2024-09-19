@@ -151,7 +151,7 @@ class EventosState extends State<Eventos> {
           children: [
             Container(
               padding: const EdgeInsets.all(18),
-              margin: EdgeInsets.only(left: 14, right: 14, top: 20, bottom: 10),
+              margin: EdgeInsets.only(left: 14, right: 14, top: 56, bottom: 10),
               decoration: BoxDecoration(
                 color: Color(0xFF036896),
                 borderRadius: BorderRadius.circular(15),
@@ -161,7 +161,7 @@ class EventosState extends State<Eventos> {
                   "EVENTOS PAROQUIAIS",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -169,15 +169,26 @@ class EventosState extends State<Eventos> {
               ),
             ),
             SizedBox(height: 10.0),
-            ElevatedButton(
+            OutlinedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SavedEvents()),
                 );
               },
-              child: Text('Ver eventos salvos'),
+              child: Text(
+                'Ver eventos salvos',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(width: 2.0, color: Colors.lightBlue),
+              ),
             ),
+
             SizedBox(height: 10.0),
             Expanded(
               child: isLoading
@@ -187,7 +198,7 @@ class EventosState extends State<Eventos> {
                 itemBuilder: (context, index) {
                   final evento = eventos[index];
                   return SizedBox(
-                    width: 380, // Define a largura fixa para o card
+                    width: 380,
                     child: Card(
                       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       elevation: 4,
@@ -260,7 +271,7 @@ class EventosState extends State<Eventos> {
                               right: 16,
                               child: IconButton(
                                 icon: Icon(Icons.bookmark_add_outlined, color: Colors.blue, size: 25
-                                ), // Alterado o ícone
+                                ),
                                 onPressed: () {
                                   final eventId = evento['id'];
                                   final nomeEvento = evento['nome_evento'] ?? '';
@@ -268,7 +279,6 @@ class EventosState extends State<Eventos> {
                                   print('ID do evento: $eventId (${eventId.runtimeType})');
                                   print('Nome do evento: $nomeEvento (${nomeEvento.runtimeType})');
 
-                                  // Garanta que o ID seja uma String
                                   final eventIdString = eventId.toString();
 
                                   _saveEvent(eventIdString, {
