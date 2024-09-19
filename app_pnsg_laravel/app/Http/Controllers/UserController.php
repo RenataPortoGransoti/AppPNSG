@@ -43,4 +43,29 @@ class UserController extends Controller
 
         return redirect()->route('dashboard')->with('status', 'Secretário(a) atualizado(a) com sucesso!');
     }
+
+    public function inativarSecretario(Request $request)
+    {
+        $id = $request->input('user_id');
+        $user = User::find($id);
+
+        if ($user) {
+            $user->ativo = 0;
+            $user->save();
+        }
+
+        return redirect()->back()->with('status', 'Secretário(a) inativado(a) com sucesso!');
+    }
+
+    public function ativarSecretario($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->ativo = 1;
+            $user->save();
+        }
+
+        return redirect()->back()->with('status', 'Secretário(a) ativado(a) com sucesso!');
+    }
 }

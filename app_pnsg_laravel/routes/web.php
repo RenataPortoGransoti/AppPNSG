@@ -13,6 +13,7 @@ use App\Http\Controllers\DizimoController;
 use App\Http\Controllers\DoacaoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ParoquianoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -66,6 +67,8 @@ Route::delete('/contatos/{tipo}', [ContatoController::class, 'excluirContato'])-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])->name('edit-user');
 Route::put('/usuarios/{user}', [UserController::class, 'editarSecretario'])->name('editar.secretario');
+Route::put('/secretario/ativar/{id}', [UserController::class, 'ativarSecretario'])->name('ativar.secretario');
+Route::post('/secretario/inativar', [UserController::class, 'inativarSecretario'])->name('inativar.secretario');
 
 
 //Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
@@ -76,6 +79,7 @@ Route::get('/eventosapi', [EventoController::class, 'carregarEventosAtivosApp'])
 Route::get('/horariosapi', [HorarioController::class, 'carregarHorariosApp']);
 Route::get('/contatosapi', [ContatoController::class, 'carregarContatoApp']);
 Route::get('/avisosapi', [AvisoController::class, 'carregarAvisosApp']);
+Route::post('/register-paroquiano', [ParoquianoController::class, 'registrarParoquiano']);
 
 Route::get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);

@@ -51,6 +51,24 @@
                             <td class="py-2 px-4 border-b">
                                 <a href="{{ route('edit-user', $user->id) }}"
                                     class="text-[#036896] font-bold hover:underline">Editar</a>
+
+                                @if ($user->ativo)
+                                    <form action="{{ route('inativar.secretario') }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                        <button type="submit"
+                                            class="text-red-600 font-bold hover:underline ml-4">Inativar</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('ativar.secretario', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit"
+                                            class="text-green-600 font-bold hover:underline ml-4">Ativar</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @empty
