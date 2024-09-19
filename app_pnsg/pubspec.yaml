@@ -46,6 +46,10 @@ dependencies:
   html: ^0.15.4
   cloud_firestore: ^5.4.1
   flutter_masked_text2: ^0.9.1
+  sqflite: ^2.0.0+4
+  path: ^1.8.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
