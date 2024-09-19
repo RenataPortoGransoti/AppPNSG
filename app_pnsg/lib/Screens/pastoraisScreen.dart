@@ -7,6 +7,7 @@ import 'eventos.dart';
 import 'informacoes.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
+import 'pastoralEspecifica.dart'; // Importa a tela PastoralEspecifica
 
 class PastoraisScreen extends StatefulWidget {
   @override
@@ -34,9 +35,11 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
       print('Erro ao carregar dados das pastorais: $e');
     }
   }
+
   Future<void> _handleRefresh() async {
     await _fetchPastorais();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,31 +47,22 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Inicio()),
-              );
-            } else if (currentPageIndex == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
-              );
-            } else if (currentPageIndex == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Eventos()),
-              );
-            } else if (currentPageIndex == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Contribua()),
-              );
-            } else if (currentPageIndex == 4) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Informacoes()),
-              );
+            switch (currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
             }
           });
         },
@@ -109,11 +103,10 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
             } else {
               final pastoral = _pastorais[index - 1];
 
-
               return _SampleCard(
                 cardName: pastoral['nome'],
                 descricao: pastoral['descricao'] ?? '',
-                imagem: pastoral['imagem']?? '',
+                imagem: pastoral['imagem'] ?? '',
               );
             }
           },
@@ -138,14 +131,15 @@ class _SampleCard extends StatelessWidget {
         margin: const EdgeInsets.all(10),
         child: InkWell(
           onTap: () {
-            Navigator.pushNamed(
+            Navigator.push(
               context,
-              '/PastoralEspecifica',
-              arguments: {
-                'nome': cardName,
-                'descricao': descricao,
-                'imagem': imagem,
-              },
+              MaterialPageRoute(
+                builder: (context) => PastoralEspecifica(
+                  nome: cardName,
+                  descricao: descricao,
+                  imagem: imagem,
+                ),
+              ),
             );
           },
           child: Column(
@@ -180,10 +174,3 @@ class PastoralService {
     }
   }
 }
-
-
-//192.168.0.254
-
-//10.20.1.95
-
-//192.168.1.5:8000
