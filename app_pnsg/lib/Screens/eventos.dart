@@ -123,7 +123,7 @@ class EventosState extends State<Eventos> {
                 context,
                 MaterialPageRoute(builder: (context) => Inicio()),
               );
-            } else if (currentPageIndex == 2) {
+            } else if (currentPageIndex == 1) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PastoraisScreen()),
