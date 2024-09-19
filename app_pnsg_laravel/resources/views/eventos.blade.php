@@ -15,94 +15,126 @@
                             </button>
                         </div>
                         <!-- DIV CARD EVENTO -->
-                        @foreach ($eventos as $evento)
-                            @if ($evento->ativo)
-                                <div class="bg-white shadow-lg rounded-2xl mb-4 mx-5">
-                                    <div
-                                        class="bg-[#9DDEFB] rounded-t-md py-3 px-4 flex justify-between items-center cursor-pointer border border-[#036896]">
-                                        <h4 class="font-semibold text-xl py-3 px-5">{{ $evento->nome_evento }}</h4>
-                                        <div class="flex-1">
-                                            <p class="text-sm">Data de Início:
-                                                {{ \Carbon\Carbon::parse($evento->data_inicio)->format('d/m/Y H:i') }}</p>
-                                            @if (!empty($evento->data_fim))
-                                                <p class="text-sm">Data de Fim:
-                                                    {{ \Carbon\Carbon::parse($evento->data_fim)->format('d/m/Y H:i') }}</p>
-                                            @endif
-                                            <p class="text-sm">Local: {{ $evento->local }}</p>
-                                            @if (!empty($evento->descricao))
-                                                <p class="text-sm">Descrição: {{ $evento->descricao }}</p>
-                                            @endif
-                                        </div>
-                                        <div class="flex items-center space-x-2">
-                                            <button type="button" class="relative group btn btn-outline-primary me-2 px-5"
-                                                onclick="toggleEditForm({{ $evento->id }})">
-                                                <i
-                                                    class="bi bi-pencil text-gray-800 group-hover:text-blue-500 transform group-hover:scale-110 transition-transform duration-300"></i>
-                                                <span
-                                                    class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                    Editar
-                                                </span>
-                                            </button>
-                                            <button type="button" class="relative group btn btn-outline-danger pr-5"
-                                                onclick="showInativarModal({{ $evento->id }})">
-                                                <i
-                                                    class="bi bi-trash text-gray-800 group-hover:text-red-500 transform group-hover:scale-110 transition-transform duration-300"></i>
-                                                <span
-                                                    class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                                    Inativar
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!-- Forms de edição do EVENTO -->
-                                    <div id="editForm{{ $evento->id }}" class="my-4 hidden">
-                                        <form action="{{ route('eventos.editarEvento', ['evento' => $evento->id]) }}"
-                                            class="px-3" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="mb-4">
-                                                <label for="editNomeEvento" class="block mb-1">Nome do Evento</label>
-                                                <input type="text" class="form-input w-full border rounded-md h-12 px-1"
-                                                    id="editNomeEvento" name="edit_nome_evento"
-                                                    value="{{ $evento->nome_evento }}" maxlength="50" required>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="editDataInicio" class="block mb-1">Data Início</label>
-                                                <input type="datetime-local" id="editDataInicio"
-                                                    class="form-input border rounded-md h-10 px-1" name="edit_data_inicio"
-                                                    value="{{ \Carbon\Carbon::parse($evento->data_inicio)->format('Y-m-d\TH:i') }}"
-                                                    required>
-                                            </div>
-
-                                            <div class="mb-4">
-                                                <label for="editDataFim" class="block mb-1">Data Fim</label>
-                                                <input type="datetime-local" id="editDataFim"
-                                                    class="form-input border rounded-md h-10 px-1" name="edit_data_fim"
-                                                    value="{{ \Carbon\Carbon::parse($evento->data_fim)->format('Y-m-d\TH:i') }}">
-                                            </div>
-
-                                            <div class="mb-4">
-                                                <label for="editLocal" class="block mb-1">Local</label>
-                                                <input type="text" class="form-input w-full border rounded-md h-10 px-1"
-                                                    id="editLocal" name="edit_local" maxlength="100"
-                                                    value="{{ $evento->local }}" required>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="editDescricao" class="block mb-1">Descrição</label>
-                                                <textarea class="form-textarea w-full border rounded-md px-1" id="editDescricao" name="edit_descricao" maxlength="255">{{ $evento->descricao }} </textarea>
-                                            </div>
-                                            <div class="text-white px-4 py-3 text-center">
-                                                <button type="button"
-                                                    class="btn w-3/12 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl"
-                                                    onclick="hideEditForm({{ $evento->id }})">Cancelar</button>
+                        @if ($eventos->where('ativo', 1)->isEmpty())
+                            <p class="text-center text-gray-600 p-4">Não há eventos ativos no momento.</p>
+                        @else
+                            @foreach ($eventos as $evento)
+                                <!--  Modal Excluir Evento -->
+                                <div id="excluirModal"
+                                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                                    <div class="bg-white w-1/3 p-8 rounded-md">
+                                        <h3 class="text-[#960316] text-lg font-bold text-center mb-4">Excluir Evento?</h3>
+                                        <p class="mt-2 mb-4">Tem certeza de que deseja excluir? O evento não aparecerá mais
+                                            na lista
+                                            de eventos.</p>
+                                        <div class="flex justify-center items-center align-center">
+                                            <button id="btnExcluirFecharModal"
+                                                class="px-4 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white border border-[#036896] rounded-xl mr-2">Voltar</button>
+                                            <form id="formExcluirEvento" method="POST"
+                                                action="{{ route('eventos.softDelete', $evento->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" id="excluirEventoId" name="evento_id">
                                                 <button type="submit"
-                                                    class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
-                                            </div>
-                                        </form>
+                                                    class="mt-4 px-4 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black text-white border border-[#960316] rounded-xl">Confirmar</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            @endif
-                        @endforeach
+                                @if ($evento->ativo)
+                                    <div class="bg-white shadow-lg rounded-2xl mb-4 mx-5">
+                                        <div
+                                            class="bg-[#9DDEFB] rounded-t-md py-3 px-4 flex justify-between items-center cursor-pointer border border-[#036896]">
+                                            <h4 class="font-semibold text-xl py-3 px-5">{{ $evento->nome_evento }}</h4>
+                                            <div class="flex-1">
+                                                <p class="text-sm">Data de Início:
+                                                    {{ \Carbon\Carbon::parse($evento->data_inicio)->format('d/m/Y H:i') }}
+                                                </p>
+                                                @if (!empty($evento->data_fim))
+                                                    <p class="text-sm">Data de Fim:
+                                                        {{ \Carbon\Carbon::parse($evento->data_fim)->format('d/m/Y H:i') }}
+                                                    </p>
+                                                @endif
+                                                <p class="text-sm">Local: {{ $evento->local }}</p>
+                                                @if (!empty($evento->descricao))
+                                                    <p class="text-sm">Descrição: {{ $evento->descricao }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <button type="button"
+                                                    class="relative group btn btn-outline-primary me-2 px-5"
+                                                    onclick="toggleEditForm({{ $evento->id }})">
+                                                    <i
+                                                        class="bi bi-pencil text-gray-800 group-hover:text-blue-500 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Editar
+                                                    </span>
+                                                </button>
+                                                <button type="button" class="relative group btn btn-outline-danger pr-5"
+                                                    onclick="showInativarModal({{ $evento->id }})">
+                                                    <i
+                                                        class="bi bi-trash text-gray-800 group-hover:text-red-500 transform group-hover:scale-110 transition-transform duration-300"></i>
+                                                    <span
+                                                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-24 text-center text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                                        Inativar
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- Forms de edição do EVENTO -->
+                                        <div id="editForm{{ $evento->id }}" class="my-4 hidden">
+                                            <form action="{{ route('eventos.editarEvento', ['evento' => $evento->id]) }}"
+                                                class="px-3" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="mb-4">
+                                                    <label for="editNomeEvento" class="block mb-1">Nome do Evento</label>
+                                                    <input type="text"
+                                                        class="form-input w-full border rounded-md h-12 px-1"
+                                                        id="editNomeEvento" name="edit_nome_evento"
+                                                        value="{{ $evento->nome_evento }}" maxlength="50" required>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="editDataInicio" class="block mb-1">Data Início</label>
+                                                    <input type="datetime-local" id="editDataInicio"
+                                                        class="form-input border rounded-md h-10 px-1"
+                                                        name="edit_data_inicio"
+                                                        value="{{ \Carbon\Carbon::parse($evento->data_inicio)->format('Y-m-d\TH:i') }}"
+                                                        required>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="editDataFim" class="block mb-1">Data Fim</label>
+                                                    <input type="datetime-local" id="editDataFim"
+                                                        class="form-input border rounded-md h-10 px-1" name="edit_data_fim"
+                                                        value="{{ \Carbon\Carbon::parse($evento->data_fim)->format('Y-m-d\TH:i') }}">
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label for="editLocal" class="block mb-1">Local</label>
+                                                    <input type="text"
+                                                        class="form-input w-full border rounded-md h-10 px-1" id="editLocal"
+                                                        name="edit_local" maxlength="100" value="{{ $evento->local }}"
+                                                        required>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="editDescricao" class="block mb-1">Descrição</label>
+                                                    <textarea class="form-textarea w-full border rounded-md px-1" id="editDescricao" name="edit_descricao" maxlength="255">{{ $evento->descricao }} </textarea>
+                                                </div>
+                                                <div class="text-white px-4 py-3 text-center">
+                                                    <button type="button"
+                                                        class="btn w-3/12 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black border border-[#960316] rounded-xl"
+                                                        onclick="hideEditForm({{ $evento->id }})">Cancelar</button>
+                                                    <button type="submit"
+                                                        class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
 
@@ -112,8 +144,8 @@
                         <div class="bg-[#036896] rounded-t-2xl text-white px-4 py-5 flex justify-between items-center">
                             <h3 class="text-center mb-0 text-2xl flex-grow">INFORMAÇÕES EVENTO</h3>
                             <button id="btnFecharCard" class="text-black hover:text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -251,27 +283,7 @@
                     </div>
                 </div>
 
-                <!--  Modal Excluir Evento -->
-                <div id="excluirModal"
-                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-                    <div class="bg-white w-1/3 p-8 rounded-md">
-                        <h3 class="text-[#960316] text-lg font-bold text-center mb-4">Excluir Evento?</h3>
-                        <p class="mt-2 mb-4">Tem certeza de que deseja excluir? O evento não aparecerá mais na lista
-                            de eventos.</p>
-                        <div class="flex justify-center items-center align-center">
-                            <button id="btnExcluirFecharModal"
-                                class="px-4 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black text-white border border-[#036896] rounded-xl mr-2">Voltar</button>
-                            <form id="formExcluirEvento" method="POST"
-                                action="{{ route('eventos.softDelete', $evento->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" id="excluirEventoId" name="evento_id">
-                                <button type="submit"
-                                    class="mt-4 px-4 py-2 bg-[#960316] hover:bg-[#FA9DAA] hover:text-black text-white border border-[#960316] rounded-xl">Confirmar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </main>
