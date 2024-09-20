@@ -3,6 +3,7 @@ import '../email.dart';
 import 'dizimo.dart';
 import 'doacao.dart';
 import 'formulario_dizimista.dart';
+import 'informacoes_dizimo.dart';
 import 'navigation_bar.dart';
 import 'inicio.dart';
 import 'pastoraisScreen.dart';
@@ -245,9 +246,28 @@ class ContribuaState extends State<Contribua> {
                 );
               },
             ),
-          ],
-        ),
-      ),
+            SizedBox(height: 20),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InformacoesDizimo()),
+                );
+              },
+              child: Text(
+                'Saber mais sobre o Dízimo',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(width: 2.0, color: Color(0xFF036896)),
+              ),
+                ),
+              ]),
+            ),
     );
   }
 }
