@@ -87,7 +87,7 @@ class InformacoesDizimoState extends State<InformacoesDizimo> {
             const SizedBox(height: 20),
             buildQuestionAnswer(
                 'O dízimo está na Bíblia?',
-                "Sim, o Dízimo é Bíblico. São muitos os textos onde se percebe que o Dìzimo é uma recomendação bíblica. Confira algumas citações do Antigo e do Novo Testamento: Gn 14,20; Ml 3,10; Lv 27,32; Gn 28,22; Ex 22,28; 2 Cor 9, 6-12; At 4,32; Mt 23,23.",
+                "Sim, o Dízimo é Bíblico. São muitos os textos onde se percebe que o Dízimo é uma recomendação bíblica. Confira algumas citações do Antigo e do Novo Testamento: Gn 14,20; Ml 3,10; Lv 27,32; Gn 28,22; Ex 22,28; 2 Cor 9, 6-12; At 4,32; Mt 23,23.",
                 Colors.white,
                 Colors.black
             ),
@@ -127,6 +127,7 @@ class InformacoesDizimoState extends State<InformacoesDizimo> {
           const SizedBox(height: 8),
           Text(
             answer,
+            textAlign: TextAlign.justify,
             style: TextStyle(
               color: textColor,
               fontSize: 16,
