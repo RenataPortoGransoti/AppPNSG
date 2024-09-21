@@ -368,6 +368,8 @@ class InformacoesState extends State<Informacoes> {
 
               const SizedBox(height: 20),
               const Image(image: AssetImage('assets/images/mapa_paroquia.png')),
+              const Text("Endereço: Rua Luís Dias, 393 - Petrópolis"),
+              const SizedBox(height: 5),
             ],
           ),
         ),
