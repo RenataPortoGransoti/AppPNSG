@@ -48,7 +48,8 @@ dependencies:
   flutter_masked_text2: ^0.9.1
   sqflite: ^2.0.0+4
   path: ^1.8.2
-
+  webview_flutter: ^4.9.0
+  connectivity_plus: ^2.3.0
 
 dev_dependencies:
   flutter_test:
