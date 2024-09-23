@@ -3,6 +3,7 @@ import 'package:PNSG/Screens/pastoraisScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import '../database_helper.dart';
 import 'contribua.dart';
 import 'informacoes.dart';
@@ -22,16 +23,36 @@ class EventosState extends State<Eventos> {
   int currentPageIndex = 2;
   List<dynamic> eventos = [];
   bool isLoading = true;
+  bool hasInternet = true;
   User? user;
 
   @override
   void initState() {
     super.initState();
+    checkInternetConnection();
     fetchEventos();
     _getUser();
   }
 
+  // Função para verificar se há conexão à internet
+  Future<void> checkInternetConnection() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        hasInternet = false;
+        isLoading = false;
+      });
+    } else {
+      setState(() {
+        hasInternet = true;
+      });
+    }
+  }
+
   Future<void> fetchEventos() async {
+    await checkInternetConnection();
+    if (!hasInternet) return;
+
     try {
       final response = await http.get(Uri.parse('${Config.baseUrl}eventosapi'));
       if (response.statusCode == 200) {
@@ -39,7 +60,7 @@ class EventosState extends State<Eventos> {
           eventos = json.decode(response.body);
           isLoading = false;
         });
-        print('Eventos carregados: $eventos'); // Log de depuração
+        print('Eventos carregados: $eventos');
       } else {
         throw Exception('Falha ao carregar eventos');
       }
@@ -64,9 +85,8 @@ class EventosState extends State<Eventos> {
 
   Future<void> _saveEvent(String eventId, Map<String, dynamic> eventData) async {
     if (user != null) {
-      // Mapeamento dos dados do evento
       final eventToSave = {
-        'id': eventId.toString(), // Garanta que o ID seja uma String
+        'id': eventId.toString(),
         'nome_evento': eventData['nome_evento'] ?? 'Nome não informado',
         'data_inicio': eventData['data_inicio'] ?? 'Data não informada',
         'data_fim': eventData['data_fim'] ?? 'Data não informada',
@@ -74,25 +94,21 @@ class EventosState extends State<Eventos> {
         'descricao': eventData['descricao'] ?? 'Descrição não informada',
       };
 
-      // Exibe no console para depuração
       print('Tentando salvar evento: $eventToSave');
 
       try {
-        // Chama a função do DatabaseHelper para salvar o evento
         await DatabaseHelper().saveEvent(eventToSave);
 
-        // Exibe uma mensagem de sucesso para o usuário
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Evento salvo com sucesso!')),
         );
       } catch (e) {
-        print('Erro ao salvar evento: $e'); // Log de erro
+        print('Erro ao salvar evento: $e');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Erro ao salvar evento.')),
         );
       }
     } else {
-      // Caso o usuário não esteja logado
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Você precisa estar logado para salvar eventos.')),
       );
@@ -146,7 +162,7 @@ class EventosState extends State<Eventos> {
       ),
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
-        color: Colors.blue[200],
+        color: Colors.blue[200], // Cor alterada para azul
         child: Column(
           children: [
             Container(
@@ -192,7 +208,21 @@ class EventosState extends State<Eventos> {
             SizedBox(height: 10.0),
             Expanded(
               child: isLoading
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(
+                child: CircularProgressIndicator(
+                  color: Colors.blue[200],
+                ),
+              )
+                  : !hasInternet
+                  ? Center(
+                child: Text(
+                  "Sem acesso à internet",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.red,
+                  ),
+                ),
+              )
                   : ListView.builder(
                 itemCount: eventos.length,
                 itemBuilder: (context, index) {
@@ -248,46 +278,29 @@ class EventosState extends State<Eventos> {
                                   'Local: ${evento['local'] ?? 'Local não disponível'}',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: Color(0xFF036896),
-                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey[700],
                                   ),
                                 ),
                                 SizedBox(height: 8),
-                                evento['descricao'] != null && evento['descricao'].isNotEmpty
-                                    ? Text(
-                                  evento['descricao'],
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
+                                Text(
+                                  evento['descricao'] ?? 'Descrição do evento não disponível.',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: Colors.black,
                                   ),
-                                )
-                                    : SizedBox.shrink(), // Ou outra widget de fallback, se desejado
+                                ),
                               ],
                             ),
                             Positioned(
-                              bottom: 56,
-                              right: 16,
+                              right: 0,
+                              bottom: 0,
                               child: IconButton(
-                                icon: Icon(Icons.bookmark_add_outlined, color: Colors.blue, size: 25
+                                icon: Icon(
+                                  Icons.bookmark,
+                                  size: 30,
+                                  color: Colors.blue[300],
                                 ),
                                 onPressed: () {
-                                  final eventId = evento['id'];
-                                  final nomeEvento = evento['nome_evento'] ?? '';
-
-                                  print('ID do evento: $eventId (${eventId.runtimeType})');
-                                  print('Nome do evento: $nomeEvento (${nomeEvento.runtimeType})');
-
-                                  final eventIdString = eventId.toString();
-
-                                  _saveEvent(eventIdString, {
-                                    'nome_evento': nomeEvento,
-                                    'data_inicio': evento['data_inicio'],
-                                    'data_fim': evento['data_fim'],
-                                    'local': evento['local'],
-                                    'descricao': evento['descricao'],
-                                  });
+                                  _saveEvent(evento['id'].toString(), evento);
                                 },
                               ),
                             ),
