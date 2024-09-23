@@ -23,8 +23,11 @@ class AppPnsg extends StatelessWidget {
       title: 'App PNSG',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.blue,
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.blue,
+        ),
       ),
       home: Splash(), // Tela inicial de splash
       routes: {
