@@ -18,13 +18,42 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      Navigator.of(context).pop();
-    } catch (e) {
-      // Mostrar erro ao usuário
+      Navigator.of(context).pop(); // Sucesso no login
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+
+      // Tratar os códigos de erro do FirebaseAuthException
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'Nenhum usuário encontrado com este e-mail.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Senha incorreta. Verifique a senha e tente novamente.';
+          break;
+        case 'invalid-email':
+          errorMessage = 'O formato do e-mail está incorreto. Por favor, verifique e tente novamente.';
+          break;
+        case 'user-disabled':
+          errorMessage = 'Esta conta foi desativada. Entre em contato com o suporte.';
+          break;
+        case 'too-many-requests':
+          errorMessage = 'Muitas tentativas de login. Tente novamente mais tarde.';
+          break;
+        default:
+        // Tratar qualquer outro erro com uma mensagem genérica amigável
+          errorMessage = 'Erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.';
+      }
+
+      // Exibir a mensagem de erro para o usuário
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao fazer login: ${e.toString()}')),
+        SnackBar(content: Text(errorMessage)),
       );
-      print(e);
+    } catch (e) {
+      // Tratamento de erro genérico
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao fazer login. Tente novamente mais tarde.')),
+      );
+      print('Erro: $e');
     }
   }
 
