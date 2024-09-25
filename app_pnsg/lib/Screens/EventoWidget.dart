@@ -19,16 +19,29 @@ class EventoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateFormat inputFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    DateFormat outputFormat = DateFormat('dd/MM/yy HH:mm');
+    DateFormat outputFormat = DateFormat('dd/MM/yyyy HH:mm'); // Ajuste para dd/MM/yyyy
 
-    DateTime parsedDataInicio = inputFormat.parse(data_inicio);
-    DateTime? parsedDataFim;
-
-    if (data_fim != null && data_fim!.isNotEmpty) {
-      parsedDataFim = inputFormat.parse(data_fim!);
+    // Verificação da data de início
+    DateTime? parsedDataInicio;
+    try {
+      if (data_inicio.isNotEmpty) {
+        parsedDataInicio = inputFormat.parse(data_inicio);
+      }
+    } catch (e) {
+      parsedDataInicio = null; // Se ocorrer um erro, defina como nulo
     }
 
-    String formattedDataInicio = outputFormat.format(parsedDataInicio);
+    // Verificação da data de fim
+    DateTime? parsedDataFim;
+    if (data_fim != null && data_fim!.isNotEmpty) {
+      try {
+        parsedDataFim = inputFormat.parse(data_fim!);
+      } catch (e) {
+        parsedDataFim = null; // Se ocorrer um erro, defina como nulo
+      }
+    }
+
+    String formattedDataInicio = parsedDataInicio != null ? outputFormat.format(parsedDataInicio) : 'Data não informada';
     String? formattedDataFim = parsedDataFim != null ? outputFormat.format(parsedDataFim) : null;
 
     return Container(
