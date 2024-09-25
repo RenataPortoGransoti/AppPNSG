@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../database_helper.dart';
+import 'EventoWidget.dart';
 
 class SavedEvents extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class SavedEventsState extends State<SavedEvents> {
       _savedEvents = events;
     });
     if (events.isEmpty) {
-      print('Nenhum evento salvo.'); // Log para depuração
+      print('Nenhum evento salvo.');
     }
   }
 
@@ -44,15 +45,29 @@ class SavedEventsState extends State<SavedEvents> {
         itemCount: _savedEvents.length,
         itemBuilder: (context, index) {
           final event = _savedEvents[index];
-          return ListTile(
-            title: Text(event['nome_evento'] ?? 'Nome do Evento'),
-            subtitle: Text('Início: ${event['data_inicio'] ?? 'Data não disponível'}'),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () async {
-                await DatabaseHelper().deleteEvent(event['id'] ?? '');
-                _loadSavedEvents();
-              },
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                EventoWidget(
+                  nome_evento: event['nome_evento'] ?? 'Nome do Evento',
+                  data_inicio: event['data_inicio'] ?? 'Data não disponível',
+                  data_fim: event['data_fim'],
+                  local: event['local'] ?? 'Local não disponível',
+                  descricao: event['descricao'] ?? 'Descrição não disponível',
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () async {
+                      await DatabaseHelper().deleteEvent(event['id'] ?? '');
+                      _loadSavedEvents();
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         },
