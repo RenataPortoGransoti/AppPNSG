@@ -185,26 +185,26 @@ class EventosState extends State<Eventos> {
               ),
             ),
             SizedBox(height: 10.0),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SavedEvents()),
-                );
-              },
-              child: Text(
-                'Ver eventos salvos',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(width: 2.0, color: Colors.lightBlue),
-              ),
-            ),
-
+             if (user != null)
+               OutlinedButton(
+                 onPressed: () {
+                   Navigator.push(
+                     context,
+                     MaterialPageRoute(builder: (context) => SavedEvents()),
+                   );
+                 },
+                 child: Text(
+                   'Ver eventos salvos',
+                   style: TextStyle(
+                     fontSize: 18,
+                     color: Colors.black,
+                     fontWeight: FontWeight.bold,
+                   ),
+                 ),
+                 style: OutlinedButton.styleFrom(
+                   side: BorderSide(width: 2.0, color: Colors.lightBlue),
+                 ),
+               ),
             SizedBox(height: 10.0),
             Expanded(
               child: isLoading
