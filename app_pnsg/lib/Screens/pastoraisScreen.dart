@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -17,12 +18,30 @@ class PastoraisScreen extends StatefulWidget {
 class _PastoraisScreenState extends State<PastoraisScreen> {
   final PastoralService _pastoralService = PastoralService();
   List<dynamic> _pastorais = [];
+  bool isLoading = true;
+  bool hasInternet = true;
   int currentPageIndex = 1;
 
   @override
   void initState() {
     super.initState();
+    checkInternetConnection();
     _fetchPastorais();
+  }
+
+  // Função para verificar se há conexão à internet
+  Future<void> checkInternetConnection() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        hasInternet = false;
+        isLoading = false;
+      });
+    } else {
+      setState(() {
+        hasInternet = true;
+      });
+    }
   }
 
   Future<void> _fetchPastorais() async {
@@ -30,8 +49,12 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
       List<dynamic> pastorais = await _pastoralService.fetchPastorais();
       setState(() {
         _pastorais = pastorais;
+        isLoading = false; // Carregamento concluído
       });
     } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
       print('Erro ao carregar dados das pastorais: $e');
     }
   }
@@ -72,44 +95,60 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
         color: Colors.blue[200],
-        child: ListView.builder(
-          itemCount: _pastorais.length + 1,
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return const Column(
-                children: [
-                  SizedBox(height: 20),
-                  Text(
-                    'Pastorais',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: EdgeInsets.all(25),
-                    child: Text(
-                      'Pastoral é a ação da Igreja Católica no mundo ou o conjunto de atividades pelas quais a Igreja realiza a sua missão de continuar a ação de Jesus Cristo junto a diferentes grupos e realidades.',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
-                  SizedBox(height: 1),
-                ],
-              );
-            } else {
-              final pastoral = _pastorais[index - 1];
-
-              return _SampleCard(
-                cardName: pastoral['nome'],
-                descricao: pastoral['descricao'] ?? '',
-                imagem: pastoral['imagem'] ?? '',
-              );
-            }
-          },
+        child: ListView(
+          children: [
+            const SizedBox(height: 20),
+            const Text(
+              'Pastorais',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 5),
+            const Padding(
+              padding: EdgeInsets.all(25),
+              child: Text(
+                'Pastoral é a ação da Igreja Católica no mundo ou o conjunto de atividades pelas quais a Igreja realiza a sua missão de continuar a ação de Jesus Cristo junto a diferentes grupos e realidades.',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.justify,
+              ),
+            ),
+            const SizedBox(height: 10),
+            isLoading
+                ? Center(
+              child: CircularProgressIndicator(
+                color: Colors.blue[200],
+              ),
+            )
+                : !hasInternet
+                ? const Padding(
+              padding: EdgeInsets.all(25),
+              child:  Text(
+                "Sem acesso à internet. Conecte-se para ver as pastorais ativas na paróquia!",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.red,
+                ),
+              ),
+            )
+                : ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: _pastorais.length,
+              itemBuilder: (context, index) {
+                final pastoral = _pastorais[index];
+                return _SampleCard(
+                  cardName: pastoral['nome'],
+                  descricao: pastoral['descricao'] ?? '',
+                  imagem: pastoral['imagem'] ?? '',
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
