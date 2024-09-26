@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../database_helper.dart';
+import '../services/database_helper.dart';
 import 'evento_widget.dart';
 
 class SavedEvents extends StatefulWidget {

@@ -36,6 +36,24 @@ class DatabaseHelper {
     );
   }
 
+  Future<List<Map<String, dynamic>>> getSavedEvents() async {
+    final db = await database; // Certifique-se de que você tenha acesso ao seu banco de dados
+    final List<Map<String, dynamic>> maps = await db.query('eventos_salvos'); // Substitua pelo nome correto da sua tabela
+
+    return List.generate(maps.length, (i) {
+      return {
+        'id': maps[i]['id'],
+        'nome_evento': maps[i]['nome_evento'],
+        'data_inicio': maps[i]['data_inicio'],
+        'data_fim': maps[i]['data_fim'],
+        'local': maps[i]['local'],
+        'descricao': maps[i]['descricao'],
+      };
+    });
+  }
+
+
+
   Future<void> saveEvent(Map<String, dynamic> event) async {
     final db = await database;
     print('Salvando evento: $event'); // Log de depuração

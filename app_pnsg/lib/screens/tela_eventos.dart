@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../database_helper.dart';
+import '../services/database_helper.dart';
 import 'tela_contribua.dart';
 import 'tela_informacoes.dart';
 import 'tela_inicio.dart';
