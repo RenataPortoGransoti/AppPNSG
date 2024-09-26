@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pastoraisScreen.dart';
+import 'pastorais.dart';
 import 'contribua.dart';
 import 'eventos.dart';
 import 'informacoes.dart';

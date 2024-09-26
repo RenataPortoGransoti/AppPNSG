@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:PNSG/Screens/pastoraisScreen.dart';
+import 'package:PNSG/Screens/pastorais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart'; // Importado para Clipboard
@@ -10,30 +10,30 @@ import 'informacoes.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
 
-class DoacaoService {
-  Future<Map<String, String?>?> fetchDoacaoData() async {
-    final response = await http.get(Uri.parse('${Config.baseUrl}doacaoapi'));
+class DizimoService {
+  Future<Map<String, String?>?> fetchDizimoData() async {
+    final response = await http.get(Uri.parse('${Config.baseUrl}dizimoapi'));
     if (response.statusCode == 200) {
-      List<dynamic> doacao = json.decode(response.body);
-      if (doacao.isNotEmpty) {
+      List<dynamic> dizimos = json.decode(response.body);
+      if (dizimos.isNotEmpty) {
         return {
-          'chavePix': doacao[0]['chavePix'],
-          'QRCode': doacao[0]['QRCode']
+          'chavePix': dizimos[0]['chavePix'],
+          'QRCode': dizimos[0]['QRCode']
         };
       }
     } else {
-      throw Exception('Falha ao carregar doação');
+      throw Exception('Falha ao carregar dízimos');
     }
     return null;
   }
 }
 
-class Doacao extends StatefulWidget {
+class Dizimo extends StatefulWidget {
   @override
-  _DoacaoState createState() => _DoacaoState();
+  _DizimoState createState() => _DizimoState();
 }
 
-class _DoacaoState extends State<Doacao> {
+class _DizimoState extends State<Dizimo> {
   String? chavePix;
   String? qrCodeUrl;
   bool isLoading = true;
@@ -41,13 +41,13 @@ class _DoacaoState extends State<Doacao> {
   @override
   void initState() {
     super.initState();
-    loadDoacao();
+    loadDizimo();
   }
 
-  Future<void> loadDoacao() async {
+  Future<void> loadDizimo() async {
     try {
-      final service = DoacaoService();
-      final fetchedData = await service.fetchDoacaoData();
+      final service = DizimoService();
+      final fetchedData = await service.fetchDizimoData();
       setState(() {
         if (fetchedData != null) {
           chavePix = fetchedData['chavePix'];
@@ -59,12 +59,12 @@ class _DoacaoState extends State<Doacao> {
       setState(() {
         isLoading = false;
       });
-      print('Erro ao carregar dados do doação: $e');
+      print('Erro ao carregar dados do dízimo: $e');
     }
   }
 
   Future<void> _handleRefresh() async {
-    await loadDoacao();
+    await loadDizimo();
   }
 
   void _copyToClipboard(String text) {
@@ -79,42 +79,43 @@ class _DoacaoState extends State<Doacao> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(bottomNavigationBar: CustomBottomNavigationBar(
-      onDestinationSelected: (int index) {
-        setState(() {
-          currentPageIndex = index;
-          if (currentPageIndex == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Inicio()),
-            );
-          } else if (currentPageIndex == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PastoraisScreen()),
-            );
-          } else if (currentPageIndex == 2) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Eventos()),
-            );
-          } else if (currentPageIndex == 3) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Contribua()),
-            );
-          }
-          else if (currentPageIndex == 4) {
-            Navigator.push(
+    return Scaffold(
+      bottomNavigationBar: CustomBottomNavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+            if (currentPageIndex == 0) {
+              Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Informacoes())
-            );
-          }
-        });
-      },
-      selectedIndex: currentPageIndex,
-      backgroundColor: Colors.lightBlue,
-    ),
+                MaterialPageRoute(builder: (context) => Inicio()),
+              );
+            } else if (currentPageIndex == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PastoraisScreen()),
+              );
+            } else if (currentPageIndex == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Eventos()),
+              );
+            } else if (currentPageIndex == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Contribua()),
+              );
+            }
+            else if (currentPageIndex == 4) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Informacoes())
+              );
+            }
+          });
+        },
+        selectedIndex: currentPageIndex,
+        backgroundColor: Colors.lightBlue,
+      ),
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
         color: Colors.blue[200],
@@ -133,7 +134,7 @@ class _DoacaoState extends State<Doacao> {
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Text(
-                  "Doação",
+                  "Dízimo",
                   style: TextStyle(
                     fontSize: 28,
                     color: Colors.white,

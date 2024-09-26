@@ -6,7 +6,7 @@ import 'formulario_dizimista.dart';
 import 'informacoes_dizimo.dart';
 import 'navigation_bar.dart';
 import 'inicio.dart';
-import 'pastoraisScreen.dart';
+import 'pastorais.dart';
 import 'eventos.dart';
 import 'informacoes.dart';
 

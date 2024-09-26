@@ -10,7 +10,7 @@ import 'contribua.dart';
 import 'eventos.dart';
 import 'inicio.dart';
 import 'navigation_bar.dart';
-import 'pastoraisScreen.dart';
+import 'pastorais.dart';
 import '../email.dart';
 class Informacoes extends StatefulWidget {
   @override

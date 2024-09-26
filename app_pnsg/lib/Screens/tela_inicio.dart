@@ -10,7 +10,7 @@ import '../loginButton.dart';
 import 'login.dart';
 import 'eventos.dart';
 import 'navigation_bar.dart';
-import 'pastoraisScreen.dart';
+import 'pastorais.dart';
 import 'contribua.dart';
 import 'informacoes.dart';
 import '../config.dart';
