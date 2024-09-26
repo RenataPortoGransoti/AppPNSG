@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../Screens/contribua.dart';
-import '../Screens/eventos.dart';
-import '../Screens/informacoes.dart';
-import '../Screens/inicio.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:io'; // Para detectar o sistema operacional
+import '../Screens/tela_contribua.dart';
+import '../Screens/tela_eventos.dart';
+import '../Screens/tela_informacoes.dart';
+import '../Screens/tela_inicio.dart';
 import '../Screens/navigation_bar.dart';
-import '../Screens/pastoraisScreen.dart';
-
+import '../Screens/tela_pastorais.dart';
 
 class Galeria extends StatefulWidget {
   @override
@@ -15,6 +15,12 @@ class Galeria extends StatefulWidget {
 
 class _GaleriaState extends State<Galeria> {
   int currentPageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +62,7 @@ class _GaleriaState extends State<Galeria> {
       ),
       body: Column(
         children: [
-          GaleriaPagina(),
+          Expanded(child: GaleriaPagina()), // Ocupa o espaço restante
         ],
       ),
     );
@@ -66,6 +72,9 @@ class _GaleriaState extends State<Galeria> {
 const String nome = 'Galeria';
 
 class GaleriaPagina extends StatelessWidget {
+  final String googleDriveFolderUrl =
+      'https://drive.google.com/drive/folders/YOUR_FOLDER_ID?usp=sharing'; // Substitua pelo link da sua pasta
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -88,7 +97,8 @@ class GaleriaPagina extends StatelessWidget {
             ),
           ),
         ),
-      ],
-    );
+]
+        );
+
   }
 }

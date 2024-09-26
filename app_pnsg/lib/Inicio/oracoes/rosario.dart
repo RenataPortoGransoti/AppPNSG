@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Rosario/misteriosDolorosos.dart';
-import 'Rosario/misteriosGloriosos.dart';
-import 'Rosario/misteriosGozosos.dart';
-import 'Rosario/misteriosLuminosos.dart';
+import 'Rosario/misterios_dolorosos.dart';
+import 'Rosario/misterios_gloriosos.dart';
+import 'Rosario/misterios_gozosos.dart';
+import 'Rosario/misterios_luminosos.dart';
 
 
 class Rosario extends StatefulWidget {

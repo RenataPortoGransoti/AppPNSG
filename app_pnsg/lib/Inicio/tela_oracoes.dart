@@ -5,15 +5,15 @@ import '../Screens/tela_informacoes.dart';
 import '../Screens/tela_inicio.dart';
 import '../Screens/navigation_bar.dart';
 import '../Screens/tela_pastorais.dart';
-import 'Oracoes/aveMaria.dart';
+import 'Oracoes/ave_maria.dart';
 import 'Oracoes/credo.dart';
 import 'Oracoes/magnificat.dart';
-import 'Oracoes/paiNosso.dart';
+import 'Oracoes/pai_nosso.dart';
 import 'Oracoes/rosario.dart';
-import 'Oracoes/salveRainha.dart';
-import 'Oracoes/santoAnjo.dart';
-import 'Oracoes/tercoDivinaMisericordia.dart';
-import 'Oracoes/vindeEspiritoSanto.dart';
+import 'Oracoes/salve_rainha.dart';
+import 'Oracoes/santo_anjo.dart';
+import 'Oracoes/terco_divina_misericordia.dart';
+import 'Oracoes/vinde_espirito_santo.dart';
 
 
 class Oracoes extends StatefulWidget {
