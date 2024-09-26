@@ -1,13 +1,13 @@
 import 'dart:convert';
-import 'package:PNSG/Screens/pastorais.dart';
+import 'package:PNSG/Screens/tela_pastorais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart'; // Importado para Clipboard
 import '../config.dart';
-import 'contribua.dart';
-import 'eventos.dart';
-import 'informacoes.dart';
-import 'inicio.dart';
+import 'tela_contribua.dart';
+import 'tela_eventos.dart';
+import 'tela_informacoes.dart';
+import 'tela_inicio.dart';
 import 'navigation_bar.dart';
 
 class DoacaoService {

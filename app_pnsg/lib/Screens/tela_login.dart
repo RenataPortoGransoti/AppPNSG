@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'registro.dart';
+import 'tela_registro.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

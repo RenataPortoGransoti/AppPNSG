@@ -1,12 +1,12 @@
 import 'package:PNSG/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Screens/pastoraisScreen.dart';
-import 'Screens/PastoralEspecifica.dart';
-import 'Screens/inicio.dart';
-import 'Screens/eventos.dart';
-import 'Screens/contribua.dart';
-import 'Screens/informacoes.dart';
+import 'Screens/tela_pastorais.dart';
+import 'Screens/tela_pastoral_especifica.dart';
+import 'Screens/tela_inicio.dart';
+import 'Screens/tela_eventos.dart';
+import 'Screens/tela_contribua.dart';
+import 'Screens/tela_informacoes.dart';
 import 'config.dart';
 import 'package:flutter/services.dart';
 

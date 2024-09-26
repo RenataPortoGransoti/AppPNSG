@@ -6,11 +6,11 @@ import 'package:url_launcher/url_launcher_string.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../config.dart';
 import '../contatoFormulario.dart';
-import 'contribua.dart';
-import 'eventos.dart';
-import 'inicio.dart';
+import 'tela_contribua.dart';
+import 'tela_eventos.dart';
+import 'tela_inicio.dart';
 import 'navigation_bar.dart';
-import 'pastorais.dart';
+import 'tela_pastorais.dart';
 import '../email.dart';
 class Informacoes extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../database_helper.dart';
-import 'EventoWidget.dart';
+import 'evento_widget.dart';
 
 class SavedEvents extends StatefulWidget {
   @override

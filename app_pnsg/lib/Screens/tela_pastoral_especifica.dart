@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'pastorais.dart';
-import 'contribua.dart';
-import 'eventos.dart';
-import 'informacoes.dart';
-import 'inicio.dart';
+import 'tela_pastorais.dart';
+import 'tela_contribua.dart';
+import 'tela_eventos.dart';
+import 'tela_informacoes.dart';
+import 'tela_inicio.dart';
 import 'navigation_bar.dart';
 import '../config.dart';
 

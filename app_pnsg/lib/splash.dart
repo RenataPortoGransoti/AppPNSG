@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Screens/inicio.dart';
+import 'Screens/tela_inicio.dart';
 
 class Splash extends StatefulWidget {
   @override

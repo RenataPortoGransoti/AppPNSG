@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../config.dart';
-import 'contribua.dart';
-import 'eventos.dart';
-import 'informacoes.dart';
-import 'inicio.dart';
+import 'tela_contribua.dart';
+import 'tela_eventos.dart';
+import 'tela_informacoes.dart';
+import 'tela_inicio.dart';
 import 'navigation_bar.dart';
-import 'pastoralEspecifica.dart'; // Importa a tela PastoralEspecifica
+import 'tela_pastoral_especifica.dart'; // Importa a tela PastoralEspecifica
 
 class PastoraisScreen extends StatefulWidget {
   @override

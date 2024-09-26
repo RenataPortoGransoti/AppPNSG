@@ -7,12 +7,12 @@ import '../Inicio/historiaParoquia.dart';
 import '../Inicio/oracoes.dart';
 import '../Inicio/viaSacra.dart';
 import '../loginButton.dart';
-import 'login.dart';
-import 'eventos.dart';
+import 'tela_login.dart';
+import 'tela_eventos.dart';
 import 'navigation_bar.dart';
-import 'pastorais.dart';
-import 'contribua.dart';
-import 'informacoes.dart';
+import 'tela_pastorais.dart';
+import 'tela_contribua.dart';
+import 'tela_informacoes.dart';
 import '../config.dart';
 
 class Inicio extends StatefulWidget {

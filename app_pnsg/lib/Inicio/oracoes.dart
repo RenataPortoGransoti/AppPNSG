@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../Screens/contribua.dart';
-import '../Screens/eventos.dart';
-import '../Screens/informacoes.dart';
-import '../Screens/inicio.dart';
+import '../Screens/tela_contribua.dart';
+import '../Screens/tela_eventos.dart';
+import '../Screens/tela_informacoes.dart';
+import '../Screens/tela_inicio.dart';
 import '../Screens/navigation_bar.dart';
-import '../Screens/pastoraisScreen.dart';
+import '../Screens/tela_pastorais.dart';
 import 'Oracoes/aveMaria.dart';
 import 'Oracoes/credo.dart';
 import 'Oracoes/magnificat.dart';

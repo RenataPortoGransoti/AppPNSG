@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../email.dart';
-import 'dizimo.dart';
-import 'doacao.dart';
+import 'tela_dizimo.dart';
+import 'tela_doacao.dart';
 import 'formulario_dizimista.dart';
-import 'informacoes_dizimo.dart';
+import 'tela_informacoes_dizimo.dart';
 import 'navigation_bar.dart';
-import 'inicio.dart';
-import 'pastorais.dart';
-import 'eventos.dart';
-import 'informacoes.dart';
+import 'tela_inicio.dart';
+import 'tela_pastorais.dart';
+import 'tela_eventos.dart';
+import 'tela_informacoes.dart';
 
 
 class Contribua extends StatefulWidget {
