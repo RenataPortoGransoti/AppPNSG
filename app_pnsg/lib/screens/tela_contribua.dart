@@ -5,11 +5,6 @@ import 'tela_doacao.dart';
 import 'formulario_dizimista.dart';
 import 'tela_informacoes_dizimo.dart';
 import 'navigation_bar.dart';
-import 'tela_inicio.dart';
-import 'tela_pastorais.dart';
-import 'tela_eventos.dart';
-import 'tela_informacoes.dart';
-
 
 class Contribua extends StatefulWidget {
   @override
@@ -43,9 +38,9 @@ class ContribuaState extends State<Contribua> {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Formulário enviado com sucesso. Deus abençoe. Aguarde nosso contato!'),
+              content: const Text('Formulário enviado com sucesso. Deus abençoe. Aguarde nosso contato!'),
               backgroundColor: Colors.lightGreen[800],
-              duration: Duration(seconds: 4),
+              duration: const Duration(seconds: 4),
             ),
           );        },
         baseUrl: '',
@@ -99,32 +94,22 @@ class ContribuaState extends State<Contribua> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Inicio()),
-              );
-            } else if (currentPageIndex == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
-              );
-            } else if (currentPageIndex == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Eventos()),
-              );
-            } else if (currentPageIndex == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Contribua()),
-              );
-            }
-            else if (currentPageIndex == 4) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Informacoes())
-              );
+            switch (currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
             }
           });
         },
@@ -135,7 +120,7 @@ class ContribuaState extends State<Contribua> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.all(25),
           child:
             Text(
@@ -146,15 +131,15 @@ class ContribuaState extends State<Contribua> {
                   textAlign: TextAlign.justify,
                 ),
           ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               "Formas de Contribuir",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -166,7 +151,7 @@ class ContribuaState extends State<Contribua> {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     padding: const EdgeInsets.all(18),
                     width: 160,
                     height: 160,
@@ -174,7 +159,7 @@ class ContribuaState extends State<Contribua> {
                       color: Colors.lightBlue.shade100,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Dízimo",
                         textAlign: TextAlign.center,
@@ -193,7 +178,7 @@ class ContribuaState extends State<Contribua> {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     padding: const EdgeInsets.all(18),
                     width: 160,
                     height: 160,
@@ -201,7 +186,7 @@ class ContribuaState extends State<Contribua> {
                       color: Colors.lightBlue.shade100,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Doação",
                         textAlign: TextAlign.center,
@@ -219,14 +204,14 @@ class ContribuaState extends State<Contribua> {
                 _mostrarFormularioDizimista(context);
               },
               child: Container(
-                margin: EdgeInsets.symmetric(vertical: 15),
+                margin: const EdgeInsets.symmetric(vertical: 15),
                 padding: const EdgeInsets.all(18),
                 width: MediaQuery.of(context).size.width - 40,
                 decoration: BoxDecoration(
-                  color: Color(0xFF036896),
+                  color: const Color(0xFF036896),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text(
+                child: const Text(
                   "Ser Dizimista",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -236,7 +221,7 @@ class ContribuaState extends State<Contribua> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             LayoutBuilder(
               builder: (context, constraints) {
                 double imageSize = constraints.maxWidth * 0.9; // 50% da largura da tela
@@ -246,7 +231,7 @@ class ContribuaState extends State<Contribua> {
                 );
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             OutlinedButton(
               onPressed: () {
                 Navigator.push(
@@ -254,7 +239,7 @@ class ContribuaState extends State<Contribua> {
                   MaterialPageRoute(builder: (context) => InformacoesDizimo()),
                 );
               },
-              child: Text(
+              child: const Text(
                 'Saber mais sobre o Dízimo',
                 style: TextStyle(
                   fontSize: 18,
@@ -263,7 +248,7 @@ class ContribuaState extends State<Contribua> {
                 ),
               ),
               style: OutlinedButton.styleFrom(
-                side: BorderSide(width: 2.0, color: Color(0xFF036896)),
+                side: const BorderSide(width: 2.0, color: Color(0xFF036896)),
               ),
                 ),
               ]),

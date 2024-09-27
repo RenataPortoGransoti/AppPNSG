@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import '../Screens/tela_contribua.dart';
-import '../Screens/tela_eventos.dart';
-import '../Screens/tela_informacoes.dart';
-import '../Screens/tela_inicio.dart';
-import '../Screens/navigation_bar.dart';
-import '../Screens/tela_pastorais.dart';
-import 'Oracoes/ave_maria.dart';
-import 'Oracoes/credo.dart';
-import 'Oracoes/magnificat.dart';
-import 'Oracoes/pai_nosso.dart';
-import 'Oracoes/rosario.dart';
-import 'Oracoes/salve_rainha.dart';
-import 'Oracoes/santo_anjo.dart';
-import 'Oracoes/terco_divina_misericordia.dart';
-import 'Oracoes/vinde_espirito_santo.dart';
+import '../tela_contribua.dart';
+import '../tela_eventos.dart';
+import '../tela_informacoes.dart';
+import '../tela_inicio.dart';
+import '../navigation_bar.dart';
+import '../tela_pastorais.dart';
+import 'oracoes/ave_maria.dart';
+import 'oracoes/credo.dart';
+import 'oracoes/magnificat.dart';
+import 'oracoes/pai_nosso.dart';
+import 'oracoes/rosario.dart';
+import 'oracoes/salve_rainha.dart';
+import 'oracoes/santo_anjo.dart';
+import 'oracoes/terco_divina_misericordia.dart';
+import 'oracoes/vinde_espirito_santo.dart';
 
 
 class Oracoes extends StatefulWidget {
+  const Oracoes({super.key});
+
   @override
   _OracoesState createState() => _OracoesState();
 }
@@ -62,7 +64,7 @@ class _OracoesState extends State<Oracoes> {
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.lightBlue,
       ),
-      body: Stack(
+      body: const Stack(
         children: [
           OracoesList(),
         ],
@@ -74,20 +76,22 @@ class _OracoesState extends State<Oracoes> {
 const String nome = 'Orações';
 
 class OracoesList extends StatelessWidget {
+  const OracoesList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
           width: double.infinity,
-          margin: EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 20),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 20),
+          padding: const EdgeInsets.all(10),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: const Color(0xFF036896).withOpacity(0.8),
             borderRadius: BorderRadius.circular(50),
           ),
-          child: Text(
+          child: const Text(
             nome,
             style: TextStyle(
               fontSize: 24,
@@ -193,12 +197,12 @@ class OracoesTile extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  OracoesTile({required this.title, required this.onTap});
+  const OracoesTile({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5), // Espaço entre os itens
+      margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
         color: Colors.lightBlue.shade100.withOpacity(0.8),
         borderRadius: BorderRadius.circular(10),

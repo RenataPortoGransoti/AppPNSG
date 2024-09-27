@@ -252,12 +252,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8)),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.lightBlue),
               ),
               filled: true,
               fillColor: Colors.white,
-              contentPadding: EdgeInsets.symmetric(vertical: 8.0,
+              contentPadding: const EdgeInsets.symmetric(vertical: 8.0,
                   horizontal: 12.0),
             ),
           ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'Screens/tela_login.dart';
 
 class LoginButton extends StatelessWidget {
   final double topPadding;
   final VoidCallback onPressed;
   final String buttonText;
 
-  LoginButton({
+  const LoginButton({
     this.topPadding = 26.0,
     required this.onPressed,
     this.buttonText = "Login",

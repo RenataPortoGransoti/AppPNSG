@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'navigation_bar.dart';
+
 class InformacoesDizimo extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -8,9 +10,36 @@ class InformacoesDizimo extends StatefulWidget {
 }
 
 class InformacoesDizimoState extends State<InformacoesDizimo> {
+  int currentPageIndex = 3;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CustomBottomNavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+            switch (currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
+            }
+          });
+        },
+        selectedIndex: currentPageIndex,
+        backgroundColor: Colors.lightBlue,
+      ),
        body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

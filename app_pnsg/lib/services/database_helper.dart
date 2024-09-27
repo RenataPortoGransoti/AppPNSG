@@ -56,7 +56,6 @@ class DatabaseHelper {
 
   Future<void> saveEvent(Map<String, dynamic> event) async {
     final db = await database;
-    print('Salvando evento: $event'); // Log de depuração
 
     // Verificação para garantir que o evento tenha um ID válido
     if (event['id'] == null || event['id'].isEmpty) {
@@ -75,7 +74,6 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getEvents() async {
     final db = await database;
     final events = await db.query('events');
-    print('Eventos carregados do banco: $events'); // Log de depuração
     return events;
   }
 

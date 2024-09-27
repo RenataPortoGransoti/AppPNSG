@@ -1,19 +1,16 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../inicio/tela_galeria.dart';
-import '../inicio/tela_historia_paroquia.dart';
-import '../inicio/tela_oracoes.dart';
-import '../inicio/tela_via_sacra.dart';
-import '../loginButton.dart';
-import 'tela_login.dart';
-import 'tela_eventos.dart';
-import 'navigation_bar.dart';
-import 'tela_pastorais.dart';
-import 'tela_contribua.dart';
-import 'tela_informacoes.dart';
 import '../config.dart';
+import 'package:http/http.dart' as http;
+import 'package:PNSG/Screens/tela_login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import '../login_button.dart';
+import 'navigation_bar.dart';
+import 'Inicio/tela_galeria.dart';
+import 'Inicio/tela_historia_paroquia.dart';
+import 'Inicio/tela_oracoes.dart';
+import 'Inicio/tela_via_sacra.dart';
 
 class Inicio extends StatefulWidget {
   @override
@@ -79,26 +76,22 @@ class InicioState extends State<Inicio> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
-              );
-            } else if (currentPageIndex == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Eventos()),
-              );
-            } else if (currentPageIndex == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Contribua()),
-              );
-            } else if (currentPageIndex == 4) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Informacoes()),
-              );
+            switch (currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
             }
           });
         },

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:io'; // Para detectar o sistema operacional
-import '../Screens/tela_contribua.dart';
-import '../Screens/tela_eventos.dart';
-import '../Screens/tela_informacoes.dart';
-import '../Screens/tela_inicio.dart';
-import '../Screens/navigation_bar.dart';
-import '../Screens/tela_pastorais.dart';
+import '../tela_contribua.dart';
+import '../tela_eventos.dart';
+import '../tela_informacoes.dart';
+import '../tela_inicio.dart';
+import '../navigation_bar.dart';
+import '../tela_pastorais.dart';
 
 class Galeria extends StatefulWidget {
   @override

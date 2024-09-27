@@ -1,22 +1,21 @@
-import 'package:PNSG/splash.dart';
+import 'package:PNSG/screens/tela_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Screens/tela_pastorais.dart';
-import 'Screens/tela_pastoral_especifica.dart';
-import 'Screens/tela_inicio.dart';
-import 'Screens/tela_eventos.dart';
-import 'Screens/tela_contribua.dart';
-import 'Screens/tela_informacoes.dart';
-import 'config.dart';
-import 'package:flutter/services.dart';
+import 'screens/tela_pastorais.dart';
+import 'screens/tela_inicio.dart';
+import 'screens/tela_eventos.dart';
+import 'screens/tela_contribua.dart';
+import 'screens/tela_informacoes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(AppPnsg());
+  runApp(const AppPnsg());
 }
 
 class AppPnsg extends StatelessWidget {
+  const AppPnsg({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +24,7 @@ class AppPnsg extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primarySwatch: Colors.blue,
-        buttonTheme: ButtonThemeData(
+        buttonTheme: const ButtonThemeData(
           buttonColor: Colors.blue,
         ),
       ),

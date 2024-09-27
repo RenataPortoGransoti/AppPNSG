@@ -6,11 +6,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../config.dart';
 import '../contatoFormulario.dart';
-import 'tela_contribua.dart';
-import 'tela_eventos.dart';
-import 'tela_inicio.dart';
 import 'navigation_bar.dart';
-import 'tela_pastorais.dart';
 import '../email.dart';
 class Informacoes extends StatefulWidget {
   @override
@@ -203,26 +199,22 @@ class InformacoesState extends State<Informacoes> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Inicio()),
-              );
-            } else if (currentPageIndex == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
-              );
-            } else if (currentPageIndex == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Eventos()),
-              );
-            } else if (currentPageIndex == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Contribua()),
-              );
+            switch (currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
             }
           });
         },

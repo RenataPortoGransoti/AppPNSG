@@ -1,13 +1,8 @@
 import 'dart:convert';
-import 'package:PNSG/Screens/tela_pastorais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart'; // Importado para Clipboard
+import 'package:flutter/services.dart';
 import '../config.dart';
-import 'tela_contribua.dart';
-import 'tela_eventos.dart';
-import 'tela_informacoes.dart';
-import 'tela_inicio.dart';
 import 'navigation_bar.dart';
 
 class DizimoService {
@@ -84,32 +79,22 @@ class _DizimoState extends State<Dizimo> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Inicio()),
-              );
-            } else if (currentPageIndex == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
-              );
-            } else if (currentPageIndex == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Eventos()),
-              );
-            } else if (currentPageIndex == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Contribua()),
-              );
-            }
-            else if (currentPageIndex == 4) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Informacoes())
-              );
+            switch (currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
             }
           });
         },
@@ -123,17 +108,17 @@ class _DizimoState extends State<Dizimo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.all(15),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(15),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Color(0xFF036896),
+                  color: const Color(0xFF036896),
                   borderRadius: BorderRadius.circular(50),
                 ),
-                child: Text(
+                child: const Text(
                   "Dízimo",
                   style: TextStyle(
                     fontSize: 28,

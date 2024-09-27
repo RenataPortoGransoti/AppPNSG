@@ -1,13 +1,9 @@
 import 'dart:convert';
-import 'package:PNSG/Screens/tela_pastorais.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../services/database_helper.dart';
-import 'tela_contribua.dart';
-import 'tela_informacoes.dart';
-import 'tela_inicio.dart';
 import 'tela_eventos_salvos.dart';
 import '../config.dart';
 import 'navigation_bar.dart';
@@ -134,26 +130,22 @@ class EventosState extends State<Eventos> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Inicio()),
-              );
-            } else if (currentPageIndex == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
-              );
-            } else if (currentPageIndex == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Contribua()),
-              );
-            } else if (currentPageIndex == 4) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Informacoes()),
-              );
+            switch (currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
             }
           });
         },

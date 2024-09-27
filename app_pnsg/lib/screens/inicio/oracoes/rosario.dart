@@ -1,8 +1,9 @@
+import 'package:PNSG/screens/inicio/oracoes/rosario/misterios_dolorosos.dart';
+import 'package:PNSG/screens/inicio/oracoes/rosario/misterios_gloriosos.dart';
+import 'package:PNSG/screens/inicio/oracoes/rosario/misterios_gozosos.dart';
+import 'package:PNSG/screens/inicio/oracoes/rosario/misterios_luminosos.dart';
 import 'package:flutter/material.dart';
-import 'Rosario/misterios_dolorosos.dart';
-import 'Rosario/misterios_gloriosos.dart';
-import 'Rosario/misterios_gozosos.dart';
-import 'Rosario/misterios_luminosos.dart';
+
 
 
 class Rosario extends StatefulWidget {
