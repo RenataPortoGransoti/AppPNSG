@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
@@ -35,15 +36,32 @@ class DoacaoState extends State<Doacao> {
   String? chavePix;
   String? qrCodeUrl;
   bool isLoading = true;
+  bool hasInternet = true; // Variável para controlar a conexão com a internet
   int currentPageIndex = 3;
+
   @override
   void initState() {
     super.initState();
     loadDoacao();
   }
 
+  Future<void> checkInternetConnection() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        hasInternet = false; // Não há conexão
+        isLoading = false; // Para parar o carregamento
+      });
+    } else {
+      setState(() {
+        hasInternet = true; // Há conexão
+      });
+    }
+  }
+
   Future<void> loadDoacao() async {
     try {
+      await checkInternetConnection(); // Verificar conexão antes de carregar os dados
       final service = DoacaoService();
       final fetchedData = await service.fetchDoacaoData();
       setState(() {
@@ -55,7 +73,7 @@ class DoacaoState extends State<Doacao> {
       });
     } catch (e) {
       setState(() {
-        isLoading = false;
+        isLoading = false; // Para parar o carregamento em caso de erro
       });
       logger.i('Erro ao carregar dados do doação: $e');
     }
@@ -132,55 +150,65 @@ class DoacaoState extends State<Doacao> {
                 ),
               ),
               const SizedBox(height: 20),
-              if (isLoading)
-                const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: CircularProgressIndicator(),
-                  ),
-                )
-              else
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min, // Ajusta o tamanho do Row
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              const TextSpan(
-                                text: "Chave pix: ",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black, // Ajustar a cor do texto
+              isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.blue[200],
+                      ),
+                    )
+                  : !hasInternet
+                      ? const Padding(
+                          padding: EdgeInsets.all(25),
+                          child: Text(
+                            "Sem acesso à internet. \n\nConecte-se para ver a chave pix para realizar a doação!",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.red,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Center(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      const TextSpan(
+                                        text: "Chave pix: ",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: chavePix ?? 'Chave PIX não encontrada',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              TextSpan(
-                                text: chavePix ?? 'Chave PIX não encontrada',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black, // Ajustar a cor do texto
+                                const SizedBox(width: 10),
+                                IconButton(
+                                  icon: const Icon(Icons.copy),
+                                  onPressed: () {
+                                    if (chavePix != null) {
+                                      _copyToClipboard(chavePix!);
+                                    }
+                                  },
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 10), // Espaço entre o texto e o ícone
-                        IconButton(
-                          icon: const Icon(Icons.copy),
-                          onPressed: () {
-                            if (chavePix != null) {
-                              _copyToClipboard(chavePix!);
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               const SizedBox(height: 20),
               if (qrCodeUrl != null && qrCodeUrl!.isNotEmpty)
                 Center(
