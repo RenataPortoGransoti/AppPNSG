@@ -3,12 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 import 'package:http/http.dart' as http;
+import 'logger.dart';
 
 class ContactForm extends StatelessWidget {
   final Function(String, String, String, String) onSubmit;
   final String baseUrl;
 
-  ContactForm({required this.onSubmit, required this.baseUrl});
+  ContactForm({super.key, required this.onSubmit, required this.baseUrl});
 
   final _formKey = GlobalKey<FormState>();
   late String _nomeCompleto;
@@ -16,8 +17,7 @@ class ContactForm extends StatelessWidget {
   late String _celular;
   late String _mensagem;
 
-
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -40,7 +40,7 @@ class ContactForm extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.close),
+                          icon: const Icon(Icons.close),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -55,7 +55,7 @@ class ContactForm extends StatelessWidget {
                         ),
                         labelStyle: TextStyle(color: Colors.black),
                       ),
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       cursorColor: Colors.black,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -74,7 +74,7 @@ class ContactForm extends StatelessWidget {
                         ),
                         labelStyle: TextStyle(color: Colors.black),
                       ),
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       cursorColor: Colors.black,
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -169,12 +169,14 @@ class ContactForm extends StatelessWidget {
 
   Future<String?> fetchCSRFToken(String baseUrl) async {
     try {
-      final Uri uri = Uri.parse('$baseUrl/csrf-token'); // URL para obter o token CSRF
+      final Uri uri =
+          Uri.parse('$baseUrl/csrf-token'); // URL para obter o token CSRF
       final response = await http.get(uri);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
-        final String csrfToken = responseData['csrfToken']; // Supondo que o token CSRF seja retornado como 'csrfToken'
+        final String csrfToken = responseData[
+            'csrfToken']; // Supondo que o token CSRF seja retornado como 'csrfToken'
         return csrfToken;
       } else {
         if (kDebugMode) {
@@ -191,12 +193,12 @@ class ContactForm extends StatelessWidget {
   }
 
   Future<void> enviarRequisicaoComToken(
-      String baseUrl,
-      String nomeCompleto,
-      String email,
-      String celular,
-      String mensagem,
-      ) async {
+    String baseUrl,
+    String nomeCompleto,
+    String email,
+    String celular,
+    String mensagem,
+  ) async {
     try {
       // Obter o token CSRF
       String? csrfToken = await fetchCSRFToken(baseUrl);
@@ -221,7 +223,7 @@ class ContactForm extends StatelessWidget {
         );
 
         if (response.statusCode == 200) {
-          print('Email enviado com sucesso');
+          logger.i('Email enviado com sucesso');
         } else {
           if (kDebugMode) {
             print('Falha ao enviar email: ${response.body}');
