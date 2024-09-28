@@ -3,7 +3,6 @@ import '../config.dart';
 import 'package:http/http.dart' as http;
 import 'package:PNSG/Screens/tela_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../login_button.dart';
 import 'navigation_bar.dart';
@@ -13,6 +12,8 @@ import 'Inicio/tela_oracoes.dart';
 import 'Inicio/tela_via_sacra.dart';
 
 class Inicio extends StatefulWidget {
+  const Inicio({super.key});
+
   @override
   InicioState createState() => InicioState();
 }
@@ -48,7 +49,7 @@ class InicioState extends State<Inicio> {
         throw Exception('Falha ao carregar os avisos');
       }
     } catch (e) {
-      print('Erro ao carregar os avisos: $e');
+      throw Exception('Falha ao carregar os avisos');
     }
   }
 
@@ -58,7 +59,7 @@ class InicioState extends State<Inicio> {
 
   void _navigateToLogin() {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
 
@@ -106,7 +107,7 @@ class InicioState extends State<Inicio> {
             child: ListView(
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 10),
+                  margin: const EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 10),
                   padding: const EdgeInsets.all(18),
                   width: MediaQuery.of(context).size.width - 40,
                   decoration: BoxDecoration(
@@ -124,9 +125,9 @@ class InicioState extends State<Inicio> {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       if (avisos.isEmpty)
-                        Text(
+                        const Text(
                           'Não há avisos disponíveis no momento.',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
@@ -143,7 +144,7 @@ class InicioState extends State<Inicio> {
                                 child: Text(
                                   aviso['aviso'],
                                   textAlign: TextAlign.justify,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
                                   ),
@@ -155,20 +156,20 @@ class InicioState extends State<Inicio> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GridView.count(
                   padding: const EdgeInsets.all(30),
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 5,
                   crossAxisCount: 2,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Oracoes()),
+                          MaterialPageRoute(builder: (context) => const Oracoes()),
                         );
                       },
                       child: Container(
@@ -191,7 +192,7 @@ class InicioState extends State<Inicio> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Galeria()),
+                          MaterialPageRoute(builder: (context) => const Galeria()),
                         );
                       },
                       child: Container(
@@ -214,7 +215,7 @@ class InicioState extends State<Inicio> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ViaSacra()),
+                          MaterialPageRoute(builder: (context) => const ViaSacra()),
                         );
                       },
                       child: Container(
@@ -237,7 +238,7 @@ class InicioState extends State<Inicio> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HistoriaParoquia()),
+                          MaterialPageRoute(builder: (context) => const HistoriaParoquia()),
                         );
                       },
                       child: Container(

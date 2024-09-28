@@ -20,10 +20,10 @@ class Oracoes extends StatefulWidget {
   const Oracoes({super.key});
 
   @override
-  _OracoesState createState() => _OracoesState();
+  OracoesState createState() => OracoesState();
 }
 
-class _OracoesState extends State<Oracoes> {
+class OracoesState extends State<Oracoes> {
   int currentPageIndex = 0;
 
   @override
@@ -36,27 +36,27 @@ class _OracoesState extends State<Oracoes> {
             if (currentPageIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Inicio()),
+                MaterialPageRoute(builder: (context) => const Inicio()),
               );
             } else if (currentPageIndex == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
+                MaterialPageRoute(builder: (context) => const PastoraisScreen()),
               );
             } else if (currentPageIndex == 2) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Eventos()),
+                MaterialPageRoute(builder: (context) => const Eventos()),
               );
             } else if (currentPageIndex == 3) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Contribua()),
+                MaterialPageRoute(builder: (context) => const Contribua()),
               );
             } else if (currentPageIndex == 4) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Informacoes()),
+                MaterialPageRoute(builder: (context) => const Informacoes()),
               );
             }
           });
@@ -109,7 +109,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AveMaria()),
+                    MaterialPageRoute(builder: (context) => const AveMaria()),
                   );
                 },
               ),
@@ -118,7 +118,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Credo()),
+                    MaterialPageRoute(builder: (context) => const Credo()),
                   );
                 },
               ),
@@ -127,7 +127,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Magnificat()),
+                    MaterialPageRoute(builder: (context) => const Magnificat()),
                   );
                 },
               ),
@@ -136,7 +136,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PaiNosso()),
+                    MaterialPageRoute(builder: (context) => const PaiNosso()),
                   );
                 },
               ),
@@ -145,7 +145,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Rosario()),
+                    MaterialPageRoute(builder: (context) => const Rosario()),
                   );
                 },
               ),
@@ -154,7 +154,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SalveRainha()),
+                    MaterialPageRoute(builder: (context) => const SalveRainha()),
                   );
                 },
               ),
@@ -163,7 +163,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SantoAnjo()),
+                    MaterialPageRoute(builder: (context) => const SantoAnjo()),
                   );
                 },
               ),
@@ -172,7 +172,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TercoDivinaMisericordia()),
+                    MaterialPageRoute(builder: (context) => const TercoDivinaMisericordia()),
                   );
                 },
               ),
@@ -181,7 +181,7 @@ class OracoesList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VindeEspiritoSanto()),
+                    MaterialPageRoute(builder: (context) => const VindeEspiritoSanto()),
                   );
                 },
               ),

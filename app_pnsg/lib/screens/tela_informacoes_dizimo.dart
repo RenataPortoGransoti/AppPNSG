@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'navigation_bar.dart';
 
 class InformacoesDizimo extends StatefulWidget {
+  const InformacoesDizimo({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return InformacoesDizimoState();
@@ -133,7 +135,7 @@ class InformacoesDizimoState extends State<InformacoesDizimo> {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 8.0,
@@ -147,7 +149,7 @@ class InformacoesDizimoState extends State<InformacoesDizimo> {
         children: [
           Text(
             question,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF036896),
               fontWeight: FontWeight.bold,
               fontSize: 18,

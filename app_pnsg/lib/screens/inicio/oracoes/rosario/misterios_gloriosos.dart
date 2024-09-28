@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MisteriosGloriosos extends StatelessWidget {
+  const MisteriosGloriosos({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Misterios Gloriosos'),
+        title: const Text('Misterios Gloriosos'),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),

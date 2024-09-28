@@ -7,6 +7,8 @@ import 'tela_informacoes_dizimo.dart';
 import 'navigation_bar.dart';
 
 class Contribua extends StatefulWidget {
+  const Contribua({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return ContribuaState();
@@ -147,7 +149,7 @@ class ContribuaState extends State<Contribua> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Dizimo()),
+                      MaterialPageRoute(builder: (context) => const Dizimo()),
                     );
                   },
                   child: Container(
@@ -174,7 +176,7 @@ class ContribuaState extends State<Contribua> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Doacao()),
+                      MaterialPageRoute(builder: (context) => const Doacao()),
                     );
                   },
                   child: Container(
@@ -236,9 +238,12 @@ class ContribuaState extends State<Contribua> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => InformacoesDizimo()),
+                  MaterialPageRoute(builder: (context) => const InformacoesDizimo()),
                 );
               },
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(width: 2.0, color: Color(0xFF036896)),
+              ),
               child: const Text(
                 'Saber mais sobre o Dízimo',
                 style: TextStyle(
@@ -246,9 +251,6 @@ class ContribuaState extends State<Contribua> {
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(width: 2.0, color: Color(0xFF036896)),
               ),
                 ),
               ]),

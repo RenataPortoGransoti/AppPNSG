@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TercoDivinaMisericordia extends StatelessWidget {
+  const TercoDivinaMisericordia({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Terço da Divina Misericórdia'),
+        title: const Text('Terço da Divina Misericórdia'),
       ),
       body: const SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),

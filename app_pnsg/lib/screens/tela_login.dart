@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'tela_registro.dart';
+import '../logger.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
@@ -51,15 +54,15 @@ class _LoginScreenState extends State<LoginScreen> {
     } catch (e) {
       // Tratamento de erro genérico
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao fazer login. Tente novamente mais tarde.')),
+        const SnackBar(content: Text('Erro ao fazer login. Tente novamente mais tarde.')),
       );
-      print('Erro: $e');
+      logger.i('Erro: $e');
     }
   }
 
   void _navigateToRegister() {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => RegisterScreen()),
+      MaterialPageRoute(builder: (context) => const RegisterScreen()),
     );
   }
 
@@ -68,11 +71,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Login',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color(0xFF036896),
+        backgroundColor: const Color(0xFF036896),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -93,8 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text(
+                  const SizedBox(height: 20),
+                  const Text(
                     'Bem-vindo(a)!',
                     style: TextStyle(
                       fontSize: 28,
@@ -102,16 +105,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Color(0xFF036896),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       labelText: 'E-mail',
-                      labelStyle: TextStyle(color: Colors.black54),
+                      labelStyle: const TextStyle(color: Colors.black54),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue),
                       ),
                       filled: true,
@@ -119,24 +122,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextField(
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Senha',
-                      labelStyle: TextStyle(color: Colors.black54),
+                      labelStyle: const TextStyle(color: Colors.black54),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue),
                       ),
                       filled: true,
                       fillColor: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
@@ -145,17 +148,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       backgroundColor: Colors.blue[200],
                       foregroundColor: Colors.black,
-                      padding: EdgeInsets.symmetric(horizontal: 66, vertical: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 66, vertical: 12),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Login',
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TextButton(
                     onPressed: _navigateToRegister,
-                    child: Text(
+                    child: const Text(
                       'Criar conta',
                       style: TextStyle(
                         color: Color(0xFF036896),

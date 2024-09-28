@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PaiNosso extends StatelessWidget {
+  const PaiNosso({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

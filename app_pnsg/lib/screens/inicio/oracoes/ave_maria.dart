@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AveMaria extends StatelessWidget {
+  const AveMaria({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ave Maria'),
+        title: const Text('Ave Maria'),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),

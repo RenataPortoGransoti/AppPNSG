@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SantoAnjo extends StatelessWidget {
+  const SantoAnjo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

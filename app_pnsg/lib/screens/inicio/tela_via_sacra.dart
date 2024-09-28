@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ViaSacra extends StatefulWidget {
+  const ViaSacra({super.key});
+
   @override
-  _ViaSacraState createState() => _ViaSacraState();
+  ViaSacraState createState() => ViaSacraState();
 }
 
-class _ViaSacraState extends State<ViaSacra> {
+class ViaSacraState extends State<ViaSacra> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -218,6 +220,6 @@ class _ViaSacraState extends State<ViaSacra> {
   }
 }
 
-void main() => runApp(MaterialApp(
+void main() => runApp(const MaterialApp(
   home: ViaSacra(),
 ));

@@ -6,9 +6,12 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import '../services/database_helper.dart';
 import 'tela_eventos_salvos.dart';
 import '../config.dart';
+import '../logger.dart';
 import 'navigation_bar.dart';
 
 class Eventos extends StatefulWidget {
+  const Eventos({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return EventosState();
@@ -56,7 +59,6 @@ class EventosState extends State<Eventos> {
           eventos = json.decode(response.body);
           isLoading = false;
         });
-        print('Eventos carregados: $eventos');
       } else {
         throw Exception('Falha ao carregar eventos');
       }
@@ -64,7 +66,6 @@ class EventosState extends State<Eventos> {
       setState(() {
         isLoading = false;
       });
-      print(e);
     }
   }
 
@@ -90,23 +91,23 @@ class EventosState extends State<Eventos> {
         'descricao': eventData['descricao'] ?? 'Descrição não informada',
       };
 
-      print('Tentando salvar evento: $eventToSave');
+      logger.i('Tentando salvar evento: $eventToSave');
 
       try {
         await DatabaseHelper().saveEvent(eventToSave);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Evento salvo com sucesso!')),
+          const SnackBar(content: Text('Evento salvo com sucesso!')),
         );
       } catch (e) {
-        print('Erro ao salvar evento: $e');
+        logger.i('Erro ao salvar evento: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro ao salvar evento.')),
+          const SnackBar(content: Text('Erro ao salvar evento.')),
         );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Você precisa estar logado para salvar eventos.')),
+        const SnackBar(content: Text('Você precisa estar logado para salvar eventos.')),
       );
     }
   }
@@ -159,12 +160,12 @@ class EventosState extends State<Eventos> {
           children: [
             Container(
               padding: const EdgeInsets.all(18),
-              margin: EdgeInsets.only(left: 14, right: 14, top: 56, bottom: 10),
+              margin: const EdgeInsets.only(left: 14, right: 14, top: 56, bottom: 10),
               decoration: BoxDecoration(
-                color: Color(0xFF036896),
+                color: const Color(0xFF036896),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   "EVENTOS PAROQUIAIS",
                   textAlign: TextAlign.center,
@@ -176,16 +177,19 @@ class EventosState extends State<Eventos> {
                 ),
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
              if (user != null)
                OutlinedButton(
                  onPressed: () {
                    Navigator.push(
                      context,
-                     MaterialPageRoute(builder: (context) => SavedEvents()),
+                     MaterialPageRoute(builder: (context) => const SavedEvents()),
                    );
                  },
-                 child: Text(
+                 style: OutlinedButton.styleFrom(
+                   side: const BorderSide(width: 2.0, color: Colors.lightBlue),
+                 ),
+                 child: const Text(
                    'Ver eventos salvos',
                    style: TextStyle(
                      fontSize: 18,
@@ -193,11 +197,8 @@ class EventosState extends State<Eventos> {
                      fontWeight: FontWeight.bold,
                    ),
                  ),
-                 style: OutlinedButton.styleFrom(
-                   side: BorderSide(width: 2.0, color: Colors.lightBlue),
-                 ),
                ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Expanded(
               child: isLoading
                   ? Center(
@@ -206,7 +207,7 @@ class EventosState extends State<Eventos> {
                 ),
               )
                   : !hasInternet
-                  ? Center(
+                  ? const Center(
                 child: Text(
                   "Sem acesso à internet",
                   style: TextStyle(
@@ -222,13 +223,13 @@ class EventosState extends State<Eventos> {
                   return SizedBox(
                     width: 380,
                     child: Card(
-                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       elevation: 4,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Container(
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           gradient: LinearGradient(
@@ -244,12 +245,12 @@ class EventosState extends State<Eventos> {
                               children: [
                                 Text(
                                   evento['nome_evento'] ?? 'Nome do Evento',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Text(
                                   'Início: ${formatDate(evento['data_inicio'])} ${formatTime(evento['data_inicio'])}',
                                   style: TextStyle(
@@ -265,7 +266,7 @@ class EventosState extends State<Eventos> {
                                       color: Colors.grey[700],
                                     ),
                                   ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Text(
                                   'Local: ${evento['local'] ?? 'Local não disponível'}',
                                   style: TextStyle(
@@ -273,10 +274,10 @@ class EventosState extends State<Eventos> {
                                     color: Colors.grey[700],
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Text(
                                   evento['descricao'] ?? 'Descrição do evento não disponível.',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),

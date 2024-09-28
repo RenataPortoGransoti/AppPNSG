@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import '../config.dart';
 import 'navigation_bar.dart';
+import '../logger.dart';
 
 class DoacaoService {
   Future<Map<String, String?>?> fetchDoacaoData() async {
@@ -24,11 +25,13 @@ class DoacaoService {
 }
 
 class Doacao extends StatefulWidget {
+  const Doacao({super.key});
+
   @override
-  _DoacaoState createState() => _DoacaoState();
+  DoacaoState createState() => DoacaoState();
 }
 
-class _DoacaoState extends State<Doacao> {
+class DoacaoState extends State<Doacao> {
   String? chavePix;
   String? qrCodeUrl;
   bool isLoading = true;
@@ -54,7 +57,7 @@ class _DoacaoState extends State<Doacao> {
       setState(() {
         isLoading = false;
       });
-      print('Erro ao carregar dados do doação: $e');
+      logger.i('Erro ao carregar dados do doação: $e');
     }
   }
 
@@ -65,7 +68,7 @@ class _DoacaoState extends State<Doacao> {
   void _copyToClipboard(String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('Chave Pix copiada para a área de transferência!'),
         duration: Duration(seconds: 2),
       ),
@@ -108,17 +111,17 @@ class _DoacaoState extends State<Doacao> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.all(15),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(15),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Color(0xFF036896),
+                  color: const Color(0xFF036896),
                   borderRadius: BorderRadius.circular(50),
                 ),
-                child: Text(
+                child: const Text(
                   "Doação",
                   style: TextStyle(
                     fontSize: 28,
@@ -128,11 +131,11 @@ class _DoacaoState extends State<Doacao> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (isLoading)
-                Center(
+                const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(16.0),
                     child: CircularProgressIndicator(),
                   ),
                 )
@@ -146,7 +149,7 @@ class _DoacaoState extends State<Doacao> {
                         RichText(
                           text: TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: "Chave pix: ",
                                 style: TextStyle(
                                   fontSize: 16,
@@ -156,7 +159,7 @@ class _DoacaoState extends State<Doacao> {
                               ),
                               TextSpan(
                                 text: chavePix ?? 'Chave PIX não encontrada',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.normal,
                                   color: Colors.black, // Ajustar a cor do texto
@@ -165,9 +168,9 @@ class _DoacaoState extends State<Doacao> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 10), // Espaço entre o texto e o ícone
+                        const SizedBox(width: 10), // Espaço entre o texto e o ícone
                         IconButton(
-                          icon: Icon(Icons.copy),
+                          icon: const Icon(Icons.copy),
                           onPressed: () {
                             if (chavePix != null) {
                               _copyToClipboard(chavePix!);
@@ -178,7 +181,7 @@ class _DoacaoState extends State<Doacao> {
                     ),
                   ),
                 ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (qrCodeUrl != null && qrCodeUrl!.isNotEmpty)
                 Center(
                   child: Image.network(

@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../config.dart';
+import '../logger.dart';
 import 'navigation_bar.dart';
 import 'tela_pastoral_especifica.dart';
 
 class PastoraisScreen extends StatefulWidget {
+  const PastoraisScreen({super.key});
+
   @override
-  _PastoraisScreenState createState() => _PastoraisScreenState();
+  PastoraisScreenState createState() => PastoraisScreenState();
 }
 
-class _PastoraisScreenState extends State<PastoraisScreen> {
+class PastoraisScreenState extends State<PastoraisScreen> {
   final PastoralService _pastoralService = PastoralService();
   List<dynamic> _pastorais = [];
   bool isLoading = true;
@@ -51,7 +54,7 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
       setState(() {
         isLoading = false;
       });
-      print('Erro ao carregar dados das pastorais: $e');
+      logger.i('Erro ao carregar dados das pastorais: $e');
     }
   }
 
@@ -132,7 +135,7 @@ class _PastoraisScreenState extends State<PastoraisScreen> {
               ),
             )
                 : ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: _pastorais.length,
               itemBuilder: (context, index) {

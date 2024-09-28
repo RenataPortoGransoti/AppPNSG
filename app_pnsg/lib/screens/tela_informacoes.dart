@@ -5,13 +5,17 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../config.dart';
-import '../contatoFormulario.dart';
+import '../contato_formulario.dart';
 import 'navigation_bar.dart';
 import '../email.dart';
+import '../logger.dart';
+
 class Informacoes extends StatefulWidget {
+  const Informacoes({super.key});
+
   @override
   State<StatefulWidget> createState() {
-    return new InformacoesState();
+    return InformacoesState();
   }
 }
 
@@ -52,7 +56,7 @@ class InformacoesState extends State<Informacoes> {
         throw Exception('Falha ao carregar os horários');
       }
     } catch (e) {
-      print('Erro ao carregar os horários: $e');
+      logger.i('Erro ao carregar os horários: $e');
     }
   }
 
@@ -77,7 +81,7 @@ class InformacoesState extends State<Informacoes> {
         throw Exception('Falha ao carregar os detalhes de contato');
       }
     } catch (e) {
-      print('Erro ao carregar os detalhes de contato: $e');
+      logger.i('Erro ao carregar os detalhes de contato: $e');
     }
   }
 
@@ -88,46 +92,47 @@ class InformacoesState extends State<Informacoes> {
       scheme: 'tel',
       path: phoneNumber,
     );
-    if (await canLaunch(launchUri.toString())) {
-      await launch(launchUri.toString());
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
     } else {
       throw 'Não foi possível lançar $phoneNumber';
     }
   }
 
   // Função para abrir o Instagram
-  void _abrirInstagram() async {
-    var nativeUrl = instagramUrl.replaceFirst('https://www.instagram.com/', 'instagram://user?username=');
-    var webUrl = instagramUrl;
+void _abrirInstagram() async {
+  var nativeUrl = instagramUrl.replaceFirst('https://www.instagram.com/', 'instagram://user?username=');
+  var webUrl = instagramUrl;
 
-    try {
-      if (await canLaunch(nativeUrl)) {
-        await launch(nativeUrl);
-      } else {
-        await launch(webUrl);
-      }
-    } catch (e) {
-      print(e);
-      await launch(webUrl);
+  try {
+    if (await canLaunchUrl(Uri.parse(nativeUrl))) {
+      await launchUrl(Uri.parse(nativeUrl));
+    } else {
+      await launchUrl(Uri.parse(webUrl));
     }
+  } catch (e) {
+    logger.i(e);
+    await launchUrl(Uri.parse(webUrl));
   }
+}
+
 
   // Função para abrir o Facebook
-  void _abrirFacebook() async {
-    var nativeUrl = facebookUrl.replaceFirst('https://www.facebook.com/', 'fb://page/');
-    var webUrl = facebookUrl;
+void _abrirFacebook() async {
+  var nativeUrl = facebookUrl.replaceFirst('https://www.facebook.com/', 'fb://page/');
+  var webUrl = facebookUrl;
 
-    try {
-      if (await canLaunch(nativeUrl)) {
-        await launch(nativeUrl);
-      } else {
-        await launch(webUrl);
-      }
-    } catch (e) {
-      print(e);
-      await launch(webUrl);
+  try {
+    if (await canLaunchUrl(Uri.parse(nativeUrl))) {
+      await launchUrl(Uri.parse(nativeUrl));
+    } else {
+      await launchUrl(Uri.parse(webUrl));
     }
+  } catch (e) {
+    logger.i(e);
+    await launchUrl(Uri.parse(webUrl));
   }
+}
 
 // Função para lançar o WhatsApp com o número específico
   void abrirWhatsapp(
@@ -152,9 +157,9 @@ class InformacoesState extends State<Informacoes> {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Formulário enviado com sucesso. Aguarde nosso contato!'),
+              content: const Text('Formulário enviado com sucesso. Aguarde nosso contato!'),
               backgroundColor: Colors.lightGreen[800],
-              duration: Duration(seconds: 4),
+              duration: const Duration(seconds: 4),
             ),
           );
         },
@@ -236,7 +241,7 @@ class InformacoesState extends State<Informacoes> {
                   _launchPhone();
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(vertical: 5),
                   padding: const EdgeInsets.all(18),
                   width: MediaQuery.of(context).size.width - 40,
                   decoration: BoxDecoration(
@@ -254,10 +259,10 @@ class InformacoesState extends State<Informacoes> {
               ),
               GestureDetector(
                 onTap: () {
-                  abrirWhatsapp('$phoneNumber', 'Olá!');
+                  abrirWhatsapp(phoneNumber, 'Olá!');
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(vertical: 5),
                   padding: const EdgeInsets.all(18),
                   width: MediaQuery.of(context).size.width - 40,
                   decoration: BoxDecoration(
@@ -278,7 +283,7 @@ class InformacoesState extends State<Informacoes> {
                   _showContactFormDialog(context);
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(vertical: 5),
                   padding: const EdgeInsets.all(18),
                   width: MediaQuery.of(context).size.width - 40,
                   decoration: BoxDecoration(
@@ -321,11 +326,11 @@ class InformacoesState extends State<Informacoes> {
               ),
             ),
           ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
           GestureDetector(
             onTap: () {
               _abrirFacebook();
-            },child: Container(
+            },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -343,7 +348,6 @@ class InformacoesState extends State<Informacoes> {
               ],
             ),
           ),
-          ),
               const SizedBox(height: 30),
 
               // Containers de horários expandíveis
@@ -360,7 +364,7 @@ class InformacoesState extends State<Informacoes> {
 
               const SizedBox(height: 20),
               const Image(image: AssetImage('assets/images/mapa_paroquia.png')),
-              const Text("Endereço: Rua Luís Dias, 393 - Petrópolis"),
+              const Text("Endereço: Rua Luís Dias, 393 Petrópolis, Londrina - PR"),
               const SizedBox(height: 5),
             ],
           ),
@@ -381,7 +385,7 @@ class InformacoesState extends State<Informacoes> {
       ),
       child: Theme(
         data: ThemeData(
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
         child: ExpansionTile(
           shape: const Border(),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Magnificat extends StatelessWidget {
+  const Magnificat({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Magnificat'),
+        title: const Text('Magnificat'),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),

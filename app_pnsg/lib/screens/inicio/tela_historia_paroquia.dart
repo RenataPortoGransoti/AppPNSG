@@ -8,11 +8,13 @@ import '../navigation_bar.dart';
 import '../tela_pastorais.dart';
 
 class HistoriaParoquia extends StatefulWidget {
+  const HistoriaParoquia({super.key});
+
   @override
-  _HistoriaParoquiaState createState() => _HistoriaParoquiaState();
+  HistoriaParoquiaState createState() => HistoriaParoquiaState();
 }
 
-class _HistoriaParoquiaState extends State<HistoriaParoquia> {
+class HistoriaParoquiaState extends State<HistoriaParoquia> {
   int currentPageIndex = 0;
 
   @override
@@ -25,27 +27,27 @@ class _HistoriaParoquiaState extends State<HistoriaParoquia> {
             if (currentPageIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Inicio()),
+                MaterialPageRoute(builder: (context) => const Inicio()),
               );
             } else if (currentPageIndex == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
+                MaterialPageRoute(builder: (context) => const PastoraisScreen()),
               );
             } else if (currentPageIndex == 2) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Eventos()),
+                MaterialPageRoute(builder: (context) => const Eventos()),
               );
             } else if (currentPageIndex == 3) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Contribua()),
+                MaterialPageRoute(builder: (context) => const Contribua()),
               );
             } else if (currentPageIndex == 4) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Informacoes()),
+                MaterialPageRoute(builder: (context) => const Informacoes()),
               );
             }
           });
@@ -53,7 +55,7 @@ class _HistoriaParoquiaState extends State<HistoriaParoquia> {
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.lightBlue,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
       child: Column(
         children: [
           Historia(),
@@ -65,6 +67,8 @@ class _HistoriaParoquiaState extends State<HistoriaParoquia> {
 }
 
 class Historia extends StatelessWidget {
+  const Historia({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -74,14 +78,14 @@ class Historia extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            margin: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
-            padding: EdgeInsets.all(10),
+            margin: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
+            padding: const EdgeInsets.all(10),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: const Color(0xFF036896).withOpacity(0.8),
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Text(
+            child: const Text(
               "História da Paróquia",
               style: TextStyle(
                 fontSize: 24,
@@ -128,7 +132,7 @@ class Historia extends StatelessWidget {
                   return Container(
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
                     child: Image.asset(imagePath, fit: BoxFit.cover),

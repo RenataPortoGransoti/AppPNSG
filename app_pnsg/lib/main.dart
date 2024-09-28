@@ -28,13 +28,13 @@ class AppPnsg extends StatelessWidget {
           buttonColor: Colors.blue,
         ),
       ),
-      home: Splash(), // Tela inicial de splash
+      home: const Splash(), // Tela inicial de splash
       routes: {
-        '/Inicio': (context) => Inicio(),
-        '/PastoraisScreen': (context) => PastoraisScreen(),
-        '/Eventos': (context) => Eventos(),
-        '/Contribua': (context) => Contribua(),
-        '/Informacoes': (context) => Informacoes(),
+        '/Inicio': (context) => const Inicio(),
+        '/PastoraisScreen': (context) => const PastoraisScreen(),
+        '/Eventos': (context) => const Eventos(),
+        '/Contribua': (context) => const Contribua(),
+        '/Informacoes': (context) => const Informacoes(),
       },
     );
   }

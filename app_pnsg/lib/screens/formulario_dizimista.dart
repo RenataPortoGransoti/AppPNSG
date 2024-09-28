@@ -8,7 +8,7 @@ class FormularioDizimista extends StatelessWidget {
   final Function(String, String, String, String, String, String, String, String, String, String, String, String) onSubmit;
   final String baseUrl;
 
-  FormularioDizimista({required this.onSubmit, required this.baseUrl});
+  FormularioDizimista({super.key, required this.onSubmit, required this.baseUrl});
 
   final _formKey = GlobalKey<FormState>();
   late String _nomeCompleto;
@@ -48,7 +48,7 @@ class FormularioDizimista extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.close),
+                          icon: const Icon(Icons.close),
                           onPressed: () {
                             Navigator.pop(context);
                           },

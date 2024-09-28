@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SalveRainha extends StatelessWidget {
+  const SalveRainha({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

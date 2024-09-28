@@ -7,23 +7,27 @@ import 'package:flutter/material.dart';
 
 
 class Rosario extends StatefulWidget {
+  const Rosario({super.key});
+
   @override
-  _RosarioState createState() => _RosarioState();
+  RosarioState createState() => RosarioState();
 }
 
-class _RosarioState extends State<Rosario> {
+class RosarioState extends State<Rosario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rosário'),
       ),
-      body: RosarioList(),
+      body: const RosarioList(),
     );
   }
 }
 
 class RosarioList extends StatelessWidget {
+  const RosarioList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -46,7 +50,7 @@ class RosarioList extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MisteriosGozosos()),
+              MaterialPageRoute(builder: (context) => const MisteriosGozosos()),
             );
           },
         ),
@@ -55,7 +59,7 @@ class RosarioList extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MisteriosLuminosos()),
+              MaterialPageRoute(builder: (context) => const MisteriosLuminosos()),
             );
           },
         ),
@@ -64,7 +68,7 @@ class RosarioList extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MisteriosDolorosos()),
+              MaterialPageRoute(builder: (context) => const MisteriosDolorosos()),
             );
           },
         ),
@@ -73,7 +77,7 @@ class RosarioList extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MisteriosGloriosos()),
+              MaterialPageRoute(builder: (context) => const MisteriosGloriosos()),
             );
           },
         ),
@@ -86,7 +90,7 @@ class RosarioTile extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  RosarioTile({required this.title, required this.onTap});
+  const RosarioTile({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

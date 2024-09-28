@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import '../services/database_helper.dart';
 import 'evento_widget.dart';
+import 'package:logger/logger.dart';
 
 class SavedEvents extends StatefulWidget {
+  const SavedEvents({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return SavedEventsState();
@@ -11,6 +14,7 @@ class SavedEvents extends StatefulWidget {
 
 class SavedEventsState extends State<SavedEvents> {
   List<Map<String, dynamic>> _savedEvents = [];
+  var logger = Logger();
 
   @override
   void initState() {
@@ -24,7 +28,7 @@ class SavedEventsState extends State<SavedEvents> {
       _savedEvents = events;
     });
     if (events.isEmpty) {
-      print('Nenhum evento salvo.');
+       logger.i('Nenhum evento salvo.');
     }
   }
 
@@ -32,10 +36,10 @@ class SavedEventsState extends State<SavedEvents> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eventos Salvos'),
+        title: const Text('Eventos Salvos'),
       ),
       body: _savedEvents.isEmpty
-          ? Center(
+          ? const Center(
         child: Text(
           'Nenhum evento salvo',
           style: TextStyle(fontSize: 18),
@@ -51,16 +55,16 @@ class SavedEventsState extends State<SavedEvents> {
               alignment: Alignment.bottomRight,
               children: [
                 EventoWidget(
-                  nome_evento: event['nome_evento'] ?? 'Nome do Evento',
-                  data_inicio: event['data_inicio'] ?? 'Data não disponível',
-                  data_fim: event['data_fim'],
+                  nomeEvento: event['nome_evento'] ?? 'Nome do Evento',
+                  dataInicio: event['data_inicio'] ?? 'Data não disponível',
+                  dataFim: event['data_fim'],
                   local: event['local'] ?? 'Local não disponível',
                   descricao: event['descricao'] ?? 'Descrição não disponível',
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                    icon: Icon(Icons.delete, color: Colors.red),
+                    icon: const Icon(Icons.delete, color: Colors.red),
                     onPressed: () async {
                       await DatabaseHelper().deleteEvent(event['id'] ?? '');
                       _loadSavedEvents();

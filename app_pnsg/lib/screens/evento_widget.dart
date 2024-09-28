@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EventoWidget extends StatelessWidget {
-  final String nome_evento;
-  final String data_inicio; // A data de início do evento como uma string
-  final String? data_fim; // Usar String? para aceitar nulo
+  final String nomeEvento;
+  final String dataInicio; // A data de início do evento como uma string
+  final String? dataFim; // Usar String? para aceitar nulo
   final String local;
   final String descricao;
 
-  const EventoWidget({
-    required this.nome_evento,
-    required this.data_inicio,
-    this.data_fim,
+  const EventoWidget({super.key, 
+    required this.nomeEvento,
+    required this.dataInicio,
+    this.dataFim,
     required this.local,
     required this.descricao,
   });
@@ -24,8 +24,8 @@ class EventoWidget extends StatelessWidget {
     // Verificação da data de início
     DateTime? parsedDataInicio;
     try {
-      if (data_inicio.isNotEmpty) {
-        parsedDataInicio = inputFormat.parse(data_inicio);
+      if (dataInicio.isNotEmpty) {
+        parsedDataInicio = inputFormat.parse(dataInicio);
       }
     } catch (e) {
       parsedDataInicio = null; // Se ocorrer um erro, defina como nulo
@@ -33,9 +33,9 @@ class EventoWidget extends StatelessWidget {
 
     // Verificação da data de fim
     DateTime? parsedDataFim;
-    if (data_fim != null && data_fim!.isNotEmpty) {
+    if (dataFim != null && dataFim!.isNotEmpty) {
       try {
-        parsedDataFim = inputFormat.parse(data_fim!);
+        parsedDataFim = inputFormat.parse(dataFim!);
       } catch (e) {
         parsedDataFim = null; // Se ocorrer um erro, defina como nulo
       }
@@ -55,7 +55,7 @@ class EventoWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Evento: $nome_evento',
+            'Evento: $nomeEvento',
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           const SizedBox(height: 5),
@@ -68,7 +68,7 @@ class EventoWidget extends StatelessWidget {
               'Data de Fim: $formattedDataFim',
               style: const TextStyle(fontSize: 16),
             ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             'Local: $local',
             style: const TextStyle(fontSize: 16),

@@ -7,7 +7,7 @@ class PastoralEspecifica extends StatelessWidget {
   final String? descricao;
   final String? imagem;
 
-  PastoralEspecifica({required this.nome, this.descricao, this.imagem});
+  const PastoralEspecifica({super.key, required this.nome, this.descricao, this.imagem});
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +42,19 @@ class PastoralEspecifica extends StatelessWidget {
         child: Center(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.all(15),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(15),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Color(0xFF036896),
+                  color: const Color(0xFF036896),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Text(
                   nome,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 28,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -64,10 +64,10 @@ class PastoralEspecifica extends StatelessWidget {
               ),
               if (descricao != null)
                 Container(
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   child: Text(
                     descricao!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       height: 1.5,
                     ),

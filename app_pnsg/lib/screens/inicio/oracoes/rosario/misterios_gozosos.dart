@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MisteriosGozosos extends StatelessWidget {
+  const MisteriosGozosos({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

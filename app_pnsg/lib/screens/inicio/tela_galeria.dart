@@ -7,11 +7,13 @@ import '../navigation_bar.dart';
 import '../tela_pastorais.dart';
 
 class Galeria extends StatefulWidget {
+  const Galeria({super.key});
+
   @override
-  _GaleriaState createState() => _GaleriaState();
+  GaleriaState createState() => GaleriaState();
 }
 
-class _GaleriaState extends State<Galeria> {
+class GaleriaState extends State<Galeria> {
   int currentPageIndex = 0;
 
   @override
@@ -30,27 +32,27 @@ class _GaleriaState extends State<Galeria> {
             if (currentPageIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Inicio()),
+                MaterialPageRoute(builder: (context) => const Inicio()),
               );
             } else if (currentPageIndex == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PastoraisScreen()),
+                MaterialPageRoute(builder: (context) => const PastoraisScreen()),
               );
             } else if (currentPageIndex == 2) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Eventos()),
+                MaterialPageRoute(builder: (context) => const Eventos()),
               );
             } else if (currentPageIndex == 3) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Contribua()),
+                MaterialPageRoute(builder: (context) => const Contribua()),
               );
             } else if (currentPageIndex == 4) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Informacoes()),
+                MaterialPageRoute(builder: (context) => const Informacoes()),
               );
             }
           });
@@ -58,7 +60,7 @@ class _GaleriaState extends State<Galeria> {
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.lightBlue,
       ),
-      body: Column(
+      body: const Column(
         children: [
           Expanded(child: GaleriaPagina()), // Ocupa o espaço restante
         ],
@@ -71,7 +73,9 @@ const String nome = 'Galeria';
 
 class GaleriaPagina extends StatelessWidget {
   final String googleDriveFolderUrl =
-      'https://drive.google.com/drive/folders/YOUR_FOLDER_ID?usp=sharing'; // Substitua pelo link da sua pasta
+      'https://drive.google.com/drive/folders/YOUR_FOLDER_ID?usp=sharing';
+
+  const GaleriaPagina({super.key}); // Substitua pelo link da sua pasta
 
   @override
   Widget build(BuildContext context) {

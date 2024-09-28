@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import '../config.dart';
 import 'navigation_bar.dart';
+import '../logger.dart';
 
 class DizimoService {
   Future<Map<String, String?>?> fetchDizimoData() async {
@@ -24,11 +25,13 @@ class DizimoService {
 }
 
 class Dizimo extends StatefulWidget {
+  const Dizimo({super.key});
+
   @override
-  _DizimoState createState() => _DizimoState();
+  DizimoState createState() => DizimoState();
 }
 
-class _DizimoState extends State<Dizimo> {
+class DizimoState extends State<Dizimo> {
   String? chavePix;
   String? qrCodeUrl;
   bool isLoading = true;
@@ -54,7 +57,7 @@ class _DizimoState extends State<Dizimo> {
       setState(() {
         isLoading = false;
       });
-      print('Erro ao carregar dados do dízimo: $e');
+      logger.i('Erro ao carregar dados do dízimo: $e');
     }
   }
 
@@ -65,7 +68,7 @@ class _DizimoState extends State<Dizimo> {
   void _copyToClipboard(String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('Chave Pix copiada para a área de transferência!'),
         duration: Duration(seconds: 2),
       ),
@@ -128,11 +131,11 @@ class _DizimoState extends State<Dizimo> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (isLoading)
-                Center(
+                const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(16.0),
                     child: CircularProgressIndicator(),
                   ),
                 )
@@ -146,7 +149,7 @@ class _DizimoState extends State<Dizimo> {
                         RichText(
                           text: TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: "Chave pix: ",
                                 style: TextStyle(
                                   fontSize: 16,
@@ -156,7 +159,7 @@ class _DizimoState extends State<Dizimo> {
                               ),
                               TextSpan(
                                 text: chavePix ?? 'Chave PIX não encontrada',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.normal,
                                   color: Colors.black, // Ajustar a cor do texto
@@ -165,9 +168,9 @@ class _DizimoState extends State<Dizimo> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 10), // Espaço entre o texto e o ícone
+                        const SizedBox(width: 10), // Espaço entre o texto e o ícone
                         IconButton(
-                          icon: Icon(Icons.copy),
+                          icon: const Icon(Icons.copy),
                           onPressed: () {
                             if (chavePix != null) {
                               _copyToClipboard(chavePix!);
@@ -178,7 +181,7 @@ class _DizimoState extends State<Dizimo> {
                     ),
                   ),
                 ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (qrCodeUrl != null && qrCodeUrl!.isNotEmpty)
                 Center(
                   child: Image.network(
