@@ -80,37 +80,43 @@ class EventosState extends State<Eventos> {
     });
   }
 
-  Future<void> _saveEvent(String eventId, Map<String, dynamic> eventData) async {
-    if (user != null) {
-      final eventToSave = {
-        'id': eventId.toString(),
-        'nome_evento': eventData['nome_evento'] ?? 'Nome não informado',
-        'data_inicio': eventData['data_inicio'] ?? 'Data não informada',
-        'data_fim': eventData['data_fim'] ?? 'Data não informada',
-        'local': eventData['local'] ?? 'Local não informado',
-        'descricao': eventData['descricao'] ?? 'Descrição não informada',
-      };
+ Future<void> _saveEvent(String eventId, Map<String, dynamic> eventData) async {
+  if (user != null) {
+    final eventToSave = {
+      'id': eventId.toString(),
+      'nome_evento': eventData['nome_evento'] ?? 'Nome não informado',
+      'data_inicio': eventData['data_inicio'] ?? 'Data não informada',
+      'data_fim': eventData['data_fim'] ?? 'Data não informada',
+      'local': eventData['local'] ?? 'Local não informado',
+      'descricao': eventData['descricao'] ?? 'Descrição não informada',
+    };
 
-      logger.i('Tentando salvar evento: $eventToSave');
+    logger.i('Tentando salvar evento: $eventToSave');
 
-      try {
-        await DatabaseHelper().saveEvent(eventToSave);
+    try {
+      await DatabaseHelper().saveEvent(eventToSave);
 
+      if (mounted) { 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Evento salvo com sucesso!')),
         );
-      } catch (e) {
-        logger.i('Erro ao salvar evento: $e');
+      }
+    } catch (e) {
+      logger.i('Erro ao salvar evento: $e');
+      if (mounted) { 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Erro ao salvar evento.')),
         );
       }
-    } else {
+    }
+  } else {
+    if (mounted) { 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Você precisa estar logado para salvar eventos.')),
       );
     }
   }
+}
 
   String formatDate(String? dateTime) {
     if (dateTime == null) return 'Data não disponível';

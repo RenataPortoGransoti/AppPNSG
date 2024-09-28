@@ -10,34 +10,32 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> {
-
   @override
   void initState() {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent, // Torna a barra de status transparente
+      statusBarColor: Colors.transparent,
     ));
     Future.delayed(const Duration(seconds: 1)).then((_) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Inicio()),
-      );
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Inicio()),
+        );
+      }
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Cor de fundo da splash
+      backgroundColor: Colors.white,
       body: Center(
         child: Image.asset(
           'assets/images/brasao_pnsg.jpg',
-          fit: BoxFit.cover, // Ajusta a imagem para cobrir a tela
+          fit: BoxFit.cover,
         ),
       ),
     );
   }
-
 }
