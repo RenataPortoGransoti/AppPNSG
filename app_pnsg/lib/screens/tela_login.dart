@@ -15,17 +15,18 @@ class LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
+  bool _isPasswordVisible = false; 
+
   void _login() async {
     try {
       await _auth.signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
-      Navigator.of(context).pop(); // Sucesso no login
+      Navigator.of(context).pop(); 
     } on FirebaseAuthException catch (e) {
       String errorMessage;
 
-      // Tratar os códigos de erro do FirebaseAuthException
       switch (e.code) {
         case 'user-not-found':
           errorMessage = 'Nenhum usuário encontrado com este e-mail.';
@@ -43,16 +44,13 @@ class LoginScreenState extends State<LoginScreen> {
           errorMessage = 'Muitas tentativas de login. Tente novamente mais tarde.';
           break;
         default:
-        // Tratar qualquer outro erro com uma mensagem genérica amigável
           errorMessage = 'Erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.';
       }
 
-      // Exibir a mensagem de erro para o usuário
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage)),
       );
     } catch (e) {
-      // Tratamento de erro genérico
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Erro ao fazer login. Tente novamente mais tarde.')),
       );
@@ -123,22 +121,7 @@ class LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 16),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Senha',
-                      labelStyle: const TextStyle(color: Colors.black54),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                  ),
+                  _buildPasswordField(), 
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _login,
@@ -147,24 +130,15 @@ class LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       backgroundColor: Colors.blue[200],
-                      foregroundColor: Colors.black,
+                      foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 66, vertical: 12),
                     ),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    child: const Text('Login', style: TextStyle(fontSize: 18)),
                   ),
                   const SizedBox(height: 10),
                   TextButton(
                     onPressed: _navigateToRegister,
-                    child: const Text(
-                      'Criar conta',
-                      style: TextStyle(
-                        color: Color(0xFF036896),
-                        fontSize: 16,
-                      ),
-                    ),
+                    child: const Text('Não tem uma conta? Registre-se aqui.'),
                   ),
                 ],
               ),
@@ -172,6 +146,37 @@ class LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildPasswordField() {
+    return TextField(
+      controller: _passwordController,
+      obscureText: !_isPasswordVisible,
+      decoration: InputDecoration(
+        labelText: 'Senha',
+        labelStyle: const TextStyle(color: Colors.black54),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue),
+        ),
+        filled: true,
+        fillColor: Colors.white,
+        suffixIcon: IconButton(
+          icon: Icon(
+            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+            color: const Color(0xFF8DBCE7),
+          ),
+          onPressed: () {
+            setState(() {
+              _isPasswordVisible = !_isPasswordVisible;
+            });
+          },
+        ),
+      ),
+      keyboardType: TextInputType.visiblePassword,
     );
   }
 }
