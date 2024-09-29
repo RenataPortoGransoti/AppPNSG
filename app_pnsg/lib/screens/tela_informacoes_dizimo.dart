@@ -123,6 +123,16 @@ class InformacoesDizimoState extends State<InformacoesDizimo> {
                 Colors.black
             ),
             const SizedBox(height: 20),
+            buildQuestionAnswer(
+                'Dízimo e suas dimensões',
+                "Primeira dimensão do dízimo é a religiosa. A partir de uma experiência, de descobrir-se amado por Deus, é que o fiel quer em gesto concreto colaborar com sua vida e com os seus bens que também outros façam a mesma experiência de saber ser amado por Deus."
+                    " Devolvendo uma parte dos seus bens, o fiel cultiva e aprofunda sua relação com aquele de quem provém tudo o que ele é e tudo o que ele tem, e expressa, na gratidão, sua fé e sua conversão. Dízimo é evangelização, por meio de nossa doação gratuita, ajudamos que a mensagem do Evangelho chegue a muitos lugares.\n\n"
+                "O dízimo também tem sua dimensão eclesial. Com o dízimo, o fiel vivencia sua consciência de ser membro da Igreja, pela qual é corresponsável, contribuindo para que a comunidade disponha do necessário para realizar o culto divino e para desenvolver sua missão\n\n"
+                "Na dimensão missionário, o dízimo permite a partilha de recursos entre as paróquias, comunidades mais pobres, manifestando a comunhão que há entre elas. Nosso dízimo contribui para que a Palavra de Deus chegue a cantos longíquos.\n\n"
+                    "O dízimo tem ainda a dimensão caritativa, que se manifesta no cuidado com os pobres, por parte da comunidade, por meio de um acompanhamento sério e de promoção da pessoa.",
+                Colors.lightBlue.shade50,
+                Colors.black
+            ),
           ],
         ),
       ),
