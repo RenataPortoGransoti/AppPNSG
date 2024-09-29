@@ -34,10 +34,9 @@ class InformacoesState extends State<Informacoes> {
   @override
   void initState() {
     super.initState();
-    fetchHorarios(); // Chama a função para buscar os horários ao iniciar a tela
+    fetchHorarios();
     fetchContactDetails();  }
 
-  // Função para buscar os horários da API Laravel
   Future<void>  fetchHorarios() async {
     try {
       final response = await http.get(Uri.parse('${Config.baseUrl}horariosapi'));
@@ -60,7 +59,6 @@ class InformacoesState extends State<Informacoes> {
     }
   }
 
-// Função para buscar os detalhes de contato da API Laravel
   Future<void>  fetchContactDetails() async {
     try {
       final response = await http.get(Uri.parse('${Config.baseUrl}contatosapi'));
@@ -85,8 +83,6 @@ class InformacoesState extends State<Informacoes> {
     }
   }
 
-
-
   void _launchPhone() async {
     final Uri launchUri = Uri(
       scheme: 'tel',
@@ -99,7 +95,6 @@ class InformacoesState extends State<Informacoes> {
     }
   }
 
-  // Função para abrir o Instagram
 void _abrirInstagram() async {
   var nativeUrl = instagramUrl.replaceFirst('https://www.instagram.com/', 'instagram://user?username=');
   var webUrl = instagramUrl;
@@ -116,8 +111,6 @@ void _abrirInstagram() async {
   }
 }
 
-
-  // Função para abrir o Facebook
 void _abrirFacebook() async {
   var nativeUrl = facebookUrl.replaceFirst('https://www.facebook.com/', 'fb://page/');
   var webUrl = facebookUrl;
@@ -134,7 +127,6 @@ void _abrirFacebook() async {
   }
 }
 
-// Função para lançar o WhatsApp com o número específico
   void abrirWhatsapp(
       String phone,
       String message,
@@ -146,7 +138,6 @@ void _abrirFacebook() async {
       mode: LaunchMode.externalApplication,
     );
   }
-// Método para mostrar o diálogo de formulário de contato
   void _showContactFormDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -194,8 +185,6 @@ void _abrirFacebook() async {
     await fetchHorarios();
     await fetchContactDetails();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -317,9 +306,9 @@ void _abrirFacebook() async {
                   Text(
                     instagramUsername.isNotEmpty ? '@$instagramUsername' : 'Instagram',
                     style: const TextStyle(fontSize: 16,
-                      decoration: TextDecoration.underline, // Adicionando sublinhado
-                      decorationColor: Color(0xFF036896), // Cor do sublinhado
-                      decorationThickness: 1, // Espessura do sublinhado
+                      decoration: TextDecoration.underline,
+                      decorationColor: Color(0xFF036896),
+                      decorationThickness: 1,
                       ),
                   ),
                 ],
@@ -334,14 +323,14 @@ void _abrirFacebook() async {
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FaIcon(FontAwesomeIcons.facebook, color: Color(0xFF3F51B5), size: 24), // Ícone do Facebook
+                FaIcon(FontAwesomeIcons.facebook, color: Color(0xFF3F51B5), size: 24),
                 SizedBox(width: 10),
                 Text(
                    'pnsgracalondrina' ,
                   style: TextStyle(
                     fontSize: 16,
                     decoration: TextDecoration.underline,
-                    decorationColor: Color(0xFF036896), // Cor do sublinhado
+                    decorationColor: Color(0xFF036896),
                     decorationThickness: 1,
                   ),
                 ),
@@ -349,8 +338,6 @@ void _abrirFacebook() async {
             ),
           ),
               const SizedBox(height: 30),
-
-              // Containers de horários expandíveis
               const Text(
                 'HORÁRIOS:',
                 style: TextStyle(
@@ -358,13 +345,13 @@ void _abrirFacebook() async {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              _buildHorarioTile("Secretaria Paroquial", 'secretaria'), // Tipo 'secretaria'
-              _buildHorarioTile("Missas", 'missa'), // Tipo 'missa'
-              _buildHorarioTile("Confissões", 'confissão'), // Tipo 'confissao'
+              _buildHorarioTile("Secretaria Paroquial", 'secretaria'),
+              _buildHorarioTile("Missas", 'missa'),
+              _buildHorarioTile("Confissões", 'confissão'),
 
               const SizedBox(height: 20),
               const Image(image: AssetImage('assets/images/mapa_paroquia.png')),
-              const Text("Endereço: Rua Luís Dias, 393 Petrópolis, Londrina - PR"),
+              const Text("Endereço: Rua Luís Dias, 393 - Petrópolis\n Londrina - PR", textAlign: TextAlign.center),
               const SizedBox(height: 5),
             ],
           ),
@@ -400,7 +387,7 @@ void _abrirFacebook() async {
               ),
             ),
           ),
-          iconColor: Colors.white, // Cor do ícone de expandir/recolher
+          iconColor: Colors.white,
           children: [
             if (horariosList != null && horariosList.isNotEmpty)
               Column(
