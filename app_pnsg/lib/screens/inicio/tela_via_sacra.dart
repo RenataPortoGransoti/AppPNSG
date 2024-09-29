@@ -11,6 +11,9 @@ class ViaSacraState extends State<ViaSacra> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
+  final String oracaoRepetida = 'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
+      'R. Porque pela Vossa santa cruz remistes o mundo.\n\n';
+
   final List<String> titulos = [
     'I ESTAÇÃO \n JESUS É CONDENADO À MORTE',
     'II ESTAÇÃO \n JESUS CARREGA A CRUZ',
@@ -29,90 +32,20 @@ class ViaSacraState extends State<ViaSacra> {
   ];
 
   final List<String> textos = [
-    // Textos de cada estação da Via Sacra
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Quando o “povo” pediu a crucificação de Jesus, Pilatos pediu água e lavou as mãos, dizendo: “Não sou responsável pelo sangue deste homem. É um problema de vocês”. Depois de mandar açoitar Jesus, entregou-o para ser crucificado. '
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus recebe sobre seus ombros a cruz e se dirige ao monte Calvário ou Gólgota, onde será crucificado. A cruz era um antigo instrumento de suplício, usado para executar os condenados à morte.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus caminha cansado e abatido sob o peso da cruz. Seu corpo está coberto de sangue, suas forças esmorecem, e ele cai. Com chicotes,os soldados o forçam a se levantar e continuar o caminho para o Calvário.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Mãe e filho se encontram e se abraçam em meio à dor. Eles tudo partilham, até a cruz, até o fim. Sem palavras, a dor leva-nos a compartilhar este momento sofrido, expresso em seus rostos.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Enquanto levavam Jesus para ser crucificado, Simão de Cirene, que voltava do campo, foi obrigado a carregar a cruz para que Jesus não desfalecesse pelo caminho, pois tinha de permanecer vivo até a crucificação.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Uma mulher que assistia à passagem de Jesus se comove ao ver a cena e decide limpar a face do condenado tingida de sangue. No pano usado por Verônica ficou gravado o rosto de Jesus.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus sabia do fim que o esperava. Seu espírito estava preparado, mas seu corpo estava esgotado e abatido. Por isso, caminhava com dificuldade e pela segunda vez cai sob a cruz.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Já estavam próximos do monte Calvário. Jesus, abatido pela dor e vendo suas forças esgotadas, ainda tem ânimo para consolar as mulheres que, chorando, lamentavam o sofrimento dele.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus já não suporta o cansaço e a dor, por isso cai pela terceira vez sob o peso da cruz. Quiseram dar-lhe vinho misturado com fel para aliviar a dor, mas ele não quis beber.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Os soldados tomaram as roupas de Jesus e fizeram um sorteio, para ver a parte que cabia a cada um. Assim se cumpre a profecia: “Repartiram entre si minhas vestes e lançaram sorte sobre a minha túnica”.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus é crucificado. São cravados pregos de ferro que lhe rasgam a carne, dilacerando mãos e pés. A cruz é erguida, Jesus fica suspenso entre o céu e a terra. Agora é o fim, ele está definitivamente condenado.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus morre na cruz. Ele está entregando a alma, consumando a obra da redenção. Tudo está cumprido, o véu do templo se rasga, a terra treme e os corações se comovem. É o grito de dor de um Deus que se faz homem, que morre por amor.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus é descido da cruz. Seu corpo é levado nos braços de Maria, que o recebe da mesma forma que o entregou, com amor e ternura. É o fim de uma vida, é o fim de uma história. Jesus se entrega ao Pai.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
-
-    'V. Nós Vos adoramos e Vos bendizemos, Senhor Jesus\n'
-        'R. Porque pela Vossa santa cruz remistes o mundo.\n\n'
-        'Jesus é colocado no sepulcro. É o repouso de um corpo dilacerado pela dor. Agora ele está morto, é o fim de uma história, mas o início de uma nova vida. Jesus ressuscitou, ele está vivo no meio de nós.\n'
-        'Pai Nosso, Ave Maria, Glória\n'
-        'Ó santa Mãe da dor, gravai no meu coração as chagas do Salvador.',
+    'Quando o “povo” pediu a crucificação de Jesus, Pilatos pediu água e lavou as mãos, dizendo: “Não sou responsável pelo sangue deste homem. É um problema de vocês”. Depois de mandar açoitar Jesus, entregou-o para ser crucificado.',
+    'Jesus recebe sobre seus ombros a cruz e se dirige ao monte Calvário ou Gólgota, onde será crucificado. A cruz era um antigo instrumento de suplício, usado para executar os condenados à morte.',
+    'Jesus caminha cansado e abatido sob o peso da cruz. Seu corpo está coberto de sangue, suas forças esmorecem, e ele cai. Com chicotes, os soldados o forçam a se levantar e continuar o caminho para o Calvário.',
+    'Mãe e filho se encontram e se abraçam em meio à dor. Eles tudo partilham, até a cruz, até o fim. Sem palavras, a dor leva-nos a compartilhar este momento sofrido, expresso em seus rostos.',
+    'Enquanto levavam Jesus para ser crucificado, Simão de Cirene, que voltava do campo, foi obrigado a carregar a cruz para que Jesus não desfalecesse pelo caminho, pois tinha de permanecer vivo até a crucificação.',
+    'Uma mulher que assistia à passagem de Jesus se comove ao ver a cena e decide limpar a face do condenado tingida de sangue. No pano usado por Verônica ficou gravado o rosto de Jesus.',
+    'Jesus sabia do fim que o esperava. Seu espírito estava preparado, mas seu corpo estava esgotado e abatido. Por isso, caminhava com dificuldade e pela segunda vez cai sob a cruz.',
+    'Já estavam próximos do monte Calvário. Jesus, abatido pela dor e vendo suas forças esgotadas, ainda tem ânimo para consolar as mulheres que, chorando, lamentavam o sofrimento dele.',
+    'Jesus já não suporta o cansaço e a dor, por isso cai pela terceira vez sob o peso da cruz. Quiseram dar-lhe vinho misturado com fel para aliviar a dor, mas ele não quis beber.',
+    'Os soldados tomaram as roupas de Jesus e fizeram um sorteio, para ver a parte que cabia a cada um. Assim se cumpre a profecia: “Repartiram entre si minhas vestes e lançaram sorte sobre a minha túnica”.',
+    'Jesus é crucificado. São cravados pregos de ferro que lhe rasgam a carne, dilacerando mãos e pés. A cruz é erguida, Jesus fica suspenso entre o céu e a terra. Agora é o fim, ele está definitivamente condenado.',
+    'Jesus morre na cruz. Ele está entregando a alma, consumando a obra da redenção. Tudo está cumprido, o véu do templo se rasga, a terra treme e os corações se comovem. É o grito de dor de um Deus que se faz homem, que morre por amor.',
+    'Jesus é descido da cruz. Seu corpo é levado nos braços de Maria, que o recebe da mesma forma que o entregou, com amor e ternura. É o fim de uma vida, é o fim de uma história. Jesus se entrega ao Pai.',
+    'Jesus é depositado no sepulcro. A vida venceu a morte, Jesus desceu à mansão dos mortos e ressuscitou. O caminho da cruz nos ensina que a nossa vida, mesmo com sofrimento, tem uma direção: a ressurreição.',
   ];
 
   @override
@@ -125,7 +58,8 @@ class ViaSacraState extends State<ViaSacra> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Via Sacra'),
+        title: const Text('Via Sacra', style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF036896),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -149,12 +83,27 @@ class ViaSacraState extends State<ViaSacra> {
                           color: Color(0xFF036896),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 40),
                       Text(
-                        textos[index],
+                        oracaoRepetida,
+                        style: const TextStyle(fontSize: 18),
                         textAlign: TextAlign.justify,
-                        style: const TextStyle(
-                          fontSize: 18,
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF036896).withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(color: const Color(0xFF036896)),
+                        ),
+                        child: Text(
+                          textos[index],
+                          textAlign: TextAlign.justify,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],
@@ -175,7 +124,7 @@ class ViaSacraState extends State<ViaSacra> {
               children: <Widget>[
                 if (_currentPage > 0)
                   IconButton(
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back, color: Color(0xFF036896)),
                     onPressed: () {
                       _pageController.previousPage(
                         duration: const Duration(milliseconds: 500),
@@ -186,7 +135,7 @@ class ViaSacraState extends State<ViaSacra> {
                 _buildPageIndicator(),
                 if (_currentPage < titulos.length - 1)
                   IconButton(
-                    icon: const Icon(Icons.arrow_forward),
+                    icon: const Icon(Icons.arrow_forward, color: Color(0xFF036896)),
                     onPressed: () {
                       _pageController.nextPage(
                         duration: const Duration(milliseconds: 500),
@@ -219,7 +168,3 @@ class ViaSacraState extends State<ViaSacra> {
     );
   }
 }
-
-void main() => runApp(const MaterialApp(
-  home: ViaSacra(),
-));
