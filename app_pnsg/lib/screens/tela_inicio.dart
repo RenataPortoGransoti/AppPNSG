@@ -262,6 +262,18 @@ class InicioState extends State<Inicio> {
               ],
             ),
           ),
+          //saudação ao usuário logado
+          // if (_user != null)
+          //   Positioned(
+          //     top: 40.0,
+          //     left: 20,
+          //     child: Text(
+          //       "Seja bem-vindo(a), ${_user?.displayName?.split(' ')[0] ?? 'Usuário'}!",
+          //       style: const TextStyle(
+          //         fontSize: 14,
+          //       ),
+          //     ),
+          //   ),
           _user == null
               ? LoginButton(
             onPressed: _navigateToLogin,
