@@ -2,8 +2,7 @@
 
 <head>
     <title>Informações | Painel Admin</title>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/images/brasaoparoquia_logo.jpg?v=2') }}" />
 </head>
 
 <body>
