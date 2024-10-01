@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('/admin/register', [RegisteredUserController::class, 'create'])
         ->name('register');
-    Route::post('/admin/register', [RegisteredUserController::class, 'store']);
+    Route::post('/admin/register', [RegisteredUserController::class, 'cadastrarSecretario']);
 });
 
 
