@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Horario;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Log;
 
 class HorarioController extends Controller
@@ -16,52 +15,50 @@ class HorarioController extends Controller
             'missa' => Horario::where('tipo', 'missa')->get(),
             'confissão' => Horario::where('tipo', 'confissão')->get(),
         ];
-        return $horarios; // Retorna o array diretamente
+        return $horarios;
     }
 
     public function carregarHorariosApp()
     {
         $horarios = Horario::all()->groupBy('tipo');
-
         return response()->json($horarios);
     }
-
 
     public function cadastrarHorario(Request $request)
     {
         Log::info('Request data:', $request->all());
 
-        $this->storeHorarios($request, 'secretaria');
-        $this->storeHorarios($request, 'missa');
-        $this->storeHorarios($request, 'confissão');
+        $storeHorarios = function ($tipo) use ($request) {
+            $horarios = $request->input("horarios_{$tipo}", []);
+            $ids = $request->input("ids_{$tipo}", []);
 
-        return redirect()->route('informacoes.index')->with('success', 'Horários salvos com sucesso!');
-    }
+            Log::info("Processando horários do tipo {$tipo}", ['horarios' => $horarios, 'ids' => $ids]);
 
-    private function storeHorarios(Request $request, $tipo)
-    {
-        $horarios = $request->input("horarios_$tipo", []);
-        $ids = $request->input("ids_$tipo", []);
+            foreach ($horarios as $index => $descricao) {
+                if (!empty($descricao)) {
+                    $horarioId = $ids[$index] ?? null;
 
-        Log::info("Processing $tipo:", ['horarios' => $horarios, 'ids' => $ids]);
-
-        foreach ($horarios as $index => $descricao) {
-            if (!empty($descricao)) {
-                $horarioId = $ids[$index];
-
-                if ($horarioId) {
-                    // Atualize o horário existente
-                    $existingHorario = Horario::find($horarioId);
-                    if ($existingHorario) {
-                        $existingHorario->descricao = $descricao;
-                        $existingHorario->save();
+                    if ($horarioId) {
+                        $existingHorario = Horario::find($horarioId);
+                        if ($existingHorario) {
+                            $existingHorario->descricao = $descricao;
+                            $existingHorario->save();
+                        }
+                    } else {
+                        Horario::create([
+                            'descricao' => $descricao,
+                            'tipo' => $tipo
+                        ]);
                     }
-                } else {
-                    // Crie um novo horário
-                    Horario::create(['descricao' => $descricao, 'tipo' => $tipo]);
                 }
             }
-        }
+        };
+
+        $storeHorarios('secretaria');
+        $storeHorarios('missa');
+        $storeHorarios('confissão');
+
+        return redirect()->route('informacoes.index')->with('success', 'Horários salvos com sucesso!');
     }
 
     public function excluirHorario($id)

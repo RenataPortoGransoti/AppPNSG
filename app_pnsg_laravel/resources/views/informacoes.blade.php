@@ -117,7 +117,6 @@
                         </div>
                         {{-- div horarios --}}
                         <div class="px-8 py-4 bg-white shadow rounded-lg mb-10">
-
                             <h1 class="mb-4 text-center text-xl">Editar Informações de Horários</h1>
                             <div class="flex justify-end">
                                 <i class="bi bi-dash toggle-icon cursor-pointer text-2xl"></i>
@@ -221,19 +220,17 @@
                         }
                     });
                 });
-
-
-
                 document.addEventListener('click', (event) => {
                     if (event.target.closest('.add-horario-btn')) {
                         const container = event.target.closest('.card-body');
+                        const tipo = container.id.replace('horarios-container-', '');
                         const newHorario = document.createElement('div');
                         newHorario.classList.add('my-2', 'flex', 'items-center');
                         newHorario.innerHTML = `
-                            <input type="text" name="${container.id.replace('container', '')}[]" data-id="" class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                            <input type="hidden" name="ids_${container.id.replace('container', '')}[]" value="">
+                            <input type="text"  name="horarios_${tipo}[]" data-id="" class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                            <input type="hidden" name="ids_${tipo}[]" value="">
                             <button type="button" class="remove-horario-btn ml-2 text-red-500"><i class="bi bi-x"></i></button>
-                        `;
+                                    `;
                         container.appendChild(newHorario);
                     }
 
@@ -258,7 +255,6 @@
                     }
                 });
             });
-
 
             function showExcluirModal(id) {
                 const excluirModal = document.getElementById('excluirModal');
