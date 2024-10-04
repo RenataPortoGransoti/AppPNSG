@@ -21,17 +21,27 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex sm:justify-center items-center pt-6 sm:pt-0 bg-gray-200 content-center">
-        <div>
-            <a href="/" class="flex justify-center">
-                <x-application-logo class="w-12 content-centerfill-current text-gray-500" />
+    <header>
+        <nav class="absolute top-4 md:top-8 left-2 md:left-6">
+            <a href="{{ route('dashboard') }}"
+                class="rounded-full bg-[#036896] px-3 md:px-5 py-2 md:py-3 text-white transition hover:bg-[#9DDEFB] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9DDEFB]">
+                Voltar
             </a>
-        </div>
+        </nav>
+    </header>
+    <main>
+        <div class="min-h-screen flex sm:justify-center items-center pt-6 sm:pt-0 bg-gray-200 content-center">
+            <div>
+                <a href="/" class="flex justify-center">
+                    <x-application-logo class="w-12 content-centerfill-current text-gray-500" />
+                </a>
+            </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-lg overflow-hidden sm:rounded-lg">
-            {{ $slot }}
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-lg overflow-hidden sm:rounded-lg">
+                {{ $slot }}
+            </div>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>
