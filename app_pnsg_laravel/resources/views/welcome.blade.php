@@ -10,8 +10,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
-    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <!-- Styles -->
     <style>
         /* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
         *,
@@ -899,40 +899,43 @@
                 --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity))
             }
         }
-    </style>
+    </style> --}}
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 
-    <header class="grid grid-cols-2 items-center gap-2 py-8 lg:grid-cols-3">
-        <div class="flex lg:justify-center lg:col-start-2">
-            <x-application-logo class="" />
+    <header class="relative flex flex-col lg:grid lg:grid-cols-3 items-center gap-2 pt-14 ">
+        <div class="lg:col-start-2 flex justify-center">
+            <x-application-logo class="w-32 h-32" />
         </div>
 
         @if (Route::has('login'))
-            <nav class="flex justify-center">
+            <nav class="absolute top-4 md:top-8 right-2 md:right-6">
                 @auth
                     <a href="{{ url('/dashboard') }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        class="rounded-full bg-[#036896] px-3 md:px-5 py-2 md:py-3 text-white transition hover:bg-[#9DDEFB] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9DDEFB]">
                         Dashboard
                     </a>
                 @else
                     <a href="{{ route('login') }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                        Fazer Login
+                        class="rounded-full bg-[#036896] px-3 md:px-5 py-2 md:py-3 text-white transition hover:bg-[#9DDEFB] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9DDEFB]">
+                        Acessar Painel Admin
                     </a>
                 @endauth
             </nav>
         @endif
     </header>
 
-    <main>
-        <h1 class="flex justify-center font-semibold text-xl">Painel Admin - Aplicativo da Paróquia Nossa Senhora
-            das
-            Graças, Londrina-PR</h1>
+    <main class="mt-8 lg:mt-16">
+        <h1 class="text-center font-semibold text-lg md:text-xl lg:text-2xl mt-4 lg:mt-8">
+            Painel Admin - Aplicativo da Paróquia Nossa Senhora das Graças, Londrina-PR
+        </h1>
     </main>
 
-
 </body>
+
+
+
+
 
 </html>
