@@ -25,9 +25,9 @@
             </form>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto mt-16">
             <table class="min-w-full bg-white border border-gray-200">
-                <thead>
+                <thead class="bg-[#036896] text-white">
                     <tr>
                         <th class="py-2 px-4 border-b">Nome</th>
                         <th class="py-2 px-4 border-b">CPF</th>
@@ -40,15 +40,15 @@
                 </thead>
                 <tbody>
                     @forelse ($users as $user)
-                        <tr>
-                            <td class="py-2 px-4 border-b">{{ $user->nome }}</td>
-                            <td class="py-2 px-4 border-b">{{ $user->cpf }}</td>
-                            <td class="py-2 px-4 border-b">{{ $user->celular }}</td>
-                            <td class="py-2 px-4 border-b">{{ $user->email }}</td>
-                            <td class="py-2 px-4 border-b">
+                        <tr class="border-b hover:bg-[#9DDEFB] transition-colors">
+                            <td class="py-2 px-4 text-center">{{ $user->nome }}</td>
+                            <td class="py-2 px-4 text-center">{{ $user->cpf }}</td>
+                            <td class="py-2 px-4 text-center">{{ $user->celular }}</td>
+                            <td class="py-2 px-4 text-center">{{ $user->email }}</td>
+                            <td class="py-2 px-4 text-center">
                                 {{ \Carbon\Carbon::parse($user->dataNascimento)->format('d/m/Y') }}</td>
-                            <td class="py-2 px-4 border-b">{{ $user->tipo }}</td>
-                            <td class="py-2 px-4 border-b">
+                            <td class="py-2 px-4 text-center">{{ $user->tipo }}</td>
+                            <td class="py-2 px-4 text-center">
                                 <a href="{{ route('edit-user', $user->id) }}"
                                     class="text-[#036896] font-bold hover:underline">Editar</a>
 
