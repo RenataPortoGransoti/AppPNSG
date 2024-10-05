@@ -12,24 +12,26 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="">
-    <div class="flex">
+<body class="flex flex-col min-h-screen"> <!-- Alterado aqui -->
+    <div class="flex flex-1"> <!-- Modificado para ocupar a altura restante -->
         <!-- Sidebar -->
         @include('layouts.sidebar')
 
-
-        <div class=" flex-1">
+        <div class="flex-1">
             <!-- Navigation -->
             @include('layouts.navigation')
 
             <!-- Page Content -->
-            <main>
-                <div class=" mx-auto sm:px-6 lg:px-8">
+            <main class="flex-1">
+                <div class="mx-auto sm:px-6 lg:px-8">
                     @yield('content')
                 </div>
             </main>
         </div>
     </div>
+
+    <!-- Rodapé -->
+    <x-rodape />
 </body>
 
 </html>
