@@ -110,8 +110,8 @@
                     const newAviso = document.createElement('div');
                     newAviso.classList.add('my-2', 'flex', 'items-center');
                     newAviso.innerHTML = `
-                            <input type="text" name="${container.id.replace('container', '')}[]" data-id="" class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                            <input type="hidden" name="ids_${container.id.replace('container', '')}[]" value="">
+                            <input type="text" name="avisos[]" data-id="" class="form-control block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                            <input type="hidden" name="ids[]" value="">
                             <button type="button" class="remove-aviso-btn ml-2 text-red-500"><i class="bi bi-x"></i></button>
                         `;
                     container.appendChild(newAviso);
