@@ -23,10 +23,17 @@
 <body class="font-sans text-gray-900 antialiased">
     <header>
         <nav class="absolute top-4 md:top-8 left-2 md:left-6">
-            <a href="{{ route('dashboard') }}"
-                class="rounded-full bg-[#036896] px-3 md:px-5 py-2 md:py-3 text-white transition hover:bg-[#9DDEFB] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9DDEFB]">
-                Voltar
-            </a>
+            @auth
+                <a href="{{ route('dashboard') }}"
+                    class="rounded-full bg-[#036896] px-3 md:px-5 py-2 md:py-3 text-white transition hover:bg-[#9DDEFB] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9DDEFB]">
+                    Voltar
+                </a>
+            @else
+                <a href="{{ route('welcome') }}"
+                    class="rounded-full bg-[#036896] px-3 md:px-5 py-2 md:py-3 text-white transition hover:bg-[#9DDEFB] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9DDEFB]">
+                    Voltar
+                </a>
+            @endauth
         </nav>
     </header>
     <main>
