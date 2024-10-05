@@ -14,14 +14,18 @@
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-4 relative">
             <x-input-label for="password" :value="__('Senha')" />
 
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+            <x-text-input id="password" class="block mt-1 w-full pr-10" type="password" name="password" required
                 autocomplete="current-password" />
+
+            <i class="bx bx-lock-alt absolute right-3 top-2/3 transform -translate-y-1/2 cursor-pointer"
+                id="togglePasswordIcon" onclick="togglePasswordVisibility('password', 'togglePasswordIcon')"></i>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+
 
         <!-- Remember Me -->
         <div class="block mt-4">
@@ -45,4 +49,23 @@
             </x-primary-button>
         </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            window.togglePasswordVisibility = function(inputId, iconId) {
+                const passwordInput = document.getElementById(inputId);
+                const passwordIcon = document.getElementById(iconId);
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                if (type === 'text') {
+                    passwordIcon.classList.remove('bx-lock-alt');
+                    passwordIcon.classList.add('bx-lock-open-alt');
+                } else {
+                    passwordIcon.classList.remove('bx-lock-open-alt');
+                    passwordIcon.classList.add('bx-lock-alt');
+                }
+            };
+        });
+    </script>
 </x-guest-layout>
