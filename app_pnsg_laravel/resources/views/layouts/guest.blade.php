@@ -17,7 +17,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/images/brasaoparoquia_logo.jpg?v=2') }}" />
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
