@@ -138,7 +138,10 @@ class LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 10),
                   TextButton(
                     onPressed: _navigateToRegister,
-                    child: const Text('Não tem uma conta? Registre-se aqui.'),
+                    child: const Text('Não tem uma conta? Registre-se aqui.',
+                      style: TextStyle(
+                        color: Color(0xFF036896),
+                      ),),
                   ),
                 ],
               ),
