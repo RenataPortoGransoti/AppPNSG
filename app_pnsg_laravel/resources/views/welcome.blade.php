@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>PNSG - Painel Admin</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('build/assets/brasaoparoquia_logo.jpg') }}">
     <!-- Fonts -->
@@ -931,11 +930,6 @@
             Painel Admin - Aplicativo da Paróquia Nossa Senhora das Graças, Londrina-PR
         </h1>
     </main>
-
 </body>
-
-
-
-
 
 </html>

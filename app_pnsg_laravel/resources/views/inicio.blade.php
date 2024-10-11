@@ -3,7 +3,6 @@
 <head>
     <title>Início | Painel Admin</title>
 </head>
-
 <body>
     @section('content')
         <div class="container mx-auto max-w-4xl">
@@ -13,7 +12,6 @@
                     <div class="w-full md:w-2/3">
                         <div class="px-8 py-4 bg-white shadow rounded-lg">
                             <h1 class="mb-4 text-center text-xl">Editar avisos</h1>
-
                             <!-- Formulário de Avisos -->
                             <form action="{{ route('avisos.store') }}" method="POST" class="mb-4">
                                 @csrf
@@ -56,7 +54,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="text-white px-4 py-3 text-center">
                                     <button type="submit" id="submitBtn"
                                         class="btn w-3/12 py-2 bg-[#036896] hover:bg-[#9DDEFB] hover:text-black border border-[#036896] rounded-xl">Salvar</button>
@@ -137,7 +134,6 @@
                     });
                 }
             });
-
         });
 
         function showExcluirModal(id) {
@@ -154,5 +150,4 @@
             excluirModal.classList.add('hidden');
         }
     </script>
-
 </body>

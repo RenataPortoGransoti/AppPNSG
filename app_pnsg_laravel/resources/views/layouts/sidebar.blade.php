@@ -18,7 +18,6 @@
     <!--begin::Sidebar Wrapper-->
     <div class="px-4">
         <nav class="mt-4">
-            <!--begin::Sidebar Menu-->
             <ul class="space-y-2">
                 <li class="nav-item {{ Request::is('dashboard') ? 'bg-gray-600' : '' }}">
                     <a href="{{ url('/dashboard') }}" class="flex items-center p-2 text-base font-normal rounded-lg hover:bg-gray-700">
@@ -57,7 +56,6 @@
                     </a>
                 </li>
             </ul>
-            <!--end::Sidebar Menu-->
         </nav>
     </div>
     <!--end::Sidebar Wrapper-->

@@ -134,7 +134,6 @@
     </div>
 
     <script>
-        // Script para abrir e fechar os modais
         document.getElementById('gerenciarDizimo').addEventListener('click', function() {
             document.getElementById('dizimoModal').classList.remove('hidden');
         });

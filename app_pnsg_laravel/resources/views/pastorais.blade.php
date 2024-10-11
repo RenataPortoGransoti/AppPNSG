@@ -2,7 +2,6 @@
 <title>Pastorais | Painel Admin</title>
 @section('content')
     <main class="app-main flex-1 p-5 overflow-y-auto">
-
         <div class="container mx-auto">
             <h1 class="text-center font-semibold text-4xl my-6">PASTORAIS</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
@@ -66,7 +65,6 @@
                                                     <label for="photo" class="form-label mb-1 block">Imagem Atual</label>
                                                     <img src="{{ asset('storage/' . $pastoral->imagem) }}"
                                                         class="block mb-2" style="max-width: 200px;" alt="Imagem Atual">
-                                                    <!-- Botão para excluir a imagem -->
                                                     <button type="button" class="text-red-500 hover:text-red-700"
                                                         onclick="handleDeleteImage({{ $pastoral->id }})">Excluir
                                                         Imagem</button>
@@ -362,7 +360,6 @@
                     })
                     .then(response => {
                         if (response.ok) {
-                            // Atualizar a página após a exclusão bem-sucedida
                             window.location.reload();
                         } else {
                             throw new Error('Erro ao excluir a imagem.');

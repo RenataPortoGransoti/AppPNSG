@@ -11,7 +11,6 @@
                 class="rounded-md px-6 py-4 bg-[#9DDEFB] text-black font-semibold hover:bg-[#036896] hover:text-white transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#036896] focus:ring-offset-2">
                 Registrar novo(a) secretário(a)
             </a>
-
             <form method="GET" action="{{ route('dashboard') }}" class="flex items-center">
                 <select name="tipo" class="border border-gray-300 rounded-md p-2 mr-2">
                     <option value="">Todos</option>
