@@ -11,16 +11,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="flex flex-col min-h-screen"> <!-- Alterado aqui -->
-    <div class="flex flex-1"> <!-- Modificado para ocupar a altura restante -->
-        <!-- Sidebar -->
+<body class="flex flex-col min-h-screen">
+    <div class="flex flex-1">
         @include('layouts.sidebar')
-
         <div class="flex-1">
-            <!-- Navigation -->
             @include('layouts.navigation')
-
-            <!-- Page Content -->
             <main class="flex-1">
                 <div class="mx-auto sm:px-6 lg:px-8">
                     @yield('content')
