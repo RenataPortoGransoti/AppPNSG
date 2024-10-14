@@ -12,7 +12,7 @@ class _GaleriaState extends State<Galeria> {
   late final WebViewController _controller;
 
   final String googleDriveFolderUrl =
-      'https://drive.google.com/drive/folders/1bczfTHgOD7mwodZ89e4SM7qvlamzQeM5?usp=sharing';
+      'https://drive.google.com/drive/folders/1ODlccrNq4HvXXGopNoFjSSOvSEd3Agvk?usp=sharing';
 
   @override
   void initState() {
