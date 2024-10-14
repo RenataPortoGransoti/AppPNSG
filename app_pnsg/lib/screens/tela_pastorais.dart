@@ -46,6 +46,9 @@ class PastoraisScreenState extends State<PastoraisScreen> {
   Future<void> _fetchPastorais() async {
     try {
       List<dynamic> pastorais = await _pastoralService.fetchPastorais();
+
+      pastorais.sort((a, b) => a['nome'].compareTo(b['nome']));
+      
       setState(() {
         _pastorais = pastorais;
         isLoading = false; // Carregamento concluído
