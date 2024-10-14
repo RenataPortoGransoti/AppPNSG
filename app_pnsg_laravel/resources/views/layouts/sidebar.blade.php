@@ -23,7 +23,7 @@
                     <a href="{{ url('/dashboard') }}"
                         class="flex items-center p-2 text-base font-normal rounded-lg hover:bg-gray-700">
                         <i class="bi bi-clipboard-data"></i>
-                        <span class="ml-3">Dashboard</span>
+                        <span class="ml-3">Usuários</span>
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('inicio') ? 'bg-gray-600' : '' }}">

@@ -913,7 +913,7 @@
                 @auth
                     <a href="{{ url('/dashboard') }}"
                         class="rounded-full bg-[#036896] px-3 md:px-5 py-2 md:py-3 text-white transition hover:bg-[#9DDEFB] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9DDEFB]">
-                        Dashboard
+                        Painel Admin
                     </a>
                 @else
                     <a href="{{ route('login') }}"
