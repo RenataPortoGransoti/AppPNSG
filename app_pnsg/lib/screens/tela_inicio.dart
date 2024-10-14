@@ -5,8 +5,8 @@ import 'package:PNSG/Screens/tela_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../login_button.dart';
+import 'inicio/tela_galeria.dart';
 import 'navigation_bar.dart';
-import 'Inicio/tela_galeria.dart';
 import 'Inicio/tela_historia_paroquia.dart';
 import 'Inicio/tela_oracoes.dart';
 import 'Inicio/tela_via_sacra.dart';
@@ -295,5 +295,5 @@ class InicioState extends State<Inicio> {
  child: WebView(
  initialUrl: 'https://liturgia.cancaonova.com/pb/',
  javascriptMode: JavascriptMode.unrestricted,
-
+)
  */
