@@ -3,6 +3,7 @@
 <head>
     <title>Início | Painel Admin</title>
 </head>
+
 <body>
     @section('content')
         <div class="container mx-auto max-w-4xl">
@@ -10,7 +11,7 @@
             <div class="container mx-auto mt-4 mb-8">
                 <div class="flex justify-center">
                     <div class="w-full md:w-2/3">
-                        <div class="px-8 py-4 bg-white shadow rounded-lg">
+                        <div class="px-8 py-4 bg-white shadow-xl rounded-lg border border-[#036896]">
                             <h1 class="mb-4 text-center text-xl">Editar avisos</h1>
                             <!-- Formulário de Avisos -->
                             <form action="{{ route('avisos.store') }}" method="POST" class="mb-4">

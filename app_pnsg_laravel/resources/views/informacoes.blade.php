@@ -27,10 +27,10 @@
             @endif
             <h1 class="text-center font-semibold text-4xl my-6">INFORMAÇÕES GERAIS</h1>
             <div class="container mx-auto mt-4 mb-8">
-                <div class="flex justify-center">
+                <div class="flex justify-center ">
                     <div class="w-full md:w-2/3">
                         {{-- div contato --}}
-                        <div class="px-8 py-4 bg-white shadow rounded-lg mb-10">
+                        <div class="px-8 py-4 bg-white shadow-xl rounded-lg mb-10 border border-[#036896] ">
                             <h1 class="mb-4 text-center text-xl">Editar Informações de Contato</h1>
                             <div class="flex justify-end">
                                 <i class="bi bi-dash toggle-icon cursor-pointer text-2xl"></i>
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                         {{-- div horarios --}}
-                        <div class="px-8 py-4 bg-white shadow rounded-lg mb-10">
+                        <div class="px-8 py-4 bg-white shadow-xl rounded-lg mb-10 border border-[#036896]">
                             <h1 class="mb-4 text-center text-xl">Editar Informações de Horários</h1>
                             <div class="flex justify-end">
                                 <i class="bi bi-dash toggle-icon cursor-pointer text-2xl"></i>
