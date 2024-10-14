@@ -1,4 +1,4 @@
-<footer class="bg-gray-800 text-white py-6">
+<footer class="bg-[#173441] text-white py-6">
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row md:justify-evenly">
             <div class="mb-4 md:mb-0">
