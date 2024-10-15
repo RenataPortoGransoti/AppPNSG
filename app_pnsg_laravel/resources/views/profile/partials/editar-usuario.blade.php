@@ -43,7 +43,8 @@
             <select id="tipo" name="tipo" class="block mt-1 w-full" required>
                 <option value="secretário(a)" {{ old('tipo', $user->tipo) == 'secretário(a)' ? 'selected' : '' }}>
                     Secretário(a)</option>
-                <option value="outro" {{ old('tipo', $user->tipo) == 'outro' ? 'selected' : '' }}>Outro</option>
+                <option value="paroquiano(a)" {{ old('tipo', $user->tipo) == 'paroquiano(a)' ? 'selected' : '' }}>
+                    Paroquiano(a)</option>
             </select>
             <x-input-error :messages="$errors->get('tipo')" class="mt-2" />
         </div>
