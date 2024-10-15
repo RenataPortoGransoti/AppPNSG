@@ -13,7 +13,6 @@ use App\Http\Controllers\DizimoController;
 use App\Http\Controllers\DoacaoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ParoquianoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,16 +60,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-//Rotas para informações das pastorais, eventos, horarios, contatos e avisos em JSON
-Route::get('/pastoraisapi', [PastoralController::class, 'carregarPastoraisApp']);
-Route::get('/dizimoapi', [DizimoController::class, 'carregarDizimoApp']);
-Route::get('/doacaoapi', [DoacaoController::class, 'carregarDoacaoApp']);
-Route::get('/eventosapi', [EventoController::class, 'carregarEventosAtivosApp']);
-Route::get('/horariosapi', [HorarioController::class, 'carregarHorariosApp']);
-Route::get('/contatosapi', [ContatoController::class, 'carregarContatoApp']);
-Route::get('/avisosapi', [AvisoController::class, 'carregarAvisosApp']);
-Route::post('/register-paroquiano', [ParoquianoController::class, 'registrarParoquiano']);
 
 Route::get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);
