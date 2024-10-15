@@ -13,10 +13,10 @@
                 Registrar novo(a) secretário(a)
             </a>
             <form method="GET" action="{{ route('dashboard') }}" class="flex flex-wrap items-center gap-2">
-                <select name="tipo" class="border border-gray-300 rounded-md p-2">
+                <select name="tipo" class="border border-gray-300 rounded-md py-2 px-6">
                     <option value="">Todos</option>
                     <option value="secretário(a)">Secretário</option>
-                    <option value="paroquiano">Paroquiano</option>
+                    <option value="paroquiano(a)">Paroquiano</option>
                 </select>
                 <button type="submit"
                     class="rounded-md px-6 py-2 bg-[#9DDEFB] text-black font-semibold hover:bg-[#036896] hover:text-white transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#036896] focus:ring-offset-2">
