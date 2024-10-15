@@ -39,7 +39,7 @@ class InformacoesState extends State<Informacoes> {
 
   Future<void>  fetchHorarios() async {
     try {
-      final response = await http.get(Uri.parse('${Config.baseUrl}horariosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}api/horariosapi'));
 
       if (response.statusCode == 200) {
         setState(() {
@@ -61,7 +61,7 @@ class InformacoesState extends State<Informacoes> {
 
   Future<void>  fetchContactDetails() async {
     try {
-      final response = await http.get(Uri.parse('${Config.baseUrl}contatosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}api/contatosapi'));
 
       if (response.statusCode == 200) {
         setState(() {

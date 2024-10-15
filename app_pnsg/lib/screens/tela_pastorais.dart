@@ -207,7 +207,7 @@ class _SampleCard extends StatelessWidget {
 
 class PastoralService {
   Future<List<dynamic>> fetchPastorais() async {
-    final response = await http.get(Uri.parse('${Config.baseUrl}pastoraisapi'));
+    final response = await http.get(Uri.parse('${Config.baseUrl}api/pastoraisapi'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {

@@ -9,7 +9,7 @@ import '../logger.dart';
 
 class DizimoService {
   Future<Map<String, String?>?> fetchDizimoData() async {
-    final response = await http.get(Uri.parse('${Config.baseUrl}dizimoapi'));
+    final response = await http.get(Uri.parse('${Config.baseUrl}api/dizimoapi'));
     if (response.statusCode == 200) {
       List<dynamic> dizimos = json.decode(response.body);
       if (dizimos.isNotEmpty) {

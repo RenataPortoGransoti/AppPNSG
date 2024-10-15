@@ -53,7 +53,7 @@ class EventosState extends State<Eventos> {
     if (!hasInternet) return;
 
     try {
-      final response = await http.get(Uri.parse('${Config.baseUrl}eventosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}api/eventosapi'));
       if (response.statusCode == 200) {
         setState(() {
           eventos = json.decode(response.body);

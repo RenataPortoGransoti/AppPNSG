@@ -9,7 +9,7 @@ import '../logger.dart';
 
 class DoacaoService {
   Future<Map<String, String?>?> fetchDoacaoData() async {
-    final response = await http.get(Uri.parse('${Config.baseUrl}doacaoapi'));
+    final response = await http.get(Uri.parse('${Config.baseUrl}api/doacaoapi'));
     if (response.statusCode == 200) {
       List<dynamic> doacao = json.decode(response.body);
       if (doacao.isNotEmpty) {

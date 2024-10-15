@@ -39,7 +39,7 @@ class InicioState extends State<Inicio> {
 
   Future<void> fetchAvisos() async {
     try {
-      final response = await http.get(Uri.parse('${Config.baseUrl}avisosapi'));
+      final response = await http.get(Uri.parse('${Config.baseUrl}api/avisosapi'));
 
       if (response.statusCode == 200) {
         setState(() {
