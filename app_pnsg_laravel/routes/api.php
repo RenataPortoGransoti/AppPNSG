@@ -2,9 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\PastoralController;
-
-
+use App\Http\Controllers\ParoquianoController;
+use App\Http\Controllers\AvisoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,10 +15,10 @@ use App\Http\Controllers\API\PastoralController;
 |
 */
 
+Route::post('/registrar/paroquiano', [ParoquianoController::class, 'registrarParoquiano']);
+
 Route::post('/autenticate', [\App\Http\Controllers\Api\AuthController::class, "login"]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/pastoraisapi', [PastoralController::class, 'indexApi']);
