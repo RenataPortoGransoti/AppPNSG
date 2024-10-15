@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
@@ -35,6 +34,7 @@ class RegisterScreenState extends State<RegisterScreen> {
     });
 
     try {
+      // Verificar se todos os campos estão preenchidos
       if (_nameController.text.isEmpty ||
           _emailController.text.isEmpty ||
           _passwordController.text.isEmpty ||
@@ -54,41 +54,22 @@ class RegisterScreenState extends State<RegisterScreen> {
         return;
       }
 
-      // Criação do usuário no Firebase
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      // Adicionar informações adicionais no Firestore
-      await FirebaseFirestore.instance.collection('users').doc(
-          userCredential.user!.uid).set({
-        'name': _nameController.text,
-        'email': _emailController.text,
-        'cpf': _cpfController.text,
-        'celular': _celularController.text,
-        'dataNascimento': _dataNascimentoController.text,
-        'type': 'paroquiano',
-      });
-
       // Converter dataNascimento para o formato Y-m-d
       final dateFormat = DateFormat('dd/MM/yyyy');
       final parsedDate = dateFormat.parse(_dataNascimentoController.text);
-      final dataNascimentoFormatted = DateFormat('yyyy-MM-dd').format(
-          parsedDate);
+      final dataNascimentoFormatted = DateFormat('yyyy-MM-dd').format(parsedDate);
 
-      // Enviar dados para a API Laravel
+      // Primeiro, enviar os dados para a API
       final response = await http.post(
-        Uri.parse('${Config.baseUrl}register-paroquiano'),
+        Uri.parse('${Config.baseUrl}api/registrar/paroquiano'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode({
           'nome': _nameController.text,
-          'email': _emailController.text,
           'cpf': _cpfController.text,
           'celular': _celularController.text,
+          'email': _emailController.text,
           'dataNascimento': dataNascimentoFormatted,
           'password': _passwordController.text,
           'password_confirmation': _confirmPasswordController.text,
@@ -96,8 +77,17 @@ class RegisterScreenState extends State<RegisterScreen> {
       );
 
       if (response.statusCode == 201) {
-        Navigator.of(context).pop();
+        // Se a API retornar sucesso, criar o usuário no Firebase
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        // Redirecionar após sucesso
+        Navigator.of(context).pushReplacementNamed('/Inicio');
       } else {
+        // Se a API retornar erro, mostrar a mensagem
         final responseData = jsonDecode(response.body);
         setState(() {
           _errorMessage = 'Erro: ${responseData['errors']}';
@@ -106,7 +96,7 @@ class RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       setState(() {
         _errorMessage =
-        'Erro ao criar a conta. Verifique os detalhes e tente novamente.';
+        'Erro ao registrar o usuário. Verifique os detalhes e tente novamente.';
       });
       logger.i(e);
     } finally {
