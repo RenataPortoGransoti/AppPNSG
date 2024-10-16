@@ -1,3 +1,5 @@
+import 'package:PNSG/Screens/tela_login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../email.dart';
 import 'tela_dizimo.dart';
@@ -87,6 +89,18 @@ class ContribuaState extends State<Contribua> {
       subject: 'Novo formulário de dizimista preenchido - App PNSG!',
       body: emailBody,
     );
+  }
+
+  void _checkAuthAndShowForm(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    } else {
+      _mostrarFormularioDizimista(context);
+    }
   }
 
   @override
@@ -203,7 +217,7 @@ class ContribuaState extends State<Contribua> {
             ),
             GestureDetector(
               onTap: () {
-                _mostrarFormularioDizimista(context);
+                _checkAuthAndShowForm(context);
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 15),
