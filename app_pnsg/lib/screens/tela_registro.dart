@@ -27,6 +27,23 @@ class RegisterScreenState extends State<RegisterScreen> {
   bool _isLoading = false;
   String? _errorMessage;
 
+  String _handleApiError(Map<String, dynamic> errors) {
+    if (errors.containsKey('cpf')) {
+      if (errors['cpf'].contains('already exists')) {
+        return 'Este CPF já está cadastrado.';
+      } else if (errors['cpf'].contains('invalid')) {
+        return 'CPF inválido. Verifique e tente novamente.';
+      }
+    }
+    if (errors.containsKey('email')) {
+      return 'O e-mail já está em uso. Tente outro e-mail.';
+    }
+    if (errors.containsKey('password')) {
+      return 'As senhas não coincidem ou não atendem aos requisitos.';
+    }
+    return 'Ocorreu um erro desconhecido. Tente novamente.';
+  }
+
   void _register() async {
     setState(() {
       _isLoading = true;
@@ -87,10 +104,10 @@ class RegisterScreenState extends State<RegisterScreen> {
         // Redirecionar após sucesso
         Navigator.of(context).pushReplacementNamed('/Inicio');
       } else {
-        // Se a API retornar erro, mostrar a mensagem
+        // Se a API retornar erro, mostrar a mensagem personalizada
         final responseData = jsonDecode(response.body);
         setState(() {
-          _errorMessage = 'Erro: ${responseData['errors']}';
+          _errorMessage = _handleApiError(responseData['errors']);
         });
       }
     } catch (e) {
