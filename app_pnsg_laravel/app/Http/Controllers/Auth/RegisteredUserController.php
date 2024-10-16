@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
             'email' => $request->input('email'),
             'dataNascimento' => $dataNascimento,
             'password' => Hash::make($request->input('password')),
-            'tipo' => 'secretário(a)',
+            'tipo' => 'Secretário(a)',
         ]);
 
         event(new Registered($user));
@@ -85,7 +85,7 @@ class RegisteredUserController extends Controller
             'email' => $request->input('email'),
             'dataNascimento' => $request->input('dataNascimento'),
             'password' => Hash::make($request->input('password')),
-            'tipo' => 'paroquiano(a)',
+            'tipo' => 'Paroquiano(a)',
         ]);
 
         return response()->json(['message' => 'Usuário registrado com sucesso!'], 201);

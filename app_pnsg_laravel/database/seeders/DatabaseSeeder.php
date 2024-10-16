@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'celular' => '4333421276',
             'email' => 'admin@email.com',
             'dataNascimento' => '1955-11-01',
-            'tipo' => 'secretário(a)',
+            'tipo' => 'Secretário(a)',
             'password' => bcrypt('admin123'),
         ]);
     }

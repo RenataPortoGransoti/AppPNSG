@@ -35,7 +35,7 @@ class ParoquianoController extends Controller
                 'email' => $request->input('email'),
                 'dataNascimento' => $request->input('dataNascimento'), // Formato Y-m-d
                 'password' => Hash::make($request->input('password')),
-                'tipo' => 'paroquiano(a)',
+                'tipo' => 'Paroquiano(a)',
             ]);
 
             return response()->json(['message' => 'Usuário registrado com sucesso!', 'user' => $user], 201);
