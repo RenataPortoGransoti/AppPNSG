@@ -17,6 +17,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');;
+Route::get('/politica-de-privacidade', function () {
+    return view('politica_de_privacidade');
+})->name('politica-privacidade');;
 
 Route::middleware('auth')->group(function () {
     Route::get('/inicio', [AvisoController::class, 'consultarAvisos'])->name('inicio.index');
