@@ -1,4 +1,4 @@
-package com.example.app_pnsg
+package com.example.app_pnsg_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 
