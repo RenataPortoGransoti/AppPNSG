@@ -1,0 +1,53 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.renata.app_pnsg_flutter"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+
+        applicationId = "com.renata.app_pnsg_flutter"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdkVersion 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'key'
+            keyPassword 'pnsg123'
+            storeFile file('C:/Users/renat/my-release-key.jks')
+            storePassword 'pnsg123'
+        }
+    }
+
+    buildTypes {
+        release {
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.release
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+apply plugin: 'com.google.gms.google-services'

@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="default_web_client_id"></string>
+    <string name="google_api_key">AIzaSyDpduiQ88bR7jW7wNb3yTaJmrxymPcdy24
+</string>
+    <string name="firebase_database_url"></string>
+    <string name="project_id">pnsg-71d91</string>
+    <string name="application_id">1:1036593207928:android:c414d8dd54312837516b8d
+</string>
 </resources>

@@ -33,7 +33,7 @@ class UserController extends Controller
         $dataNascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $request->input('dataNascimento'))->format('Y-m-d');
 
         $user->update([
-            'nome' => $request->input('nome'),
+            'nome' => $request->input('nome'), 
             'cpf' => $request->input('cpf'),
             'celular' => $request->input('celular'),
             'email' => $request->input('email'),
