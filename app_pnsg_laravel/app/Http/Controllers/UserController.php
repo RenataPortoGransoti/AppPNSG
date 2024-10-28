@@ -32,13 +32,22 @@ class UserController extends Controller
 
         $dataNascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $request->input('dataNascimento'))->format('Y-m-d');
 
+        $validatedData = $validator->validated();
+
+        if ($request->filled('password')) {
+            $validatedData['password'] = bcrypt($request->input('password'));
+        } else {
+            $validatedData['password'] = $user->password;
+        }
+
         $user->update([
-            'nome' => $request->input('nome'), 
+            'nome' => $request->input('nome'),
             'cpf' => $request->input('cpf'),
             'celular' => $request->input('celular'),
             'email' => $request->input('email'),
             'dataNascimento' => $dataNascimento,
             'tipo' => $request->input('tipo'),
+            'password' => $validatedData['password'],
         ]);
 
         return redirect()->route('dashboard')->with('status', 'Secretário(a) atualizado(a) com sucesso!');

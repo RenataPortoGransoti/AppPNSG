@@ -49,6 +49,36 @@
             <x-input-error :messages="$errors->get('tipo')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Nova Senha')" />
+            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full pr-10"
+                autocomplete="new-password" placeholder="Nova Senha do Usuário" />
+            <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center"
+                onclick="togglePasswordVisibility('update_password_password', 'password-icon')"
+                style="margin-top:
+                1.5rem;">
+                <i id="password-icon" class="fa fa-lock"></i>
+            </button>
+            @error('password')
+                <x-input-error :messages="$message" />
+            @enderror
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirmar Senha')" />
+            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password"
+                class="mt-1 block w-full pr-10" autocomplete="new-password" placeholder="Confirmar Senha do Usuário" />
+            <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center"
+                onclick="togglePasswordVisibility('update_password_password_confirmation', 'confirm-password-icon')"
+                style="margin-top:
+                1.5rem;">
+                <i id="confirm-password-icon" class="fa fa-lock"></i>
+            </button>
+            @error('password_confirmation')
+                <x-input-error :messages="$message" />
+            @enderror
+        </div>
+
         <div class="flex items-center justify-center mt-8">
             <x-primary-button class="ms-4">
                 {{ __('Atualizar') }}
