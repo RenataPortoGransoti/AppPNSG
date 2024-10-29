@@ -29,7 +29,7 @@ class InformacoesState extends State<Informacoes> {
   String instagramUrl = "";
   String facebookUrl = "";
   String instagramUsername = "";
-  ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(4);
+  final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(4);
 
   final List<String> _navigationHistory = [];
 

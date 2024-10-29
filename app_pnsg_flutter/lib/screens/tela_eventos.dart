@@ -24,7 +24,7 @@ class EventosState extends State<Eventos> {
   bool isLoading = true;
   bool hasInternet = true;
   User? user;
-  ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(2);
+  final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(2);
 
   final List<String> _navigationHistory = [];
 

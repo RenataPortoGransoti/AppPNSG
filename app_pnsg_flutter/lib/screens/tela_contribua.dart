@@ -18,7 +18,7 @@ class Contribua extends StatefulWidget {
 }
 
 class ContribuaState extends State<Contribua> {
-  ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(3);
+  final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(3);
 
   final List<String> _navigationHistory = [];
 

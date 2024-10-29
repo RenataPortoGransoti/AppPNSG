@@ -151,7 +151,7 @@ class LoginScreenState extends State<LoginScreen> {
                         MaterialPageRoute(builder: (context) => EsqueceuSenha()),
                       );
                     },
-                    child: Text('Esqueceu sua senha?',
+                    child: const Text('Esqueceu sua senha?',
                       style: TextStyle(
                         color: Colors.black,
                   ),),

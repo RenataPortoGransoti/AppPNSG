@@ -8,7 +8,7 @@ class EsqueceuSenha extends StatelessWidget {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('E-mail de redefinição enviado! Verifique sua caixa de entrada.')),
+        const SnackBar(content: Text('E-mail de redefinição enviado! Verifique sua caixa de entrada.')),
       );
     } on FirebaseAuthException catch (e) {
       String message = 'Erro ao enviar e-mail de redefinição.';
@@ -25,7 +25,7 @@ class EsqueceuSenha extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Esqueceu a Senha"),
+        title: const Text("Esqueceu a Senha"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,7 +36,7 @@ class EsqueceuSenha extends StatelessWidget {
               'Informe seu e-mail para receber o link de redefinição de senha.',
               style: TextStyle(fontSize: 16.0),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             TextField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
@@ -71,7 +71,7 @@ class EsqueceuSenha extends StatelessWidget {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 76, vertical: 12),
               ),
-              child: Text('Enviar e-mail de redefinição'),
+              child: const Text('Enviar e-mail de redefinição'),
             ),
           ],
         ),
