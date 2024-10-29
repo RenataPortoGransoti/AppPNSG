@@ -14,6 +14,15 @@
                                 <span>CADASTRAR EVENTO</span>
                             </button>
                         </div>
+                        @if ($errors->any())
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-2 py-2 mx-5 mt-2 rounded relative">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li class="text-lg">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <!-- DIV CARD EVENTO -->
                         @if ($eventos->where('ativo', 1)->isEmpty())
                             <p class="text-center text-gray-600 p-4">Não há eventos ativos no momento.</p>
@@ -109,6 +118,9 @@
                                                     <input type="datetime-local" id="editDataFim"
                                                         class="form-input border rounded-md h-10 px-1" name="edit_data_fim"
                                                         value="{{ \Carbon\Carbon::parse($evento->data_fim)->format('Y-m-d\TH:i') }}">
+                                                    @error('edit_data_fim')
+                                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="mb-4">
@@ -137,6 +149,7 @@
                         @endif
                     </div>
                 </div>
+
 
                 <!-- Cadastrar novo evento -->
                 <div id="cardEvento" class="my-4 hidden">

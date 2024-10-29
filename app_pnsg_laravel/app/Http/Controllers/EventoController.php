@@ -27,6 +27,7 @@ class EventoController extends Controller
         $validator = Validator::make($request->all(), [
             'nome_evento' => 'required|string|max:50',
             'data_inicio' => 'required|date',
+            'data_fim' => 'nullable|date|after_or_equal:data_inicio',
             'local' => 'required|string|max:100',
             'descricao' => 'nullable|string|max:255',
             'ativo' => 'boolean'
@@ -68,8 +69,11 @@ class EventoController extends Controller
         $validator = Validator::make($request->all(), [
             'edit_nome_evento' => 'required|string|max:50',
             'edit_data_inicio' => 'required|date',
+            'edit_data_fim' => 'nullable|date|after_or_equal:edit_data_inicio',
             'edit_local' => 'required|string|max:100',
             'edit_descricao' => 'nullable|string|max:255',
+        ], [
+            'edit_data_fim.after_or_equal' => 'A data de fim deve ser uma data posterior ou igual à data de início.',
         ]);
 
         if ($validator->fails()) {
@@ -85,6 +89,9 @@ class EventoController extends Controller
             'local' => $request->edit_local,
             'descricao' => $request->edit_descricao,
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         return redirect()->route('eventos.index')->with('success', 'Evento editado com sucesso.');
     }
