@@ -4,8 +4,6 @@ import 'package:PNSG/screens/inicio/oracoes/rosario/misterios_gozosos.dart';
 import 'package:PNSG/screens/inicio/oracoes/rosario/misterios_luminosos.dart';
 import 'package:flutter/material.dart';
 
-
-
 class Rosario extends StatefulWidget {
   const Rosario({super.key});
 

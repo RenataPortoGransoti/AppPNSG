@@ -15,10 +15,8 @@ import 'oracoes/santo_anjo.dart';
 import 'oracoes/terco_divina_misericordia.dart';
 import 'oracoes/vinde_espirito_santo.dart';
 
-
 class Oracoes extends StatefulWidget {
   const Oracoes({super.key});
-
   @override
   OracoesState createState() => OracoesState();
 }
@@ -74,10 +72,8 @@ class OracoesState extends State<Oracoes> {
 }
 
 const String nome = 'Orações';
-
 class OracoesList extends StatelessWidget {
   const OracoesList({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -196,9 +192,7 @@ class OracoesList extends StatelessWidget {
 class OracoesTile extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
-
   const OracoesTile({super.key, required this.title, required this.onTap});
-
   @override
   Widget build(BuildContext context) {
     return Container(
