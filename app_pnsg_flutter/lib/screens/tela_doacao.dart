@@ -36,7 +36,7 @@ class DoacaoState extends State<Doacao> {
   String? chavePix;
   String? qrCodeUrl;
   bool isLoading = true;
-  bool hasInternet = true; // Variável para controlar a conexão com a internet
+  bool hasInternet = true;
   int currentPageIndex = 3;
 
   @override
@@ -49,19 +49,19 @@ class DoacaoState extends State<Doacao> {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       setState(() {
-        hasInternet = false; // Não há conexão
-        isLoading = false; // Para parar o carregamento
+        hasInternet = false;
+        isLoading = false;
       });
     } else {
       setState(() {
-        hasInternet = true; // Há conexão
+        hasInternet = true;
       });
     }
   }
 
   Future<void> loadDoacao() async {
     try {
-      await checkInternetConnection(); // Verificar conexão antes de carregar os dados
+      await checkInternetConnection();
       final service = DoacaoService();
       final fetchedData = await service.fetchDoacaoData();
       setState(() {
@@ -73,7 +73,7 @@ class DoacaoState extends State<Doacao> {
       });
     } catch (e) {
       setState(() {
-        isLoading = false; // Para parar o carregamento em caso de erro
+        isLoading = false;
       });
       logger.i('Erro ao carregar dados do doação: $e');
     }

@@ -3,8 +3,8 @@ import 'package:intl/intl.dart';
 
 class EventoWidget extends StatelessWidget {
   final String nomeEvento;
-  final String dataInicio; // A data de início do evento como uma string
-  final String? dataFim; // Usar String? para aceitar nulo
+  final String dataInicio;
+  final String? dataFim;
   final String local;
   final String descricao;
 
@@ -19,7 +19,7 @@ class EventoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateFormat inputFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    DateFormat outputFormat = DateFormat('dd/MM/yyyy HH:mm'); // Ajuste para dd/MM/yyyy
+    DateFormat outputFormat = DateFormat('dd/MM/yyyy HH:mm');
 
     // Verificação da data de início
     DateTime? parsedDataInicio;
@@ -28,7 +28,7 @@ class EventoWidget extends StatelessWidget {
         parsedDataInicio = inputFormat.parse(dataInicio);
       }
     } catch (e) {
-      parsedDataInicio = null; // Se ocorrer um erro, defina como nulo
+      parsedDataInicio = null;
     }
 
     // Verificação da data de fim
@@ -37,7 +37,7 @@ class EventoWidget extends StatelessWidget {
       try {
         parsedDataFim = inputFormat.parse(dataFim!);
       } catch (e) {
-        parsedDataFim = null; // Se ocorrer um erro, defina como nulo
+        parsedDataFim = null;
       }
     }
 
@@ -46,7 +46,7 @@ class EventoWidget extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      padding: const EdgeInsets.all(20), // Espaçamento interno fixo
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.lightBlue),
         borderRadius: BorderRadius.circular(8.0),
@@ -63,7 +63,7 @@ class EventoWidget extends StatelessWidget {
             'Data de Início: $formattedDataInicio',
             style: const TextStyle(fontSize: 16),
           ),
-          if (formattedDataFim != null) // Mostra apenas se formattedDataFim não for nulo
+          if (formattedDataFim != null)
             Text(
               'Data de Fim: $formattedDataFim',
               style: const TextStyle(fontSize: 16),

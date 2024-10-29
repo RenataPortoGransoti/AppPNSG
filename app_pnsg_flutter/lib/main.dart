@@ -28,7 +28,7 @@ class AppPnsg extends StatelessWidget {
           buttonColor: Colors.blue,
         ),
       ),
-      home: const Splash(), // Tela inicial de splash
+      home: const Splash(),
       routes: {
         '/Inicio': (context) => const Inicio(),
         '/PastoraisScreen': (context) => const PastoraisScreen(),

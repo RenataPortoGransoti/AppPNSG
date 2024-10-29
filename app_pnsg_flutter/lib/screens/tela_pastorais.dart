@@ -29,7 +29,6 @@ class PastoraisScreenState extends State<PastoraisScreen> {
     if (index != 1) {
       _navigationHistory.add(_getRouteName(index));
     }
-
     switch (index) {
       case 0:
         Navigator.pushNamed(context, '/Inicio');
@@ -48,7 +47,6 @@ class PastoraisScreenState extends State<PastoraisScreen> {
     }
   }
 
-
   String _getRouteName(int index) {
     switch (index) {
       case 0: return '/Inicio';
@@ -66,7 +64,6 @@ class PastoraisScreenState extends State<PastoraisScreen> {
     _fetchPastorais();
   }
 
-  // Função para verificar se há conexão à internet
   Future<void> checkInternetConnection() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
@@ -102,7 +99,6 @@ class PastoraisScreenState extends State<PastoraisScreen> {
   Future<void> _handleRefresh() async {
     await _fetchPastorais();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +183,6 @@ class PastoraisScreenState extends State<PastoraisScreen> {
   }
 }
 
-// Método para obter o índice a partir do nome da rota
 int _getIndexFromRoute(String route) {
   switch (route) {
     case '/Inicio': return 0;
@@ -195,11 +190,9 @@ int _getIndexFromRoute(String route) {
     case '/Eventos': return 2;
     case '/Contribua': return 3;
     case '/Informações': return 4;
-    default: return -1; // Valor padrão se a rota não for encontrada
+    default: return -1;
   }
 }
-
-
 
 class _SampleCard extends StatelessWidget {
   const _SampleCard({required this.cardName, required this.descricao, required this.imagem});

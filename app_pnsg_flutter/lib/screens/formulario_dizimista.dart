@@ -78,7 +78,7 @@ class FormularioDizimista extends StatelessWidget {
                         return null;
                       },
                       inputFormatters: [
-                        MaskedInputFormatter('(##) #########'), // Máscara de telefone
+                        MaskedInputFormatter('(##) #########'),
                       ],
                     ),
                     const SizedBox(height: 10),

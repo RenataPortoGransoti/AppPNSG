@@ -53,7 +53,6 @@ class EventosState extends State<Eventos> {
     }
   }
 
-
   String _getRouteName(int index) {
     switch (index) {
       case 0: return '/Inicio';
@@ -72,7 +71,6 @@ class EventosState extends State<Eventos> {
     _getUser();
   }
 
-  // Função para verificar se há conexão à internet
   Future<void> checkInternetConnection() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
@@ -191,7 +189,7 @@ class EventosState extends State<Eventos> {
     ),
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
-        color: Colors.blue[200], // Cor alterada para azul
+        color: Colors.blue[200],
         child: Column(
           children: [
             Container(
@@ -347,7 +345,6 @@ class EventosState extends State<Eventos> {
     ),);
   }
 }
-// Método para obter o índice a partir do nome da rota
 int _getIndexFromRoute(String route) {
   switch (route) {
     case '/Inicio': return 0;

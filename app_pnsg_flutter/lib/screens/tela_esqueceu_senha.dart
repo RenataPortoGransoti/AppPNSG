@@ -32,7 +32,7 @@ class EsqueceuSenha extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            const Text(
               'Informe seu e-mail para receber o link de redefinição de senha.',
               style: TextStyle(fontSize: 16.0),
             ),
@@ -53,7 +53,7 @@ class EsqueceuSenha extends StatelessWidget {
                 fillColor: Colors.white,
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 final email = emailController.text;

@@ -51,7 +51,6 @@ class RegisterScreenState extends State<RegisterScreen> {
     });
 
     try {
-      // Verificar se todos os campos estão preenchidos
       if (_nameController.text.isEmpty ||
           _emailController.text.isEmpty ||
           _passwordController.text.isEmpty ||
@@ -71,12 +70,10 @@ class RegisterScreenState extends State<RegisterScreen> {
         return;
       }
 
-      // Converter dataNascimento para o formato Y-m-d
       final dateFormat = DateFormat('dd/MM/yyyy');
       final parsedDate = dateFormat.parse(_dataNascimentoController.text);
       final dataNascimentoFormatted = DateFormat('yyyy-MM-dd').format(parsedDate);
 
-      // Primeiro, enviar os dados para a API
       final response = await http.post(
         Uri.parse('${Config.baseUrl}api/registrar/paroquiano'),
         headers: <String, String>{
@@ -94,7 +91,6 @@ class RegisterScreenState extends State<RegisterScreen> {
       );
 
       if (response.statusCode == 201) {
-        // Se a API retornar sucesso, criar o usuário no Firebase
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
           email: _emailController.text,
@@ -224,7 +220,7 @@ class RegisterScreenState extends State<RegisterScreen> {
               filled: true,
               fillColor: Colors.white,
               contentPadding: const EdgeInsets.symmetric(vertical: 8.0,
-                  horizontal: 12.0), // Reduzindo o padding interno
+                  horizontal: 12.0),
             ),
           ),
         ],

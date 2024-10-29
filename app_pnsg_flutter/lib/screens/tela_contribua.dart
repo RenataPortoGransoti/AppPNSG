@@ -76,7 +76,6 @@ class ContribuaState extends State<Contribua> {
             dataNascimento,
             dataNascimentoConjuge,
           );
-
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text('Formulário enviado com sucesso. Deus abençoe. Aguarde nosso contato!'),
@@ -303,7 +302,6 @@ class ContribuaState extends State<Contribua> {
   }
 }
 
-// Método para obter o índice a partir do nome da rota
 int _getIndexFromRoute(String route) {
   switch (route) {
     case '/Inicio': return 0;
@@ -311,6 +309,6 @@ int _getIndexFromRoute(String route) {
     case '/Eventos': return 2;
     case '/Contribua': return 3;
     case '/Informações': return 4;
-    default: return -1; // Valor padrão se a rota não for encontrada
+    default: return -1;
   }
 }

@@ -170,13 +170,13 @@ class ContactForm extends StatelessWidget {
   Future<String?> fetchCSRFToken(String baseUrl) async {
     try {
       final Uri uri =
-          Uri.parse('$baseUrl/csrf-token'); // URL para obter o token CSRF
+          Uri.parse('$baseUrl/csrf-token');
       final response = await http.get(uri);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         final String csrfToken = responseData[
-            'csrfToken']; // Supondo que o token CSRF seja retornado como 'csrfToken'
+            'csrfToken'];
         return csrfToken;
       } else {
         if (kDebugMode) {
@@ -200,14 +200,11 @@ class ContactForm extends StatelessWidget {
     String mensagem,
   ) async {
     try {
-      // Obter o token CSRF
       String? csrfToken = await fetchCSRFToken(baseUrl);
 
       if (csrfToken != null) {
-        // Configurar a URL para enviar o e-mail
         final Uri uri = Uri.parse('$baseUrl/send-email');
 
-        // Enviar o e-mail com o token CSRF nos headers
         final response = await http.post(
           uri,
           headers: {

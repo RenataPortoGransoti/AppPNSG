@@ -16,7 +16,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       onTap: (index) {
-        onDestinationSelected(index); // Notifica o índice selecionado
+        onDestinationSelected(index);
       },
       selectedItemColor: Colors.lightBlue,
       currentIndex: selectedIndex,

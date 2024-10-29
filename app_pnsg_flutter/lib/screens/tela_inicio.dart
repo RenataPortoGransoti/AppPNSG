@@ -32,7 +32,6 @@ class InicioState extends State<Inicio> {
     if (index != 1) {
       _navigationHistory.add(_getRouteName(index));
     }
-
     switch (index) {
       case 0:
         break;
@@ -50,7 +49,6 @@ class InicioState extends State<Inicio> {
         break;
     }
   }
-
 
   String _getRouteName(int index) {
     switch (index) {
@@ -320,7 +318,6 @@ class InicioState extends State<Inicio> {
   }
 }
 
-// Método para obter o índice a partir do nome da rota
 int _getIndexFromRoute(String route) {
   switch (route) {
     case '/Inicio': return 0;
@@ -331,7 +328,6 @@ int _getIndexFromRoute(String route) {
     default: return -1; // Valor padrão se a rota não for encontrada
   }
 }
-
 
 //aparecer janela web com a liturgia diária
 /*Container(

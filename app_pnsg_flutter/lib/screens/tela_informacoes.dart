@@ -82,7 +82,6 @@ class InformacoesState extends State<Informacoes> {
       if (response.statusCode == 200) {
         setState(() {
           var parsedJson = json.decode(response.body) as Map<String, dynamic>;
-          // Iterar sobre as chaves do JSON para preencher horarios corretamente
           parsedJson.forEach((key, value) {
             if (key == 'secretaria' || key == 'missa' || key == 'confissão') {
               horarios[key] = value as List<dynamic>;
@@ -104,10 +103,9 @@ class InformacoesState extends State<Informacoes> {
       if (response.statusCode == 200) {
         setState(() {
           var parsedJson = json.decode(response.body) as Map<String, dynamic>;
-          phoneNumber = parsedJson['contato'][0]['valor']; // Atualiza o número de telefone
-          instagramUrl = parsedJson['instagram'][0]['valor']; // Atualiza o URL do Instagram
-          facebookUrl = parsedJson['facebook'][0]['valor']; // Atualiza o URL do Facebook
-          // Extrair o nome de usuário do URL do Instagram
+          phoneNumber = parsedJson['contato'][0]['valor'];
+          instagramUrl = parsedJson['instagram'][0]['valor'];
+          facebookUrl = parsedJson['facebook'][0]['valor'];
           if (instagramUrl.isNotEmpty) {
             final uri = Uri.parse(instagramUrl);
             instagramUsername = uri.pathSegments.isNotEmpty ? uri.pathSegments[0] : '';
