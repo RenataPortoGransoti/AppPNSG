@@ -33,7 +33,6 @@ class PastoralController extends Controller
 
         $nomePastoral = $request->input('nomePastoral');
 
-        // Verificar se já existe uma pastoral com o mesmo nome (case-insensitive)
         $existingPastoral = Pastoral::whereRaw('LOWER(nome) = ?', [strtolower($nomePastoral)])->first();
 
         if ($existingPastoral) {
@@ -54,7 +53,6 @@ class PastoralController extends Controller
                 return redirect()->route('pastorais.index')->with('error', 'Uma pastoral com esse nome já existe.');
             }
         } else {
-            // Criar uma nova pastoral
             $pastoral = new Pastoral;
             $pastoral->nome = $nomePastoral;
             $pastoral->descricao = $request->input('descricao');
@@ -73,13 +71,11 @@ class PastoralController extends Controller
 
     public function editarPastoral(Request $request, Pastoral $pastoral)
     {
-        // Validação dos dados do formulário
         $request->validate([
             'nomePastoral' => 'required',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Para imagem
         if ($request->hasFile('photo')) {
             Storage::delete('public/' . $pastoral->imagem);
 
@@ -97,7 +93,6 @@ class PastoralController extends Controller
                 $pastoral->save();
             }
         }
-        // Atualizar os dados no banco de dados
         $pastoral->nome = $request->input('nomePastoral');
         $pastoral->descricao = $request->input('descricao');
         $pastoral->save();
@@ -107,12 +102,9 @@ class PastoralController extends Controller
 
     public function excluirImagem(Request $request, Pastoral $pastoral)
     {
-        // Verifique se a imagem existe antes de excluir
         if ($pastoral->imagem) {
-            // Exclua a imagem do armazenamento
             Storage::delete('public/' . $pastoral->imagem);
 
-            // Atualize o campo de imagem para null
             $pastoral->imagem = null;
             $pastoral->save();
 
@@ -131,7 +123,6 @@ class PastoralController extends Controller
             $pastoral->ativo = 0;
             $pastoral->save();
         }
-
         return redirect()->route('pastorais.index')->with('success', 'Pastoral inativada com sucesso.');
     }
 
@@ -143,7 +134,6 @@ class PastoralController extends Controller
             $pastoral->ativo = 1; // Definindo como ativo
             $pastoral->save();
         }
-
         return redirect()->route('pastorais.index')->with('success', 'Pastoral ativada com sucesso.');
     }
 }

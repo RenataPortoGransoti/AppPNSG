@@ -12,13 +12,12 @@ class ParoquianoController extends Controller
 {
     public function registrarParoquiano(Request $request)
     {
-        // Validação dos dados
         $validator = Validator::make($request->all(), [
             'nome' => 'required|string|max:255',
             'cpf' => 'required|string|size:14|unique:users|regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/',
             'celular' => 'required|string|size:15|regex:/^\(\d{2}\) \d{5}-\d{4}$/',
             'email' => 'required|string|email|max:255|unique:users',
-            'dataNascimento' => 'required|date_format:Y-m-d', // Formato Y-m-d vindo do Flutter
+            'dataNascimento' => 'required|date_format:Y-m-d',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -26,18 +25,16 @@ class ParoquianoController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Criação do usuário no banco de dados
         try {
             $user = User::create([
                 'nome' => $request->input('nome'),
                 'cpf' => $request->input('cpf'),
                 'celular' => $request->input('celular'),
                 'email' => $request->input('email'),
-                'dataNascimento' => $request->input('dataNascimento'), // Formato Y-m-d
+                'dataNascimento' => $request->input('dataNascimento'),
                 'password' => Hash::make($request->input('password')),
                 'tipo' => 'Paroquiano(a)',
             ]);
-
             return response()->json(['message' => 'Usuário registrado com sucesso!', 'user' => $user], 201);
         } catch (\Illuminate\Database\QueryException $e) {
             return response()->json(['message' => 'Erro ao registrar usuário no banco de dados', 'error' => $e->getMessage()], 500);

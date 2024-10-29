@@ -34,14 +34,13 @@ class AvisoController extends Controller
                 $avisoId = $ids[$index] ?? null;
 
                 if ($avisoId) {
-                    // Atualize o aviso existente somente se mudou
+                    // Atualiza o aviso existente somente se mudou
                     $existingAviso = Aviso::find($avisoId);
                     if ($existingAviso && $existingAviso->aviso != $descricao) {
                         $existingAviso->aviso = $descricao;
                         $existingAviso->save();
                     }
                 } else {
-                    // Crie um novo aviso
                     Aviso::create(['aviso' => $descricao]);
                 }
             }

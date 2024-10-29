@@ -41,7 +41,6 @@ class DizimoController extends Controller
             $imagePath = $request->file('QRCode')->store('images', 'public');
             $dizimo->QRCode = $imagePath;
         }
-
         $dizimo->chavePix = $request->input('chavePix');
         $dizimo->save();
 
@@ -58,7 +57,6 @@ class DizimoController extends Controller
 
             $dizimo->delete();
         }
-
         return redirect()->route('dizimo.consultar');
     }
 }

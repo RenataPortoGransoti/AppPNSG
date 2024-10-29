@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 
 class EventoController extends Controller
 {
-    // Lista todos os eventos
     public function consultarEvento()
     {
         $eventos = Evento::all();
@@ -21,7 +20,6 @@ class EventoController extends Controller
         return response()->json($eventos);
     }
 
-    // Cria um novo evento
     public function cadastrarEvento(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -39,12 +37,10 @@ class EventoController extends Controller
 
         $nomeEvento = $request->input('nome_evento');
 
-        // Verificar se já existe um evento com o mesmo nome (case-insensitive)
         $existingEvento = Evento::whereRaw('LOWER(nome_evento) = ?', [strtolower($nomeEvento)])->first();
 
         if ($existingEvento) {
             if (!$existingEvento->ativo) {
-                // Ativar evento existente se estiver inativo
                 $existingEvento->ativo = 1;
                 $existingEvento->data_inicio = $request->input('data_inicio');
                 $existingEvento->data_fim = $request->input('data_fim');
@@ -58,7 +54,6 @@ class EventoController extends Controller
                 return response()->json(['error' => 'Um evento com esse nome já existe.'], 400);
             }
         } else {
-            // Criar um novo evento
             $evento = Evento::create(array_merge($request->all(), ['ativo' => 1]));
             return  redirect()->route('eventos.index')->with('success', 'Evento editado com sucesso.');
         }
@@ -96,20 +91,6 @@ class EventoController extends Controller
         return redirect()->route('eventos.index')->with('success', 'Evento editado com sucesso.');
     }
 
-
-    // Deleta um evento utilizando soft delete
-    // public function excluirEvento($id)
-    // {
-    //     $evento = Evento::find($id);
-    //     if ($evento) {
-    //         $evento->delete();
-    //         return redirect()->route('eventos.index')
-    //             ->with('success', 'Evento inativado com sucesso.');
-    //     } else {
-    //         return response()->json(['error' => 'Evento não encontrado'], 404);
-    //     }
-    // }
-
     public function excluirEvento($id)
     {
         $evento = Evento::find($id);
@@ -123,9 +104,6 @@ class EventoController extends Controller
         }
     }
 
-
-
-    // Inativa um evento
     public function inativarEvento(Request $request)
     {
         $id = $request->input('evento_id');
@@ -144,10 +122,9 @@ class EventoController extends Controller
         $evento = Evento::find($id);
 
         if ($evento) {
-            $evento->ativo = 1; // Definindo como ativo
+            $evento->ativo = 1;
             $evento->save();
         }
-
         return redirect()->route('eventos.index')->with('success', 'Evento ativado com sucesso.');
     }
 }

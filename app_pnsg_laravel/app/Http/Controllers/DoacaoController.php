@@ -57,7 +57,6 @@ class DoacaoController extends Controller
             if ($doacao->QRCode) {
                 Storage::delete('public/' . $doacao->QRCode);
             }
-
             $doacao->delete();
         }
 

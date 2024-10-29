@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contato;
-use App\Models\Horario;
 
 use Illuminate\Http\Request;
 
@@ -30,7 +29,6 @@ class ContatoController extends Controller
             $contato->valor = $valor;
             $contato->save();
         }
-
         return redirect()->route('informacoes.index')->with('success', 'Contatos atualizados com sucesso!');
     }
 
@@ -41,7 +39,6 @@ class ContatoController extends Controller
             $contato->valor = null;
             $contato->save();
         }
-
         return response()->json(['success' => true]);
     }
 }

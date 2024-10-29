@@ -9,6 +9,6 @@ class Pastoral extends Model
 {
     use HasFactory;
 
-    protected $table = 'pastorais'; //nome da tabela
+    protected $table = 'pastorais'; 
     protected $fillable = ['nome', 'descricao', 'imagem'];
 }

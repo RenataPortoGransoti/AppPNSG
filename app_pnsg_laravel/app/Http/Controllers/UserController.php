@@ -62,7 +62,6 @@ class UserController extends Controller
             $user->ativo = 0;
             $user->save();
         }
-
         return redirect()->back()->with('status', 'Secretário(a) inativado(a) com sucesso!');
     }
 
@@ -74,7 +73,6 @@ class UserController extends Controller
             $user->ativo = 1;
             $user->save();
         }
-
         return redirect()->back()->with('status', 'Secretário(a) ativado(a) com sucesso!');
     }
 }
