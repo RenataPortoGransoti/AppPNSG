@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PNSG - Painel Admin</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('storage/permanent_images/brasaoparoquia_logo.jpg?v=2') }}" />
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>

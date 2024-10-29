@@ -38,14 +38,12 @@
     </header>
     <main>
         <div class="min-h-screen flex flex-col sm:flex-row items-center pt-6 bg-gray-200 justify-center">
-            <!-- Logo (imagem) -->
             <div class="mb-4 sm:mb-0 sm:mr-6 flex justify-center">
                 <a href="/" class="flex justify-center items-center">
                     <x-application-logo class="w-24 h-24 sm:w-16 sm:h-16 fill-current text-gray-500" />
                 </a>
             </div>
 
-            <!-- Formulário responsivo -->
             <div class="w-full max-w-xs sm:max-w-md px-6 py-4 bg-white shadow-lg overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>

@@ -25,7 +25,6 @@
             </form>
         </div>
 
-        <!-- Tabela responsiva -->
         <div class="overflow-x-auto mt-8">
             <table class="min-w-full bg-white border border-gray-200">
                 <thead class="bg-[#036896] text-white">

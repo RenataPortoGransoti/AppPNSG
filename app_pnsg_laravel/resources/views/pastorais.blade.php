@@ -346,7 +346,6 @@
 
         function handleDeleteImage(pastoralId) {
             if (confirm("Tem certeza de que deseja excluir esta imagem?")) {
-                // Enviar uma solicitação AJAX para excluir a imagem
                 fetch(`/pastorais/${pastoralId}/delete-image`, {
                         method: 'POST',
                         headers: {

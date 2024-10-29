@@ -1,7 +1,6 @@
 <nav x-data="{ open: false }" class="border-b border-gray-300 bg-[#036896] shadow-lg">
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
-            <!-- Botão de menu -->
             <button id="toggleSidebar"
                 class="flex items-center w-10 h-10 p-2 rounded-md text-white hover:text-black focus:outline-none transition duration-150 ease-in-out">
                 <i class="bi bi-list" x-show="!open"></i>

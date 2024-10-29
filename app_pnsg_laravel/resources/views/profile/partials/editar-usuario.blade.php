@@ -101,15 +101,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Máscara para CPF
             $('#cpf').mask('000.000.000-00', {
                 reverse: true
             });
 
-            // Máscara para telefone celular
             $('#celular').mask('(00) 00000-0000');
 
-            // Máscara para data de nascimento
             $('#dataNascimento').mask('00/00/0000');
         });
     </script>

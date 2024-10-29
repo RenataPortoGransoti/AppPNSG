@@ -1,21 +1,13 @@
 <aside class="bg-[#01334A] text-white w-64 min-h-screen d-none d-md-block">
-    <!--begin::Sidebar Brand-->
     <div class="flex items-center justify-center py-4">
-        <!--begin::Brand Link-->
         <a href="{{ url('/') }}" class="flex items-center">
-            <!--begin::Brand Image-->
             <div>
                 <x-application-logo class="" />
             </div>
-            <!--end::Brand Image-->
-            <!--begin::Brand Text-->
             <span class="text-lg font-light">Painel Admin PNSG</span>
-            <!--end::Brand Text-->
         </a>
-        <!--end::Brand Link-->
     </div>
-    <!--end::Sidebar Brand-->
-    <!--begin::Sidebar Wrapper-->
+
     <div class="px-4">
         <nav class="mt-4">
             <ul class="space-y-2">
@@ -64,9 +56,7 @@
             </ul>
         </nav>
     </div>
-    <!--end::Sidebar Wrapper-->
 </aside>
-<!--end::Sidebar-->
 
 <!-- Script para esconder/mostrar sidebar em dispositivos móveis -->
 <script>
