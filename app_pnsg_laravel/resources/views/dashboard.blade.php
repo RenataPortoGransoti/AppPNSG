@@ -2,6 +2,7 @@
 
 <head>
     <title>Dashboard | Painel Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 @section('content')
@@ -48,28 +49,47 @@
                             <td class="py-2 px-4 text-left">
                                 {{ \Carbon\Carbon::parse($user->dataNascimento)->format('d/m/Y') }}</td>
                             <td class="py-2 px-4 text-left">{{ $user->tipo }}</td>
-                            <td class="py-2 px-4 text-left">
-                                <a href="{{ route('edit-user', $user->id) }}"
-                                    class="text-[#036896] font-bold hover:underline">Editar</a>
+                            <td class="py-2 px-2 text-center">
+                                <div class="flex justify-center items-center space-x-4">
+                                    <!-- Link para Editar -->
+                                    <a href="{{ route('edit-user', $user->id) }}"
+                                        class="text-[#036896] font-bold hover:underline flex items-center" title="Editar">
+                                        <span class="hidden lg:inline">Editar</span>
+                                        <i class="fa fa-pencil md:inline lg:hidden ml-1" aria-hidden="true"
+                                            title="Editar"></i>
+                                    </a>
 
-                                @if ($user->ativo)
-                                    <form action="{{ route('inativar.secretario') }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                        <button type="submit"
-                                            class="text-red-600 font-bold hover:underline ml-4">Inativar</button>
-                                    </form>
-                                @else
-                                    <form action="{{ route('ativar.secretario', $user->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit"
-                                            class="text-green-600 font-bold hover:underline ml-4">Ativar</button>
-                                    </form>
-                                @endif
+                                    <!-- Formulário de Inativar/Ativar -->
+                                    @if ($user->ativo)
+                                        <form action="{{ route('inativar.secretario') }}" method="POST"
+                                            class="flex items-center m-0 p-0 justify-center">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                            <button type="submit"
+                                                class="text-red-600 font-bold hover:underline flex items-center"
+                                                title="Inativar">
+                                                <span class="hidden lg:inline">Inativar</span>
+                                                <i class="fa fa-trash md:inline lg:hidden ml-1" aria-hidden="true"
+                                                    title="Inativar"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('ativar.secretario', $user->id) }}" method="POST"
+                                            class="flex items-center m-0 p-0 justify-center">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit"
+                                                class="text-green-600 font-bold hover:underline flex items-center"
+                                                title="Ativar">
+                                                <span class="hidden lg:inline">Ativar</span>
+                                                <i class="fa fa-check md:inline lg:hidden ml-1" aria-hidden="true"
+                                                    title="Ativar"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
                             </td>
+
                         </tr>
                     @empty
                         <tr>
