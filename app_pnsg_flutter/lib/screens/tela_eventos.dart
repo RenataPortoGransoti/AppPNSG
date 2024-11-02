@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../services/database_helper.dart';
+import '../views/widgets/header_widget.dart';
 import 'tela_eventos_salvos.dart';
 import '../config.dart';
 import '../logger.dart';
@@ -192,25 +193,7 @@ class EventosState extends State<Eventos> {
         color: Colors.blue[200],
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(18),
-              margin: const EdgeInsets.only(left: 14, right: 14, top: 56, bottom: 10),
-              decoration: BoxDecoration(
-                color: const Color(0xFF036896),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const Center(
-                child: Text(
-                  "EVENTOS PAROQUIAIS",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            const HeaderWidget(title: "Eventos Paroquiais"),
             const SizedBox(height: 10.0),
              if (user != null)
                OutlinedButton(

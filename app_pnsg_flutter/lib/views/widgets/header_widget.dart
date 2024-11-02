@@ -9,8 +9,8 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.all(15),
+      margin: const EdgeInsets.only(left: 10, right: 10, top: 50, bottom: 10),
+      padding: const EdgeInsets.all(16),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: const Color(0xFF036896),

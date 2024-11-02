@@ -52,7 +52,6 @@ class _DizimoScreenState extends State<DizimoScreen> {
         padding: const EdgeInsets.all(15),
         child: Column(
           children: [
-            const SizedBox(height: 50),
             const HeaderWidget(title: "Dízimo"),
             const SizedBox(height: 20),
             _isLoading

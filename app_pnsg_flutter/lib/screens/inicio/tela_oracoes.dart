@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../views/widgets/header_widget.dart';
 import '../tela_contribua.dart';
 import '../tela_eventos.dart';
 import '../tela_informacoes.dart';
@@ -71,31 +72,13 @@ class OracoesState extends State<Oracoes> {
   }
 }
 
-const String nome = 'Orações';
 class OracoesList extends StatelessWidget {
   const OracoesList({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: double.infinity,
-          margin: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 20),
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: const Color(0xFF036896).withOpacity(0.8),
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: const Text(
-            nome,
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        const HeaderWidget(title: "Orações"),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.all(10),

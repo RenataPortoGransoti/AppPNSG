@@ -52,7 +52,6 @@ class DoacaoScreenState extends State<DoacaoScreen> {
         padding: const EdgeInsets.all(15),
         child: Column(
           children: [
-            const SizedBox(height: 50),
             const HeaderWidget(title: "Doação"),
             const SizedBox(height: 20),
             _isLoading

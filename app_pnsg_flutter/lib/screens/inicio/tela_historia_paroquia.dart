@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../../views/widgets/header_widget.dart';
 import '../tela_contribua.dart';
 import '../tela_eventos.dart';
 import '../tela_informacoes.dart';
@@ -76,25 +77,7 @@ class Historia extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: double.infinity,
-            margin: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
-            padding: const EdgeInsets.all(10),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: const Color(0xFF036896).withOpacity(0.8),
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: const Text(
-              "História da Paróquia",
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
+          const HeaderWidget(title: "História da Paróquia"),          Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.blueAccent.withOpacity(0.1),
