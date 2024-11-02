@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../controllers/dizimo_controller.dart';
 import '../models/dizimo_model.dart';
+import '../screens/navigation_bar.dart';
 import '../config.dart';
 
 class DizimoScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _DizimoScreenState extends State<DizimoScreen> {
   DizimoModel? _dizimoData;
   bool _isLoading = true;
   bool _hasInternet = true;
+  int _currentPageIndex = 3;
 
   @override
   void initState() {
@@ -101,6 +103,32 @@ class _DizimoScreenState extends State<DizimoScreen> {
                 : const Text("Erro ao carregar os dados."),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            _currentPageIndex = index;
+            switch (_currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
+            }
+          });
+        },
+        selectedIndex: _currentPageIndex,
+        backgroundColor: Colors.lightBlue,
       ),
     );
   }

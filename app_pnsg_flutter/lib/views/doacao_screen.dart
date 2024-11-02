@@ -3,20 +3,22 @@ import 'package:flutter/services.dart';
 import '../controllers/doacao_controller.dart';
 import '../models/doacao_model.dart';
 import '../config.dart';
+import '../screens/navigation_bar.dart';
 import 'widgets/header_widget.dart';
 
 class DoacaoScreen extends StatefulWidget {
   const DoacaoScreen({Key? key}) : super(key: key);
 
   @override
-  _DoacaoScreenState createState() => _DoacaoScreenState();
+  DoacaoScreenState createState() => DoacaoScreenState();
 }
 
-class _DoacaoScreenState extends State<DoacaoScreen> {
+class DoacaoScreenState extends State<DoacaoScreen> {
   final DoacaoController _controller = DoacaoController();
   DoacaoModel? _doacaoData;
   bool _isLoading = true;
   bool _hasInternet = true;
+  int _currentPageIndex = 3;
 
   @override
   void initState() {
@@ -101,6 +103,32 @@ class _DoacaoScreenState extends State<DoacaoScreen> {
                 : const Text("Erro ao carregar os dados."),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            _currentPageIndex = index;
+            switch (_currentPageIndex) {
+              case 0:
+                Navigator.pushNamed(context, '/Inicio');
+                break;
+              case 1:
+                Navigator.pushNamed(context, '/PastoraisScreen');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/Eventos');
+                break;
+              case 3:
+                Navigator.pushNamed(context, '/Contribua');
+                break;
+              case 4:
+                Navigator.pushNamed(context, '/Informacoes');
+                break;
+            }
+          });
+        },
+        selectedIndex: _currentPageIndex,
+        backgroundColor: Colors.lightBlue,
       ),
     );
   }
