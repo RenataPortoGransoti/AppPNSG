@@ -49,7 +49,7 @@ class EventosState extends State<Eventos> {
         Navigator.pushNamed(context, '/Contribua');
         break;
       case 4:
-        Navigator.pushNamed(context, '/Informações');
+        Navigator.pushNamed(context, '/Informacoes');
         break;
     }
   }
@@ -60,7 +60,7 @@ class EventosState extends State<Eventos> {
       case 1: return '/Pastorais';
       case 2: return '/Eventos';
       case 3: return '/Contribua';
-      case 4: return '/Informacoes';
+      case 4: return '/Informaçoes';
       default: return '';
     }
   }
