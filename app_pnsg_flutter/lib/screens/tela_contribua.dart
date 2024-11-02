@@ -2,8 +2,8 @@ import 'package:PNSG/Screens/tela_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../email.dart';
-import 'tela_dizimo.dart';
-import 'tela_doacao.dart';
+import   '../views/dizimo_screen.dart';
+import   '../views/doacao_screen.dart';
 import 'formulario_dizimista.dart';
 import 'tela_informacoes_dizimo.dart';
 import 'navigation_bar.dart';
@@ -191,7 +191,7 @@ class ContribuaState extends State<Contribua> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Dizimo()),
+                      MaterialPageRoute(builder: (context) => const DizimoScreen()),
                     );
                   },
                   child: Container(
@@ -218,7 +218,7 @@ class ContribuaState extends State<Contribua> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Doacao()),
+                      MaterialPageRoute(builder: (context) => const DoacaoScreen()),
                     );
                   },
                   child: Container(
