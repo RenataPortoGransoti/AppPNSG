@@ -25,14 +25,20 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            <div class="px-4">
+                                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                                <div class="font-medium text-sm text-gray-500 pt-4">{{ Auth::user()->email }}</div>
+                            </div>
+                            <div class="mt-3 space-y-1">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                                    {{ __('Sair') }}
-                                </x-dropdown-link>
-                            </form>
+                                        {{ __('Sair') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </div>
                         </x-slot>
                     </x-dropdown>
                 </div>
