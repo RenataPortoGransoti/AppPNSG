@@ -10,8 +10,7 @@ class PastoralController extends Controller
 {
     public function consultarPastoral()
     {
-        $pastorais = Pastoral::all();
-        $pastorais = Pastoral::where('ativo', true)->orderBy('nome', 'asc')->get();
+        $pastorais = Pastoral::orderBy('nome', 'asc')->get();
         return view('pastorais', ['pastorais' => $pastorais]);
     }
 
