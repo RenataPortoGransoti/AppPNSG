@@ -9,6 +9,11 @@ class Pastoral extends Model
 {
     use HasFactory;
 
-    protected $table = 'pastorais'; 
-    protected $fillable = ['nome', 'descricao', 'imagem'];
+    protected $table = 'pastorais';
+    protected $fillable = ['nome', 'descricao', 'imagem', 'secretario_id'];
+
+    public function secretario()
+    {
+        return $this->belongsTo(User::class, 'secretario_id');
+    }
 }

@@ -44,6 +44,7 @@ class PastoralController extends Controller
                     $imagePath = $request->file('photo')->store('images', 'public');
                     $existingPastoral->imagem = $imagePath;
                 }
+                $existingPastoral->secretario_id = auth()->id();
 
                 $existingPastoral->save();
 
@@ -56,6 +57,7 @@ class PastoralController extends Controller
             $pastoral->nome = $nomePastoral;
             $pastoral->descricao = $request->input('descricao');
             $pastoral->ativo = 1;
+            $pastoral->secretario_id = auth()->id();
 
             if ($request->hasFile('photo')) {
                 $imagePath = $request->file('photo')->store('images', 'public');

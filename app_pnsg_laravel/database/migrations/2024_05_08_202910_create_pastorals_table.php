@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('breve_descricao')->nullable();
             $table->text('descricao')->nullable();
             $table->string('imagem')->nullable();
+            $table->unsignedBigInteger('secretario_id')->nullable();
+            $table->foreign('secretario_id')->references('id')->on('users')->onDelete('set null'); 
             $table->timestamps();
         });
     }
