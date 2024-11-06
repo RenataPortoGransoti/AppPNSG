@@ -18,9 +18,15 @@ class Evento extends Model
         'data_fim',
         'local',
         'descricao',
+        'ativo',
+        'secretario_id',
         'created_at',
         'updated_at',
-        'ativo',
         'deleted_at'
     ];
+
+    public function secretario()
+    {
+        return $this->belongsTo(Secretario::class);
+    }
 }

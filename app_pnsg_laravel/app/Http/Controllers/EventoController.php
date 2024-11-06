@@ -46,6 +46,7 @@ class EventoController extends Controller
                 $existingEvento->data_fim = $request->input('data_fim');
                 $existingEvento->local = $request->input('local');
                 $existingEvento->descricao = $request->input('descricao');
+                $existingEvento->secretario_id = auth()->id();
 
                 $existingEvento->save();
 
@@ -54,8 +55,11 @@ class EventoController extends Controller
                 return response()->json(['error' => 'Um evento com esse nome já existe.'], 400);
             }
         } else {
-            $evento = Evento::create(array_merge($request->all(), ['ativo' => 1]));
-            return  redirect()->route('eventos.index')->with('success', 'Evento editado com sucesso.');
+            Evento::create(array_merge($request->all(), [
+                'ativo' => 1,
+                'secretario_id' => auth()->id()
+            ]));
+            return  redirect()->route('eventos.index')->with('success', 'Evento cadastrado com sucesso.');
         }
     }
 

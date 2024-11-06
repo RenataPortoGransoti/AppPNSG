@@ -20,8 +20,10 @@ class CreateEventosTable extends Migration
             $table->dateTime('data_fim')->nullable();
             $table->string('local', 100);
             $table->boolean('ativo')->default(1);
-            $table->timestamps();
             $table->softDeletes();
+            $table->unsignedBigInteger('secretario_id')->nullable();
+            $table->foreign('secretario_id')->references('id')->on('users')->onDelete('set null');
+            $table->timestamps();
         });
     }
 
