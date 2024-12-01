@@ -156,7 +156,7 @@ return [
     'string'               => 'O campo :attribute deve ser uma string.',
     'timezone'             => 'O campo :attribute deve ser uma zona válida.',
     'unique'               => 'O campo :attribute já está sendo utilizado.',
-    'uploaded'             => 'Ocorreu uma falha no upload do campo :attribute.',
+    'uploaded'             => 'O arquivo enviado no campo imagem é muito grande. Certifique-se de que ele tenha no máximo 2 MB.',
     'uppercase'            => 'O campo :attribute deve conter letras maiúsculas.',
     'url'                  => 'O campo :attribute tem um formato inválido.',
     'ulid'                 => 'O campo :attribute deve ser um ULID válido.',
